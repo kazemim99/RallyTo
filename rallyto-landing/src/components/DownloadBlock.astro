@@ -1,0 +1,129 @@
+---
+/**
+ * Where to get the app. Until a store publishes it (`SITE.stores` is null) each store reads «به‌زودی» and links
+ * nowhere, so the page never sends anyone to a missing listing.
+ */
+import { SITE } from '../config/site'
+import BrandMark from './BrandMark.astro'
+
+const STORES = [
+  { key: 'bazaar', name: 'کافه‌بازار', url: SITE.stores.bazaar },
+  { key: 'myket', name: 'مایکت', url: SITE.stores.myket },
+] as const
+const anyLive = STORES.some((s) => s.url)
+---
+
+<section class="section on-dark download" id="download" aria-labelledby="download-title">
+  <div class="container download__inner">
+    <BrandMark size={112} tile class="download__mark" />
+    <h2 id="download-title">بازی بعدی‌ات را همین هفته بچین</h2>
+    <p class="muted download__lead">
+      {
+        anyLive
+          ? 'رالیتو را از فروشگاه دلخواهت نصب کن، پروفایلت را بساز و اولین بازی‌ات را پیدا کن.'
+          : 'نسخه‌ی اندروید رالیتو به‌زودی در کافه‌بازار و مایکت منتشر می‌شود.'
+      }
+    </p>
+    <ul class="stores">
+      {
+        STORES.map((s) =>
+          s.url ? (
+            <li>
+              <a class="store" href={s.url} rel="noopener">
+                <span class="store__small">دریافت از</span>
+                <span class="store__name">{s.name}</span>
+              </a>
+            </li>
+          ) : (
+            <li>
+              <span class="store store--soon">
+                <span class="store__small">به‌زودی در</span>
+                <span class="store__name">{s.name}</span>
+              </span>
+            </li>
+          ),
+        )
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .download {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  /* Court lines behind the block, very faint. */
+  .download::before {
+    content: '';
+    position: absolute;
+    inset: 12% 50% auto auto;
+    width: 640px;
+    height: 900px;
+    border: 2px solid rgb(255 255 255 / 6%);
+    transform: translateX(50%) rotate(-12deg);
+    background:
+      linear-gradient(rgb(255 255 255 / 6%), rgb(255 255 255 / 6%)) center / 2px 100% no-repeat,
+      linear-gradient(rgb(255 255 255 / 6%), rgb(255 255 255 / 6%)) center / 100% 2px no-repeat;
+    pointer-events: none;
+  }
+
+  .download__inner {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+  }
+
+  .download__inner :global(.download__mark) {
+    margin-block-end: 8px;
+    filter: drop-shadow(0 18px 30px rgb(0 0 0 / 35%));
+  }
+
+  .download__lead {
+    max-width: 34rem;
+    font-size: var(--step-1);
+  }
+
+  .stores {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-block-start: 10px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .store {
+    display: grid;
+    min-width: 170px;
+    padding: 10px 22px;
+    border-radius: 14px;
+    background: var(--c-ball);
+    color: var(--c-deep);
+    text-decoration: none;
+    line-height: 1.5;
+  }
+
+  .store--soon {
+    background: transparent;
+    border: 2px dashed rgb(255 255 255 / 40%);
+    color: var(--c-surface);
+  }
+
+  .store__small {
+    font-size: 0.8125rem;
+  }
+
+  .store--soon .store__small {
+    color: var(--c-mint);
+  }
+
+  .store__name {
+    font-weight: 700;
+    font-size: var(--step-1);
+  }
+</style>

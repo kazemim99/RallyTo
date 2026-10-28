@@ -1,0 +1,67 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+TestResults/
+*.trx
+coverage*.xml
+logs/
+uploads/
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Secrets and local configuration (never commit)
+.env
+*.env.local
+appsettings.*.local.json
+secrets/
+**/google-services.json
+**/GoogleService-Info.plist
+**/firebase-credentials*.json
+*.keystore
+*.jks
+key.properties
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+**/android/.gradle/
+**/android/local.properties
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+*.iml
+
+# Node / admin panel
+node_modules/
+dist/
+*.local
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Scraped club data and images (regenerate with tools/club-scrape)
+tools/club-scrape/output/
+tools/club-scrape/google/*.json
+tools/club-scrape/google/*.txt
+tools/club-scrape/google/*.csv
+
+# Python bytecode, crash dumps, test reports
+__pycache__/
+*.pyc
+*.stackdump
+.vitest/
+
+# Personal Claude Code settings (the shared commands and skills are committed)
+.claude/settings.local.json

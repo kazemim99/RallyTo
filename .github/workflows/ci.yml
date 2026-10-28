@@ -1,0 +1,88 @@
+﻿name: CI
+
+on:
+  push:
+    branches: [main, develop, "claude/**"]
+  pull_request:
+    branches: [main, develop]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend (build, unit, architecture, integration)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - name: Restore
+        run: dotnet restore Rallyto.slnx
+      - name: Build
+        run: dotnet build Rallyto.slnx --no-restore -c Release
+      - name: Test
+        # Integration tests start PostgreSQL and Redis with Testcontainers; the hosted runner provides Docker.
+        run: dotnet test Rallyto.slnx --no-build -c Release --logger "trx" --results-directory TestResults
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-test-results
+          path: TestResults
+
+  app:
+    name: Flutter app (analyze, test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rallyto-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.44.2"
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: dart run build_runner build
+      - run: flutter analyze
+      - run: flutter test
+
+  admin:
+    name: Admin panel (type-check, build, test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rallyto-admin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: rallyto-admin/package-lock.json
+      - run: npm ci
+      - run: npm run type-check
+      - run: npm run build
+      - run: npm run test
+
+  landing:
+    name: Landing site (check, unit tests, build, built-site tests)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rallyto-landing
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: rallyto-landing/package-lock.json
+      - run: npm ci
+      - run: npm run test:unit
+      - run: npm run build:test
+      - run: npm run test:built

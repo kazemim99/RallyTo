@@ -1,0 +1,272 @@
+---
+/**
+ * The problem in the visitor's own words: how a game gets organised in a group chat today, next to the same game in
+ * Rallyto. The chat is an illustration of a familiar situation, not a quote from anyone.
+ */
+import Icon from '../Icon.astro'
+
+const CHAT = [
+  { who: 'آرش', text: 'کسی فردا ساعت ۶ تنیس هست؟ یه نفر کم داریم' },
+  { who: 'نیما', text: 'من هستم ولی تازه شروع کردم، اشکال نداره؟' },
+  { who: 'آرش', text: 'سطحمون یه کم بالاتره راستش…' },
+  { who: 'کاوه', text: 'من شاید بیام، فردا خبر می‌دم' },
+  { who: 'کاوه', text: 'بچه‌ها شرمنده، امروز نمی‌رسم', late: true },
+]
+const FIXES = [
+  { icon: 'level', title: 'سطح‌ها از اول معلوم است', text: 'هر بازیکن سطحش را در هر ورزش جدا اعلام می‌کند و جستجو هم‌سطح‌ترها را اول نشانت می‌دهد.' },
+  { icon: 'reliable', title: 'با کسی بازی کن که می‌آید', text: 'بعد از هر بازی حضورها ثبت می‌شود و خوش‌قولی هر بازیکن روی پروفایلش پیداست.' },
+  { icon: 'group', title: 'هماهنگی داخل اپ', text: 'بازی‌های چندنفره گروه گفتگوی خودشان را دارند؛ نه پیامی گم می‌شود، نه شماره‌ای رد و بدل.' },
+] as const
+---
+
+<section class="section problem" aria-labelledby="problem-title">
+  <div class="container problem__grid">
+    <div class="problem__copy">
+      <h2 id="problem-title">دیگه تو گروه تلگرامی دنبال نفر چهارم نگرد</h2>
+      <p class="problem__lead">
+        پیام‌های بی‌جواب، سطح‌های ناجور، کنسلی دقیقه‌ی نود. پیدا کردن هم‌بازی نباید سخت‌تر از خود بازی باشد.
+      </p>
+      <ul class="fixes">
+        {
+          FIXES.map((f) => (
+            <li>
+              <span class="fixes__icon">
+                <Icon name={f.icon} />
+              </span>
+              <div>
+                <h3>{f.title}</h3>
+                <p>{f.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="compare" aria-hidden="true">
+      <div class="chat">
+        <div class="chat__bar">
+          <span class="chat__avatar">ت</span>
+          <span>
+            <b>تنیس پنجشنبه‌ها</b>
+            <small>گروه</small>
+          </span>
+        </div>
+        <ol class="chat__list">
+          {
+            CHAT.map((m) => (
+              <li class:list={['bubble', { 'bubble--late': m.late }]}>
+                <b>{m.who}</b>
+                {m.text}
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="settled">
+        <div class="settled__head">
+          <Icon name="check" size={22} />
+          <b>بازی پنجشنبه قطعی شد</b>
+        </div>
+        <p>تنیس دونفره، ۱۸:۰۰ تا ۲۰:۰۰، هر چهار نفر هم‌سطح</p>
+        <div class="settled__people">
+          {
+            ['آ', 'ن', 'س', 'م'].map((c) => (
+              <span>
+                <i>{c}</i>
+                <Icon name="check" size={14} />
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .problem__grid {
+    display: grid;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .problem__lead {
+    margin-block: 16px 32px;
+    max-width: 34rem;
+    color: var(--c-muted);
+    font-size: var(--step-1);
+    line-height: 1.85;
+  }
+
+  .fixes {
+    display: grid;
+    gap: 22px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .fixes li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .fixes__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: var(--c-soft);
+    color: var(--c-court);
+  }
+
+  .fixes p {
+    color: var(--c-muted);
+  }
+
+  .compare {
+    position: relative;
+    display: grid;
+    gap: 18px;
+  }
+
+  .chat {
+    background: #e6ece9;
+    border-radius: var(--radius-l);
+    padding: 0 0 18px;
+    overflow: hidden;
+    transform: rotate(1.5deg);
+  }
+
+  .chat__bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: var(--c-surface);
+    font-size: var(--step--1);
+    line-height: 1.5;
+  }
+
+  .chat__bar small {
+    display: block;
+    color: var(--c-muted);
+  }
+
+  .chat__avatar {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #9aa9a5;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .chat__list {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 16px 16px 0;
+    list-style: none;
+  }
+
+  .bubble {
+    justify-self: start;
+    max-width: 85%;
+    padding: 8px 12px;
+    background: var(--c-surface);
+    border-radius: 14px 14px 14px 4px;
+    font-size: var(--step--1);
+    line-height: 1.7;
+  }
+
+  .bubble b {
+    display: block;
+    color: var(--c-padel);
+    font-size: 0.8125rem;
+  }
+
+  .bubble--late {
+    margin-block-start: 14px;
+    position: relative;
+  }
+
+  .bubble--late::before {
+    content: 'روز بعد، ۱۷:۴۰';
+    position: absolute;
+    inset-block-end: calc(100% + 2px);
+    inset-inline-start: 0;
+    color: var(--c-muted);
+    font-size: 0.75rem;
+  }
+
+  .settled {
+    justify-self: end;
+    width: min(100%, 330px);
+    margin-block-start: -36px;
+    padding: 16px 18px;
+    background: var(--c-surface);
+    border: 2px solid var(--c-court);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow);
+    transform: rotate(-1.5deg);
+    position: relative;
+  }
+
+  .settled__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--c-court);
+  }
+
+  .settled p {
+    margin-block: 4px 12px;
+    color: var(--c-muted);
+    font-size: var(--step--1);
+  }
+
+  .settled__people {
+    display: flex;
+    gap: 10px;
+  }
+
+  .settled__people span {
+    position: relative;
+  }
+
+  .settled__people i {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #d8e9e4, #9fc6ba);
+    color: var(--c-deep);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .settled__people :global(.icon) {
+    position: absolute;
+    inset-block-end: -2px;
+    inset-inline-end: -4px;
+    padding: 1px;
+    background: var(--c-court);
+    color: #fff;
+    border-radius: 50%;
+  }
+
+  @media (min-width: 900px) {
+    .problem__grid {
+      grid-template-columns: 1.05fr 1fr;
+      gap: 72px;
+    }
+  }
+</style>

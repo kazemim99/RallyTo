@@ -1,0 +1,58 @@
+<Solution>
+  <Folder Name="/BuildingBlocks/">
+    <Project Path="src/BuildingBlocks/Rallyto.Contracts/Rallyto.Contracts.csproj" />
+    <Project Path="src/BuildingBlocks/Rallyto.Core.Application/Rallyto.Core.Application.csproj" />
+    <Project Path="src/BuildingBlocks/Rallyto.Core.Domain/Rallyto.Core.Domain.csproj" />
+    <Project Path="src/BuildingBlocks/Rallyto.Infrastructure.Core/Rallyto.Infrastructure.Core.csproj" />
+    <Project Path="src/BuildingBlocks/Rallyto.Infrastructure.Web/Rallyto.Infrastructure.Web.csproj" />
+  </Folder>
+  <Folder Name="/Contexts/" />
+  <Folder Name="/Contexts/Catalog/">
+    <Project Path="src/Contexts/Catalog/Rallyto.Catalog.Api/Rallyto.Catalog.Api.csproj" />
+    <Project Path="src/Contexts/Catalog/Rallyto.Catalog.Application/Rallyto.Catalog.Application.csproj" />
+    <Project Path="src/Contexts/Catalog/Rallyto.Catalog.Domain/Rallyto.Catalog.Domain.csproj" />
+    <Project Path="src/Contexts/Catalog/Rallyto.Catalog.Infrastructure/Rallyto.Catalog.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Contexts/Community/">
+    <Project Path="src/Contexts/Community/Rallyto.Community.Api/Rallyto.Community.Api.csproj" />
+    <Project Path="src/Contexts/Community/Rallyto.Community.Application/Rallyto.Community.Application.csproj" />
+    <Project Path="src/Contexts/Community/Rallyto.Community.Domain/Rallyto.Community.Domain.csproj" />
+    <Project Path="src/Contexts/Community/Rallyto.Community.Infrastructure/Rallyto.Community.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Contexts/Identity/">
+    <Project Path="src/Contexts/Identity/Rallyto.Identity.Api/Rallyto.Identity.Api.csproj" />
+    <Project Path="src/Contexts/Identity/Rallyto.Identity.Application/Rallyto.Identity.Application.csproj" />
+    <Project Path="src/Contexts/Identity/Rallyto.Identity.Domain/Rallyto.Identity.Domain.csproj" />
+    <Project Path="src/Contexts/Identity/Rallyto.Identity.Infrastructure/Rallyto.Identity.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Contexts/Messaging/">
+    <Project Path="src/Contexts/Messaging/Rallyto.Messaging.Api/Rallyto.Messaging.Api.csproj" />
+    <Project Path="src/Contexts/Messaging/Rallyto.Messaging.Application/Rallyto.Messaging.Application.csproj" />
+    <Project Path="src/Contexts/Messaging/Rallyto.Messaging.Domain/Rallyto.Messaging.Domain.csproj" />
+    <Project Path="src/Contexts/Messaging/Rallyto.Messaging.Infrastructure/Rallyto.Messaging.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Contexts/Notifications/">
+    <Project Path="src/Contexts/Notifications/Rallyto.Notifications.Api/Rallyto.Notifications.Api.csproj" />
+    <Project Path="src/Contexts/Notifications/Rallyto.Notifications.Application/Rallyto.Notifications.Application.csproj" />
+    <Project Path="src/Contexts/Notifications/Rallyto.Notifications.Domain/Rallyto.Notifications.Domain.csproj" />
+    <Project Path="src/Contexts/Notifications/Rallyto.Notifications.Infrastructure/Rallyto.Notifications.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Host/">
+    <Project Path="src/Host/Rallyto.Host/Rallyto.Host.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Rallyto.ArchitectureTests/Rallyto.ArchitectureTests.csproj" />
+    <Project Path="tests/Rallyto.BuildingBlocks.UnitTests/Rallyto.BuildingBlocks.UnitTests.csproj" />
+    <Project Path="tests/Rallyto.Catalog.UnitTests/Rallyto.Catalog.UnitTests.csproj" />
+    <Project Path="tests/Rallyto.Community.UnitTests/Rallyto.Community.UnitTests.csproj" />
+    <Project Path="tests/Rallyto.Messaging.UnitTests/Rallyto.Messaging.UnitTests.csproj" />
+    <Project Path="tests/Rallyto.Notifications.UnitTests/Rallyto.Notifications.UnitTests.csproj" />
+    <Project Path="tests/Rallyto.Host.IntegrationTests/Rallyto.Host.IntegrationTests.csproj" />
+    <Project Path="tests/Rallyto.Identity.UnitTests/Rallyto.Identity.UnitTests.csproj" />
+    <Project Path="tests/Rallyto.Tests.Commons/Rallyto.Tests.Commons.csproj" />
+    <Project Path="tests/Rallyto.VenueImport.Tests/Rallyto.VenueImport.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/Rallyto.VenueImport/Rallyto.VenueImport.csproj" />
+  </Folder>
+</Solution>

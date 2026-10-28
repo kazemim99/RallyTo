@@ -1,0 +1,116 @@
+---
+import { SITE } from '../config/site'
+import { SPORTS } from '../data/sports'
+import BrandMark from './BrandMark.astro'
+
+// The Jalali year of the build, in Persian digits.
+const year = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric' }).format(new Date())
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a class="footer-brand" href="/">
+        <BrandMark size={34} tone="color" />
+        <span>{SITE.name}</span>
+      </a>
+      <p class="muted">{SITE.tagline}.</p>
+    </div>
+    <nav aria-label="ورزش‌ها">
+      <h2 class="footer-title">ورزش‌ها</h2>
+      <ul>
+        {
+          SPORTS.map((s) => (
+            <li>
+              <a href={`/${s.slug}`}>پارتنر {s.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <nav aria-label="رالیتو">
+      <h2 class="footer-title">رالیتو</h2>
+      <ul>
+        <li><a href="/#how">چطور کار می‌کند</a></li>
+        <li><a href="/#faq">سؤال‌های پرتکرار</a></li>
+        <li><a href="/terms">قوانین استفاده</a></li>
+        <li><a href="/privacy">حریم خصوصی</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container site-footer__base">
+    <p>© {year} {SITE.name}</p>
+    <p dir="ltr" lang="en">{SITE.latinName}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: 56px 28px;
+    background: var(--c-surface);
+    border-top: 1px solid var(--c-line);
+    font-size: var(--step--1);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .site-footer__brand {
+    grid-column: 1 / -1;
+    max-width: 22rem;
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--c-ink);
+    font: 900 1.45rem / 1 var(--font-display);
+    text-decoration: none;
+    margin-block-end: 10px;
+  }
+
+  .footer-title {
+    font: 700 var(--step-0) / 1.6 var(--font-body);
+    margin-block-end: 8px;
+  }
+
+  .site-footer ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-footer li a {
+    display: inline-block;
+    padding-block: 5px;
+    color: var(--c-muted);
+    text-decoration: none;
+  }
+
+  .site-footer li a:hover {
+    color: var(--c-court);
+    text-decoration: underline;
+  }
+
+  .site-footer__base {
+    display: flex;
+    justify-content: space-between;
+    margin-block-start: 40px;
+    padding-block-start: 20px;
+    border-top: 1px solid var(--c-line);
+    color: var(--c-muted);
+  }
+
+  @media (min-width: 760px) {
+    .site-footer__grid {
+      grid-template-columns: 2fr 1fr 1fr;
+    }
+
+    .site-footer__brand {
+      grid-column: auto;
+    }
+  }
+</style>

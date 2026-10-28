@@ -1,0 +1,51 @@
+---
+import type { Crumb } from '../lib/seo'
+
+/** The visible trail; the same crumbs go into the page's BreadcrumbList structured data (layouts/Base.astro). */
+interface Props {
+  crumbs: Crumb[]
+}
+const { crumbs } = Astro.props
+---
+
+<nav class="crumbs" aria-label="مسیر صفحه">
+  <ol>
+    {
+      crumbs.map((c, i) =>
+        i < crumbs.length - 1 ? (
+          <li>
+            <a href={c.path}>{c.name}</a>
+          </li>
+        ) : (
+          <li aria-current="page">{c.name}</li>
+        ),
+      )
+    }
+  </ol>
+</nav>
+
+<style>
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0;
+    list-style: none;
+    color: var(--c-mint);
+    font-size: var(--step--1);
+  }
+
+  .crumbs li + li::before {
+    content: '/';
+    margin-inline-end: 6px;
+    opacity: 0.6;
+  }
+
+  .crumbs a {
+    color: var(--c-mint);
+  }
+
+  .crumbs [aria-current] {
+    color: var(--c-surface);
+  }
+</style>

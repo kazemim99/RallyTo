@@ -1,0 +1,57 @@
+---
+import bodyFontUrl from '../assets/fonts/vazir-regular.woff2?url'
+import displayFontUrl from '../assets/fonts/estedad-black-fa.woff2?url'
+import { SITE } from '../config/site'
+import { SPECULATION_RULES } from '../config/inline-scripts.mjs'
+import type { PageMeta } from '../data/pages'
+import { OG_IMAGE_PATH, absolute } from '../lib/seo'
+
+interface Props {
+  meta: PageMeta
+  jsonLd?: Record<string, unknown>[]
+}
+
+const { meta, jsonLd = [] } = Astro.props
+const canonical = absolute(meta.path)
+const tracked = process.env.LANDING_BUILD !== 'test' && SITE.analytics !== null
+const ogImage = absolute(OG_IMAGE_PATH)
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{meta.title}</title>
+<meta name="description" content={meta.description} />
+{meta.indexable ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex, follow" />}
+<link rel="preload" href={bodyFontUrl} as="font" type="font/woff2" crossorigin="anonymous" />
+<link rel="preload" href={displayFontUrl} as="font" type="font/woff2" crossorigin="anonymous" />
+<meta name="theme-color" content={SITE.themeColor} />
+<meta name="color-scheme" content="light" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/manifest.webmanifest" />
+{
+  meta.indexable && (
+    <>
+      <meta property="og:type" content="website" />
+      <meta property="og:locale" content="fa_IR" />
+      <meta property="og:site_name" content={SITE.name} />
+      <meta property="og:title" content={meta.shareTitle ?? meta.title} />
+      <meta property="og:description" content={meta.description} />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={`${SITE.name}، ${SITE.tagline}`} />
+      <meta name="twitter:card" content="summary_large_image" />
+    </>
+  )
+}
+<script type="speculationrules" is:inline set:html={SPECULATION_RULES} />
+{
+  tracked && SITE.analytics && (
+    <script is:inline defer src={SITE.analytics.script} data-website-id={SITE.analytics.websiteId} data-do-not-track="true" />
+  )
+}
+{jsonLd.map((data) => <script type="application/ld+json" is:inline set:html={JSON.stringify(data)} />)}

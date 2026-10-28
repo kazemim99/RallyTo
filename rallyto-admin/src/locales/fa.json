@@ -1,0 +1,821 @@
+{
+  "app": {
+    "name": "پنل مدیریت رالیتو",
+    "brand": "رالیتو"
+  },
+  "navigation": {
+    "dashboard": "داشبورد",
+    "users": "کاربران",
+    "venues": "باشگاه‌ها",
+    "venueCandidates": "صف ورود باشگاه‌ها",
+    "sports": "ورزش‌ها",
+    "reports": "گزارش‌های تخلف",
+    "disputedMatches": "بازی‌های مورد اختلاف",
+    "auditLog": "گزارش فعالیت ادمین‌ها",
+    "toggleMenu": "باز و بسته کردن منو"
+  },
+  "auth": {
+    "title": "ورود به پنل مدیریت",
+    "adminOnly": "فقط حساب‌های مدیر رالیتو به این پنل دسترسی دارند.",
+    "emailLabel": "ایمیل",
+    "emailPlaceholder": "admin{'@'}rallyto.ir",
+    "emailRequired": "ایمیل را وارد کنید.",
+    "emailInvalid": "ایمیل معتبر نیست. ایمیل را به شکل name{'@'}example.com وارد کنید.",
+    "passwordLabel": "رمز عبور",
+    "passwordRequired": "رمز عبور را وارد کنید.",
+    "signIn": "ورود",
+    "signOut": "خروج"
+  },
+  "placeholder": {
+    "comingSoon": "این بخش در مرحله‌های بعدی ساخته می‌شود."
+  },
+  "notFound": {
+    "subtitle": "صفحه‌ای که دنبالش هستید پیدا نشد.",
+    "backHome": "بازگشت به داشبورد"
+  },
+  "users": {
+    "searchPlaceholder": "جستجوی شماره موبایل",
+    "statusPlaceholder": "همه وضعیت‌ها",
+    "total": "{total} کاربر",
+    "empty": "کاربری پیدا نشد.",
+    "noValue": "—",
+    "cancel": "انصراف",
+    "columns": {
+      "phone": "شماره موبایل",
+      "roles": "نقش‌ها",
+      "status": "وضعیت",
+      "suspendedUntil": "تعلیق تا",
+      "reason": "دلیل",
+      "createdAt": "تاریخ عضویت",
+      "actions": "عملیات"
+    },
+    "status": {
+      "Active": "فعال",
+      "Suspended": "معلق",
+      "Banned": "مسدود دائمی",
+      "Deleted": "حذف‌شده"
+    },
+    "roles": {
+      "Admin": "مدیر",
+      "Player": "بازیکن"
+    },
+    "actions": {
+      "details": "جزئیات",
+      "suspend": "تعلیق",
+      "liftSuspension": "رفع تعلیق",
+      "ban": "مسدودسازی",
+      "grantAdmin": "اعطای نقش مدیر",
+      "revokeAdmin": "لغو نقش مدیر"
+    },
+    "reason": {
+      "label": "دلیل",
+      "placeholder": "دلیل این تصمیم را بنویسید. در سابقه حساب ثبت می‌شود.",
+      "required": "دلیل را وارد کنید."
+    },
+    "suspend": {
+      "title": "تعلیق حساب {phone}",
+      "durationLabel": "مدت تعلیق",
+      "days": "{count} روز",
+      "custom": "تاریخ دلخواه",
+      "untilLabel": "پایان تعلیق (به وقت تهران)",
+      "year": "سال",
+      "month": "ماه",
+      "day": "روز",
+      "hour": "ساعت",
+      "minute": "دقیقه",
+      "preview": "حساب تا {date} به وقت تهران معلق می‌ماند.",
+      "inPast": "زمان پایان تعلیق باید در آینده باشد.",
+      "invalidDate": "این تاریخ وجود ندارد.",
+      "submit": "تعلیق حساب"
+    },
+    "lift": {
+      "title": "رفع تعلیق حساب {phone}",
+      "description": "حساب بی‌درنگ دوباره فعال می‌شود.",
+      "submit": "رفع تعلیق"
+    },
+    "ban": {
+      "title": "مسدودسازی دائمی حساب {phone}",
+      "warningTitle": "این کار دائمی است و برگشت ندارد.",
+      "warning": "حساب مسدودشده برای همیشه از رالیتو کنار گذاشته می‌شود: کاربر دیگر نمی‌تواند وارد شود و هیچ راهی برای رفع مسدودیت در پنل وجود ندارد. اگر محدودیت موقت کافی است، از تعلیق استفاده کنید.",
+      "acknowledge": "می‌دانم مسدودسازی دائمی است و برگشت‌پذیر نیست.",
+      "submit": "مسدودسازی دائمی"
+    },
+    "grantAdmin": {
+      "title": "اعطای نقش مدیر",
+      "confirm": "حساب {phone} به همه بخش‌های پنل مدیریت دسترسی پیدا می‌کند. ادامه می‌دهید؟",
+      "submit": "اعطای نقش مدیر"
+    },
+    "revokeAdmin": {
+      "title": "لغو نقش مدیر",
+      "confirm": "دسترسی حساب {phone} به پنل مدیریت گرفته می‌شود. ادامه می‌دهید؟",
+      "submit": "لغو نقش مدیر"
+    },
+    "messages": {
+      "suspended": "حساب معلق شد.",
+      "lifted": "تعلیق حساب برداشته شد.",
+      "banned": "حساب برای همیشه مسدود شد.",
+      "granted": "نقش مدیر اعطا شد.",
+      "revoked": "نقش مدیر لغو شد."
+    },
+    "detail": {
+      "title": "جزئیات کاربر",
+      "userId": "شناسه کاربر"
+    },
+    "player": {
+      "title": "پروفایل بازیکن",
+      "noProfile": "این کاربر هنوز پروفایل نساخته است",
+      "noPhoto": "بدون عکس",
+      "photoAlt": "عکس پروفایل {name}",
+      "fields": {
+        "name": "نام نمایشی",
+        "gender": "جنسیت",
+        "birthDate": "تاریخ تولد",
+        "ageRange": "بازه سنی",
+        "city": "شهر",
+        "bio": "درباره من",
+        "visibility": "نمایش پروفایل",
+        "status": "وضعیت پروفایل",
+        "sports": "ورزش‌ها",
+        "homeVenues": "باشگاه‌های اصلی"
+      },
+      "ageRangeBetween": "{from} تا {to} سال",
+      "ageRangeFrom": "{from} سال به بالا",
+      "noSports": "ورزشی ثبت نشده است.",
+      "noVenues": "باشگاهی انتخاب نشده است.",
+      "level": "سطح",
+      "experience": "سابقه",
+      "formats": "قالب بازی",
+      "goals": "هدف",
+      "gender": {
+        "Male": "مرد",
+        "Female": "زن"
+      },
+      "visibility": {
+        "Everyone": "همه بازیکنان",
+        "SameGender": "فقط بازیکنان هم‌جنس"
+      },
+      "status": {
+        "Active": "فعال",
+        "Hidden": "پنهان",
+        "Deleted": "حذف‌شده"
+      },
+      "experienceBands": {
+        "UnderSixMonths": "کمتر از شش ماه",
+        "SixToTwelveMonths": "شش ماه تا یک سال",
+        "OneToThreeYears": "یک تا سه سال",
+        "ThreeToFiveYears": "سه تا پنج سال",
+        "OverFiveYears": "بیش از پنج سال"
+      },
+      "goalNames": {
+        "RallyPractice": "تمرین رالی",
+        "FriendlyMatch": "بازی دوستانه",
+        "Competitive": "رقابتی",
+        "Fitness": "تناسب اندام"
+      },
+      "actions": {
+        "correctGender": "اصلاح جنسیت",
+        "removePhoto": "حذف عکس"
+      },
+      "correctGender": {
+        "title": "اصلاح جنسیت {name}",
+        "current": "جنسیت فعلی: {gender}",
+        "newGender": "جنسیت جدید",
+        "newGenderRequired": "جنسیت جدید را انتخاب کنید.",
+        "warning": "بازیکن از این اصلاح باخبر می‌شود و دلیل آن در سابقه حساب ثبت می‌شود.",
+        "submit": "اصلاح جنسیت"
+      },
+      "removePhoto": {
+        "title": "حذف عکس پروفایل {name}",
+        "description": "عکس پروفایل بازیکن حذف می‌شود و دلیل آن در سابقه حساب ثبت می‌شود.",
+        "submit": "حذف عکس"
+      },
+      "messages": {
+        "genderCorrected": "جنسیت بازیکن اصلاح شد.",
+        "photoRemoved": "عکس پروفایل حذف شد."
+      }
+    }
+  },
+  "catalog": {
+    "noValue": "—",
+    "cancel": "انصراف",
+    "save": "ذخیره",
+    "formats": {
+      "Singles": "انفرادی",
+      "Doubles": "دونفره"
+    },
+    "tiers": {
+      "Beginner": "مبتدی",
+      "LowerIntermediate": "متوسط رو به پایین",
+      "Intermediate": "متوسط",
+      "Advanced": "پیشرفته",
+      "Professional": "حرفه‌ای"
+    },
+    "surfaces": {
+      "Hard": "هارد",
+      "Clay": "خاک رس",
+      "Grass": "چمن طبیعی",
+      "ArtificialGrass": "چمن مصنوعی",
+      "Carpet": "موکت",
+      "Wood": "چوب",
+      "Synthetic": "سینتتیک",
+      "Glass": "شیشه"
+    },
+    "settings": {
+      "Indoor": "سرپوشیده",
+      "Outdoor": "روباز",
+      "Both": "سرپوشیده و روباز"
+    },
+    "location": {
+      "province": "استان",
+      "city": "شهر",
+      "allProvinces": "همه استان‌ها",
+      "allCities": "همه شهرها",
+      "chooseProvince": "استان را انتخاب کنید",
+      "chooseCity": "شهر را انتخاب کنید",
+      "loadFailed": "فهرست استان‌ها و شهرها بارگذاری نشد."
+    },
+    "sportsEditor": {
+      "courtCount": "تعداد زمین",
+      "unknown": "نامشخص",
+      "setting": "نوع فضا",
+      "surface": "جنس زمین",
+      "lighting": "نورپردازی",
+      "inactive": "غیرفعال",
+      "empty": "هنوز ورزشی تعریف نشده است.",
+      "required": "دست‌کم یک ورزش را انتخاب کنید.",
+      "laterHint": "جزئیات زمین‌ها (تعداد، نوع فضا، جنس و نورپردازی) را بعداً هم می‌توانید از صفحه باشگاه‌ها کامل کنید. فعلاً انتخاب ورزش‌ها کافی است."
+    }
+  },
+  "sports": {
+    "total": "{total} ورزش",
+    "add": "ورزش جدید",
+    "empty": "ورزشی تعریف نشده است.",
+    "minutes": "{count} دقیقه",
+    "playersPerSideShort": "{count} نفر در هر طرف",
+    "columns": {
+      "name": "نام",
+      "code": "کد",
+      "status": "وضعیت",
+      "formats": "قالب‌های بازی",
+      "session": "مدت پیش‌فرض جلسه",
+      "actions": "عملیات"
+    },
+    "status": {
+      "active": "فعال",
+      "inactive": "غیرفعال"
+    },
+    "actions": {
+      "edit": "ویرایش",
+      "activate": "فعال‌سازی",
+      "deactivate": "غیرفعال‌سازی"
+    },
+    "form": {
+      "createTitle": "ورزش جدید",
+      "editTitle": "ویرایش {name}",
+      "code": "کد",
+      "codeHelp": "حروف کوچک انگلیسی، عدد و خط تیره؛ بعداً تغییر نمی‌کند.",
+      "codeInvalid": "کد فقط حروف کوچک انگلیسی، عدد و خط تیره است.",
+      "nameFa": "نام فارسی",
+      "nameEn": "نام انگلیسی",
+      "nameRequired": "نام را وارد کنید.",
+      "sortOrder": "ترتیب نمایش",
+      "session": "مدت پیش‌فرض جلسه (دقیقه)",
+      "sessionInvalid": "مدت جلسه باید بین ۳۰ تا ۲۴۰ دقیقه و مضربی از ۱۵ باشد.",
+      "formats": "قالب‌های بازی",
+      "playersPerSide": "بازیکن در هر طرف",
+      "formatsRequired": "دست‌کم یک قالب بازی را انتخاب کنید.",
+      "surfaces": "جنس‌های زمین",
+      "surfacesPlaceholder": "جنس‌های زمینی که این ورزش روی آن‌ها بازی می‌شود",
+      "levels": "توضیح سطح‌ها",
+      "levelsHelp": "هر پنج سطح لازم است؛ بازیکن هنگام تعیین سطح خود این توضیح‌ها را می‌بیند.",
+      "levelRequired": "توضیح این سطح را بنویسید.",
+      "submitCreate": "افزودن ورزش",
+      "submitEdit": "ذخیره تغییرات"
+    },
+    "activate": {
+      "title": "فعال‌سازی {name}",
+      "confirm": "این ورزش دوباره در اپ برای بازیکنان نمایش داده می‌شود. ادامه می‌دهید؟",
+      "submit": "فعال‌سازی"
+    },
+    "deactivate": {
+      "title": "غیرفعال‌سازی {name}",
+      "confirm": "این ورزش دیگر در اپ برای انتخاب نمایش داده نمی‌شود. داده‌های گذشته حفظ می‌شود. ادامه می‌دهید؟",
+      "submit": "غیرفعال‌سازی"
+    },
+    "messages": {
+      "created": "ورزش افزوده شد.",
+      "updated": "تغییرات ورزش ذخیره شد.",
+      "activated": "ورزش فعال شد.",
+      "deactivated": "ورزش غیرفعال شد."
+    }
+  },
+  "venues": {
+    "total": "{total} باشگاه",
+    "add": "باشگاه جدید",
+    "empty": "باشگاهی پیدا نشد.",
+    "searchPlaceholder": "جستجوی نام باشگاه",
+    "statusPlaceholder": "همه وضعیت‌ها",
+    "google": "گوگل",
+    "googleTitle": "از جستجوی گوگل وارد شده است",
+    "courts": "{count} زمین",
+    "columns": {
+      "name": "نام",
+      "city": "شهر",
+      "sports": "ورزش‌ها",
+      "status": "وضعیت",
+      "actions": "عملیات"
+    },
+    "status": {
+      "Active": "فعال",
+      "Hidden": "پنهان"
+    },
+    "actions": {
+      "edit": "ویرایش",
+      "profile": "پروفایل و عکس‌ها",
+      "hide": "پنهان‌سازی",
+      "unhide": "نمایش دوباره"
+    },
+    "form": {
+      "createTitle": "باشگاه جدید",
+      "editTitle": "ویرایش {name}",
+      "cityFixed": "شهر باشگاه پس از ثبت تغییر نمی‌کند.",
+      "cityRequired": "شهر را انتخاب کنید.",
+      "name": "نام باشگاه",
+      "nameRequired": "نام باشگاه را وارد کنید.",
+      "address": "نشانی",
+      "phone": "تلفن",
+      "coordinates": "مختصات (اختیاری)",
+      "latitude": "عرض جغرافیایی",
+      "longitude": "طول جغرافیایی",
+      "coordinatesHelp": "هر دو را وارد کنید یا هیچ‌کدام را.",
+      "coordinatesIncomplete": "عرض و طول جغرافیایی را با هم وارد کنید.",
+      "sports": "ورزش‌ها و زمین‌ها",
+      "similarTitle": "باشگاه‌هایی با نام مشابه در این شهر:",
+      "similarHint": "اگر همین باشگاه است، به‌جای ثبت دوباره، همان را ویرایش کنید.",
+      "conflictTitle": "باشگاهی با نام مشابه در این شهر ثبت شده است",
+      "saveAnyway": "باشگاه دیگری است، با این حال ذخیره کن",
+      "submitCreate": "افزودن باشگاه",
+      "submitEdit": "ذخیره تغییرات"
+    },
+    "profile": {
+      "title": "پروفایل {name}",
+      "photos": "عکس‌ها",
+      "photosHelp": "اولین عکس، عکس اصلی باشگاه است. حداکثر {max} عکس (JPEG، PNG یا WebP تا ۱۰ مگابایت).",
+      "cover": "عکس اصلی",
+      "addPhoto": "افزودن عکس",
+      "removePhoto": "حذف",
+      "tagline": "شعار",
+      "description": "توضیحات",
+      "workingHours": "ساعت کاری",
+      "website": "وب‌سایت",
+      "instagram": "اینستاگرام",
+      "telegram": "تلگرام",
+      "linkHelp": "لینک‌ها باید با http:// یا https:// شروع شوند.",
+      "amenities": "امکانات",
+      "courtTypes": "نوع زمین‌ها",
+      "tagsHelp": "بعد از هر مورد Enter بزنید.",
+      "source": "منبع:",
+      "saved": "پروفایل باشگاه ذخیره شد.",
+      "googleRating": "امتیاز گوگل: {rating} از ۵ ({count} نظر)"
+    },
+    "hide": {
+      "title": "پنهان‌سازی {name}",
+      "confirm": "این باشگاه دیگر در اپ نمایش داده نمی‌شود و نمی‌توان آن را برای بازی انتخاب کرد. ادامه می‌دهید؟",
+      "submit": "پنهان‌سازی"
+    },
+    "unhide": {
+      "title": "نمایش دوباره {name}",
+      "confirm": "این باشگاه دوباره در اپ نمایش داده می‌شود. ادامه می‌دهید؟",
+      "submit": "نمایش دوباره"
+    },
+    "messages": {
+      "created": "باشگاه افزوده شد.",
+      "updated": "تغییرات باشگاه ذخیره شد.",
+      "hidden": "باشگاه پنهان شد.",
+      "unhidden": "باشگاه دوباره نمایش داده می‌شود."
+    }
+  },
+  "candidates": {
+    "total": "{total} مورد",
+    "empty": "موردی در صف نیست.",
+    "keywordPlaceholder": "کلیدواژه جستجو",
+    "statusPlaceholder": "همه وضعیت‌ها",
+    "bulkApprove": "تأیید گروهی ({count})",
+    "columns": {
+      "name": "نام",
+      "address": "نشانی",
+      "keyword": "کلیدواژه",
+      "importedAt": "تاریخ ورود",
+      "status": "وضعیت",
+      "actions": "عملیات"
+    },
+    "status": {
+      "Pending": "در انتظار بررسی",
+      "Approved": "تأییدشده",
+      "Merged": "ادغام‌شده",
+      "Rejected": "ردشده"
+    },
+    "actions": {
+      "approve": "تأیید",
+      "merge": "ادغام",
+      "reject": "رد"
+    },
+    "approve": {
+      "title": "تأیید {name}",
+      "description": "این مورد به‌عنوان باشگاه تازه به فهرست اضافه می‌شود. اطلاعات گوگل را بازبینی کنید.",
+      "submit": "تأیید و افزودن باشگاه"
+    },
+    "merge": {
+      "title": "ادغام {name}",
+      "description": "این مورد همان باشگاهی است که در فهرست هست؛ باشگاه موجود را انتخاب کنید.",
+      "venue": "باشگاه موجود در همین شهر",
+      "venuePlaceholder": "باشگاه را انتخاب کنید",
+      "venueRequired": "باشگاه را انتخاب کنید.",
+      "noVenues": "در این شهر باشگاهی ثبت نشده است.",
+      "submit": "ادغام"
+    },
+    "reject": {
+      "title": "رد {name}",
+      "reason": "دلیل",
+      "reasonPlaceholder": "مثلاً: باشگاه بدنسازی است، زمین راکتی ندارد.",
+      "reasonRequired": "دلیل را وارد کنید.",
+      "submit": "رد"
+    },
+    "bulk": {
+      "title": "تأیید گروهی",
+      "description": "{count} مورد انتخاب‌شده هر کدام با نام و نشانی گوگل به‌عنوان باشگاه تازه اضافه می‌شوند و ورزش‌های زیر برای همه ثبت می‌شود.",
+      "submit": "تأیید همه"
+    },
+    "messages": {
+      "approved": "باشگاه افزوده شد.",
+      "merged": "مورد با باشگاه موجود ادغام شد.",
+      "rejected": "مورد رد شد.",
+      "bulkApproved": "{count} باشگاه افزوده شد."
+    }
+  },
+  "safety": {
+    "reasons": {
+      "Harassment": "آزار و توهین",
+      "InappropriateContent": "محتوای نامناسب",
+      "FakeProfile": "پروفایل جعلی",
+      "Spam": "هرزنامه و تبلیغ",
+      "UnsafeBehaviour": "رفتار ناامن",
+      "Underage": "کاربر زیر سن قانونی",
+      "Other": "سایر"
+    },
+    "targetTypes": {
+      "Player": "پروفایل",
+      "Message": "پیام",
+      "Post": "آگهی بازی",
+      "Photo": "عکس پروفایل"
+    },
+    "reportStatus": {
+      "Open": "باز",
+      "Resolved": "رسیدگی‌شده",
+      "Dismissed": "ردشده"
+    },
+    "reliability": {
+      "Unknown": "نامشخص",
+      "New": "تازه‌وارد",
+      "Low": "کم",
+      "Good": "خوب",
+      "High": "عالی"
+    },
+    "answers": {
+      "Played": "بازی انجام شد",
+      "DidNotHappen": "بازی انجام نشد"
+    },
+    "outcomes": {
+      "Played": "حاضر",
+      "NoShow": "غایب",
+      "Contested": "مورد اختلاف"
+    },
+    "matchStatus": {
+      "Open": "باز",
+      "Pending": "در انتظار",
+      "Confirmed": "قطعی",
+      "Completed": "انجام‌شده",
+      "Disputed": "مورد اختلاف",
+      "Unconfirmed": "تأییدنشده",
+      "Cancelled": "لغوشده",
+      "Expired": "منقضی"
+    },
+    "noValue": "—",
+    "cancel": "انصراف",
+    "refresh": "بارگذاری دوباره",
+    "reason": {
+      "label": "دلیل",
+      "placeholder": "دلیل این تصمیم را بنویسید. در گزارش فعالیت ادمین‌ها ثبت می‌شود."
+    }
+  },
+  "reports": {
+    "total": "{total} بازیکن گزارش‌شده",
+    "empty": "گزارش بازی در صف نیست.",
+    "columns": {
+      "target": "بازیکن",
+      "priority": "اولویت",
+      "openReports": "گزارش‌های باز",
+      "reporters": "گزارش‌دهندگان",
+      "oldest": "قدیمی‌ترین گزارش",
+      "actions": "عملیات"
+    },
+    "priority": {
+      "high": "اولویت بالا",
+      "normal": "عادی"
+    },
+    "age": {
+      "days": "{count} روز پیش",
+      "hours": "{count} ساعت پیش",
+      "justNow": "کمتر از یک ساعت پیش"
+    },
+    "openDetail": "بررسی و اقدام",
+    "report": {
+      "reporter": "گزارش‌دهنده",
+      "reason": "دلیل",
+      "details": "توضیحات گزارش‌دهنده",
+      "date": "تاریخ گزارش",
+      "target": "مورد گزارش‌شده",
+      "targetId": "شناسه مورد",
+      "status": "وضعیت",
+      "evidence": "شواهد (همان‌طور که گزارش‌دهنده دید)",
+      "noDetails": "توضیحی ننوشته است."
+    },
+    "evidence": {
+      "text": "متن",
+      "displayName": "نام نمایشی",
+      "bio": "درباره من",
+      "photo": "عکس",
+      "sentAt": "زمان ارسال",
+      "photoAlt": "عکس گزارش‌شده {name}",
+      "empty": "شاهدی ذخیره نشده است."
+    },
+    "dismiss": {
+      "action": "رد گزارش",
+      "title": "رد گزارش {reporter}",
+      "description": "گزارش بدون اقدام بسته می‌شود. دلیل در گزارش فعالیت ادمین‌ها ثبت می‌شود.",
+      "submit": "رد گزارش",
+      "success": "گزارش رد شد."
+    }
+  },
+  "reportTarget": {
+    "back": "بازگشت به صف گزارش‌ها",
+    "title": "پرونده {name}",
+    "userId": "شناسه کاربر",
+    "account": "وضعیت حساب",
+    "suspendedUntil": "تعلیق تا",
+    "reliability": "اعتبار حضور",
+    "accountUnknown": "خوانده نشد",
+    "actionsTitle": "اقدام",
+    "noActionsAvailable": "برای این حساب اقدامی در دسترس نیست.",
+    "sections": {
+      "reports": "گزارش‌ها",
+      "history": "اقدام‌های قبلی",
+      "disputes": "اختلاف‌های ۹۰ روز اخیر",
+      "notes": "یادداشت‌های خصوصی امتیازها"
+    },
+    "noReports": "گزارشی ثبت نشده است.",
+    "noHistory": "هنوز اقدامی انجام نشده است.",
+    "noNotes": "یادداشت خصوصی‌ای ثبت نشده است.",
+    "disputeCount": "{count} بازی مورد اختلاف",
+    "historyColumns": {
+      "at": "زمان",
+      "action": "اقدام",
+      "reason": "دلیل",
+      "subject": "مورد",
+      "report": "گزارش",
+      "admin": "ادمین"
+    },
+    "noteColumns": {
+      "rater": "امتیازدهنده",
+      "stars": "ستاره",
+      "note": "یادداشت",
+      "match": "بازی",
+      "at": "زمان"
+    },
+    "actOnReport": "اقدام روی این گزارش",
+    "notFound": "این بازیکن پروفایل ندارد یا پیدا نشد."
+  },
+  "moderation": {
+    "actions": {
+      "Warn": "اخطار",
+      "RemovePhoto": "حذف عکس",
+      "HidePost": "پنهان کردن آگهی",
+      "DeleteMessage": "حذف پیام",
+      "Suspend": "تعلیق",
+      "LiftSuspension": "رفع تعلیق",
+      "Ban": "مسدودسازی دائمی",
+      "CorrectGender": "اصلاح جنسیت"
+    },
+    "title": "{action}: {name}",
+    "descriptions": {
+      "Warn": "متن اخطار برای بازیکن فرستاده می‌شود.",
+      "RemovePhoto": "عکس پروفایل بازیکن حذف می‌شود و بازیکن باخبر می‌شود.",
+      "HidePost": "آگهی از جستجو و لینک اشتراک حذف می‌شود؛ شرکت‌کنندگان پذیرفته‌شده بازی را نگه می‌دارند.",
+      "DeleteMessage": "پیام برای همه حذف می‌شود.",
+      "Suspend": "حساب تا پایان روز انتخاب‌شده به وقت تهران معلق می‌ماند و بازیکن دلیل و تاریخ پایان را می‌بیند.",
+      "LiftSuspension": "حساب بی‌درنگ دوباره فعال می‌شود.",
+      "CorrectGender": "بازیکن از اصلاح جنسیت باخبر می‌شود."
+    },
+    "fields": {
+      "report": "گزارش مرتبط",
+      "reportNone": "بدون گزارش",
+      "warningText": "متن اخطار",
+      "warningPlaceholder": "متنی که بازیکن می‌بیند",
+      "matchId": "شناسه بازی (آگهی)",
+      "messageId": "شناسه پیام",
+      "fromReports": "از گزارش‌ها:",
+      "until": "آخرین روز تعلیق",
+      "preset": "{count} روز",
+      "gender": "جنسیت درست"
+    },
+    "untilPreview": "حساب تا پایان {date} به وقت تهران معلق می‌ماند.",
+    "ban": {
+      "warningTitle": "این کار دائمی است و برگشت ندارد.",
+      "warning": "حساب مسدودشده برای همیشه از رالیتو کنار گذاشته می‌شود و همین شماره دیگر نمی‌تواند ثبت‌نام کند. اگر محدودیت موقت کافی است، از تعلیق استفاده کنید.",
+      "acknowledge": "می‌دانم مسدودسازی دائمی است و برگشت‌پذیر نیست.",
+      "confirmName": "برای تأیید، نام نمایشی بازیکن را بنویسید: {name}"
+    },
+    "errors": {
+      "reasonRequired": "دلیل را وارد کنید.",
+      "warningTextRequired": "متن اخطار را بنویسید.",
+      "matchIdInvalid": "شناسه بازی معتبر نیست.",
+      "messageIdInvalid": "شناسه پیام معتبر نیست.",
+      "untilInvalid": "روز را کامل انتخاب کنید.",
+      "untilPast": "آخرین روز تعلیق نمی‌تواند قبل از امروز باشد.",
+      "genderRequired": "جنسیت را انتخاب کنید.",
+      "banUnconfirmed": "مسدودسازی را تأیید کنید و نام بازیکن را درست بنویسید."
+    },
+    "submit": "ثبت اقدام",
+    "success": "اقدام ثبت شد."
+  },
+  "jalaliDate": {
+    "year": "سال",
+    "month": "ماه",
+    "day": "روز"
+  },
+  "audit": {
+    "total": "{total} رویداد",
+    "empty": "رویدادی پیدا نشد.",
+    "filters": {
+      "adminId": "شناسه ادمین",
+      "targetUserId": "شناسه کاربر هدف",
+      "action": "نوع اقدام",
+      "actionPlaceholder": "همه اقدام‌ها (یا نام اقدام را بنویسید)",
+      "from": "از تاریخ",
+      "to": "تا تاریخ",
+      "apply": "اعمال فیلتر",
+      "reset": "پاک کردن",
+      "last7Days": "۷ روز اخیر"
+    },
+    "errors": {
+      "invalidId": "شناسه معتبر نیست.",
+      "invalidDate": "تاریخ کامل یا معتبر نیست.",
+      "range": "تاریخ پایان قبل از تاریخ شروع است."
+    },
+    "columns": {
+      "at": "زمان",
+      "action": "اقدام",
+      "admin": "ادمین",
+      "target": "هدف",
+      "reason": "دلیل"
+    },
+    "actionNames": {
+      "moderation_warn": "اخطار به بازیکن",
+      "moderation_hide_post": "پنهان کردن آگهی بازی",
+      "moderation_delete_message": "حذف پیام",
+      "report_dismiss": "رد گزارش",
+      "rating_remove": "حذف امتیاز",
+      "player_correct_gender": "اصلاح جنسیت",
+      "player_remove_photo": "حذف عکس پروفایل",
+      "account_suspend": "تعلیق حساب",
+      "account_lift_suspension": "رفع تعلیق حساب",
+      "account_ban": "مسدودسازی دائمی حساب",
+      "account_grant_admin": "اعطای نقش مدیر",
+      "account_revoke_admin": "لغو نقش مدیر",
+      "sport_create": "افزودن ورزش",
+      "sport_update": "ویرایش ورزش",
+      "sport_activate": "فعال کردن ورزش",
+      "sport_deactivate": "غیرفعال کردن ورزش",
+      "venue_create": "افزودن باشگاه",
+      "venue_update": "ویرایش باشگاه",
+      "venue_hide": "پنهان کردن باشگاه",
+      "venue_unhide": "نمایش دوباره باشگاه",
+      "venue_candidate_approve": "تأیید باشگاه از صف",
+      "venue_candidate_merge": "ادغام باشگاه از صف",
+      "venue_candidate_reject": "رد باشگاه از صف",
+      "venue_candidates_import": "ورود باشگاه‌ها از گوگل",
+      "venue_candidates_bulk_approve": "تأیید گروهی باشگاه‌ها"
+    },
+    "targetTypes": {
+      "Player": "بازیکن",
+      "Match": "بازی",
+      "Message": "پیام",
+      "Report": "گزارش",
+      "Rating": "امتیاز",
+      "Account": "حساب",
+      "Sport": "ورزش",
+      "Venue": "باشگاه",
+      "VenueCandidate": "باشگاه در صف"
+    },
+    "openTarget": "پرونده"
+  },
+  "disputes": {
+    "total": "{total} بازی",
+    "empty": "بازی مورد اختلافی نیست.",
+    "description": "بازی‌های مورد اختلاف و بازی‌هایی که غیبت کسی در آن‌ها مورد اختلاف است، جدیدترین اول.",
+    "columns": {
+      "date": "روز بازی",
+      "sport": "ورزش",
+      "status": "وضعیت",
+      "players": "بازیکنان، پاسخ و نتیجه",
+      "resolvedAt": "زمان بسته شدن",
+      "matchId": "شناسه بازی"
+    },
+    "noAnswer": "پاسخ نداد",
+    "noOutcome": "بدون نتیجه",
+    "openPlayer": "پرونده بازیکن"
+  },
+  "ratings": {
+    "profileTab": "حساب و پروفایل",
+    "tab": "امتیازها",
+    "empty": "این بازیکن امتیازی دریافت نکرده است.",
+    "summary": "{total} امتیاز، {removed} حذف‌شده",
+    "stars": "{count} از ۵",
+    "starsLabel": "{count} ستاره",
+    "fields": {
+      "rater": "امتیازدهنده",
+      "match": "بازی",
+      "tags": "برچسب‌ها",
+      "levelAccuracy": "سطح بازی",
+      "privateNote": "یادداشت خصوصی",
+      "submittedAt": "زمان ثبت",
+      "removedAt": "زمان حذف",
+      "removalReason": "دلیل حذف"
+    },
+    "noNote": "یادداشتی ننوشته است.",
+    "noTags": "بدون برچسب",
+    "revealed": "آشکار",
+    "hidden": "پنهان (دوسوکور)",
+    "removed": "حذف‌شده",
+    "remove": "حذف امتیاز",
+    "tags": {
+      "OnTime": "وقت‌شناس",
+      "Friendly": "خوش‌برخورد",
+      "FairCalls": "داوری منصفانه",
+      "GoodRally": "رالی خوب",
+      "Sportsmanship": "روحیه ورزشی",
+      "WellOrganised": "منظم"
+    },
+    "levels": {
+      "Lower": "پایین‌تر از سطح اعلام‌شده",
+      "AboutRight": "هم‌سطح با سطح اعلام‌شده",
+      "Higher": "بالاتر از سطح اعلام‌شده"
+    },
+    "removeModal": {
+      "title": "حذف امتیاز {rater}",
+      "description": "امتیاز دیگر در میانگین‌ها و اعتبار بازیکن حساب نمی‌شود. دلیل در گزارش فعالیت ادمین‌ها ثبت می‌شود.",
+      "submit": "حذف امتیاز",
+      "success": "امتیاز حذف شد."
+    }
+  },
+  "dashboard": {
+    "period": "از {from} تا {to}",
+    "from": "از تاریخ",
+    "to": "تا تاریخ",
+    "apply": "نمایش",
+    "lastDays": "{count} روز اخیر",
+    "groups": {
+      "players": "بازیکنان",
+      "matches": "آگهی‌ها و بازی‌ها",
+      "safety": "گزارش‌ها"
+    },
+    "metrics": {
+      "signUps": "ثبت‌نام",
+      "activePlayers": "بازیکنان فعال",
+      "posts": "آگهی بازی",
+      "invitations": "دعوت خصوصی",
+      "confirmedMatches": "بازی قطعی‌شده",
+      "completedMatches": "بازی انجام‌شده",
+      "resolvedMatches": "بازی بسته‌شده",
+      "completionRate": "نرخ انجام بازی",
+      "reports": "گزارش تخلف",
+      "openReports": "گزارش‌های باز"
+    },
+    "hints": {
+      "signUps": "پروفایل‌های ساخته‌شده در این بازه",
+      "activePlayers": "بازیکنانی که در این بازه فعال بوده‌اند",
+      "posts": "آگهی‌های عمومی ساخته‌شده در این بازه",
+      "invitations": "دعوت‌های خصوصی ساخته‌شده در این بازه",
+      "confirmedMatches": "بازی‌های قطعی که در این بازه برگزار می‌شدند",
+      "completedMatches": "بازی‌هایی که در این بازه انجام‌شده ثبت شدند",
+      "resolvedMatches": "انجام‌شده، مورد اختلاف یا تأییدنشده",
+      "completionRate": "بازی انجام‌شده ÷ بازی بسته‌شده",
+      "reports": "گزارش‌های ثبت‌شده در این بازه",
+      "openReports": "همه گزارش‌هایی که الان باز هستند"
+    },
+    "errors": {
+      "invalidDate": "تاریخ کامل یا معتبر نیست.",
+      "range": "تاریخ پایان قبل از تاریخ شروع است."
+    }
+  }
+}

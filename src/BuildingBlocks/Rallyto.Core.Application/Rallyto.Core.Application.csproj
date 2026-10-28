@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Application base types, adapted from AsanRezerve.Core.Application (see docs/BUILDING_BLOCKS_ORIGIN.md). -->
+  <ItemGroup>
+    <ProjectReference Include="..\Rallyto.Core.Domain\Rallyto.Core.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" />
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" />
+  </ItemGroup>
+</Project>

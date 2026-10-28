@@ -1,0 +1,81 @@
+---
+/**
+ * The Rallyto mark, drawn inline from branding/mark.json (src/lib/brand.ts), so it is the same drawing as every app
+ * icon. `tile` puts it on the court-green rounded tile (the app icon); `spin` turns it once on load, as the app's
+ * launch splash does. Decorative unless `label` is given.
+ */
+import { MARK, ball, toneColors, trailPath, type MarkTone } from '../lib/brand'
+import { uniqueId } from '../lib/ids'
+
+interface Props {
+  size?: number
+  tone?: MarkTone
+  tile?: boolean
+  spin?: boolean
+  label?: string
+  class?: string
+}
+const { size = 40, tone = 'reversed', tile = false, spin = false, label, class: className } = Astro.props
+const [trailA, ballA, trailB, ballB] = toneColors(tile ? 'reversed' : tone)
+const a = ball(0)
+const b = ball(180)
+// Each instance gets its own gradient id, so two tiles on one page never share (or lose) a definition.
+const gradientId = uniqueId('rallyto-tile')
+const scale = tile ? 0.9 : 1
+---
+
+<svg
+  class:list={['brand-mark', className, { 'brand-mark--spin': spin }]}
+  width={size}
+  height={size}
+  viewBox="0 0 100 100"
+  fill="none"
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  focusable="false"
+>
+  {
+    tile && (
+      <>
+        <defs>
+          <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color={MARK.tile.gradientFrom} />
+            <stop offset="1" stop-color={MARK.tile.gradientTo} />
+          </linearGradient>
+        </defs>
+        <rect width="100" height="100" rx={MARK.tile.cornerRadius} fill={`url(#${gradientId})`} />
+      </>
+    )
+  }
+  <g transform={`translate(50 50) scale(${scale}) translate(-50 -50)`}>
+    <g class="brand-mark__loop">
+      <path d={trailPath(0)} fill={trailA}></path>
+      <path d={trailPath(180)} fill={trailB}></path>
+      <circle cx={a.cx} cy={a.cy} r={a.r} fill={ballA}></circle>
+      <circle cx={b.cx} cy={b.cy} r={b.r} fill={ballB}></circle>
+    </g>
+  </g>
+</svg>
+
+<style>
+  .brand-mark__loop {
+    transform-origin: 50px 50px;
+    transform-box: view-box;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .brand-mark--spin .brand-mark__loop {
+      animation: rally-turn 0.9s 0.25s cubic-bezier(0.65, 0, 0.35, 1) both;
+    }
+  }
+
+  @keyframes rally-turn {
+    from {
+      transform: rotate(-360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+</style>

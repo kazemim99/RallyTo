@@ -1,0 +1,101 @@
+---
+import { SPORTS } from '../data/sports'
+import MiniCourt from './MiniCourt.astro'
+
+interface Props {
+  /** The sport whose page this is; it is left out of the list. */
+  except?: string
+  heading?: string
+  lead?: string
+}
+const {
+  except,
+  heading = 'تنیس، پدل، بدمینتون یا اسکواش؟',
+  lead = 'هر ورزش سطح‌بندی و قاعده‌های خودش را دارد و رالیتو برای هر کدام جدا هم‌بازی پیدا می‌کند.',
+} = Astro.props
+const sports = SPORTS.filter((s) => s.slug !== except)
+---
+
+<section class="section sports" id="sports" aria-labelledby="sports-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="sports-title">{heading}</h2>
+      <p>{lead}</p>
+    </div>
+    <ul class="tiles" data-count={sports.length}>
+      {
+        sports.map((s) => (
+          <li>
+            <a class:list={['tile', `tile--${s.slug}`]} href={`/${s.slug}`}>
+              <MiniCourt sport={s.slug} />
+              <span class="tile__text">
+                <span class="tile__name">پارتنر {s.name}</span>
+                <span class="tile__formats">{s.formats.join('، ')}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .tiles {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0;
+    list-style: none;
+  }
+
+  .tile {
+    display: grid;
+    gap: 14px;
+    height: 100%;
+    padding: 14px 14px 18px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-l);
+    color: var(--c-ink);
+    text-decoration: none;
+    transition:
+      border-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .tile:hover {
+    border-color: var(--c-court);
+    transform: translateY(-2px);
+  }
+
+  .tile :global(.mini-court) {
+    border-radius: 14px;
+  }
+
+  .tile__text {
+    display: grid;
+    padding-inline: 4px;
+  }
+
+  .tile__name {
+    font-weight: 700;
+    font-size: var(--step-1);
+    line-height: 1.6;
+  }
+
+  .tile__formats {
+    color: var(--c-muted);
+    font-size: var(--step--1);
+  }
+
+  @media (min-width: 900px) {
+    .tiles {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .tiles[data-count='3'] {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

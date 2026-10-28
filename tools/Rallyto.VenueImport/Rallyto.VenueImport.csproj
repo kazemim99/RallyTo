@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Offline import of candidate clubs from Google Places (design D15). Runs outside Iran; talks to the API over HTTP only. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Rallyto.VenueImport.Tests" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,4075 @@
+[
+  {
+    "Id": 1,
+    "Name": "مرکزی",
+    "ProvinceCode": 0,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 2,
+    "Name": "اراک",
+    "ProvinceCode": 0,
+    "CityCode": 1,
+    "ParentId": 1,
+    "Type": "City"
+  },
+  {
+    "Id": 3,
+    "Name": "دلیجان",
+    "ProvinceCode": 0,
+    "CityCode": 5,
+    "ParentId": 1,
+    "Type": "City"
+  },
+  {
+    "Id": 4,
+    "Name": "آشتیان",
+    "ProvinceCode": 0,
+    "CityCode": 2,
+    "ParentId": 1,
+    "Type": "City"
+  },
+  {
+    "Id": 5,
+    "Name": "تفرش",
+    "ProvinceCode": 0,
+    "CityCode": 3,
+    "ParentId": 1,
+    "Type": "City"
+  },
+  {
+    "Id": 6,
+    "Name": "خمین",
+    "ProvinceCode": 0,
+    "CityCode": 4,
+    "ParentId": 1,
+    "Type": "City"
+  },
+  {
+    "Id": 7,
+    "Name": "محلات",
+    "ProvinceCode": 0,
+    "CityCode": 9,
+    "ParentId": 1,
+    "Type": "City"
+  },
+  {
+    "Id": 8,
+    "Name": "شازند",
+    "ProvinceCode": 0,
+    "CityCode": 7,
+    "ParentId": 1,
+    "Type": "City"
+  },
+  {
+    "Id": 9,
+    "Name": "ساوه",
+    "ProvinceCode": 0,
+    "CityCode": 6,
+    "ParentId": 1,
+    "Type": "City"
+  },
+  {
+    "Id": 10,
+    "Name": "زرندیه",
+    "ProvinceCode": 0,
+    "CityCode": 10,
+    "ParentId": 1,
+    "Type": "City"
+  },
+  {
+    "Id": 11,
+    "Name": "کمیجان",
+    "ProvinceCode": 0,
+    "CityCode": 11,
+    "ParentId": 1,
+    "Type": "City"
+  },
+  {
+    "Id": 12,
+    "Name": "خنداب",
+    "ProvinceCode": 0,
+    "CityCode": 12,
+    "ParentId": 1,
+    "Type": "City"
+  },
+  {
+    "Id": 13,
+    "Name": "فراهان",
+    "ProvinceCode": 0,
+    "CityCode": 13,
+    "ParentId": 1,
+    "Type": "City"
+  },
+  {
+    "Id": 14,
+    "Name": "گیلان",
+    "ProvinceCode": 1,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 15,
+    "Name": "آستارا",
+    "ProvinceCode": 1,
+    "CityCode": 1,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 16,
+    "Name": "آستانه اشرفیه",
+    "ProvinceCode": 1,
+    "CityCode": 2,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 17,
+    "Name": "بندرانزلی",
+    "ProvinceCode": 1,
+    "CityCode": 3,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 18,
+    "Name": "طوالش",
+    "ProvinceCode": 1,
+    "CityCode": 4,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 19,
+    "Name": "رشت",
+    "ProvinceCode": 1,
+    "CityCode": 5,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 20,
+    "Name": "لنگرود",
+    "ProvinceCode": 1,
+    "CityCode": 10,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 21,
+    "Name": "رودبار",
+    "ProvinceCode": 1,
+    "CityCode": 6,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 22,
+    "Name": "رودسر",
+    "ProvinceCode": 1,
+    "CityCode": 7,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 23,
+    "Name": "صومعه سرا",
+    "ProvinceCode": 1,
+    "CityCode": 8,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 24,
+    "Name": "فومن",
+    "ProvinceCode": 1,
+    "CityCode": 9,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 25,
+    "Name": "لاهیجان",
+    "ProvinceCode": 1,
+    "CityCode": 11,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 26,
+    "Name": "شفت",
+    "ProvinceCode": 1,
+    "CityCode": 12,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 27,
+    "Name": "املش",
+    "ProvinceCode": 1,
+    "CityCode": 13,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 28,
+    "Name": "رضوانشهر",
+    "ProvinceCode": 1,
+    "CityCode": 14,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 29,
+    "Name": "سیاهكل",
+    "ProvinceCode": 1,
+    "CityCode": 15,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 30,
+    "Name": "ماسال",
+    "ProvinceCode": 1,
+    "CityCode": 16,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 31,
+    "Name": "خمام",
+    "ProvinceCode": 1,
+    "CityCode": 17,
+    "ParentId": 14,
+    "Type": "City"
+  },
+  {
+    "Id": 32,
+    "Name": "مازندران",
+    "ProvinceCode": 2,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 33,
+    "Name": "آمل",
+    "ProvinceCode": 2,
+    "CityCode": 1,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 34,
+    "Name": "بابل",
+    "ProvinceCode": 2,
+    "CityCode": 2,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 35,
+    "Name": "بهشهر",
+    "ProvinceCode": 2,
+    "CityCode": 4,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 36,
+    "Name": "تنكابن",
+    "ProvinceCode": 2,
+    "CityCode": 5,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 37,
+    "Name": "رامسر",
+    "ProvinceCode": 2,
+    "CityCode": 6,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 38,
+    "Name": "ساری",
+    "ProvinceCode": 2,
+    "CityCode": 7,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 39,
+    "Name": "سوادكوه",
+    "ProvinceCode": 2,
+    "CityCode": 8,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 40,
+    "Name": "قایم شهر",
+    "ProvinceCode": 2,
+    "CityCode": 10,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 41,
+    "Name": "نور",
+    "ProvinceCode": 2,
+    "CityCode": 14,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 42,
+    "Name": "نوشهر",
+    "ProvinceCode": 2,
+    "CityCode": 15,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 43,
+    "Name": "بابلسر",
+    "ProvinceCode": 2,
+    "CityCode": 16,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 44,
+    "Name": "محمودآباد",
+    "ProvinceCode": 2,
+    "CityCode": 18,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 45,
+    "Name": "نكا",
+    "ProvinceCode": 2,
+    "CityCode": 19,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 46,
+    "Name": "چالوس",
+    "ProvinceCode": 2,
+    "CityCode": 20,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 47,
+    "Name": "جویبار",
+    "ProvinceCode": 2,
+    "CityCode": 21,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 48,
+    "Name": "گلوگاه",
+    "ProvinceCode": 2,
+    "CityCode": 22,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 49,
+    "Name": "فریدونكنار",
+    "ProvinceCode": 2,
+    "CityCode": 23,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 50,
+    "Name": "عباس آباد",
+    "ProvinceCode": 2,
+    "CityCode": 24,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 51,
+    "Name": "میاندورود",
+    "ProvinceCode": 2,
+    "CityCode": 25,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 52,
+    "Name": "سیمرغ",
+    "ProvinceCode": 2,
+    "CityCode": 26,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 53,
+    "Name": "سوادکوه شمالی",
+    "ProvinceCode": 2,
+    "CityCode": 27,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 54,
+    "Name": "کلاردشت",
+    "ProvinceCode": 2,
+    "CityCode": 28,
+    "ParentId": 32,
+    "Type": "City"
+  },
+  {
+    "Id": 55,
+    "Name": "آذربایجان شرقی",
+    "ProvinceCode": 3,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 56,
+    "Name": "اهر",
+    "ProvinceCode": 3,
+    "CityCode": 2,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 57,
+    "Name": "تبریز",
+    "ProvinceCode": 3,
+    "CityCode": 3,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 58,
+    "Name": "سراب",
+    "ProvinceCode": 3,
+    "CityCode": 5,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 59,
+    "Name": "مراغه",
+    "ProvinceCode": 3,
+    "CityCode": 6,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 60,
+    "Name": "مرند",
+    "ProvinceCode": 3,
+    "CityCode": 7,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 61,
+    "Name": "میانه",
+    "ProvinceCode": 3,
+    "CityCode": 10,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 62,
+    "Name": "هشترود",
+    "ProvinceCode": 3,
+    "CityCode": 11,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 63,
+    "Name": "بناب",
+    "ProvinceCode": 3,
+    "CityCode": 12,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 64,
+    "Name": "بستان آباد",
+    "ProvinceCode": 3,
+    "CityCode": 13,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 65,
+    "Name": "شبستر",
+    "ProvinceCode": 3,
+    "CityCode": 14,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 66,
+    "Name": "کلیبر",
+    "ProvinceCode": 3,
+    "CityCode": 15,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 67,
+    "Name": "هریس",
+    "ProvinceCode": 3,
+    "CityCode": 16,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 68,
+    "Name": "جلفا",
+    "ProvinceCode": 3,
+    "CityCode": 19,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 69,
+    "Name": "آذرشهر",
+    "ProvinceCode": 3,
+    "CityCode": 21,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 70,
+    "Name": "ملکان",
+    "ProvinceCode": 3,
+    "CityCode": 20,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 71,
+    "Name": "چاراویماق",
+    "ProvinceCode": 3,
+    "CityCode": 23,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 72,
+    "Name": "اسکو",
+    "ProvinceCode": 3,
+    "CityCode": 22,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 73,
+    "Name": "ورزقان",
+    "ProvinceCode": 3,
+    "CityCode": 24,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 74,
+    "Name": "خداآفرین",
+    "ProvinceCode": 3,
+    "CityCode": 26,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 75,
+    "Name": "عجب شیر",
+    "ProvinceCode": 3,
+    "CityCode": 25,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 76,
+    "Name": "هوراند",
+    "ProvinceCode": 3,
+    "CityCode": 27,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 77,
+    "Name": "لیلان",
+    "ProvinceCode": 3,
+    "CityCode": 28,
+    "ParentId": 55,
+    "Type": "City"
+  },
+  {
+    "Id": 78,
+    "Name": "آذربایجان غربی",
+    "ProvinceCode": 4,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 79,
+    "Name": "ارومیه",
+    "ProvinceCode": 4,
+    "CityCode": 1,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 80,
+    "Name": "پیرانشهر",
+    "ProvinceCode": 4,
+    "CityCode": 2,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 81,
+    "Name": "خوی",
+    "ProvinceCode": 4,
+    "CityCode": 3,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 82,
+    "Name": "سردشت",
+    "ProvinceCode": 4,
+    "CityCode": 4,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 83,
+    "Name": "سلماس",
+    "ProvinceCode": 4,
+    "CityCode": 5,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 84,
+    "Name": "ماكو",
+    "ProvinceCode": 4,
+    "CityCode": 6,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 85,
+    "Name": "مهاباد",
+    "ProvinceCode": 4,
+    "CityCode": 7,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 86,
+    "Name": "میاندوآب",
+    "ProvinceCode": 4,
+    "CityCode": 8,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 87,
+    "Name": "نقده",
+    "ProvinceCode": 4,
+    "CityCode": 9,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 88,
+    "Name": "بوكان",
+    "ProvinceCode": 4,
+    "CityCode": 10,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 89,
+    "Name": "شاهین دژ",
+    "ProvinceCode": 4,
+    "CityCode": 11,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 90,
+    "Name": "تكاب",
+    "ProvinceCode": 4,
+    "CityCode": 12,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 91,
+    "Name": "اشنویه",
+    "ProvinceCode": 4,
+    "CityCode": 13,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 92,
+    "Name": "چالدران",
+    "ProvinceCode": 4,
+    "CityCode": 14,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 93,
+    "Name": "پلدشت",
+    "ProvinceCode": 4,
+    "CityCode": 15,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 94,
+    "Name": "چایپاره",
+    "ProvinceCode": 4,
+    "CityCode": 16,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 95,
+    "Name": "شوط",
+    "ProvinceCode": 4,
+    "CityCode": 17,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 96,
+    "Name": "چهاربرج",
+    "ProvinceCode": 4,
+    "CityCode": 18,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 97,
+    "Name": "باروق",
+    "ProvinceCode": 4,
+    "CityCode": 19,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 98,
+    "Name": "میرآباد",
+    "ProvinceCode": 4,
+    "CityCode": 20,
+    "ParentId": 78,
+    "Type": "City"
+  },
+  {
+    "Id": 99,
+    "Name": "کرمانشاه",
+    "ProvinceCode": 5,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 100,
+    "Name": "اسلام آبادغرب",
+    "ProvinceCode": 5,
+    "CityCode": 1,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 101,
+    "Name": "کرمانشاه",
+    "ProvinceCode": 5,
+    "CityCode": 2,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 102,
+    "Name": "پاوه",
+    "ProvinceCode": 5,
+    "CityCode": 3,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 103,
+    "Name": "سرپل ذهاب",
+    "ProvinceCode": 5,
+    "CityCode": 4,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 104,
+    "Name": "سنقر",
+    "ProvinceCode": 5,
+    "CityCode": 5,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 105,
+    "Name": "قصرشیرین",
+    "ProvinceCode": 5,
+    "CityCode": 6,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 106,
+    "Name": "کنگاور",
+    "ProvinceCode": 5,
+    "CityCode": 7,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 107,
+    "Name": "گیلانغرب",
+    "ProvinceCode": 5,
+    "CityCode": 8,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 108,
+    "Name": "جوانرود",
+    "ProvinceCode": 5,
+    "CityCode": 9,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 109,
+    "Name": "صحنه",
+    "ProvinceCode": 5,
+    "CityCode": 10,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 110,
+    "Name": "هرسین",
+    "ProvinceCode": 5,
+    "CityCode": 11,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 111,
+    "Name": "ثلاث باباجانی",
+    "ProvinceCode": 5,
+    "CityCode": 12,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 112,
+    "Name": "دالاهو",
+    "ProvinceCode": 5,
+    "CityCode": 13,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 113,
+    "Name": "روانسر",
+    "ProvinceCode": 5,
+    "CityCode": 14,
+    "ParentId": 99,
+    "Type": "City"
+  },
+  {
+    "Id": 114,
+    "Name": "خوزستان",
+    "ProvinceCode": 6,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 115,
+    "Name": "آبادان",
+    "ProvinceCode": 6,
+    "CityCode": 1,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 116,
+    "Name": "اندیمشک",
+    "ProvinceCode": 6,
+    "CityCode": 2,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 117,
+    "Name": "اهواز",
+    "ProvinceCode": 6,
+    "CityCode": 3,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 118,
+    "Name": "ایذه",
+    "ProvinceCode": 6,
+    "CityCode": 4,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 119,
+    "Name": "بندرماهشهر",
+    "ProvinceCode": 6,
+    "CityCode": 5,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 120,
+    "Name": "بهبهان",
+    "ProvinceCode": 6,
+    "CityCode": 6,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 121,
+    "Name": "خرمشهر",
+    "ProvinceCode": 6,
+    "CityCode": 7,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 122,
+    "Name": "دزفول",
+    "ProvinceCode": 6,
+    "CityCode": 8,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 123,
+    "Name": "دشت آزادگان",
+    "ProvinceCode": 6,
+    "CityCode": 9,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 124,
+    "Name": "رامهرمز",
+    "ProvinceCode": 6,
+    "CityCode": 10,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 125,
+    "Name": "شادگان",
+    "ProvinceCode": 6,
+    "CityCode": 11,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 126,
+    "Name": "شوشتر",
+    "ProvinceCode": 6,
+    "CityCode": 12,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 127,
+    "Name": "مسجدسلیمان",
+    "ProvinceCode": 6,
+    "CityCode": 13,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 128,
+    "Name": "شوش",
+    "ProvinceCode": 6,
+    "CityCode": 14,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 129,
+    "Name": "باغ ملک",
+    "ProvinceCode": 6,
+    "CityCode": 15,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 130,
+    "Name": "امیدیه",
+    "ProvinceCode": 6,
+    "CityCode": 16,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 131,
+    "Name": "لالی",
+    "ProvinceCode": 6,
+    "CityCode": 17,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 132,
+    "Name": "هندیجان",
+    "ProvinceCode": 6,
+    "CityCode": 18,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 133,
+    "Name": "رامشیر",
+    "ProvinceCode": 6,
+    "CityCode": 19,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 134,
+    "Name": "گتوند",
+    "ProvinceCode": 6,
+    "CityCode": 20,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 135,
+    "Name": "اندیکا",
+    "ProvinceCode": 6,
+    "CityCode": 21,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 136,
+    "Name": "هفتکل",
+    "ProvinceCode": 6,
+    "CityCode": 22,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 137,
+    "Name": "هویزه",
+    "ProvinceCode": 6,
+    "CityCode": 23,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 138,
+    "Name": "باوی",
+    "ProvinceCode": 6,
+    "CityCode": 24,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 139,
+    "Name": "حمیدیه",
+    "ProvinceCode": 6,
+    "CityCode": 25,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 140,
+    "Name": "آغاجاری",
+    "ProvinceCode": 6,
+    "CityCode": 26,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 141,
+    "Name": "کارون",
+    "ProvinceCode": 6,
+    "CityCode": 27,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 142,
+    "Name": "کرخه",
+    "ProvinceCode": 6,
+    "CityCode": 28,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 143,
+    "Name": "دزپارت",
+    "ProvinceCode": 6,
+    "CityCode": 29,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 144,
+    "Name": "صیدون",
+    "ProvinceCode": 6,
+    "CityCode": 30,
+    "ParentId": 114,
+    "Type": "City"
+  },
+  {
+    "Id": 145,
+    "Name": "فارس",
+    "ProvinceCode": 7,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 146,
+    "Name": "آباده",
+    "ProvinceCode": 7,
+    "CityCode": 1,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 147,
+    "Name": "استهبان",
+    "ProvinceCode": 7,
+    "CityCode": 2,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 148,
+    "Name": "اقلید",
+    "ProvinceCode": 7,
+    "CityCode": 3,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 149,
+    "Name": "جهرم",
+    "ProvinceCode": 7,
+    "CityCode": 4,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 150,
+    "Name": "داراب",
+    "ProvinceCode": 7,
+    "CityCode": 5,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 151,
+    "Name": "سپیدان",
+    "ProvinceCode": 7,
+    "CityCode": 6,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 152,
+    "Name": "شیراز",
+    "ProvinceCode": 7,
+    "CityCode": 7,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 153,
+    "Name": "فسا",
+    "ProvinceCode": 7,
+    "CityCode": 8,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 154,
+    "Name": "فیروزآباد",
+    "ProvinceCode": 7,
+    "CityCode": 9,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 155,
+    "Name": "کازرون",
+    "ProvinceCode": 7,
+    "CityCode": 10,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 156,
+    "Name": "لارستان",
+    "ProvinceCode": 7,
+    "CityCode": 11,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 157,
+    "Name": "مرودشت",
+    "ProvinceCode": 7,
+    "CityCode": 12,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 158,
+    "Name": "ممسنی",
+    "ProvinceCode": 7,
+    "CityCode": 13,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 159,
+    "Name": "نی ریز",
+    "ProvinceCode": 7,
+    "CityCode": 14,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 160,
+    "Name": "لامرد",
+    "ProvinceCode": 7,
+    "CityCode": 15,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 161,
+    "Name": "بوانات",
+    "ProvinceCode": 7,
+    "CityCode": 16,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 162,
+    "Name": "ارسنجان",
+    "ProvinceCode": 7,
+    "CityCode": 17,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 163,
+    "Name": "خرم بید",
+    "ProvinceCode": 7,
+    "CityCode": 18,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 164,
+    "Name": "زرین دشت",
+    "ProvinceCode": 7,
+    "CityCode": 19,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 165,
+    "Name": "قیروکارزین",
+    "ProvinceCode": 7,
+    "CityCode": 20,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 166,
+    "Name": "مهر",
+    "ProvinceCode": 7,
+    "CityCode": 21,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 167,
+    "Name": "فراشبند",
+    "ProvinceCode": 7,
+    "CityCode": 22,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 168,
+    "Name": "پاسارگاد",
+    "ProvinceCode": 7,
+    "CityCode": 23,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 169,
+    "Name": "خنج",
+    "ProvinceCode": 7,
+    "CityCode": 24,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 170,
+    "Name": "خرامه",
+    "ProvinceCode": 7,
+    "CityCode": 29,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 171,
+    "Name": "سروستان",
+    "ProvinceCode": 7,
+    "CityCode": 25,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 172,
+    "Name": "رستم",
+    "ProvinceCode": 7,
+    "CityCode": 26,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 173,
+    "Name": "گراش",
+    "ProvinceCode": 7,
+    "CityCode": 27,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 174,
+    "Name": "کوار",
+    "ProvinceCode": 7,
+    "CityCode": 28,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 175,
+    "Name": "زرقان",
+    "ProvinceCode": 7,
+    "CityCode": 30,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 176,
+    "Name": "بیضا",
+    "ProvinceCode": 7,
+    "CityCode": 31,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 177,
+    "Name": "سرچهان",
+    "ProvinceCode": 7,
+    "CityCode": 32,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 178,
+    "Name": "کوه چنار",
+    "ProvinceCode": 7,
+    "CityCode": 33,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 179,
+    "Name": "خفر",
+    "ProvinceCode": 7,
+    "CityCode": 34,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 180,
+    "Name": "بختگان",
+    "ProvinceCode": 7,
+    "CityCode": 35,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 181,
+    "Name": "اوز",
+    "ProvinceCode": 7,
+    "CityCode": 36,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 182,
+    "Name": "جویم",
+    "ProvinceCode": 7,
+    "CityCode": 37,
+    "ParentId": 145,
+    "Type": "City"
+  },
+  {
+    "Id": 183,
+    "Name": "كرمان",
+    "ProvinceCode": 8,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 184,
+    "Name": "بافت",
+    "ProvinceCode": 8,
+    "CityCode": 1,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 185,
+    "Name": "جیرفت",
+    "ProvinceCode": 8,
+    "CityCode": 3,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 186,
+    "Name": "بم",
+    "ProvinceCode": 8,
+    "CityCode": 2,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 187,
+    "Name": "رفسنجان",
+    "ProvinceCode": 8,
+    "CityCode": 4,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 188,
+    "Name": "زرند",
+    "ProvinceCode": 8,
+    "CityCode": 5,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 189,
+    "Name": "سیرجان",
+    "ProvinceCode": 8,
+    "CityCode": 6,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 190,
+    "Name": "شهربابك",
+    "ProvinceCode": 8,
+    "CityCode": 7,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 191,
+    "Name": "كرمان",
+    "ProvinceCode": 8,
+    "CityCode": 8,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 192,
+    "Name": "كهنوج",
+    "ProvinceCode": 8,
+    "CityCode": 9,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 193,
+    "Name": "بردسیر",
+    "ProvinceCode": 8,
+    "CityCode": 10,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 194,
+    "Name": "راور",
+    "ProvinceCode": 8,
+    "CityCode": 11,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 195,
+    "Name": "عنبرآباد",
+    "ProvinceCode": 8,
+    "CityCode": 12,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 196,
+    "Name": "منوجان",
+    "ProvinceCode": 8,
+    "CityCode": 13,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 197,
+    "Name": "كوهبنان",
+    "ProvinceCode": 8,
+    "CityCode": 14,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 198,
+    "Name": "رودبارجنوب",
+    "ProvinceCode": 8,
+    "CityCode": 15,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 199,
+    "Name": "قلعه گنج",
+    "ProvinceCode": 8,
+    "CityCode": 16,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 200,
+    "Name": "ریگان",
+    "ProvinceCode": 8,
+    "CityCode": 17,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 201,
+    "Name": "رابر",
+    "ProvinceCode": 8,
+    "CityCode": 18,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 202,
+    "Name": "فهرج",
+    "ProvinceCode": 8,
+    "CityCode": 19,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 203,
+    "Name": "انار",
+    "ProvinceCode": 8,
+    "CityCode": 20,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 204,
+    "Name": "نرماشیر",
+    "ProvinceCode": 8,
+    "CityCode": 21,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 205,
+    "Name": "فاریاب",
+    "ProvinceCode": 8,
+    "CityCode": 22,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 206,
+    "Name": "ارزوییه",
+    "ProvinceCode": 8,
+    "CityCode": 23,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 207,
+    "Name": "گنبکی",
+    "ProvinceCode": 8,
+    "CityCode": 24,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 208,
+    "Name": "جازموریان",
+    "ProvinceCode": 8,
+    "CityCode": 25,
+    "ParentId": 183,
+    "Type": "City"
+  },
+  {
+    "Id": 209,
+    "Name": "خراسان رضوی",
+    "ProvinceCode": 9,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 210,
+    "Name": "تایباد",
+    "ProvinceCode": 9,
+    "CityCode": 4,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 211,
+    "Name": "تربت حیدریه",
+    "ProvinceCode": 9,
+    "CityCode": 5,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 212,
+    "Name": "تربت جام",
+    "ProvinceCode": 9,
+    "CityCode": 6,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 213,
+    "Name": "درگز",
+    "ProvinceCode": 9,
+    "CityCode": 7,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 214,
+    "Name": "سبزوار",
+    "ProvinceCode": 9,
+    "CityCode": 8,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 215,
+    "Name": "قوچان",
+    "ProvinceCode": 9,
+    "CityCode": 13,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 216,
+    "Name": "کاشمر",
+    "ProvinceCode": 9,
+    "CityCode": 14,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 217,
+    "Name": "گناباد",
+    "ProvinceCode": 9,
+    "CityCode": 15,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 218,
+    "Name": "مشهد",
+    "ProvinceCode": 9,
+    "CityCode": 16,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 219,
+    "Name": "نیشابور",
+    "ProvinceCode": 9,
+    "CityCode": 17,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 220,
+    "Name": "چناران",
+    "ProvinceCode": 9,
+    "CityCode": 18,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 221,
+    "Name": "بردسکن",
+    "ProvinceCode": 9,
+    "CityCode": 23,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 222,
+    "Name": "خواف",
+    "ProvinceCode": 9,
+    "CityCode": 19,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 223,
+    "Name": "سرخس",
+    "ProvinceCode": 9,
+    "CityCode": 20,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 224,
+    "Name": "فریمان",
+    "ProvinceCode": 9,
+    "CityCode": 22,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 225,
+    "Name": "رشتخوار",
+    "ProvinceCode": 9,
+    "CityCode": 27,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 226,
+    "Name": "کلات",
+    "ProvinceCode": 9,
+    "CityCode": 28,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 227,
+    "Name": "خلیل آباد",
+    "ProvinceCode": 9,
+    "CityCode": 29,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 228,
+    "Name": "مه ولات",
+    "ProvinceCode": 9,
+    "CityCode": 30,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 229,
+    "Name": "بجستان",
+    "ProvinceCode": 9,
+    "CityCode": 31,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 230,
+    "Name": "طرقبه شاندیز",
+    "ProvinceCode": 9,
+    "CityCode": 32,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 231,
+    "Name": "فیروزه",
+    "ProvinceCode": 9,
+    "CityCode": 33,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 232,
+    "Name": "جغتای",
+    "ProvinceCode": 9,
+    "CityCode": 34,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 233,
+    "Name": "زاوه",
+    "ProvinceCode": 9,
+    "CityCode": 35,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 234,
+    "Name": "جوین",
+    "ProvinceCode": 9,
+    "CityCode": 36,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 235,
+    "Name": "باخرز",
+    "ProvinceCode": 9,
+    "CityCode": 37,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 236,
+    "Name": "خوشاب",
+    "ProvinceCode": 9,
+    "CityCode": 38,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 237,
+    "Name": "داورزن",
+    "ProvinceCode": 9,
+    "CityCode": 39,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 238,
+    "Name": "صالح آباد",
+    "ProvinceCode": 9,
+    "CityCode": 40,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 239,
+    "Name": "کوهسرخ",
+    "ProvinceCode": 9,
+    "CityCode": 41,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 240,
+    "Name": "زبرخان",
+    "ProvinceCode": 9,
+    "CityCode": 42,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 241,
+    "Name": "ششتمد",
+    "ProvinceCode": 9,
+    "CityCode": 43,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 242,
+    "Name": "گلبهار",
+    "ProvinceCode": 9,
+    "CityCode": 44,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 243,
+    "Name": "میان جلگه",
+    "ProvinceCode": 9,
+    "CityCode": 45,
+    "ParentId": 209,
+    "Type": "City"
+  },
+  {
+    "Id": 244,
+    "Name": "اصفهان",
+    "ProvinceCode": 10,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 245,
+    "Name": "اردستان",
+    "ProvinceCode": 10,
+    "CityCode": 1,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 246,
+    "Name": "اصفهان",
+    "ProvinceCode": 10,
+    "CityCode": 2,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 247,
+    "Name": "خمینی شهر",
+    "ProvinceCode": 10,
+    "CityCode": 3,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 248,
+    "Name": "خوانسار",
+    "ProvinceCode": 10,
+    "CityCode": 4,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 249,
+    "Name": "سمیرم",
+    "ProvinceCode": 10,
+    "CityCode": 5,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 250,
+    "Name": "فریدن",
+    "ProvinceCode": 10,
+    "CityCode": 6,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 251,
+    "Name": "فریدونشهر",
+    "ProvinceCode": 10,
+    "CityCode": 7,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 252,
+    "Name": "فلاورجان",
+    "ProvinceCode": 10,
+    "CityCode": 8,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 253,
+    "Name": "شهرضا",
+    "ProvinceCode": 10,
+    "CityCode": 9,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 254,
+    "Name": "کاشان",
+    "ProvinceCode": 10,
+    "CityCode": 10,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 255,
+    "Name": "گلپایگان",
+    "ProvinceCode": 10,
+    "CityCode": 11,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 256,
+    "Name": "لنجان",
+    "ProvinceCode": 10,
+    "CityCode": 12,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 257,
+    "Name": "نایین",
+    "ProvinceCode": 10,
+    "CityCode": 13,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 258,
+    "Name": "نجف آباد",
+    "ProvinceCode": 10,
+    "CityCode": 14,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 259,
+    "Name": "نطنز",
+    "ProvinceCode": 10,
+    "CityCode": 15,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 260,
+    "Name": "شاهین شهرو میمه",
+    "ProvinceCode": 10,
+    "CityCode": 16,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 261,
+    "Name": "مبارکه",
+    "ProvinceCode": 10,
+    "CityCode": 17,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 262,
+    "Name": "آران و بیدگل",
+    "ProvinceCode": 10,
+    "CityCode": 18,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 263,
+    "Name": "تیران وکرون",
+    "ProvinceCode": 10,
+    "CityCode": 19,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 264,
+    "Name": "چادگان",
+    "ProvinceCode": 10,
+    "CityCode": 20,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 265,
+    "Name": "دهاقان",
+    "ProvinceCode": 10,
+    "CityCode": 21,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 266,
+    "Name": "برخوار",
+    "ProvinceCode": 10,
+    "CityCode": 22,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 267,
+    "Name": "خور و بیابانک",
+    "ProvinceCode": 10,
+    "CityCode": 23,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 268,
+    "Name": "بویین و میاندشت",
+    "ProvinceCode": 10,
+    "CityCode": 24,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 269,
+    "Name": "کوهپایه",
+    "ProvinceCode": 10,
+    "CityCode": 25,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 270,
+    "Name": "جرقویه",
+    "ProvinceCode": 10,
+    "CityCode": 26,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 271,
+    "Name": "ورزنه",
+    "ProvinceCode": 10,
+    "CityCode": 27,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 272,
+    "Name": "هرند",
+    "ProvinceCode": 10,
+    "CityCode": 28,
+    "ParentId": 244,
+    "Type": "City"
+  },
+  {
+    "Id": 273,
+    "Name": "سیستان و بلوچستان",
+    "ProvinceCode": 11,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 274,
+    "Name": "ایرانشهر",
+    "ProvinceCode": 11,
+    "CityCode": 1,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 275,
+    "Name": "چاه بهار",
+    "ProvinceCode": 11,
+    "CityCode": 2,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 276,
+    "Name": "خاش",
+    "ProvinceCode": 11,
+    "CityCode": 3,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 277,
+    "Name": "زابل",
+    "ProvinceCode": 11,
+    "CityCode": 4,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 278,
+    "Name": "زاهدان",
+    "ProvinceCode": 11,
+    "CityCode": 5,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 279,
+    "Name": "سراوان",
+    "ProvinceCode": 11,
+    "CityCode": 6,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 280,
+    "Name": "نیک شهر",
+    "ProvinceCode": 11,
+    "CityCode": 7,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 281,
+    "Name": "راسک",
+    "ProvinceCode": 11,
+    "CityCode": 8,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 282,
+    "Name": "کنارک",
+    "ProvinceCode": 11,
+    "CityCode": 9,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 283,
+    "Name": "زهک",
+    "ProvinceCode": 11,
+    "CityCode": 10,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 284,
+    "Name": "هیرمند",
+    "ProvinceCode": 11,
+    "CityCode": 11,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 285,
+    "Name": "دلگان",
+    "ProvinceCode": 11,
+    "CityCode": 12,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 286,
+    "Name": "مهرستان",
+    "ProvinceCode": 11,
+    "CityCode": 13,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 287,
+    "Name": "سیب و سوران",
+    "ProvinceCode": 11,
+    "CityCode": 14,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 288,
+    "Name": "نیمروز",
+    "ProvinceCode": 11,
+    "CityCode": 15,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 289,
+    "Name": "هامون",
+    "ProvinceCode": 11,
+    "CityCode": 16,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 290,
+    "Name": "میرجاوه",
+    "ProvinceCode": 11,
+    "CityCode": 17,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 291,
+    "Name": "قصرقند",
+    "ProvinceCode": 11,
+    "CityCode": 18,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 292,
+    "Name": "فنوج",
+    "ProvinceCode": 11,
+    "CityCode": 19,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 293,
+    "Name": "بمپور",
+    "ProvinceCode": 11,
+    "CityCode": 20,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 294,
+    "Name": "تفتان",
+    "ProvinceCode": 11,
+    "CityCode": 21,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 295,
+    "Name": "دشتیاری",
+    "ProvinceCode": 11,
+    "CityCode": 22,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 296,
+    "Name": "سرباز",
+    "ProvinceCode": 11,
+    "CityCode": 23,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 297,
+    "Name": "گلشن",
+    "ProvinceCode": 11,
+    "CityCode": 24,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 298,
+    "Name": "لاشار",
+    "ProvinceCode": 11,
+    "CityCode": 25,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 299,
+    "Name": "زرآباد",
+    "ProvinceCode": 11,
+    "CityCode": 26,
+    "ParentId": 273,
+    "Type": "City"
+  },
+  {
+    "Id": 300,
+    "Name": "كردستان",
+    "ProvinceCode": 12,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 301,
+    "Name": "بانه",
+    "ProvinceCode": 12,
+    "CityCode": 1,
+    "ParentId": 300,
+    "Type": "City"
+  },
+  {
+    "Id": 302,
+    "Name": "بیجار",
+    "ProvinceCode": 12,
+    "CityCode": 2,
+    "ParentId": 300,
+    "Type": "City"
+  },
+  {
+    "Id": 303,
+    "Name": "سقز",
+    "ProvinceCode": 12,
+    "CityCode": 3,
+    "ParentId": 300,
+    "Type": "City"
+  },
+  {
+    "Id": 304,
+    "Name": "سنندج",
+    "ProvinceCode": 12,
+    "CityCode": 4,
+    "ParentId": 300,
+    "Type": "City"
+  },
+  {
+    "Id": 305,
+    "Name": "قروه",
+    "ProvinceCode": 12,
+    "CityCode": 5,
+    "ParentId": 300,
+    "Type": "City"
+  },
+  {
+    "Id": 306,
+    "Name": "مریوان",
+    "ProvinceCode": 12,
+    "CityCode": 6,
+    "ParentId": 300,
+    "Type": "City"
+  },
+  {
+    "Id": 307,
+    "Name": "دیواندره",
+    "ProvinceCode": 12,
+    "CityCode": 7,
+    "ParentId": 300,
+    "Type": "City"
+  },
+  {
+    "Id": 308,
+    "Name": "كامیاران",
+    "ProvinceCode": 12,
+    "CityCode": 8,
+    "ParentId": 300,
+    "Type": "City"
+  },
+  {
+    "Id": 309,
+    "Name": "سروآباد",
+    "ProvinceCode": 12,
+    "CityCode": 9,
+    "ParentId": 300,
+    "Type": "City"
+  },
+  {
+    "Id": 310,
+    "Name": "دهگلان",
+    "ProvinceCode": 12,
+    "CityCode": 10,
+    "ParentId": 300,
+    "Type": "City"
+  },
+  {
+    "Id": 311,
+    "Name": "همدان",
+    "ProvinceCode": 13,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 312,
+    "Name": "تویسركان",
+    "ProvinceCode": 13,
+    "CityCode": 1,
+    "ParentId": 311,
+    "Type": "City"
+  },
+  {
+    "Id": 313,
+    "Name": "ملایر",
+    "ProvinceCode": 13,
+    "CityCode": 2,
+    "ParentId": 311,
+    "Type": "City"
+  },
+  {
+    "Id": 314,
+    "Name": "نهاوند",
+    "ProvinceCode": 13,
+    "CityCode": 3,
+    "ParentId": 311,
+    "Type": "City"
+  },
+  {
+    "Id": 315,
+    "Name": "همدان",
+    "ProvinceCode": 13,
+    "CityCode": 4,
+    "ParentId": 311,
+    "Type": "City"
+  },
+  {
+    "Id": 316,
+    "Name": "كبودرآهنگ",
+    "ProvinceCode": 13,
+    "CityCode": 5,
+    "ParentId": 311,
+    "Type": "City"
+  },
+  {
+    "Id": 317,
+    "Name": "اسدآباد",
+    "ProvinceCode": 13,
+    "CityCode": 6,
+    "ParentId": 311,
+    "Type": "City"
+  },
+  {
+    "Id": 318,
+    "Name": "بهار",
+    "ProvinceCode": 13,
+    "CityCode": 7,
+    "ParentId": 311,
+    "Type": "City"
+  },
+  {
+    "Id": 319,
+    "Name": "رزن",
+    "ProvinceCode": 13,
+    "CityCode": 8,
+    "ParentId": 311,
+    "Type": "City"
+  },
+  {
+    "Id": 320,
+    "Name": "فامنین",
+    "ProvinceCode": 13,
+    "CityCode": 9,
+    "ParentId": 311,
+    "Type": "City"
+  },
+  {
+    "Id": 321,
+    "Name": "درگزین",
+    "ProvinceCode": 13,
+    "CityCode": 10,
+    "ParentId": 311,
+    "Type": "City"
+  },
+  {
+    "Id": 322,
+    "Name": "چهارمحال و بختیاری",
+    "ProvinceCode": 14,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 323,
+    "Name": "بروجن",
+    "ProvinceCode": 14,
+    "CityCode": 1,
+    "ParentId": 322,
+    "Type": "City"
+  },
+  {
+    "Id": 324,
+    "Name": "شهرکرد",
+    "ProvinceCode": 14,
+    "CityCode": 2,
+    "ParentId": 322,
+    "Type": "City"
+  },
+  {
+    "Id": 325,
+    "Name": "فارسان",
+    "ProvinceCode": 14,
+    "CityCode": 3,
+    "ParentId": 322,
+    "Type": "City"
+  },
+  {
+    "Id": 326,
+    "Name": "لردگان",
+    "ProvinceCode": 14,
+    "CityCode": 4,
+    "ParentId": 322,
+    "Type": "City"
+  },
+  {
+    "Id": 327,
+    "Name": "اردل",
+    "ProvinceCode": 14,
+    "CityCode": 5,
+    "ParentId": 322,
+    "Type": "City"
+  },
+  {
+    "Id": 328,
+    "Name": "کوهرنگ",
+    "ProvinceCode": 14,
+    "CityCode": 6,
+    "ParentId": 322,
+    "Type": "City"
+  },
+  {
+    "Id": 329,
+    "Name": "کیار",
+    "ProvinceCode": 14,
+    "CityCode": 7,
+    "ParentId": 322,
+    "Type": "City"
+  },
+  {
+    "Id": 330,
+    "Name": "سامان",
+    "ProvinceCode": 14,
+    "CityCode": 8,
+    "ParentId": 322,
+    "Type": "City"
+  },
+  {
+    "Id": 331,
+    "Name": "بن",
+    "ProvinceCode": 14,
+    "CityCode": 9,
+    "ParentId": 322,
+    "Type": "City"
+  },
+  {
+    "Id": 332,
+    "Name": "خانمیرزا",
+    "ProvinceCode": 14,
+    "CityCode": 10,
+    "ParentId": 322,
+    "Type": "City"
+  },
+  {
+    "Id": 333,
+    "Name": "فلارد",
+    "ProvinceCode": 14,
+    "CityCode": 11,
+    "ParentId": 322,
+    "Type": "City"
+  },
+  {
+    "Id": 334,
+    "Name": "فرخ شهر",
+    "ProvinceCode": 14,
+    "CityCode": 12,
+    "ParentId": 322,
+    "Type": "City"
+  },
+  {
+    "Id": 335,
+    "Name": "لرستان",
+    "ProvinceCode": 15,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 336,
+    "Name": "الیگودرز",
+    "ProvinceCode": 15,
+    "CityCode": 1,
+    "ParentId": 335,
+    "Type": "City"
+  },
+  {
+    "Id": 337,
+    "Name": "بروجرد",
+    "ProvinceCode": 15,
+    "CityCode": 2,
+    "ParentId": 335,
+    "Type": "City"
+  },
+  {
+    "Id": 338,
+    "Name": "خرم آباد",
+    "ProvinceCode": 15,
+    "CityCode": 3,
+    "ParentId": 335,
+    "Type": "City"
+  },
+  {
+    "Id": 339,
+    "Name": "دلفان",
+    "ProvinceCode": 15,
+    "CityCode": 4,
+    "ParentId": 335,
+    "Type": "City"
+  },
+  {
+    "Id": 340,
+    "Name": "دورود",
+    "ProvinceCode": 15,
+    "CityCode": 5,
+    "ParentId": 335,
+    "Type": "City"
+  },
+  {
+    "Id": 341,
+    "Name": "ازنا",
+    "ProvinceCode": 15,
+    "CityCode": 7,
+    "ParentId": 335,
+    "Type": "City"
+  },
+  {
+    "Id": 342,
+    "Name": "کوهدشت",
+    "ProvinceCode": 15,
+    "CityCode": 6,
+    "ParentId": 335,
+    "Type": "City"
+  },
+  {
+    "Id": 343,
+    "Name": "پلدختر",
+    "ProvinceCode": 15,
+    "CityCode": 8,
+    "ParentId": 335,
+    "Type": "City"
+  },
+  {
+    "Id": 344,
+    "Name": "سلسله",
+    "ProvinceCode": 15,
+    "CityCode": 9,
+    "ParentId": 335,
+    "Type": "City"
+  },
+  {
+    "Id": 345,
+    "Name": "چگنی",
+    "ProvinceCode": 15,
+    "CityCode": 10,
+    "ParentId": 335,
+    "Type": "City"
+  },
+  {
+    "Id": 346,
+    "Name": "رومشکان",
+    "ProvinceCode": 15,
+    "CityCode": 11,
+    "ParentId": 335,
+    "Type": "City"
+  },
+  {
+    "Id": 347,
+    "Name": "معمولان",
+    "ProvinceCode": 15,
+    "CityCode": 12,
+    "ParentId": 335,
+    "Type": "City"
+  },
+  {
+    "Id": 348,
+    "Name": "ایلام",
+    "ProvinceCode": 16,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 349,
+    "Name": "ایلام",
+    "ProvinceCode": 16,
+    "CityCode": 1,
+    "ParentId": 348,
+    "Type": "City"
+  },
+  {
+    "Id": 350,
+    "Name": "دره شهر",
+    "ProvinceCode": 16,
+    "CityCode": 2,
+    "ParentId": 348,
+    "Type": "City"
+  },
+  {
+    "Id": 351,
+    "Name": "دهلران",
+    "ProvinceCode": 16,
+    "CityCode": 3,
+    "ParentId": 348,
+    "Type": "City"
+  },
+  {
+    "Id": 352,
+    "Name": "چرداول",
+    "ProvinceCode": 16,
+    "CityCode": 4,
+    "ParentId": 348,
+    "Type": "City"
+  },
+  {
+    "Id": 353,
+    "Name": "مهران",
+    "ProvinceCode": 16,
+    "CityCode": 5,
+    "ParentId": 348,
+    "Type": "City"
+  },
+  {
+    "Id": 354,
+    "Name": "آبدانان",
+    "ProvinceCode": 16,
+    "CityCode": 6,
+    "ParentId": 348,
+    "Type": "City"
+  },
+  {
+    "Id": 355,
+    "Name": "ایوان",
+    "ProvinceCode": 16,
+    "CityCode": 7,
+    "ParentId": 348,
+    "Type": "City"
+  },
+  {
+    "Id": 356,
+    "Name": "ملكشاهی",
+    "ProvinceCode": 16,
+    "CityCode": 8,
+    "ParentId": 348,
+    "Type": "City"
+  },
+  {
+    "Id": 357,
+    "Name": "سیروان",
+    "ProvinceCode": 16,
+    "CityCode": 9,
+    "ParentId": 348,
+    "Type": "City"
+  },
+  {
+    "Id": 358,
+    "Name": "بدره",
+    "ProvinceCode": 16,
+    "CityCode": 10,
+    "ParentId": 348,
+    "Type": "City"
+  },
+  {
+    "Id": 359,
+    "Name": "هلیلان",
+    "ProvinceCode": 16,
+    "CityCode": 11,
+    "ParentId": 348,
+    "Type": "City"
+  },
+  {
+    "Id": 360,
+    "Name": "چوار",
+    "ProvinceCode": 16,
+    "CityCode": 12,
+    "ParentId": 348,
+    "Type": "City"
+  },
+  {
+    "Id": 361,
+    "Name": "كهگیلویه و بویراحمد",
+    "ProvinceCode": 17,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 362,
+    "Name": "بویراحمد",
+    "ProvinceCode": 17,
+    "CityCode": 1,
+    "ParentId": 361,
+    "Type": "City"
+  },
+  {
+    "Id": 363,
+    "Name": "كهگیلویه",
+    "ProvinceCode": 17,
+    "CityCode": 2,
+    "ParentId": 361,
+    "Type": "City"
+  },
+  {
+    "Id": 364,
+    "Name": "گچساران",
+    "ProvinceCode": 17,
+    "CityCode": 3,
+    "ParentId": 361,
+    "Type": "City"
+  },
+  {
+    "Id": 365,
+    "Name": "دنا",
+    "ProvinceCode": 17,
+    "CityCode": 4,
+    "ParentId": 361,
+    "Type": "City"
+  },
+  {
+    "Id": 366,
+    "Name": "بهمیی",
+    "ProvinceCode": 17,
+    "CityCode": 5,
+    "ParentId": 361,
+    "Type": "City"
+  },
+  {
+    "Id": 367,
+    "Name": "چرام",
+    "ProvinceCode": 17,
+    "CityCode": 6,
+    "ParentId": 361,
+    "Type": "City"
+  },
+  {
+    "Id": 368,
+    "Name": "باشت",
+    "ProvinceCode": 17,
+    "CityCode": 7,
+    "ParentId": 361,
+    "Type": "City"
+  },
+  {
+    "Id": 369,
+    "Name": "لنده",
+    "ProvinceCode": 17,
+    "CityCode": 8,
+    "ParentId": 361,
+    "Type": "City"
+  },
+  {
+    "Id": 370,
+    "Name": "مارگون",
+    "ProvinceCode": 17,
+    "CityCode": 9,
+    "ParentId": 361,
+    "Type": "City"
+  },
+  {
+    "Id": 371,
+    "Name": "بوشهر",
+    "ProvinceCode": 18,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 372,
+    "Name": "بوشهر",
+    "ProvinceCode": 18,
+    "CityCode": 1,
+    "ParentId": 371,
+    "Type": "City"
+  },
+  {
+    "Id": 373,
+    "Name": "تنگستان",
+    "ProvinceCode": 18,
+    "CityCode": 2,
+    "ParentId": 371,
+    "Type": "City"
+  },
+  {
+    "Id": 374,
+    "Name": "دشتستان",
+    "ProvinceCode": 18,
+    "CityCode": 3,
+    "ParentId": 371,
+    "Type": "City"
+  },
+  {
+    "Id": 375,
+    "Name": "دشتی",
+    "ProvinceCode": 18,
+    "CityCode": 4,
+    "ParentId": 371,
+    "Type": "City"
+  },
+  {
+    "Id": 376,
+    "Name": "دیر",
+    "ProvinceCode": 18,
+    "CityCode": 5,
+    "ParentId": 371,
+    "Type": "City"
+  },
+  {
+    "Id": 377,
+    "Name": "كنگان",
+    "ProvinceCode": 18,
+    "CityCode": 6,
+    "ParentId": 371,
+    "Type": "City"
+  },
+  {
+    "Id": 378,
+    "Name": "گناوه",
+    "ProvinceCode": 18,
+    "CityCode": 7,
+    "ParentId": 371,
+    "Type": "City"
+  },
+  {
+    "Id": 379,
+    "Name": "دیلم",
+    "ProvinceCode": 18,
+    "CityCode": 8,
+    "ParentId": 371,
+    "Type": "City"
+  },
+  {
+    "Id": 380,
+    "Name": "جم",
+    "ProvinceCode": 18,
+    "CityCode": 9,
+    "ParentId": 371,
+    "Type": "City"
+  },
+  {
+    "Id": 381,
+    "Name": "عسلویه",
+    "ProvinceCode": 18,
+    "CityCode": 10,
+    "ParentId": 371,
+    "Type": "City"
+  },
+  {
+    "Id": 382,
+    "Name": "زنجان",
+    "ProvinceCode": 19,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 383,
+    "Name": "ابهر",
+    "ProvinceCode": 19,
+    "CityCode": 1,
+    "ParentId": 382,
+    "Type": "City"
+  },
+  {
+    "Id": 384,
+    "Name": "خدابنده",
+    "ProvinceCode": 19,
+    "CityCode": 3,
+    "ParentId": 382,
+    "Type": "City"
+  },
+  {
+    "Id": 385,
+    "Name": "زنجان",
+    "ProvinceCode": 19,
+    "CityCode": 4,
+    "ParentId": 382,
+    "Type": "City"
+  },
+  {
+    "Id": 386,
+    "Name": "ایجرود",
+    "ProvinceCode": 19,
+    "CityCode": 6,
+    "ParentId": 382,
+    "Type": "City"
+  },
+  {
+    "Id": 387,
+    "Name": "خرمدره",
+    "ProvinceCode": 19,
+    "CityCode": 7,
+    "ParentId": 382,
+    "Type": "City"
+  },
+  {
+    "Id": 388,
+    "Name": "طارم",
+    "ProvinceCode": 19,
+    "CityCode": 8,
+    "ParentId": 382,
+    "Type": "City"
+  },
+  {
+    "Id": 389,
+    "Name": "ماهنشان",
+    "ProvinceCode": 19,
+    "CityCode": 9,
+    "ParentId": 382,
+    "Type": "City"
+  },
+  {
+    "Id": 390,
+    "Name": "سلطانیه",
+    "ProvinceCode": 19,
+    "CityCode": 10,
+    "ParentId": 382,
+    "Type": "City"
+  },
+  {
+    "Id": 391,
+    "Name": "سمنان",
+    "ProvinceCode": 20,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 392,
+    "Name": "دامغان",
+    "ProvinceCode": 20,
+    "CityCode": 1,
+    "ParentId": 391,
+    "Type": "City"
+  },
+  {
+    "Id": 393,
+    "Name": "سمنان",
+    "ProvinceCode": 20,
+    "CityCode": 2,
+    "ParentId": 391,
+    "Type": "City"
+  },
+  {
+    "Id": 394,
+    "Name": "شاهرود",
+    "ProvinceCode": 20,
+    "CityCode": 3,
+    "ParentId": 391,
+    "Type": "City"
+  },
+  {
+    "Id": 395,
+    "Name": "گرمسار",
+    "ProvinceCode": 20,
+    "CityCode": 4,
+    "ParentId": 391,
+    "Type": "City"
+  },
+  {
+    "Id": 396,
+    "Name": "مهدی شهر",
+    "ProvinceCode": 20,
+    "CityCode": 5,
+    "ParentId": 391,
+    "Type": "City"
+  },
+  {
+    "Id": 397,
+    "Name": "میامی",
+    "ProvinceCode": 20,
+    "CityCode": 7,
+    "ParentId": 391,
+    "Type": "City"
+  },
+  {
+    "Id": 398,
+    "Name": "آرادان",
+    "ProvinceCode": 20,
+    "CityCode": 6,
+    "ParentId": 391,
+    "Type": "City"
+  },
+  {
+    "Id": 399,
+    "Name": "سرخه",
+    "ProvinceCode": 20,
+    "CityCode": 8,
+    "ParentId": 391,
+    "Type": "City"
+  },
+  {
+    "Id": 400,
+    "Name": "یزد",
+    "ProvinceCode": 21,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 401,
+    "Name": "اردكان",
+    "ProvinceCode": 21,
+    "CityCode": 1,
+    "ParentId": 400,
+    "Type": "City"
+  },
+  {
+    "Id": 402,
+    "Name": "بافق",
+    "ProvinceCode": 21,
+    "CityCode": 2,
+    "ParentId": 400,
+    "Type": "City"
+  },
+  {
+    "Id": 403,
+    "Name": "تفت",
+    "ProvinceCode": 21,
+    "CityCode": 3,
+    "ParentId": 400,
+    "Type": "City"
+  },
+  {
+    "Id": 404,
+    "Name": "مهریز",
+    "ProvinceCode": 21,
+    "CityCode": 4,
+    "ParentId": 400,
+    "Type": "City"
+  },
+  {
+    "Id": 405,
+    "Name": "یزد",
+    "ProvinceCode": 21,
+    "CityCode": 5,
+    "ParentId": 400,
+    "Type": "City"
+  },
+  {
+    "Id": 406,
+    "Name": "میبد",
+    "ProvinceCode": 21,
+    "CityCode": 6,
+    "ParentId": 400,
+    "Type": "City"
+  },
+  {
+    "Id": 407,
+    "Name": "ابركوه",
+    "ProvinceCode": 21,
+    "CityCode": 7,
+    "ParentId": 400,
+    "Type": "City"
+  },
+  {
+    "Id": 408,
+    "Name": "اشکذر",
+    "ProvinceCode": 21,
+    "CityCode": 8,
+    "ParentId": 400,
+    "Type": "City"
+  },
+  {
+    "Id": 409,
+    "Name": "خاتم",
+    "ProvinceCode": 21,
+    "CityCode": 9,
+    "ParentId": 400,
+    "Type": "City"
+  },
+  {
+    "Id": 410,
+    "Name": "بهاباد",
+    "ProvinceCode": 21,
+    "CityCode": 11,
+    "ParentId": 400,
+    "Type": "City"
+  },
+  {
+    "Id": 411,
+    "Name": "مروست",
+    "ProvinceCode": 21,
+    "CityCode": 12,
+    "ParentId": 400,
+    "Type": "City"
+  },
+  {
+    "Id": 412,
+    "Name": "زارچ",
+    "ProvinceCode": 21,
+    "CityCode": 13,
+    "ParentId": 400,
+    "Type": "City"
+  },
+  {
+    "Id": 413,
+    "Name": "هرمزگان",
+    "ProvinceCode": 22,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 414,
+    "Name": "ابوموسی",
+    "ProvinceCode": 22,
+    "CityCode": 1,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 415,
+    "Name": "بندر عباس",
+    "ProvinceCode": 22,
+    "CityCode": 2,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 416,
+    "Name": "بندر لنگه",
+    "ProvinceCode": 22,
+    "CityCode": 3,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 417,
+    "Name": "قشم",
+    "ProvinceCode": 22,
+    "CityCode": 4,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 418,
+    "Name": "میناب",
+    "ProvinceCode": 22,
+    "CityCode": 5,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 419,
+    "Name": "جاسك",
+    "ProvinceCode": 22,
+    "CityCode": 6,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 420,
+    "Name": "رودان",
+    "ProvinceCode": 22,
+    "CityCode": 7,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 421,
+    "Name": "حاجی آباد",
+    "ProvinceCode": 22,
+    "CityCode": 8,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 422,
+    "Name": "بستك",
+    "ProvinceCode": 22,
+    "CityCode": 9,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 423,
+    "Name": "خمیر",
+    "ProvinceCode": 22,
+    "CityCode": 10,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 424,
+    "Name": "پارسیان",
+    "ProvinceCode": 22,
+    "CityCode": 11,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 425,
+    "Name": "سیریك",
+    "ProvinceCode": 22,
+    "CityCode": 12,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 426,
+    "Name": "بشاگرد",
+    "ProvinceCode": 22,
+    "CityCode": 13,
+    "ParentId": 413,
+    "Type": "City"
+  },
+  {
+    "Id": 427,
+    "Name": "تهران",
+    "ProvinceCode": 23,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 428,
+    "Name": "تهران",
+    "ProvinceCode": 23,
+    "CityCode": 1,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 429,
+    "Name": "دماوند",
+    "ProvinceCode": 23,
+    "CityCode": 2,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 430,
+    "Name": "ری",
+    "ProvinceCode": 23,
+    "CityCode": 3,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 431,
+    "Name": "پیشوا",
+    "ProvinceCode": 23,
+    "CityCode": 18,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 432,
+    "Name": "شمیرانات",
+    "ProvinceCode": 23,
+    "CityCode": 4,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 433,
+    "Name": "ورامین",
+    "ProvinceCode": 23,
+    "CityCode": 6,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 434,
+    "Name": "شهریار",
+    "ProvinceCode": 23,
+    "CityCode": 9,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 435,
+    "Name": "اسلامشهر",
+    "ProvinceCode": 23,
+    "CityCode": 10,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 436,
+    "Name": "رباط کریم",
+    "ProvinceCode": 23,
+    "CityCode": 12,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 437,
+    "Name": "پاكدشت",
+    "ProvinceCode": 23,
+    "CityCode": 13,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 438,
+    "Name": "فیروزكوه",
+    "ProvinceCode": 23,
+    "CityCode": 14,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 439,
+    "Name": "قدس",
+    "ProvinceCode": 23,
+    "CityCode": 16,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 440,
+    "Name": "ملارد",
+    "ProvinceCode": 23,
+    "CityCode": 17,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 441,
+    "Name": "بهارستان",
+    "ProvinceCode": 23,
+    "CityCode": 19,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 442,
+    "Name": "پردیس",
+    "ProvinceCode": 23,
+    "CityCode": 20,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 443,
+    "Name": "قرچک",
+    "ProvinceCode": 23,
+    "CityCode": 21,
+    "ParentId": 427,
+    "Type": "City"
+  },
+  {
+    "Id": 444,
+    "Name": "اردبیل",
+    "ProvinceCode": 24,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 445,
+    "Name": "اردبیل",
+    "ProvinceCode": 24,
+    "CityCode": 1,
+    "ParentId": 444,
+    "Type": "City"
+  },
+  {
+    "Id": 446,
+    "Name": "بیله سوار",
+    "ProvinceCode": 24,
+    "CityCode": 2,
+    "ParentId": 444,
+    "Type": "City"
+  },
+  {
+    "Id": 447,
+    "Name": "خلخال",
+    "ProvinceCode": 24,
+    "CityCode": 3,
+    "ParentId": 444,
+    "Type": "City"
+  },
+  {
+    "Id": 448,
+    "Name": "مشگین شهر",
+    "ProvinceCode": 24,
+    "CityCode": 4,
+    "ParentId": 444,
+    "Type": "City"
+  },
+  {
+    "Id": 449,
+    "Name": "گرمی",
+    "ProvinceCode": 24,
+    "CityCode": 5,
+    "ParentId": 444,
+    "Type": "City"
+  },
+  {
+    "Id": 450,
+    "Name": "پارس آباد",
+    "ProvinceCode": 24,
+    "CityCode": 6,
+    "ParentId": 444,
+    "Type": "City"
+  },
+  {
+    "Id": 451,
+    "Name": "كوثر",
+    "ProvinceCode": 24,
+    "CityCode": 7,
+    "ParentId": 444,
+    "Type": "City"
+  },
+  {
+    "Id": 452,
+    "Name": "نمین",
+    "ProvinceCode": 24,
+    "CityCode": 8,
+    "ParentId": 444,
+    "Type": "City"
+  },
+  {
+    "Id": 453,
+    "Name": "نیر",
+    "ProvinceCode": 24,
+    "CityCode": 9,
+    "ParentId": 444,
+    "Type": "City"
+  },
+  {
+    "Id": 454,
+    "Name": "سرعین",
+    "ProvinceCode": 24,
+    "CityCode": 10,
+    "ParentId": 444,
+    "Type": "City"
+  },
+  {
+    "Id": 455,
+    "Name": "اصلاندوز",
+    "ProvinceCode": 24,
+    "CityCode": 11,
+    "ParentId": 444,
+    "Type": "City"
+  },
+  {
+    "Id": 456,
+    "Name": "انگوت",
+    "ProvinceCode": 24,
+    "CityCode": 12,
+    "ParentId": 444,
+    "Type": "City"
+  },
+  {
+    "Id": 457,
+    "Name": "قم",
+    "ProvinceCode": 25,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 458,
+    "Name": "قم",
+    "ProvinceCode": 25,
+    "CityCode": 1,
+    "ParentId": 457,
+    "Type": "City"
+  },
+  {
+    "Id": 459,
+    "Name": "جعفرآباد",
+    "ProvinceCode": 25,
+    "CityCode": 2,
+    "ParentId": 457,
+    "Type": "City"
+  },
+  {
+    "Id": 460,
+    "Name": "کهک",
+    "ProvinceCode": 25,
+    "CityCode": 3,
+    "ParentId": 457,
+    "Type": "City"
+  },
+  {
+    "Id": 461,
+    "Name": "قزوین",
+    "ProvinceCode": 26,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 462,
+    "Name": "بویین زهرا",
+    "ProvinceCode": 26,
+    "CityCode": 1,
+    "ParentId": 461,
+    "Type": "City"
+  },
+  {
+    "Id": 463,
+    "Name": "تاكستان",
+    "ProvinceCode": 26,
+    "CityCode": 2,
+    "ParentId": 461,
+    "Type": "City"
+  },
+  {
+    "Id": 464,
+    "Name": "قزوین",
+    "ProvinceCode": 26,
+    "CityCode": 3,
+    "ParentId": 461,
+    "Type": "City"
+  },
+  {
+    "Id": 465,
+    "Name": "آبیك",
+    "ProvinceCode": 26,
+    "CityCode": 4,
+    "ParentId": 461,
+    "Type": "City"
+  },
+  {
+    "Id": 466,
+    "Name": "البرز",
+    "ProvinceCode": 26,
+    "CityCode": 5,
+    "ParentId": 461,
+    "Type": "City"
+  },
+  {
+    "Id": 467,
+    "Name": "آوج",
+    "ProvinceCode": 26,
+    "CityCode": 6,
+    "ParentId": 461,
+    "Type": "City"
+  },
+  {
+    "Id": 468,
+    "Name": "گلستان",
+    "ProvinceCode": 27,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 469,
+    "Name": "بندرگز",
+    "ProvinceCode": 27,
+    "CityCode": 1,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 470,
+    "Name": "تركمن",
+    "ProvinceCode": 27,
+    "CityCode": 2,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 471,
+    "Name": "علی آباد کتول",
+    "ProvinceCode": 27,
+    "CityCode": 3,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 472,
+    "Name": "كردكوی",
+    "ProvinceCode": 27,
+    "CityCode": 4,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 473,
+    "Name": "گرگان",
+    "ProvinceCode": 27,
+    "CityCode": 5,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 474,
+    "Name": "گنبدكاووس",
+    "ProvinceCode": 27,
+    "CityCode": 6,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 475,
+    "Name": "آزادشهر",
+    "ProvinceCode": 27,
+    "CityCode": 10,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 476,
+    "Name": "مینودشت",
+    "ProvinceCode": 27,
+    "CityCode": 7,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 477,
+    "Name": "آق قلا",
+    "ProvinceCode": 27,
+    "CityCode": 8,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 478,
+    "Name": "كلاله",
+    "ProvinceCode": 27,
+    "CityCode": 9,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 479,
+    "Name": "رامیان",
+    "ProvinceCode": 27,
+    "CityCode": 11,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 480,
+    "Name": "مراوه تپه",
+    "ProvinceCode": 27,
+    "CityCode": 12,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 481,
+    "Name": "گمیشان",
+    "ProvinceCode": 27,
+    "CityCode": 13,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 482,
+    "Name": "گالیكش",
+    "ProvinceCode": 27,
+    "CityCode": 14,
+    "ParentId": 468,
+    "Type": "City"
+  },
+  {
+    "Id": 483,
+    "Name": "خراسان شمالی",
+    "ProvinceCode": 28,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 484,
+    "Name": "اسفراین",
+    "ProvinceCode": 28,
+    "CityCode": 1,
+    "ParentId": 483,
+    "Type": "City"
+  },
+  {
+    "Id": 485,
+    "Name": "بجنورد",
+    "ProvinceCode": 28,
+    "CityCode": 2,
+    "ParentId": 483,
+    "Type": "City"
+  },
+  {
+    "Id": 486,
+    "Name": "جاجرم",
+    "ProvinceCode": 28,
+    "CityCode": 3,
+    "ParentId": 483,
+    "Type": "City"
+  },
+  {
+    "Id": 487,
+    "Name": "شیروان",
+    "ProvinceCode": 28,
+    "CityCode": 4,
+    "ParentId": 483,
+    "Type": "City"
+  },
+  {
+    "Id": 488,
+    "Name": "فاروج",
+    "ProvinceCode": 28,
+    "CityCode": 5,
+    "ParentId": 483,
+    "Type": "City"
+  },
+  {
+    "Id": 489,
+    "Name": "سملقان",
+    "ProvinceCode": 28,
+    "CityCode": 6,
+    "ParentId": 483,
+    "Type": "City"
+  },
+  {
+    "Id": 490,
+    "Name": "گرمه",
+    "ProvinceCode": 28,
+    "CityCode": 7,
+    "ParentId": 483,
+    "Type": "City"
+  },
+  {
+    "Id": 491,
+    "Name": "راز و جرگلان",
+    "ProvinceCode": 28,
+    "CityCode": 8,
+    "ParentId": 483,
+    "Type": "City"
+  },
+  {
+    "Id": 492,
+    "Name": "بام و صفی آباد",
+    "ProvinceCode": 28,
+    "CityCode": 9,
+    "ParentId": 483,
+    "Type": "City"
+  },
+  {
+    "Id": 493,
+    "Name": "مانه",
+    "ProvinceCode": 28,
+    "CityCode": 10,
+    "ParentId": 483,
+    "Type": "City"
+  },
+  {
+    "Id": 494,
+    "Name": "خراسان جنوبی",
+    "ProvinceCode": 29,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 495,
+    "Name": "بیرجند",
+    "ProvinceCode": 29,
+    "CityCode": 1,
+    "ParentId": 494,
+    "Type": "City"
+  },
+  {
+    "Id": 496,
+    "Name": "درمیان",
+    "ProvinceCode": 29,
+    "CityCode": 2,
+    "ParentId": 494,
+    "Type": "City"
+  },
+  {
+    "Id": 497,
+    "Name": "سربیشه",
+    "ProvinceCode": 29,
+    "CityCode": 3,
+    "ParentId": 494,
+    "Type": "City"
+  },
+  {
+    "Id": 498,
+    "Name": "قاینات",
+    "ProvinceCode": 29,
+    "CityCode": 4,
+    "ParentId": 494,
+    "Type": "City"
+  },
+  {
+    "Id": 499,
+    "Name": "نهبندان",
+    "ProvinceCode": 29,
+    "CityCode": 5,
+    "ParentId": 494,
+    "Type": "City"
+  },
+  {
+    "Id": 500,
+    "Name": "سرایان",
+    "ProvinceCode": 29,
+    "CityCode": 6,
+    "ParentId": 494,
+    "Type": "City"
+  },
+  {
+    "Id": 501,
+    "Name": "فردوس",
+    "ProvinceCode": 29,
+    "CityCode": 7,
+    "ParentId": 494,
+    "Type": "City"
+  },
+  {
+    "Id": 502,
+    "Name": "بشرویه",
+    "ProvinceCode": 29,
+    "CityCode": 8,
+    "ParentId": 494,
+    "Type": "City"
+  },
+  {
+    "Id": 503,
+    "Name": "زیرکوه",
+    "ProvinceCode": 29,
+    "CityCode": 9,
+    "ParentId": 494,
+    "Type": "City"
+  },
+  {
+    "Id": 504,
+    "Name": "خوسف",
+    "ProvinceCode": 29,
+    "CityCode": 10,
+    "ParentId": 494,
+    "Type": "City"
+  },
+  {
+    "Id": 505,
+    "Name": "طبس",
+    "ProvinceCode": 29,
+    "CityCode": 11,
+    "ParentId": 494,
+    "Type": "City"
+  },
+  {
+    "Id": 506,
+    "Name": "البرز",
+    "ProvinceCode": 30,
+    "ParentId": null,
+    "Type": "Province"
+  },
+  {
+    "Id": 507,
+    "Name": "کرج",
+    "ProvinceCode": 30,
+    "CityCode": 1,
+    "ParentId": 506,
+    "Type": "City"
+  },
+  {
+    "Id": 508,
+    "Name": "ساوجبلاغ",
+    "ProvinceCode": 30,
+    "CityCode": 2,
+    "ParentId": 506,
+    "Type": "City"
+  },
+  {
+    "Id": 509,
+    "Name": "نظرآباد",
+    "ProvinceCode": 30,
+    "CityCode": 3,
+    "ParentId": 506,
+    "Type": "City"
+  },
+  {
+    "Id": 510,
+    "Name": "طالقان",
+    "ProvinceCode": 30,
+    "CityCode": 4,
+    "ParentId": 506,
+    "Type": "City"
+  },
+  {
+    "Id": 511,
+    "Name": "اشتهارد",
+    "ProvinceCode": 30,
+    "CityCode": 5,
+    "ParentId": 506,
+    "Type": "City"
+  },
+  {
+    "Id": 512,
+    "Name": "فردیس",
+    "ProvinceCode": 30,
+    "CityCode": 6,
+    "ParentId": 506,
+    "Type": "City"
+  },
+  {
+    "Id": 513,
+    "Name": "چهارباغ",
+    "ProvinceCode": 30,
+    "CityCode": 7,
+    "ParentId": 506,
+    "Type": "City"
+  }
+]

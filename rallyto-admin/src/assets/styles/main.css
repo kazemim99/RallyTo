@@ -1,0 +1,40 @@
+:root {
+  --ty-primary: #2f7d32;
+  --ty-text: #1f2937;
+  --ty-text-secondary: #6b7280;
+  --ty-border: #e5e7eb;
+  --ty-surface: #f3f5f4;
+  --ty-font: Vazirmatn, Vazir, Tahoma, 'Segoe UI', system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--ty-font);
+  background: var(--ty-surface);
+  color: var(--ty-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.page-container {
+  min-height: 100%;
+}
+
+.page-header {
+  padding-inline: 0;
+}

@@ -1,0 +1,31 @@
+---
+import '../styles/global.css'
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
+import SeoHead from '../components/SeoHead.astro'
+import type { PageMeta } from '../data/pages'
+import { breadcrumbLd } from '../lib/seo'
+
+interface Props {
+  meta: PageMeta
+  jsonLd?: Record<string, unknown>[]
+}
+
+const { meta, jsonLd = [] } = Astro.props
+const structured = meta.crumbs ? [...jsonLd, breadcrumbLd(meta.crumbs)] : jsonLd
+---
+
+<!doctype html>
+<html lang="fa-IR" dir="rtl">
+  <head>
+    <SeoHead meta={meta} jsonLd={structured} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">رفتن به محتوای اصلی</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

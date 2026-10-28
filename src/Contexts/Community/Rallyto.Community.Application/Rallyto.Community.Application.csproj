@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Rallyto.Community.Domain\Rallyto.Community.Domain.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Rallyto.Core.Application\Rallyto.Core.Application.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Rallyto.Contracts\Rallyto.Contracts.csproj" />
+  </ItemGroup>
+</Project>

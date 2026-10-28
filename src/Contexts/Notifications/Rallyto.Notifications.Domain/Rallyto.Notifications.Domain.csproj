@@ -1,0 +1,5 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Rallyto.Core.Domain\Rallyto.Core.Domain.csproj" />
+  </ItemGroup>
+</Project>

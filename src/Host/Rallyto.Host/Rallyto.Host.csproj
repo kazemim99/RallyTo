@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!-- The only process: composes every bounded context in-process (design D1). -->
+  <PropertyGroup>
+    <UserSecretsId>rallyto-host</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\Rallyto.Infrastructure.Web\Rallyto.Infrastructure.Web.csproj" />
+    <ProjectReference Include="..\..\Contexts\Identity\Rallyto.Identity.Api\Rallyto.Identity.Api.csproj" />
+    <ProjectReference Include="..\..\Contexts\Identity\Rallyto.Identity.Infrastructure\Rallyto.Identity.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Contexts\Catalog\Rallyto.Catalog.Api\Rallyto.Catalog.Api.csproj" />
+    <ProjectReference Include="..\..\Contexts\Catalog\Rallyto.Catalog.Infrastructure\Rallyto.Catalog.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Contexts\Community\Rallyto.Community.Api\Rallyto.Community.Api.csproj" />
+    <ProjectReference Include="..\..\Contexts\Community\Rallyto.Community.Infrastructure\Rallyto.Community.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Contexts\Messaging\Rallyto.Messaging.Api\Rallyto.Messaging.Api.csproj" />
+    <ProjectReference Include="..\..\Contexts\Messaging\Rallyto.Messaging.Infrastructure\Rallyto.Messaging.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Contexts\Notifications\Rallyto.Notifications.Api\Rallyto.Notifications.Api.csproj" />
+    <ProjectReference Include="..\..\Contexts\Notifications\Rallyto.Notifications.Infrastructure\Rallyto.Notifications.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Mvc" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" />
+    <PackageReference Include="AspNetCore.HealthChecks.Redis" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

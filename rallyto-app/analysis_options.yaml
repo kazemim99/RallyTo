@@ -1,0 +1,19 @@
+# Static analysis for the Rallyto player app. CI runs `flutter analyze` and fails on any issue.
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    # build_runner output (json_serializable, retrofit, injectable). It is committed but never edited by hand,
+    # so its lints are noise.
+    - "**/*.g.dart"
+    - "**/*.config.dart"
+  language:
+    strict-casts: true
+
+linter:
+  rules:
+    - always_declare_return_types
+    - avoid_dynamic_calls
+    - prefer_final_locals
+    - prefer_single_quotes
+    - unawaited_futures

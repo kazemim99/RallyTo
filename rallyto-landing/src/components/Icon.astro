@@ -1,0 +1,45 @@
+---
+/** Line icons on a 24-unit grid, drawn in currentColor. Decorative: the text next to each icon says what it means. */
+const PATHS = {
+  shield: 'M12 3 4.5 6v5.5c0 4.6 3.1 8.4 7.5 9.5 4.4-1.1 7.5-4.9 7.5-9.5V6L12 3Z M8.8 12.2l2.2 2.2 4.3-4.6',
+  reliable: 'M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z M2.5 20c.6-3.4 3.2-5.5 6.5-5.5 1.6 0 3 .5 4.1 1.4 M15 18l2 2 4.5-4.7',
+  phoneOff: 'M7 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z M9.5 18h2 M3 3l18 18',
+  request: 'M4 5.5h16v10H9.5L5 19.5v-4H4z M12 8.5v3 M12 13.6v.1',
+  star: 'm12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3.5Z',
+  flag: 'M5 21V4 M5 4.5h11l-2 4 2 4H5',
+  group: 'M8.5 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z M15.5 11a3 3 0 1 0 0-6 M2.5 19.5c.5-3 3-5 6-5s5.5 2 6 5 M15.5 14.5c3 0 5.5 2 6 5',
+  calendar: 'M4.5 6h15v14h-15z M4.5 10h15 M8.5 3.5v4 M15.5 3.5v4 M12 13v3l2 1.2',
+  bell: 'M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15l1.5-2Z M10 21h4',
+  link: 'M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1 M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1',
+  check: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M8 12.3l2.6 2.6L16.2 9',
+  pin: 'M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z M12 12.3a2.3 2.3 0 1 0 0-4.6 2.3 2.3 0 0 0 0 4.6Z',
+  clock: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M12 7.5V12l3 2',
+  level: 'M5 19v-4 M10 19v-8 M15 19V8 M20 19V4',
+  search: 'M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z M20.5 20.5 16 16',
+  ball: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M5.6 5.6c2.6 2.6 2.6 10.2 0 12.8 M18.4 5.6c-2.6 2.6-2.6 10.2 0 12.8',
+  android: 'M7 10h10v7.5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 7 17.5V10Z M7 9a5 5 0 0 1 10 0 M9.5 6.2 8.3 4.3 M14.5 6.2l1.2-1.9 M10 7.5v.1 M14 7.5v.1',
+} as const
+
+export type IconName = keyof typeof PATHS
+
+interface Props {
+  name: IconName
+  size?: number
+  class?: string
+}
+const { name, size = 24, class: className } = Astro.props
+---
+
+<svg
+  class:list={['icon', className]}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"><path d={PATHS[name]}></path></svg
+>

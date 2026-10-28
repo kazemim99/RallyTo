@@ -1,0 +1,25 @@
+name: Deploy
+
+# Disabled until a server and domain exist (tasks.md 11.5). Runs only when started by hand, and every deploy step
+# is a placeholder so nothing reaches an environment by accident.
+on:
+  workflow_dispatch:
+
+jobs:
+  build-api-image:
+    name: Build API image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -f src/Host/Rallyto.Host/Dockerfile -t rallyto-api:${{ github.sha }} .
+
+  deploy:
+    name: Deploy (not configured)
+    needs: build-api-image
+    runs-on: ubuntu-latest
+    steps:
+      - name: No server provisioned yet
+        run: |
+          echo "Rallyto has no server yet. When one exists (tasks.md 11.5):"
+          echo "  push the image to GHCR, back up the database, docker compose pull, smoke-check /health/ready."

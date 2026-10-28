@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Rallyto.Catalog.Application\Rallyto.Catalog.Application.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Rallyto.Infrastructure.Core\Rallyto.Infrastructure.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Iran's provinces and cities, from AsanRezerve's ProvinceCity-ParentChild.json (31 provinces, 482 cities). -->
+    <EmbeddedResource Include="Seed\provinces-cities.json" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,6 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Rallyto.Messaging.Application\Rallyto.Messaging.Application.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Rallyto.Infrastructure.Core\Rallyto.Infrastructure.Core.csproj" />
+  </ItemGroup>
+</Project>

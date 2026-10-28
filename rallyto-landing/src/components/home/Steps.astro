@@ -1,0 +1,232 @@
+---
+/**
+ * How Rallyto works, in the order a player meets it. A real sequence, so the steps are numbered. Each step carries a
+ * small piece of the app's own interface (same colours, same components), drawn in HTML.
+ */
+---
+
+<section class="section steps" id="how" aria-labelledby="how-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="how-title">سه قدم تا بازی بعدی</h2>
+      <p>چند دقیقه برای پروفایل، بعد رالیتو هم‌بازی‌های هم‌سطحت را جلوی چشمت می‌گذارد.</p>
+    </div>
+
+    <ol class="steps__list">
+      <li class="step">
+        <div class="step__ui" aria-hidden="true">
+          <div class="ui-row"><span class="ui-ball">ت</span><b>تنیس</b><span class="ui-chip">متوسط</span></div>
+          <div class="ui-row"><span class="ui-ball ui-ball--padel">پ</span><b>پدل</b><span class="ui-chip">مبتدی</span></div>
+          <div class="ui-row ui-row--muted"><span class="ui-pin"></span>تهران، باشگاه‌های نزدیک من</div>
+        </div>
+        <h3><span class="step__n">۱</span>پروفایلت را بساز</h3>
+        <p>ورزش‌هایت، سطحت در هر کدام، شهرت و باشگاه‌هایی که آنجا بازی می‌کنی.</p>
+      </li>
+
+      <li class="step">
+        <div class="step__ui" aria-hidden="true">
+          <div class="ui-seg"><span class="on">بازی باز</span><span>زمان‌های آزاد</span></div>
+          <div class="ui-card">
+            <b>پدل دونفره</b>
+            <small>جمعه ۱۰:۰۰، یک جای خالی</small>
+          </div>
+          <div class="ui-card ui-card--soft">
+            <b>شنبه‌ها ۱۸ تا ۲۲</b>
+            <small>هر هفته، باشگاه نزدیک من</small>
+          </div>
+        </div>
+        <h3><span class="step__n">۲</span>بازی بگذار یا هم‌بازی پیدا کن</h3>
+        <p>یک بازی با جای خالی منتشر کن، یا زمان‌های آزاد هفتگی‌ات را بگذار تا هم‌سطح‌ها پیدایت کنند.</p>
+      </li>
+
+      <li class="step">
+        <div class="step__ui" aria-hidden="true">
+          <div class="ui-bubble">ساعت ۶ زمین شماره‌ی ۳ می‌بینمت</div>
+          <div class="ui-row"><span class="ui-check"></span>حضور در بازی تأیید شد</div>
+          <div class="ui-stars"><i></i><i></i><i></i><i></i><i class="off"></i></div>
+        </div>
+        <h3><span class="step__n">۳</span>هماهنگ کن، بازی کن، امتیاز بده</h3>
+        <p>داخل اپ هماهنگ کن. بعد از بازی حضورها ثبت می‌شود و به هم امتیاز می‌دهید.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<style>
+  .steps__list {
+    display: grid;
+    gap: 28px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .step h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-block: 22px 6px;
+  }
+
+  .step p {
+    color: var(--c-muted);
+    max-width: 30rem;
+  }
+
+  .step__n {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--c-court);
+    color: var(--c-surface);
+    font: 900 1.05rem / 1 var(--font-display);
+    padding-block-start: 2px;
+  }
+
+  .step__ui {
+    display: grid;
+    align-content: center;
+    gap: 10px;
+    min-height: 210px;
+    padding: 22px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-l);
+    font-size: var(--step--1);
+    line-height: 1.6;
+  }
+
+  .ui-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--c-line);
+    border-radius: 12px;
+  }
+
+  .ui-row--muted {
+    color: var(--c-muted);
+  }
+
+  .ui-ball {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--c-ball);
+    color: #315215;
+    font-weight: 700;
+  }
+
+  .ui-ball--padel {
+    background: #dce8f6;
+    color: var(--c-padel);
+  }
+
+  .ui-chip {
+    margin-inline-start: auto;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--c-soft);
+    color: var(--c-court);
+    font-weight: 700;
+  }
+
+  .ui-pin {
+    width: 10px;
+    height: 10px;
+    border-radius: 50% 50% 50% 0;
+    background: var(--c-court);
+    transform: rotate(-45deg);
+  }
+
+  .ui-seg {
+    display: flex;
+    padding: 4px;
+    border-radius: 12px;
+    background: #e9efed;
+  }
+
+  .ui-seg span {
+    flex: 1;
+    padding: 6px;
+    text-align: center;
+    border-radius: 9px;
+    color: var(--c-muted);
+  }
+
+  .ui-seg .on {
+    background: var(--c-surface);
+    color: var(--c-court);
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgb(31 69 58 / 10%);
+  }
+
+  .ui-card {
+    display: grid;
+    padding: 10px 14px;
+    border: 1px solid var(--c-line);
+    border-radius: 12px;
+  }
+
+  .ui-card small {
+    color: var(--c-muted);
+  }
+
+  .ui-card--soft {
+    background: var(--c-soft);
+    border-color: #c4ded5;
+  }
+
+  .ui-bubble {
+    justify-self: end;
+    padding: 9px 14px;
+    background: var(--c-soft);
+    color: var(--c-deep);
+    border-radius: 14px 14px 4px 14px;
+  }
+
+  .ui-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--c-court);
+    position: relative;
+  }
+
+  .ui-check::after {
+    content: '';
+    position: absolute;
+    inset: 6px 7px 7px;
+    border: solid #fff;
+    border-width: 0 0 2.5px 2.5px;
+    transform: rotate(-45deg);
+  }
+
+  .ui-stars {
+    display: flex;
+    gap: 6px;
+    padding-inline: 4px;
+  }
+
+  .ui-stars i {
+    width: 24px;
+    height: 24px;
+    background: #f5bd3d;
+    clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+
+  .ui-stars i.off {
+    background: var(--c-line);
+  }
+
+  @media (min-width: 860px) {
+    .steps__list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

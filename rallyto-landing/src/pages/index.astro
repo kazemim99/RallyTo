@@ -1,0 +1,127 @@
+---
+import DownloadBlock from '../components/DownloadBlock.astro'
+import Faq from '../components/Faq.astro'
+import SportTiles from '../components/SportTiles.astro'
+import CourtScene from '../components/home/CourtScene.astro'
+import GroupChat from '../components/home/GroupChat.astro'
+import Safety from '../components/home/Safety.astro'
+import Steps from '../components/home/Steps.astro'
+import type { IconName } from '../components/Icon.astro'
+import { SITE } from '../config/site'
+import { HOME_FAQ } from '../data/faq'
+import { PAGES } from '../data/pages'
+import Base from '../layouts/Base.astro'
+import { mobileApplicationLd, organizationLd, websiteLd } from '../lib/seo'
+
+const storesLive = Object.values(SITE.stores).some(Boolean)
+
+// Each line is a feature the app has today (see src/data/faq.ts for the rules behind them).
+const SAFETY: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: 'reliable',
+    title: 'خوش‌قولی هر بازیکن، روی پروفایلش',
+    text: 'بعد از هر بازی حضورها ثبت می‌شود. از ۲۰ تعهد آخر هر بازیکن، خوش‌قولی‌اش با «عالی»، «خوب» یا «کم» روی پروفایل دیده می‌شود.',
+  },
+  {
+    icon: 'star',
+    title: 'امتیاز دوطرفه و پنهان',
+    text: 'امتیازی که می‌دهی تا هم‌بازی‌ات هم امتیاز ندهد یا ۷ روز نگذرد حساب نمی‌شود و امتیازهای تکی به هیچ‌کس نشان داده نمی‌شود؛ جایی برای تلافی نمی‌ماند.',
+  },
+  {
+    icon: 'request',
+    title: 'اول درخواست، بعد گفتگو',
+    text: 'غریبه‌ها فقط یک پیام می‌توانند بفرستند؛ گفتگو وقتی باز می‌شود که تو درخواست را بپذیری.',
+  },
+  {
+    icon: 'shield',
+    title: 'فقط هم‌جنس‌ها، اگر بخواهی',
+    text: 'با «فقط هم‌جنس‌ها مرا ببینند» پروفایل و بازی‌هایت فقط به هم‌جنس‌ها نشان داده می‌شود، و بازی را می‌توانی «فقط خانم‌ها» منتشر کنی.',
+  },
+  {
+    icon: 'phoneOff',
+    title: 'شماره‌ات نمایش داده نمی‌شود',
+    text: 'همه‌ی هماهنگی‌ها داخل رالیتو انجام می‌شود و شماره‌ی تلفنت به هیچ بازیکنی نشان داده نمی‌شود.',
+  },
+  {
+    icon: 'flag',
+    title: 'گزارش و مسدود کردن',
+    text: 'هر کسی را بی‌خبر از خودش مسدود کن و هر بازیکن، پیام، پست یا عکسی را گزارش بده؛ مدیران رالیتو گزارش‌ها را بررسی می‌کنند.',
+  },
+]
+---
+
+<Base meta={PAGES.home} jsonLd={[organizationLd(), websiteLd(), mobileApplicationLd()]}>
+  <section class="hero on-dark" aria-labelledby="hero-title">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <h1 id="hero-title">هم‌بازیِ هم‌سطح، نزدیک باشگاهت</h1>
+        <p class="hero__lead">
+          رالیتو برای تنیس، پدل، بدمینتون و اسکواش هم‌بازی پیدا می‌کند: هم‌سطح خودت، نزدیک باشگاهت و در ساعتی که آزادی.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--ball" href="#download">دریافت اپ</a>
+          <a class="btn btn--outline-light" href="#how">ببین چطور کار می‌کند</a>
+        </div>
+        {!storesLive && <p class="hero__note">نسخه‌ی اندروید به‌زودی در کافه‌بازار و مایکت</p>}
+      </div>
+      <CourtScene />
+    </div>
+  </section>
+
+  <GroupChat />
+  <Steps />
+  <Safety items={SAFETY} />
+  <SportTiles />
+  <Faq items={HOME_FAQ} />
+  <DownloadBlock />
+</Base>
+
+<style>
+  .hero {
+    padding-block: 24px clamp(72px, 9vw, 120px);
+    overflow: hidden;
+    background:
+      radial-gradient(900px 520px at 15% 30%, rgb(29 122 92 / 55%), transparent 70%),
+      var(--c-deep);
+  }
+
+  .hero__grid {
+    display: grid;
+    gap: 44px;
+    align-items: center;
+  }
+
+  .hero__copy {
+    max-width: 36rem;
+  }
+
+  .hero__lead {
+    margin-block: 22px 32px;
+    color: var(--c-mint);
+    font-size: var(--step-1);
+    line-height: 1.9;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .hero__note {
+    margin-block-start: 18px;
+    color: var(--c-mint);
+    font-size: var(--step--1);
+  }
+
+  @media (min-width: 960px) {
+    .hero {
+      padding-block-start: 48px;
+    }
+
+    .hero__grid {
+      grid-template-columns: 1.1fr 1fr;
+      gap: 56px;
+    }
+  }
+</style>

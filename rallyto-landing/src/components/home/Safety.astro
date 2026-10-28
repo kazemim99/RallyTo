@@ -1,0 +1,219 @@
+---
+/**
+ * Trust and safety: only what the app actually does. Beside the list, a player's card as the app shows it, with the
+ * attendance record a partner sees before agreeing to play.
+ */
+import Icon, { type IconName } from '../Icon.astro'
+
+interface Props {
+  items: { icon: IconName; title: string; text: string }[]
+}
+const { items } = Astro.props
+---
+
+<section class="section on-dark safety" id="safety" aria-labelledby="safety-title">
+  <div class="container safety__grid">
+    <div>
+      <div class="section-head">
+        <h2 id="safety-title">قبل از قرار، هم‌بازی‌ات را بشناس</h2>
+        <p>خوش‌قولی، سطح و امتیاز هم‌بازی‌ات را پیش از بازی می‌بینی. شماره‌ات هم پیش خودت می‌ماند.</p>
+      </div>
+      <ul class="safety__list">
+        {
+          items.map((item) => (
+            <li>
+              <Icon name={item.icon} />
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="player" aria-hidden="true">
+      <span class="player__sample">نمونه</span>
+      <div class="player__top">
+        <i class="player__avatar">س</i>
+        <div>
+          <b>سارا</b>
+          <small>تنیس، سطح متوسط</small>
+        </div>
+      </div>
+      <div class="player__stat">
+        <span>خوش‌قولی</span>
+        <b class="player__badge">عالی</b>
+      </div>
+      <div class="player__stat">
+        <span>امتیاز هم‌بازی‌ها</span>
+        <b class="player__stars">۴٫۷ <i></i></b>
+      </div>
+      <div class="player__stat">
+        <span>سطح اعلام‌شده</span>
+        <b>بیشتر هم‌بازی‌ها می‌گویند درست است</b>
+      </div>
+      <div class="player__actions">
+        <span class="player__primary">درخواست پیام</span>
+        <span class="player__ghost">گزارش</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .safety__grid {
+    display: grid;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .safety__list {
+    display: grid;
+    gap: 24px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .safety__list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .safety__list :global(.icon) {
+    flex: none;
+    margin-block-start: 4px;
+    color: var(--c-ball);
+  }
+
+  .safety__list p {
+    color: var(--c-mint);
+  }
+
+  .player {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 360px);
+    padding: 22px;
+    background: var(--c-surface);
+    color: var(--c-ink);
+    border-radius: var(--radius-l);
+    box-shadow: 0 40px 60px -30px rgb(0 0 0 / 50%);
+    font-size: var(--step--1);
+  }
+
+  .player__sample {
+    position: absolute;
+    inset-block-start: -11px;
+    inset-inline-end: 20px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: var(--c-ball);
+    color: var(--c-deep);
+    font-size: 0.75rem;
+    line-height: 22px;
+    font-weight: 700;
+  }
+
+  .player__top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-block-end: 18px;
+    line-height: 1.6;
+  }
+
+  .player__top b {
+    font-size: var(--step-1);
+  }
+
+  .player__top small {
+    display: block;
+    color: var(--c-muted);
+  }
+
+  .player__avatar {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #d8e9e4, #9fc6ba);
+    color: var(--c-deep);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+
+  .player__stat {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 8px;
+  }
+
+  .player__stat span {
+    color: var(--c-muted);
+  }
+
+  .player__stat + .player__stat {
+    border-top: 1px solid var(--c-line);
+  }
+
+  .player__stat b {
+    text-align: end;
+  }
+
+  .player__badge {
+    padding: 0 12px;
+    border-radius: 999px;
+    background: var(--c-soft);
+    color: var(--c-court);
+  }
+
+  .player__stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #9a6a05;
+  }
+
+  .player__stars i {
+    width: 16px;
+    height: 16px;
+    background: #f5bd3d;
+    clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+
+  .player__actions {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 8px;
+    margin-block-start: 18px;
+  }
+
+  .player__actions span {
+    padding: 10px;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: 700;
+  }
+
+  .player__primary {
+    background: var(--c-court);
+    color: var(--c-surface);
+  }
+
+  .player__ghost {
+    background: var(--c-soft);
+    color: var(--c-court);
+  }
+
+  @media (min-width: 900px) {
+    .safety__grid {
+      grid-template-columns: 1.25fr 1fr;
+      gap: 80px;
+    }
+  }
+</style>

@@ -1,0 +1,18 @@
+{
+  "name": "Rallyto rally loop",
+  "grid": 100,
+  "center": [50, 50],
+  "ringRadius": 25,
+  "trail": { "fromDeg": -205, "toDeg": -36, "width": 13, "taper": 0.85, "samples": 48 },
+  "ball": { "angleDeg": -36, "radius": 10.5 },
+  "tile": { "cornerRadius": 23, "gradientFrom": "#187658", "gradientTo": "#0B4C3A" },
+  "colors": {
+    "green": "#146B52",
+    "greenDeep": "#0B4C3A",
+    "ball": "#D9EF70",
+    "white": "#FFFFFF",
+    "clay": "#E9783C",
+    "canvas": "#F5F8F7",
+    "ink": "#172522"
+  }
+}

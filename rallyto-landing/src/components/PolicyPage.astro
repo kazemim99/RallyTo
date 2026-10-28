@@ -1,0 +1,95 @@
+---
+import type { PageMeta } from '../data/pages'
+import type { Policy } from '../data/policies'
+import Base from '../layouts/Base.astro'
+import Breadcrumbs from './Breadcrumbs.astro'
+
+/** A policy (privacy, terms) set as readable prose: one column at a comfortable measure. */
+interface Props {
+  meta: PageMeta
+  policy: Policy
+}
+const { meta, policy } = Astro.props
+---
+
+<Base meta={meta}>
+  <section class="policy-hero on-dark" aria-labelledby="policy-title">
+    <div class="container">
+      <Breadcrumbs crumbs={meta.crumbs!} />
+      <h1 id="policy-title">{policy.h1}</h1>
+      <p class="policy-hero__updated">آخرین به‌روزرسانی: {policy.updated}</p>
+    </div>
+  </section>
+  <article class="section">
+    <div class="container prose">
+      <p class="prose__intro">{policy.intro}</p>
+      {
+        policy.sections.map((s) => (
+          <section>
+            <h2>{s.heading}</h2>
+            {s.paragraphs.map((p) => (
+              <p>{p}</p>
+            ))}
+            {s.bullets && (
+              <ul>
+                {s.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))
+      }
+    </div>
+  </article>
+</Base>
+
+<style>
+  .policy-hero {
+    padding-block: 8px 56px;
+  }
+
+  .policy-hero h1 {
+    margin-block-start: 14px;
+    font-size: var(--step-3);
+  }
+
+  .policy-hero__updated {
+    margin-block-start: 8px;
+    color: var(--c-mint);
+    font-size: var(--step--1);
+  }
+
+  .prose {
+    max-width: var(--measure);
+  }
+
+  .prose__intro {
+    font-size: var(--step-1);
+    line-height: 1.9;
+  }
+
+  .prose section {
+    margin-block-start: 40px;
+  }
+
+  .prose h2 {
+    font-size: var(--step-2);
+    margin-block-end: 12px;
+  }
+
+  .prose p + p {
+    margin-block-start: 12px;
+  }
+
+  .prose ul {
+    display: grid;
+    gap: 8px;
+    margin-block-start: 12px;
+    padding-inline-start: 1.4em;
+  }
+
+  .prose li::marker {
+    color: var(--c-court);
+  }
+</style>

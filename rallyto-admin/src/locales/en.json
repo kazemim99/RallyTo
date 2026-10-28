@@ -1,0 +1,821 @@
+{
+  "app": {
+    "name": "Rallyto Admin Panel",
+    "brand": "Rallyto"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "venues": "Venues",
+    "venueCandidates": "Venue candidates",
+    "sports": "Sports",
+    "reports": "Reports",
+    "disputedMatches": "Disputed matches",
+    "auditLog": "Audit log",
+    "toggleMenu": "Toggle menu"
+  },
+  "auth": {
+    "title": "Sign in to the admin panel",
+    "adminOnly": "Only Rallyto admin accounts can access this panel.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "admin{'@'}rallyto.ir",
+    "emailRequired": "Enter your email.",
+    "emailInvalid": "This is not a valid email. Enter it as name{'@'}example.com.",
+    "passwordLabel": "Password",
+    "passwordRequired": "Enter your password.",
+    "signIn": "Sign in",
+    "signOut": "Sign out"
+  },
+  "placeholder": {
+    "comingSoon": "This section arrives in a later release."
+  },
+  "notFound": {
+    "subtitle": "The page you are looking for was not found.",
+    "backHome": "Back to the dashboard"
+  },
+  "users": {
+    "searchPlaceholder": "Search mobile number",
+    "statusPlaceholder": "All statuses",
+    "total": "{total} users",
+    "empty": "No users found.",
+    "noValue": "—",
+    "cancel": "Cancel",
+    "columns": {
+      "phone": "Mobile number",
+      "roles": "Roles",
+      "status": "Status",
+      "suspendedUntil": "Suspended until",
+      "reason": "Reason",
+      "createdAt": "Joined",
+      "actions": "Actions"
+    },
+    "status": {
+      "Active": "Active",
+      "Suspended": "Suspended",
+      "Banned": "Banned",
+      "Deleted": "Deleted"
+    },
+    "roles": {
+      "Admin": "Admin",
+      "Player": "Player"
+    },
+    "actions": {
+      "details": "Details",
+      "suspend": "Suspend",
+      "liftSuspension": "Lift suspension",
+      "ban": "Ban",
+      "grantAdmin": "Grant admin",
+      "revokeAdmin": "Revoke admin"
+    },
+    "reason": {
+      "label": "Reason",
+      "placeholder": "Why? It is kept in the account history.",
+      "required": "Enter a reason."
+    },
+    "suspend": {
+      "title": "Suspend {phone}",
+      "durationLabel": "Duration",
+      "days": "{count} days",
+      "custom": "Custom date",
+      "untilLabel": "Suspension ends (Tehran time)",
+      "year": "Year",
+      "month": "Month",
+      "day": "Day",
+      "hour": "Hour",
+      "minute": "Minute",
+      "preview": "The account stays suspended until {date}, Tehran time.",
+      "inPast": "The end of the suspension must be in the future.",
+      "invalidDate": "This date does not exist.",
+      "submit": "Suspend account"
+    },
+    "lift": {
+      "title": "Lift the suspension of {phone}",
+      "description": "The account becomes active again immediately.",
+      "submit": "Lift suspension"
+    },
+    "ban": {
+      "title": "Permanently ban {phone}",
+      "warningTitle": "This is permanent and cannot be undone.",
+      "warning": "A banned account is removed from Rallyto for good: the user can no longer sign in, and the panel offers no way to lift a ban. If a temporary restriction is enough, suspend the account instead.",
+      "acknowledge": "I understand that a ban is permanent and cannot be undone.",
+      "submit": "Ban permanently"
+    },
+    "grantAdmin": {
+      "title": "Grant the admin role",
+      "confirm": "{phone} will get access to every section of the admin panel. Continue?",
+      "submit": "Grant admin"
+    },
+    "revokeAdmin": {
+      "title": "Revoke the admin role",
+      "confirm": "{phone} will lose access to the admin panel. Continue?",
+      "submit": "Revoke admin"
+    },
+    "messages": {
+      "suspended": "The account was suspended.",
+      "lifted": "The suspension was lifted.",
+      "banned": "The account was banned permanently.",
+      "granted": "The admin role was granted.",
+      "revoked": "The admin role was revoked."
+    },
+    "detail": {
+      "title": "User details",
+      "userId": "User ID"
+    },
+    "player": {
+      "title": "Player profile",
+      "noProfile": "This user has not created a profile yet",
+      "noPhoto": "No photo",
+      "photoAlt": "{name}'s profile photo",
+      "fields": {
+        "name": "Display name",
+        "gender": "Gender",
+        "birthDate": "Birth date",
+        "ageRange": "Age range",
+        "city": "City",
+        "bio": "Bio",
+        "visibility": "Profile visibility",
+        "status": "Profile status",
+        "sports": "Sports",
+        "homeVenues": "Home clubs"
+      },
+      "ageRangeBetween": "{from} to {to} years",
+      "ageRangeFrom": "{from} years and over",
+      "noSports": "No sports yet.",
+      "noVenues": "No home clubs chosen.",
+      "level": "Level",
+      "experience": "Experience",
+      "formats": "Format",
+      "goals": "Goals",
+      "gender": {
+        "Male": "Male",
+        "Female": "Female"
+      },
+      "visibility": {
+        "Everyone": "Everyone",
+        "SameGender": "Same gender only"
+      },
+      "status": {
+        "Active": "Active",
+        "Hidden": "Hidden",
+        "Deleted": "Deleted"
+      },
+      "experienceBands": {
+        "UnderSixMonths": "Under six months",
+        "SixToTwelveMonths": "Six to twelve months",
+        "OneToThreeYears": "One to three years",
+        "ThreeToFiveYears": "Three to five years",
+        "OverFiveYears": "Over five years"
+      },
+      "goalNames": {
+        "RallyPractice": "Rally practice",
+        "FriendlyMatch": "Friendly match",
+        "Competitive": "Competitive",
+        "Fitness": "Fitness"
+      },
+      "actions": {
+        "correctGender": "Correct gender",
+        "removePhoto": "Remove photo"
+      },
+      "correctGender": {
+        "title": "Correct the gender of {name}",
+        "current": "Current gender: {gender}",
+        "newGender": "New gender",
+        "newGenderRequired": "Choose the new gender.",
+        "warning": "The player is notified of this correction, and the reason is recorded in the account history.",
+        "submit": "Correct gender"
+      },
+      "removePhoto": {
+        "title": "Remove the profile photo of {name}",
+        "description": "The player's profile photo is removed, and the reason is recorded in the account history.",
+        "submit": "Remove photo"
+      },
+      "messages": {
+        "genderCorrected": "The player's gender was corrected.",
+        "photoRemoved": "The profile photo was removed."
+      }
+    }
+  },
+  "catalog": {
+    "noValue": "—",
+    "cancel": "Cancel",
+    "save": "Save",
+    "formats": {
+      "Singles": "Singles",
+      "Doubles": "Doubles"
+    },
+    "tiers": {
+      "Beginner": "Beginner",
+      "LowerIntermediate": "Lower intermediate",
+      "Intermediate": "Intermediate",
+      "Advanced": "Advanced",
+      "Professional": "Professional"
+    },
+    "surfaces": {
+      "Hard": "Hard",
+      "Clay": "Clay",
+      "Grass": "Grass",
+      "ArtificialGrass": "Artificial grass",
+      "Carpet": "Carpet",
+      "Wood": "Wood",
+      "Synthetic": "Synthetic",
+      "Glass": "Glass"
+    },
+    "settings": {
+      "Indoor": "Indoor",
+      "Outdoor": "Outdoor",
+      "Both": "Indoor and outdoor"
+    },
+    "location": {
+      "province": "Province",
+      "city": "City",
+      "allProvinces": "All provinces",
+      "allCities": "All cities",
+      "chooseProvince": "Choose a province",
+      "chooseCity": "Choose a city",
+      "loadFailed": "The province and city lists could not be loaded."
+    },
+    "sportsEditor": {
+      "courtCount": "Courts",
+      "unknown": "Unknown",
+      "setting": "Setting",
+      "surface": "Surface",
+      "lighting": "Lighting",
+      "inactive": "Inactive",
+      "empty": "No sports are defined yet.",
+      "required": "Choose at least one sport.",
+      "laterHint": "Court details (count, setting, surface and lighting) can be filled in later from the Venues screen. Choosing the sports is enough for now."
+    }
+  },
+  "sports": {
+    "total": "{total} sports",
+    "add": "New sport",
+    "empty": "No sports are defined.",
+    "minutes": "{count} min",
+    "playersPerSideShort": "{count} per side",
+    "columns": {
+      "name": "Name",
+      "code": "Code",
+      "status": "Status",
+      "formats": "Formats",
+      "session": "Default session",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "actions": {
+      "edit": "Edit",
+      "activate": "Activate",
+      "deactivate": "Deactivate"
+    },
+    "form": {
+      "createTitle": "New sport",
+      "editTitle": "Edit {name}",
+      "code": "Code",
+      "codeHelp": "Lowercase letters, digits and hyphens; it cannot change later.",
+      "codeInvalid": "The code may contain only lowercase letters, digits and hyphens.",
+      "nameFa": "Persian name",
+      "nameEn": "English name",
+      "nameRequired": "Enter the name.",
+      "sortOrder": "Sort order",
+      "session": "Default session (minutes)",
+      "sessionInvalid": "The session must be 30 to 240 minutes, in steps of 15.",
+      "formats": "Formats",
+      "playersPerSide": "Players per side",
+      "formatsRequired": "Choose at least one format.",
+      "surfaces": "Court surfaces",
+      "surfacesPlaceholder": "Surfaces this sport is played on",
+      "levels": "Level descriptions",
+      "levelsHelp": "All five levels are required; players read them when choosing their level.",
+      "levelRequired": "Describe this level.",
+      "submitCreate": "Add sport",
+      "submitEdit": "Save changes"
+    },
+    "activate": {
+      "title": "Activate {name}",
+      "confirm": "Players will see this sport in the app again. Continue?",
+      "submit": "Activate"
+    },
+    "deactivate": {
+      "title": "Deactivate {name}",
+      "confirm": "This sport will no longer be offered in the app. Past data is kept. Continue?",
+      "submit": "Deactivate"
+    },
+    "messages": {
+      "created": "Sport added.",
+      "updated": "Sport saved.",
+      "activated": "Sport activated.",
+      "deactivated": "Sport deactivated."
+    }
+  },
+  "venues": {
+    "total": "{total} venues",
+    "add": "New venue",
+    "empty": "No venues found.",
+    "searchPlaceholder": "Search venue name",
+    "statusPlaceholder": "All statuses",
+    "google": "Google",
+    "googleTitle": "Imported from Google search",
+    "courts": "{count} courts",
+    "columns": {
+      "name": "Name",
+      "city": "City",
+      "sports": "Sports",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "Active": "Active",
+      "Hidden": "Hidden"
+    },
+    "actions": {
+      "edit": "Edit",
+      "profile": "Profile & photos",
+      "hide": "Hide",
+      "unhide": "Unhide"
+    },
+    "form": {
+      "createTitle": "New venue",
+      "editTitle": "Edit {name}",
+      "cityFixed": "A venue's city cannot change once it is saved.",
+      "cityRequired": "Choose the city.",
+      "name": "Venue name",
+      "nameRequired": "Enter the venue name.",
+      "address": "Address",
+      "phone": "Phone",
+      "coordinates": "Coordinates (optional)",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "coordinatesHelp": "Enter both or neither.",
+      "coordinatesIncomplete": "Enter latitude and longitude together.",
+      "sports": "Sports and courts",
+      "similarTitle": "Venues with a similar name in this city:",
+      "similarHint": "If it is the same venue, edit that one instead of adding it again.",
+      "conflictTitle": "A venue with a similar name already exists in this city",
+      "saveAnyway": "It's a different venue, save anyway",
+      "submitCreate": "Add venue",
+      "submitEdit": "Save changes"
+    },
+    "profile": {
+      "title": "{name} profile",
+      "photos": "Photos",
+      "photosHelp": "The first photo is the club's cover. Up to {max} photos (JPEG, PNG or WebP, 10 MB each).",
+      "cover": "Cover",
+      "addPhoto": "Add photo",
+      "removePhoto": "Remove",
+      "tagline": "Tagline",
+      "description": "Description",
+      "workingHours": "Working hours",
+      "website": "Website",
+      "instagram": "Instagram",
+      "telegram": "Telegram",
+      "linkHelp": "Links must start with http:// or https://.",
+      "amenities": "Amenities",
+      "courtTypes": "Court types",
+      "tagsHelp": "Press Enter after each item.",
+      "source": "Source:",
+      "saved": "Club profile saved.",
+      "googleRating": "Google rating: {rating} of 5 ({count} reviews)"
+    },
+    "hide": {
+      "title": "Hide {name}",
+      "confirm": "This venue will no longer appear in the app or be offered for games. Continue?",
+      "submit": "Hide"
+    },
+    "unhide": {
+      "title": "Unhide {name}",
+      "confirm": "This venue will appear in the app again. Continue?",
+      "submit": "Unhide"
+    },
+    "messages": {
+      "created": "Venue added.",
+      "updated": "Venue saved.",
+      "hidden": "Venue hidden.",
+      "unhidden": "Venue visible again."
+    }
+  },
+  "candidates": {
+    "total": "{total} items",
+    "empty": "The queue is empty.",
+    "keywordPlaceholder": "Search keyword",
+    "statusPlaceholder": "All statuses",
+    "bulkApprove": "Approve selected ({count})",
+    "columns": {
+      "name": "Name",
+      "address": "Address",
+      "keyword": "Keyword",
+      "importedAt": "Imported",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "Pending": "Pending",
+      "Approved": "Approved",
+      "Merged": "Merged",
+      "Rejected": "Rejected"
+    },
+    "actions": {
+      "approve": "Approve",
+      "merge": "Merge",
+      "reject": "Reject"
+    },
+    "approve": {
+      "title": "Approve {name}",
+      "description": "This candidate becomes a new venue. Review the details from Google.",
+      "submit": "Approve and add venue"
+    },
+    "merge": {
+      "title": "Merge {name}",
+      "description": "This candidate is a venue already in the catalog; choose it.",
+      "venue": "Existing venue in the same city",
+      "venuePlaceholder": "Choose a venue",
+      "venueRequired": "Choose a venue.",
+      "noVenues": "There are no venues in this city.",
+      "submit": "Merge"
+    },
+    "reject": {
+      "title": "Reject {name}",
+      "reason": "Reason",
+      "reasonPlaceholder": "For example: a gym with no racket courts.",
+      "reasonRequired": "Enter the reason.",
+      "submit": "Reject"
+    },
+    "bulk": {
+      "title": "Approve selected",
+      "description": "Each of the {count} selected candidates becomes a new venue under its Google name and address, with the sports below.",
+      "submit": "Approve all"
+    },
+    "messages": {
+      "approved": "Venue added.",
+      "merged": "Candidate merged into the existing venue.",
+      "rejected": "Candidate rejected.",
+      "bulkApproved": "{count} venues added."
+    }
+  },
+  "safety": {
+    "reasons": {
+      "Harassment": "Harassment",
+      "InappropriateContent": "Inappropriate content",
+      "FakeProfile": "Fake profile",
+      "Spam": "Spam or advertising",
+      "UnsafeBehaviour": "Unsafe behaviour",
+      "Underage": "Underage user",
+      "Other": "Other"
+    },
+    "targetTypes": {
+      "Player": "Profile",
+      "Message": "Message",
+      "Post": "Play post",
+      "Photo": "Profile photo"
+    },
+    "reportStatus": {
+      "Open": "Open",
+      "Resolved": "Resolved",
+      "Dismissed": "Dismissed"
+    },
+    "reliability": {
+      "Unknown": "Unknown",
+      "New": "New",
+      "Low": "Low",
+      "Good": "Good",
+      "High": "High"
+    },
+    "answers": {
+      "Played": "Played",
+      "DidNotHappen": "Did not happen"
+    },
+    "outcomes": {
+      "Played": "Played",
+      "NoShow": "No-show",
+      "Contested": "Contested"
+    },
+    "matchStatus": {
+      "Open": "Open",
+      "Pending": "Pending",
+      "Confirmed": "Confirmed",
+      "Completed": "Completed",
+      "Disputed": "Disputed",
+      "Unconfirmed": "Unconfirmed",
+      "Cancelled": "Cancelled",
+      "Expired": "Expired"
+    },
+    "noValue": "—",
+    "cancel": "Cancel",
+    "refresh": "Reload",
+    "reason": {
+      "label": "Reason",
+      "placeholder": "Why? It is recorded in the admin audit log."
+    }
+  },
+  "reports": {
+    "total": "{total} reported players",
+    "empty": "No open reports.",
+    "columns": {
+      "target": "Player",
+      "priority": "Priority",
+      "openReports": "Open reports",
+      "reporters": "Reporters",
+      "oldest": "Oldest report",
+      "actions": "Actions"
+    },
+    "priority": {
+      "high": "High priority",
+      "normal": "Normal"
+    },
+    "age": {
+      "days": "{count} days ago",
+      "hours": "{count} hours ago",
+      "justNow": "Less than an hour ago"
+    },
+    "openDetail": "Review and act",
+    "report": {
+      "reporter": "Reporter",
+      "reason": "Reason",
+      "details": "Reporter’s details",
+      "date": "Reported at",
+      "target": "Reported item",
+      "targetId": "Item id",
+      "status": "Status",
+      "evidence": "Evidence (as the reporter saw it)",
+      "noDetails": "No details given."
+    },
+    "evidence": {
+      "text": "Text",
+      "displayName": "Display name",
+      "bio": "Bio",
+      "photo": "Photo",
+      "sentAt": "Sent at",
+      "photoAlt": "Reported photo of {name}",
+      "empty": "No evidence was kept."
+    },
+    "dismiss": {
+      "action": "Dismiss",
+      "title": "Dismiss the report by {reporter}",
+      "description": "The report is closed without an action. The reason is recorded in the audit log.",
+      "submit": "Dismiss",
+      "success": "Report dismissed."
+    }
+  },
+  "reportTarget": {
+    "back": "Back to the report queue",
+    "title": "{name}’s file",
+    "userId": "User id",
+    "account": "Account status",
+    "suspendedUntil": "Suspended until",
+    "reliability": "Reliability",
+    "accountUnknown": "Could not be read",
+    "actionsTitle": "Act",
+    "noActionsAvailable": "No action is available for this account.",
+    "sections": {
+      "reports": "Reports",
+      "history": "Earlier actions",
+      "disputes": "Disputes in the last 90 days",
+      "notes": "Private rating notes"
+    },
+    "noReports": "No reports.",
+    "noHistory": "No actions yet.",
+    "noNotes": "No private notes.",
+    "disputeCount": "{count} disputed matches",
+    "historyColumns": {
+      "at": "At",
+      "action": "Action",
+      "reason": "Reason",
+      "subject": "Subject",
+      "report": "Report",
+      "admin": "Admin"
+    },
+    "noteColumns": {
+      "rater": "Rater",
+      "stars": "Stars",
+      "note": "Note",
+      "match": "Match",
+      "at": "At"
+    },
+    "actOnReport": "Act on this report",
+    "notFound": "This player has no profile or was not found."
+  },
+  "moderation": {
+    "actions": {
+      "Warn": "Warn",
+      "RemovePhoto": "Remove photo",
+      "HidePost": "Hide post",
+      "DeleteMessage": "Delete message",
+      "Suspend": "Suspend",
+      "LiftSuspension": "Lift suspension",
+      "Ban": "Ban permanently",
+      "CorrectGender": "Correct gender"
+    },
+    "title": "{action}: {name}",
+    "descriptions": {
+      "Warn": "The player receives the warning text.",
+      "RemovePhoto": "The profile photo is removed and the player is told.",
+      "HidePost": "The post leaves search and its share link stops working; accepted participants keep the match.",
+      "DeleteMessage": "The message is deleted for everyone.",
+      "Suspend": "The account stays suspended to the end of the chosen day, Tehran time; the player sees the reason and end date.",
+      "LiftSuspension": "The account is active again at once.",
+      "CorrectGender": "The player is told about the correction."
+    },
+    "fields": {
+      "report": "Related report",
+      "reportNone": "No report",
+      "warningText": "Warning text",
+      "warningPlaceholder": "What the player will read",
+      "matchId": "Match (post) id",
+      "messageId": "Message id",
+      "fromReports": "From reports:",
+      "until": "Last day of the suspension",
+      "preset": "{count} days",
+      "gender": "Correct gender"
+    },
+    "untilPreview": "Suspended to the end of {date}, Tehran time.",
+    "ban": {
+      "warningTitle": "This is permanent and cannot be undone.",
+      "warning": "A banned account leaves Rallyto for good and the same number cannot register again. If a temporary restriction is enough, suspend instead.",
+      "acknowledge": "I understand a ban is permanent.",
+      "confirmName": "To confirm, type the player’s display name: {name}"
+    },
+    "errors": {
+      "reasonRequired": "Enter a reason.",
+      "warningTextRequired": "Write the warning text.",
+      "matchIdInvalid": "Not a valid match id.",
+      "messageIdInvalid": "Not a valid message id.",
+      "untilInvalid": "Choose a complete day.",
+      "untilPast": "The last day cannot be before today.",
+      "genderRequired": "Choose a gender.",
+      "banUnconfirmed": "Confirm the ban and type the player’s name exactly."
+    },
+    "submit": "Apply",
+    "success": "Action recorded."
+  },
+  "jalaliDate": {
+    "year": "Year",
+    "month": "Month",
+    "day": "Day"
+  },
+  "audit": {
+    "total": "{total} entries",
+    "empty": "No entries found.",
+    "filters": {
+      "adminId": "Admin id",
+      "targetUserId": "Target user id",
+      "action": "Action",
+      "actionPlaceholder": "All actions (or type an action name)",
+      "from": "From",
+      "to": "To",
+      "apply": "Apply",
+      "reset": "Clear",
+      "last7Days": "Last 7 days"
+    },
+    "errors": {
+      "invalidId": "Not a valid id.",
+      "invalidDate": "Incomplete or invalid date.",
+      "range": "The end is before the start."
+    },
+    "columns": {
+      "at": "At",
+      "action": "Action",
+      "admin": "Admin",
+      "target": "Target",
+      "reason": "Reason"
+    },
+    "actionNames": {
+      "moderation_warn": "Warn player",
+      "moderation_hide_post": "Hide play post",
+      "moderation_delete_message": "Delete message",
+      "report_dismiss": "Dismiss report",
+      "rating_remove": "Remove rating",
+      "player_correct_gender": "Correct gender",
+      "player_remove_photo": "Remove profile photo",
+      "account_suspend": "Suspend account",
+      "account_lift_suspension": "Lift suspension",
+      "account_ban": "Ban account",
+      "account_grant_admin": "Grant admin role",
+      "account_revoke_admin": "Revoke admin role",
+      "sport_create": "Create sport",
+      "sport_update": "Update sport",
+      "sport_activate": "Activate sport",
+      "sport_deactivate": "Deactivate sport",
+      "venue_create": "Create venue",
+      "venue_update": "Update venue",
+      "venue_hide": "Hide venue",
+      "venue_unhide": "Unhide venue",
+      "venue_candidate_approve": "Approve venue candidate",
+      "venue_candidate_merge": "Merge venue candidate",
+      "venue_candidate_reject": "Reject venue candidate",
+      "venue_candidates_import": "Import venue candidates",
+      "venue_candidates_bulk_approve": "Bulk-approve venue candidates"
+    },
+    "targetTypes": {
+      "Player": "Player",
+      "Match": "Match",
+      "Message": "Message",
+      "Report": "Report",
+      "Rating": "Rating",
+      "Account": "Account",
+      "Sport": "Sport",
+      "Venue": "Venue",
+      "VenueCandidate": "Venue candidate"
+    },
+    "openTarget": "File"
+  },
+  "disputes": {
+    "total": "{total} matches",
+    "empty": "No disputed matches.",
+    "description": "Disputed matches and matches with a contested no-show, newest first.",
+    "columns": {
+      "date": "Match day",
+      "sport": "Sport",
+      "status": "Status",
+      "players": "Players, answers and outcomes",
+      "resolvedAt": "Closed at",
+      "matchId": "Match id"
+    },
+    "noAnswer": "No answer",
+    "noOutcome": "No outcome",
+    "openPlayer": "Player file"
+  },
+  "ratings": {
+    "profileTab": "Account and profile",
+    "tab": "Ratings",
+    "empty": "This player has received no ratings.",
+    "summary": "{total} ratings, {removed} removed",
+    "stars": "{count} of 5",
+    "starsLabel": "{count} stars",
+    "fields": {
+      "rater": "Rater",
+      "match": "Match",
+      "tags": "Tags",
+      "levelAccuracy": "Level",
+      "privateNote": "Private note",
+      "submittedAt": "Submitted at",
+      "removedAt": "Removed at",
+      "removalReason": "Removal reason"
+    },
+    "noNote": "No note.",
+    "noTags": "No tags",
+    "revealed": "Revealed",
+    "hidden": "Hidden (double-blind)",
+    "removed": "Removed",
+    "remove": "Remove rating",
+    "tags": {
+      "OnTime": "On time",
+      "Friendly": "Friendly",
+      "FairCalls": "Fair calls",
+      "GoodRally": "Good rallies",
+      "Sportsmanship": "Sportsmanship",
+      "WellOrganised": "Well organised"
+    },
+    "levels": {
+      "Lower": "Lower than declared",
+      "AboutRight": "About as declared",
+      "Higher": "Higher than declared"
+    },
+    "removeModal": {
+      "title": "Remove the rating by {rater}",
+      "description": "The rating stops counting in the averages and reliability. The reason is recorded in the audit log.",
+      "submit": "Remove rating",
+      "success": "Rating removed."
+    }
+  },
+  "dashboard": {
+    "period": "{from} to {to}",
+    "from": "From",
+    "to": "To",
+    "apply": "Show",
+    "lastDays": "Last {count} days",
+    "groups": {
+      "players": "Players",
+      "matches": "Posts and matches",
+      "safety": "Reports"
+    },
+    "metrics": {
+      "signUps": "Sign-ups",
+      "activePlayers": "Active players",
+      "posts": "Play posts",
+      "invitations": "Private invitations",
+      "confirmedMatches": "Confirmed matches",
+      "completedMatches": "Completed matches",
+      "resolvedMatches": "Resolved matches",
+      "completionRate": "Completion rate",
+      "reports": "Reports",
+      "openReports": "Open reports"
+    },
+    "hints": {
+      "signUps": "Profiles created in the period",
+      "activePlayers": "Players active in the period",
+      "posts": "Public posts created in the period",
+      "invitations": "Private invitations created in the period",
+      "confirmedMatches": "Confirmed matches starting in the period",
+      "completedMatches": "Matches resolved as completed in the period",
+      "resolvedMatches": "Completed, disputed or unconfirmed",
+      "completionRate": "Completed ÷ resolved matches",
+      "reports": "Reports filed in the period",
+      "openReports": "Every report open right now"
+    },
+    "errors": {
+      "invalidDate": "Incomplete or invalid date.",
+      "range": "The end is before the start."
+    }
+  }
+}

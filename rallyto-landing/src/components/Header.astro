@@ -1,0 +1,104 @@
+---
+import BrandMark from './BrandMark.astro'
+
+/** On every page the header sits on the deep-green band the page opens with. */
+const NAV = [
+  { href: '/#how', label: 'چطور کار می‌کند' },
+  { href: '/#sports', label: 'ورزش‌ها' },
+  { href: '/#safety', label: 'امنیت' },
+  { href: '/#faq', label: 'سؤال‌ها' },
+]
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html'
+---
+
+<header class="site-header on-dark">
+  <div class="container site-header__bar">
+    <a class="brand" href="/" aria-label="رالیتو، صفحه اصلی">
+      <BrandMark size={38} tile spin={isHome} />
+      <span class="brand__name" aria-hidden="true">رالیتو</span>
+    </a>
+    <nav class="site-nav" aria-label="بخش‌های سایت">
+      <ul>
+        {
+          NAV.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a class="btn btn--ball site-header__cta" href="/#download">دریافت اپ</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 5;
+  }
+
+  .site-header__bar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    min-height: 76px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--c-surface);
+    text-decoration: none;
+  }
+
+  .brand__name {
+    font: 900 1.6rem / 1 var(--font-display);
+    padding-block-start: 4px;
+  }
+
+  .site-nav {
+    display: none;
+    margin-inline-start: auto;
+  }
+
+  .site-nav ul {
+    display: flex;
+    gap: 6px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-nav a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--c-mint);
+    font-size: var(--step--1);
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 999px;
+  }
+
+  .site-nav a:hover {
+    color: var(--c-surface);
+    background: rgb(255 255 255 / 8%);
+  }
+
+  .site-header__cta {
+    margin-inline-start: auto;
+    min-height: 44px;
+    padding-inline: 18px;
+    font-size: var(--step--1);
+  }
+
+  @media (min-width: 900px) {
+    .site-nav {
+      display: block;
+    }
+
+    .site-header__cta {
+      margin-inline-start: 8px;
+    }
+  }
+</style>

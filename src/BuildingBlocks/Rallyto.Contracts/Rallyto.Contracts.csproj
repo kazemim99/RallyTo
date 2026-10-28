@@ -1,0 +1,6 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Integration events exchanged between bounded contexts (design D3). Contexts may reference this project, never each other. -->
+  <ItemGroup>
+    <ProjectReference Include="..\Rallyto.Core.Application\Rallyto.Core.Application.csproj" />
+  </ItemGroup>
+</Project>

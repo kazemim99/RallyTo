@@ -1,0 +1,37 @@
+{
+  "name": "rallyto-landing",
+  "private": true,
+  "type": "module",
+  "description": "Public landing site for rallyto.ir: the brand, the four sports, download links and policies",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "fonts": "node scripts/subset-font.mjs",
+    "build": "node scripts/subset-font.mjs && astro build && node scripts/precompress.mjs",
+    "build:test": "node scripts/subset-font.mjs && cross-env LANDING_BUILD=test astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "og": "node scripts/render-og.mjs",
+    "test:unit": "vitest run tests/unit",
+    "test:built": "vitest run tests/built",
+    "lhci": "lhci autorun"
+  },
+  "dependencies": {
+    "astro": "7.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@fontsource/estedad": "5.3.0",
+    "@fontsource/lalezar": "5.3.0",
+    "@fontsource/vazirmatn": "5.3.0",
+    "@lhci/cli": "0.15.1",
+    "cross-env": "10.1.0",
+    "node-html-parser": "9.0.4",
+    "playwright-core": "1.63.0",
+    "subset-font": "2.9.0",
+    "typescript": "6.0.3",
+    "vitest": "5.0.2"
+  }
+}

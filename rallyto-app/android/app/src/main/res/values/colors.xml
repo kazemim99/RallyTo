@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The launch screen behind the mark: the app's canvas (AppColors.canvas), so the first Flutter frame (the
+         LaunchSplash) takes over without a seam. -->
+    <color name="splash_background">#F5F8F7</color>
+    <!-- The accent of the pushes the system shows itself: court green (AppColors.primary). -->
+    <color name="notification">#146B52</color>
+</resources>

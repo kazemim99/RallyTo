@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Rallyto.Community.Application\Rallyto.Community.Application.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Rallyto.Infrastructure.Core\Rallyto.Infrastructure.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" />
+    <!-- Linux native library for containers and CI; Windows natives come with SkiaSharp itself. -->
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Condition="'$(OS)' != 'Windows_NT'" />
+  </ItemGroup>
+</Project>

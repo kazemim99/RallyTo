@@ -1,0 +1,58 @@
+schema: spec-driven
+
+context: |
+  ## Product
+  Rallyto (رالیتو) helps racket-sport players in Iran find playing partners. Despite the name it is
+  multi-sport: tennis, padel, badminton and squash at launch, with the sport catalog extensible by admins.
+  Players describe themselves per sport (self-declared level and playing experience), publish when and
+  at which club they can play, search for partners, invite each other, chat, and rate each other after a
+  match. A player's personal location is never collected or shown: matching is by city + venue (club) +
+  time window, e.g. "Esteghlal Tennis Club, Tehran, Saturdays 18:00-24:00".
+
+  ## Audience and locale
+  - Iranian users; Persian UI, RTL layout, Persian digits, Jalali (Shamsi) calendar in every date picker
+    and display. All instants are stored as UTC; the display timezone is Asia/Tehran.
+  - Phone numbers are Iranian mobiles (09xxxxxxxxx, normalised to E.164 +989xxxxxxxxx).
+  - Distribution is Android-first through Cafe Bazaar, Myket and a direct APK. Push uses Firebase Cloud
+    Messaging (works in production for AsanRezerve); the in-app notification center is the source of truth.
+  - Product decisions (2026-10-23): 18+ only; first contact in chat is a message request; optional
+    same-gender visibility; no public written reviews (stars + tags only); free MVP; nationwide launch with
+    a venue catalog for all of Iran entered only by the Rallyto team (Google Places import + admin approval
+    + manual entry; no player or club input, no club accounts); roles are Player
+    and Admin only (the admin reviews reports); MediatR pinned to 12.5.0 (last Apache-2.0 release).
+
+  ## Stack (mirrors AsanRezerve, c:\Repos\Booking, except the .NET version)
+  - Backend: C# on .NET 10 (LTS; .NET 9 reaches end of support 2026-11-10), ASP.NET Core, one host
+    process composing bounded contexts in-process (modular monolith). Each context is Domain /
+    Application / Infrastructure / Api projects. MediatR CQRS, FluentValidation, built-in DI + Scrutor.
+  - Persistence: PostgreSQL via EF Core + Npgsql, one database with one schema per bounded context;
+    timestamps are `timestamp with time zone` (UTC). Migrations are idempotent.
+  - Integration events: DotNetCore.CAP with the PostgreSQL outbox and the in-memory transport. No broker.
+  - Real time: SignalR (chat and notifications). Cache/rate limiting/OTP state: Redis (HybridCache).
+  - Auth: phone OTP (SMS through MeliPayamak, as in AsanRezerve) + JWT access/refresh tokens, policy-based
+    authorization.
+  - Observability: Microsoft.Extensions.Logging with Serilog as a provider, Seq, sensitive-data masking.
+  - API: `api/v{version}/...`, Asp.Versioning, Swagger, health probes `/health`, `/health/ready`, `/health/live`.
+  - Clients: Flutter player app (flutter_bloc, dio, go_router, get_it, shamsi_date, pinput); Vue 3 +
+    ant-design-vue admin panel (Pinia, vue-i18n, Vite, TypeScript).
+  - Infra: Docker Compose (postgres, redis, seq, api, admin), GitHub Actions CI.
+  - Tests: xUnit, FluentAssertions, NSubstitute, Testcontainers.PostgreSql for integration tests;
+    Flutter widget/bloc tests; Vitest for the admin panel.
+
+  ## Conventions
+  - Business logic lives in the Domain layer; writes go through MediatR command handlers; controllers stay thin.
+  - Test-first for business behavior: acceptance scenarios first, integration tests for workflows, state
+    transitions, persistence and API contracts; unit tests for pure rules (overlap, ranking, scoring).
+  - Privacy by default: phone numbers are never exposed to other players; age is shown as a range;
+    no player geolocation is stored.
+  - OpenSpec artifacts are written in English; user-facing strings are Persian and live in localisation files.
+
+rules:
+  specs:
+    - Every requirement states sport-specific behavior explicitly when it differs between tennis, padel and badminton.
+    - Include privacy and abuse scenarios (blocked users, banned users, gender visibility) wherever a requirement exposes one player to another.
+  design:
+    - Name the bounded context, aggregate and schema that owns each piece of data.
+    - Record every deviation from the AsanRezerve stack and why.
+  tasks:
+    - Order tasks as vertical slices that each end in a runnable, tested increment.

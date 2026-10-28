@@ -1,0 +1,218 @@
+---
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+import DownloadBlock from '../components/DownloadBlock.astro'
+import Faq from '../components/Faq.astro'
+import MiniCourt from '../components/MiniCourt.astro'
+import SportTiles from '../components/SportTiles.astro'
+import Steps from '../components/home/Steps.astro'
+import { SPORTS, type Sport } from '../data/sports'
+import { sportPage } from '../data/pages'
+import Base from '../layouts/Base.astro'
+
+export function getStaticPaths() {
+  return SPORTS.map((sport) => ({ params: { sport: sport.slug }, props: { sport } }))
+}
+
+interface Props {
+  sport: Sport
+}
+const { sport } = Astro.props
+const meta = sportPage(sport)
+---
+
+<Base meta={meta}>
+  <section class="sport-hero on-dark" aria-labelledby="sport-title">
+    <div class="container sport-hero__grid">
+      <div>
+        <Breadcrumbs crumbs={meta.crumbs!} />
+        <h1 id="sport-title">{sport.h1}</h1>
+        <p class="sport-hero__lead">{sport.lead}</p>
+        <div class="sport-hero__actions">
+          <a class="btn btn--ball" href="#download">دریافت اپ</a>
+          <a class="btn btn--outline-light" href="#levels">سطح‌بندی {sport.name}</a>
+        </div>
+      </div>
+      <div class="sport-hero__court">
+        <MiniCourt sport={sport.slug} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="about-title">
+    <div class="container about">
+      <div class="about__text">
+        <h2 id="about-title">پیدا کردن هم‌بازی {sport.name}، بدون دردسر</h2>
+        {sport.intro.map((p) => <p>{p}</p>)}
+      </div>
+      <aside class="facts" aria-label={`${sport.name} در رالیتو`}>
+        <h3>{sport.name} در رالیتو</h3>
+        <dl>
+          <dt>نوع بازی</dt>
+          <dd>{sport.formats.join('، ')}</dd>
+          <dt>تعداد بازیکن</dt>
+          <dd>{sport.playersNote}</dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section levels-section" id="levels" aria-labelledby="levels-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="levels-title">سطح‌بندی {sport.name} در رالیتو</h2>
+        <p>سطحت را خودت از این فهرست انتخاب می‌کنی و رالیتو بازیکن‌های هم‌سطحت را نشانت می‌دهد.</p>
+      </div>
+      <ol class="levels">
+        {
+          sport.levels.map((level, i) => (
+            <li>
+              <span class="levels__n">{(i + 1).toLocaleString('fa-IR')}</span>
+              <div>
+                <h3>{level.name}</h3>
+                <p>{level.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <Steps />
+  <Faq items={sport.faq} heading={`سؤال‌های پرتکرار درباره‌ی هم‌بازی ${sport.name}`} />
+  <SportTiles except={sport.slug} heading="ورزش‌های دیگر در رالیتو" lead="برای هر ورزشی که بازی می‌کنی، سطحت را جدا اعلام کن." />
+  <DownloadBlock />
+</Base>
+
+<style>
+  .sport-hero {
+    padding-block: 8px clamp(56px, 7vw, 88px);
+    background:
+      radial-gradient(800px 480px at 10% 20%, rgb(29 122 92 / 55%), transparent 70%),
+      var(--c-deep);
+  }
+
+  .sport-hero__grid {
+    display: grid;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .sport-hero h1 {
+    font-size: var(--step-4);
+    margin-block-start: 14px;
+  }
+
+  .sport-hero__lead {
+    max-width: 38rem;
+    margin-block: 18px 28px;
+    color: var(--c-mint);
+    font-size: var(--step-1);
+  }
+
+  .sport-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .sport-hero__court {
+    justify-self: center;
+    width: min(70%, 260px);
+    transform: rotate(-8deg);
+    filter: drop-shadow(0 24px 30px rgb(0 0 0 / 35%));
+  }
+
+  .about {
+    display: grid;
+    gap: 40px;
+  }
+
+  .about__text {
+    display: grid;
+    gap: 16px;
+    max-width: var(--measure);
+  }
+
+  .about__text p {
+    color: var(--c-muted);
+  }
+
+  .facts {
+    align-self: start;
+    padding: 24px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-l);
+  }
+
+  .facts dl {
+    display: grid;
+    gap: 4px;
+    margin: 12px 0 0;
+  }
+
+  .facts dt {
+    color: var(--c-muted);
+    font-size: var(--step--1);
+  }
+
+  .facts dd {
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+
+  .levels-section {
+    background: var(--c-surface);
+    border-block: 1px solid var(--c-line);
+  }
+
+  .levels {
+    display: grid;
+    gap: 14px;
+    padding: 0;
+    list-style: none;
+    counter-reset: none;
+  }
+
+  .levels li {
+    display: flex;
+    gap: 16px;
+    padding: 18px 20px;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-m);
+    background: var(--c-canvas);
+  }
+
+  .levels__n {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--c-court);
+    color: var(--c-surface);
+    font: 900 1.1rem / 1 var(--font-display);
+    padding-block-start: 2px;
+  }
+
+  .levels p {
+    color: var(--c-muted);
+  }
+
+  @media (min-width: 900px) {
+    .sport-hero__grid {
+      grid-template-columns: 1.6fr 1fr;
+    }
+
+    .about {
+      grid-template-columns: 2fr 1fr;
+      gap: 64px;
+    }
+
+    .levels {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

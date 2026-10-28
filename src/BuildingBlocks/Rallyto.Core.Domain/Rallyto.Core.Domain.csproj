@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Domain base types, adapted from AsanRezerve.Core.Domain (see docs/BUILDING_BLOCKS_ORIGIN.md). No package references. -->
+</Project>

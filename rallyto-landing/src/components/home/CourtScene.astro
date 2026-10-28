@@ -1,0 +1,544 @@
+---
+/**
+ * The hero's court: one top-down court, redrawn for the sport the visitor picks, with players in the brand's two
+ * colours (white and ball yellow, as in the logo), the ball rallying between them, and a dashed place still open —
+ * the one Rallyto fills. Below it, the open game that place belongs to, as the app shows it.
+ *
+ * No JavaScript: the sport picker is a radio group, and `:has()` restyles the scene for the checked sport. The courts
+ * keep real proportions (tennis 10.97×23.77 m, padel 10×20, badminton 6.1×13.4, squash 6.4×9.75), each fitted to the
+ * same 360×520 box. The rally runs three times and rests; it does not run at all for reduced motion.
+ */
+import { SPORTS } from '../../data/sports'
+import Icon from '../Icon.astro'
+
+const level = (slug: string, index: number) => {
+  const levels = SPORTS.find((s) => s.slug === slug)?.levels ?? []
+  return levels[Math.min(index, levels.length - 1)]?.name ?? ''
+}
+
+const GAMES = [
+  { slug: 'tennis', name: 'تنیس', title: 'تنیس دونفره', open: 'یک جای خالی', when: 'پنجشنبه، ۱۸:۰۰ تا ۲۰:۰۰', where: 'غرب تهران', level: level('tennis', 2), filled: 3, of: 4 },
+  { slug: 'padel', name: 'پدل', title: 'پدل دونفره', open: 'یک جای خالی', when: 'جمعه، ۱۰:۰۰ تا ۱۱:۳۰', where: 'شمال تهران', level: level('padel', 1), filled: 3, of: 4 },
+  { slug: 'badminton', name: 'بدمینتون', title: 'بدمینتون دونفره', open: 'یک جای خالی', when: 'سه‌شنبه، ۲۰:۰۰ تا ۲۱:۳۰', where: 'شرق تهران', level: level('badminton', 2), filled: 3, of: 4 },
+  { slug: 'squash', name: 'اسکواش', title: 'اسکواش انفرادی', open: 'دنبال یک هم‌بازی', when: 'شنبه، ۷:۰۰ تا ۸:۰۰', where: 'مرکز تهران', level: level('squash', 1), filled: 1, of: 2 },
+]
+const INITIALS = ['س', 'م', 'ن']
+const faDigits = (n: number) => n.toLocaleString('fa-IR')
+---
+
+<div class="scene">
+  <fieldset class="picker">
+    <legend class="visually-hidden">ورزش را انتخاب کن</legend>
+    {
+      GAMES.map((g, i) => (
+        <>
+          <input class="visually-hidden" type="radio" name="hero-sport" id={`sport-${g.slug}`} value={g.slug} checked={i === 0} />
+          <label for={`sport-${g.slug}`}>{g.name}</label>
+        </>
+      ))
+    }
+  </fieldset>
+
+  <figure class="court" aria-labelledby="court-caption">
+    <svg viewBox="0 0 360 520" role="presentation" focusable="false">
+      <rect class="court__surface" width="360" height="520" rx="28"></rect>
+
+      <g class="c c--tennis">
+        <rect class="area" x="74" y="30" width="212" height="460"></rect>
+        <rect class="ln" x="74" y="30" width="212" height="460"></rect>
+        <path class="ln" d="M100.5 30v460M259.5 30v460M100.5 136h159M100.5 384h159M180 136v248M180 30v8M180 482v8"></path>
+        <path class="net" d="M56 260h248"></path>
+      </g>
+
+      <g class="c c--padel">
+        <rect class="area" x="70" y="40" width="220" height="440"></rect>
+        <rect class="ln" x="70" y="40" width="220" height="440"></rect>
+        <path class="ln" d="M70 107h220M70 413h220M180 107v306"></path>
+        <path class="glass" d="M64 34h232v8H64zM64 478h232v8H64zM64 34h6v94h-6zM290 34h6v94h-6zM64 392h6v94h-6zM290 392h6v94h-6z"></path>
+        <path class="mesh" d="M67 128v264M293 128v264"></path>
+        <path class="net" d="M62 260h236"></path>
+      </g>
+
+      <g class="c c--badminton">
+        <rect class="area" x="80" y="40" width="200" height="440"></rect>
+        <rect class="ln" x="80" y="40" width="200" height="440"></rect>
+        <path class="ln" d="M95 40v440M265 40v440M80 195h200M80 325h200M80 65h200M80 455h200M180 40v155M180 325v155"></path>
+        <path class="net" d="M72 260h216"></path>
+      </g>
+
+      <g class="c c--squash">
+        <rect class="area" x="36" y="40" width="288" height="440"></rect>
+        <rect class="ln" x="36" y="40" width="288" height="440"></rect>
+        <rect class="wall" x="36" y="26" width="288" height="14" rx="3"></rect>
+        <path class="ln" d="M36 286h288M180 286v194M36 358h72v-72M324 358h-72v-72"></path>
+      </g>
+
+      <g class="p p--tennis">
+        <circle class="me" cx="130" cy="452" r="12"></circle><circle class="me" cx="228" cy="326" r="12"></circle>
+        <circle class="mate" cx="150" cy="66" r="12"></circle><g transform="translate(232 190)"><g class="open"><circle r="13"></circle><path d="M-5 0h10M0 -5v10"></path></g></g>
+      </g>
+      <g class="p p--padel">
+        <circle class="me" cx="128" cy="438" r="12"></circle><circle class="me" cx="232" cy="438" r="12"></circle>
+        <circle class="mate" cx="130" cy="82" r="12"></circle><g transform="translate(230 82)"><g class="open"><circle r="13"></circle><path d="M-5 0h10M0 -5v10"></path></g></g>
+      </g>
+      <g class="p p--badminton">
+        <circle class="me" cx="132" cy="420" r="12"></circle><circle class="me" cx="230" cy="350" r="12"></circle>
+        <circle class="mate" cx="140" cy="122" r="12"></circle><g transform="translate(226 170)"><g class="open"><circle r="13"></circle><path d="M-5 0h10M0 -5v10"></path></g></g>
+      </g>
+      <g class="p p--squash">
+        <circle class="me" cx="212" cy="330" r="12"></circle>
+        <g transform="translate(140 392)"><g class="open"><circle r="13"></circle><path d="M-5 0h10M0 -5v10"></path></g></g>
+      </g>
+
+      <circle class="ball" r="6.5"></circle>
+    </svg>
+    <figcaption id="court-caption" class="visually-hidden">
+      نمای بالای زمین با بازیکن‌ها و یک جای خالی که رالیتو برایش هم‌بازی پیدا می‌کند.
+    </figcaption>
+  </figure>
+
+  <div class="games">
+    {
+      GAMES.map((g) => (
+        <div class:list={['game', `game--${g.slug}`]} role="group" aria-label={`نمونه‌ی یک بازی باز: ${g.title}`}>
+          <div class="game__head">
+            <p class="game__title">{g.title}</p>
+            <span class="game__open">{g.open}</span>
+          </div>
+          <ul class="game__meta">
+            <li>
+              <Icon name="clock" size={18} />
+              {g.when}
+            </li>
+            <li>
+              <Icon name="pin" size={18} />
+              {g.where}
+            </li>
+            {g.level && (
+              <li>
+                <Icon name="level" size={18} />
+                سطح {g.level}
+              </li>
+            )}
+          </ul>
+          <div class="game__foot">
+            <span class="game__avatars" aria-hidden="true">
+              {INITIALS.slice(0, g.filled).map((c) => (
+                <i>{c}</i>
+              ))}
+              <i class="game__slot">+</i>
+            </span>
+            <span class="game__count">
+              {faDigits(g.filled)} از {faDigits(g.of)} نفر
+            </span>
+            <span class="game__join" aria-hidden="true">
+              درخواست پیوستن
+            </span>
+          </div>
+          <span class="game__sample">نمونه</span>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .scene {
+    --court-bg: var(--c-tennis);
+    --court-line: #ffffff;
+    --ball: var(--c-ball);
+    position: relative;
+    display: grid;
+    gap: 18px;
+    justify-items: center;
+  }
+
+  .scene:has(#sport-padel:checked) {
+    --court-bg: var(--c-padel);
+  }
+
+  .scene:has(#sport-badminton:checked) {
+    --court-bg: var(--c-badminton);
+    --ball: #ffffff;
+  }
+
+  .scene:has(#sport-squash:checked) {
+    --court-bg: var(--c-squash);
+    --court-line: var(--c-squash-line);
+    --ball: var(--c-ink);
+  }
+
+  /* The picker: a segmented control in the hero's colours. */
+  .picker {
+    display: flex;
+    gap: 4px;
+    margin: 0;
+    padding: 5px;
+    border: 0;
+    background: rgb(255 255 255 / 9%);
+    border-radius: 999px;
+  }
+
+  .picker label {
+    padding: 8px 16px;
+    border-radius: 999px;
+    color: var(--c-mint);
+    font-size: var(--step--1);
+    font-weight: 700;
+    line-height: 1.6;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .picker label:hover {
+    color: var(--c-surface);
+  }
+
+  .picker input:checked + label {
+    background: var(--c-ball);
+    color: var(--c-deep);
+  }
+
+  .picker input:focus-visible + label {
+    outline: 3px solid var(--c-ball);
+    outline-offset: 2px;
+  }
+
+  .court {
+    width: min(100%, 360px);
+    aspect-ratio: 360 / 520;
+    filter: drop-shadow(0 30px 40px rgb(0 0 0 / 30%));
+  }
+
+  .court svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .court__surface {
+    fill: var(--court-bg);
+    transition: fill 0.5s ease;
+  }
+
+  .area {
+    fill: rgb(255 255 255 / 7%);
+  }
+
+  .ln {
+    fill: none;
+    stroke: var(--court-line);
+    stroke-width: 3;
+  }
+
+  .net {
+    stroke: var(--court-line);
+    stroke-width: 5;
+    stroke-linecap: round;
+  }
+
+  .glass {
+    fill: rgb(255 255 255 / 55%);
+  }
+
+  .mesh {
+    stroke: rgb(255 255 255 / 55%);
+    stroke-width: 3;
+    stroke-dasharray: 2 5;
+  }
+
+  .wall {
+    fill: var(--court-line);
+  }
+
+  .c,
+  .p {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .scene:has(#sport-tennis:checked) :is(.c--tennis, .p--tennis),
+  .scene:has(#sport-padel:checked) :is(.c--padel, .p--padel),
+  .scene:has(#sport-badminton:checked) :is(.c--badminton, .p--badminton),
+  .scene:has(#sport-squash:checked) :is(.c--squash, .p--squash) {
+    opacity: 1;
+  }
+
+  .me,
+  .mate {
+    stroke: var(--c-deep);
+    stroke-width: 3;
+  }
+
+  .me {
+    fill: #ffffff;
+  }
+
+  .mate {
+    fill: var(--c-ball);
+  }
+
+  .open circle {
+    fill: rgb(0 0 0 / 14%);
+    stroke: #ffffff;
+    stroke-width: 2.5;
+    stroke-dasharray: 5 4;
+  }
+
+  .scene:has(#sport-squash:checked) .open circle {
+    stroke: var(--c-ink);
+  }
+
+  .open path {
+    stroke: #ffffff;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+  }
+
+  .scene:has(#sport-squash:checked) .open path {
+    stroke: var(--c-ink);
+  }
+
+  .ball {
+    fill: var(--ball);
+    stroke: var(--c-deep);
+    stroke-width: 1.5;
+    offset-rotate: 0deg;
+    offset-path: path('M130 440 C 70 300, 120 160, 150 78 C 200 180, 236 330, 130 440');
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .scene:has(#sport-padel:checked) .ball {
+    offset-path: path('M232 426 C 296 300, 196 150, 130 94 C 96 220, 124 360, 232 426');
+  }
+
+  .scene:has(#sport-badminton:checked) .ball {
+    offset-path: path('M230 338 C 262 240, 190 150, 140 134 C 108 220, 170 318, 230 338');
+  }
+
+  .scene:has(#sport-squash:checked) .ball {
+    offset-path: path('M212 318 C 232 200, 262 84, 252 46 C 204 120, 150 250, 212 318');
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .scene:has(#sport-tennis:checked) .ball {
+      animation: rally-tennis 2.6s 0.6s ease-in-out 3 both;
+    }
+
+    .scene:has(#sport-padel:checked) .ball {
+      animation: rally-padel 2.6s 0.3s ease-in-out 3 both;
+    }
+
+    .scene:has(#sport-badminton:checked) .ball {
+      animation: rally-badminton 2.8s 0.3s ease-in-out 3 both;
+    }
+
+    .scene:has(#sport-squash:checked) .ball {
+      animation: rally-squash 2.2s 0.3s ease-in-out 3 both;
+    }
+
+    .open {
+      animation: open-pulse 1.8s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+  }
+
+  /* One keyframe set per sport, so picking another sport restarts the rally. The ball grows mid-flight (height). */
+  @keyframes rally-tennis {
+    0% { offset-distance: 0%; transform: scale(1); }
+    25% { transform: scale(1.5); }
+    50% { offset-distance: 50%; transform: scale(1); }
+    75% { transform: scale(1.5); }
+    100% { offset-distance: 100%; transform: scale(1); }
+  }
+
+  @keyframes rally-padel {
+    0% { offset-distance: 0%; transform: scale(1); }
+    25% { transform: scale(1.5); }
+    50% { offset-distance: 50%; transform: scale(1); }
+    75% { transform: scale(1.5); }
+    100% { offset-distance: 100%; transform: scale(1); }
+  }
+
+  @keyframes rally-badminton {
+    0% { offset-distance: 0%; transform: scale(1); }
+    25% { transform: scale(1.6); }
+    50% { offset-distance: 50%; transform: scale(1); }
+    75% { transform: scale(1.6); }
+    100% { offset-distance: 100%; transform: scale(1); }
+  }
+
+  @keyframes rally-squash {
+    0% { offset-distance: 0%; transform: scale(1); }
+    25% { transform: scale(1.35); }
+    50% { offset-distance: 50%; transform: scale(1); }
+    75% { transform: scale(1.35); }
+    100% { offset-distance: 100%; transform: scale(1); }
+  }
+
+  @keyframes open-pulse {
+    0%,
+    100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+  }
+
+  /* The open game, as the app's game card shows it. */
+  .games {
+    display: grid;
+    width: min(100%, 380px);
+  }
+
+  .game {
+    grid-area: 1 / 1;
+    position: relative;
+    padding: 16px 18px 14px;
+    background: var(--c-surface);
+    color: var(--c-ink);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease,
+      visibility 0s linear 0.35s;
+  }
+
+  .scene:has(#sport-tennis:checked) .game--tennis,
+  .scene:has(#sport-padel:checked) .game--padel,
+  .scene:has(#sport-badminton:checked) .game--badminton,
+  .scene:has(#sport-squash:checked) .game--squash {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease,
+      visibility 0s;
+  }
+
+  .game__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .game__title {
+    font-weight: 700;
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  .game__open {
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--c-clay-soft);
+    color: var(--c-warning);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .game__meta {
+    display: grid;
+    gap: 2px;
+    margin-block: 10px 12px;
+    padding: 10px 0;
+    border-block: 1px solid var(--c-line);
+    list-style: none;
+    color: var(--c-muted);
+    font-size: var(--step--1);
+  }
+
+  .game__meta li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .game__meta :global(.icon) {
+    color: var(--c-court);
+    flex: none;
+  }
+
+  .game__foot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--step--1);
+  }
+
+  .game__avatars {
+    display: flex;
+  }
+
+  .game__avatars i {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    margin-inline-start: -8px;
+    border: 2px solid var(--c-surface);
+    border-radius: 50%;
+    background: linear-gradient(145deg, #d8e9e4, #9fc6ba);
+    color: var(--c-deep);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.8125rem;
+  }
+
+  .game__avatars i:first-child {
+    margin-inline-start: 0;
+  }
+
+  .game__avatars .game__slot {
+    background: var(--c-surface);
+    border: 2px dashed var(--c-court);
+    color: var(--c-court);
+  }
+
+  .game__count {
+    color: var(--c-muted);
+  }
+
+  .game__join {
+    margin-inline-start: auto;
+    padding: 7px 12px;
+    border-radius: 10px;
+    background: var(--c-court);
+    color: var(--c-surface);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .game__sample {
+    position: absolute;
+    inset-block-start: -11px;
+    inset-inline-end: 16px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: var(--c-ink);
+    color: var(--c-surface);
+    font-size: 0.75rem;
+    line-height: 22px;
+  }
+
+  @media (min-width: 960px) {
+    .games {
+      position: absolute;
+      inset-block-end: -6%;
+      inset-inline-start: -22%;
+      width: 320px;
+    }
+
+    .scene {
+      padding-block-end: 0;
+    }
+  }
+</style>

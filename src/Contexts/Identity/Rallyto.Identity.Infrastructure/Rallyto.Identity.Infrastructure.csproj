@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Rallyto.Identity.Application\Rallyto.Identity.Application.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Rallyto.Infrastructure.Core\Rallyto.Infrastructure.Core.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Rallyto.Infrastructure.Web\Rallyto.Infrastructure.Web.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
+  </ItemGroup>
+</Project>

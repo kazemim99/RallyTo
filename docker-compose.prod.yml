@@ -1,0 +1,71 @@
+# Production stack. No server is provisioned yet (tasks.md 11.5): image owner and hosts are placeholders.
+# Secrets come from the server's .env file, never from this repository.
+name: rallyto
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-rallyto}
+      POSTGRES_USER: ${POSTGRES_USER:-rallyto}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-rallyto}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [rallyto-network]
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    networks: [rallyto-network]
+
+  seq:
+    image: datalust/seq:latest
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+    volumes:
+      - seq-data:/data
+    networks: [rallyto-network]
+
+  rallyto-api:
+    image: ghcr.io/${GHCR_OWNER:?set GHCR_OWNER}/rallyto-api:${RALLYTO_API_TAG:-latest}
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=${POSTGRES_DB:-rallyto};Username=${POSTGRES_USER:-rallyto};Password=${POSTGRES_PASSWORD}
+      ConnectionStrings__Redis: redis:6379
+      Seq__ServerUrl: http://seq:80
+      Jwt__SecretKey: ${JWT_SECRET_KEY:?set JWT_SECRET_KEY}
+      Sms__Provider: MeliPayamak
+      MeliPayamak__UserName: ${MELIPAYAMAK_USERNAME:?set MELIPAYAMAK_USERNAME}
+      MeliPayamak__ApiKey: ${MELIPAYAMAK_API_KEY:?set MELIPAYAMAK_API_KEY}
+      MeliPayamak__OtpBodyId: ${MELIPAYAMAK_OTP_BODY_ID:?set MELIPAYAMAK_OTP_BODY_ID}
+      Notifications__Firebase__CredentialsJson: ${FIREBASE_CREDENTIALS_JSON:?set FIREBASE_CREDENTIALS_JSON}
+      PublicBaseUrl: ${PUBLIC_BASE_URL:?set PUBLIC_BASE_URL}
+      Identity__InitialAdmin__Email: ${ADMIN_EMAIL:?set ADMIN_EMAIL}
+      Identity__InitialAdmin__Password: ${ADMIN_PASSWORD:?set ADMIN_PASSWORD}
+    ports:
+      - "127.0.0.1:5100:8080"
+    volumes:
+      - uploads:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks: [rallyto-network]
+
+volumes:
+  postgres-data:
+  seq-data:
+  uploads:
+
+networks:
+  rallyto-network:
