@@ -7,7 +7,8 @@ import { DIST, builtPages, fileInDist, jsonLd, page, pngSize, visibleText, type 
 
 /** The built site: metadata, structured data, crawl control, Persian text, honesty and links. */
 
-const INVENTED = ['هزاران', 'کاربر فعال', '+۱۰۰', '۱۰۰٪', '★', 'رایگان', 'بهترین اپ', 'برنده']
+const INVENTED = ['هزاران', 'کاربر فعال', '+۱۰۰', '۱۰۰٪', '★', 'بهترین اپ', 'برنده', 'تومان', 'شماره‌ی ثبت', 'اینماد']
+const SPORT_PATHS = ['/tennis', '/padel', '/badminton', '/squash']
 
 let pages: BuiltPage[]
 let indexable: BuiltPage[]
@@ -37,10 +38,11 @@ describe('every page', () => {
     for (const p of pages) for (const claim of INVENTED) expect(visibleText(p), `${p.path}: ${claim}`).not.toContain(claim)
   })
 
-  it('links the sport pages, the terms and the privacy policy from its footer', () => {
+  it('links the terms, the privacy policy and the contact page from its footer, and the sports once published', () => {
+    const expected = ['/terms', '/privacy', '/contact', ...(SITE.sportPagesPublished ? SPORT_PATHS : [])]
     for (const p of pages) {
       const hrefs = p.root.querySelectorAll('footer a').map((a) => a.getAttribute('href'))
-      expect(hrefs, p.path).toEqual(expect.arrayContaining(['/tennis', '/padel', '/badminton', '/squash', '/terms', '/privacy']))
+      expect(hrefs, p.path).toEqual(expect.arrayContaining(expected))
     }
   })
 
@@ -148,8 +150,10 @@ describe('structured data', () => {
     }
   })
 
-  it('claims no rating or price anywhere', () => {
-    for (const p of pages) expect(JSON.stringify(jsonLd(p)), p.path).not.toMatch(/AggregateRating|"offers"/)
+  it('claims no rating anywhere, and describes the app as free', () => {
+    for (const p of pages) expect(JSON.stringify(jsonLd(p)), p.path).not.toMatch(/AggregateRating/)
+    const app = jsonLd(page(pages, '/')).find((d) => d['@type'] === 'MobileApplication') as { offers: { price: string } }
+    expect(app.offers.price).toBe('0')
   })
 })
 
@@ -183,5 +187,37 @@ describe('the home page', () => {
     const home = page(pages, '/')
     const storeLinks = home.root.querySelectorAll('a[href*="cafebazaar"], a[href*="myket"]')
     expect(storeLinks.length).toBe(Object.values(SITE.stores).filter(Boolean).length)
+  })
+})
+
+describe('owner decisions (2026-10-29)', () => {
+  it('builds no sport page, and links to none, while the venue catalog has no clubs', () => {
+    expect(SITE.sportPagesPublished).toBe(false)
+    for (const path of SPORT_PATHS) expect(fileInDist(path), path).toBeUndefined()
+    for (const p of pages) {
+      const hrefs = p.root.querySelectorAll('a').map((a) => a.getAttribute('href'))
+      for (const path of SPORT_PATHS) expect(hrefs, `${p.path} -> ${path}`).not.toContain(path)
+    }
+  })
+
+  it('says on the home page that the app is free, and keeps the stores at «به‌زودی»', () => {
+    const text = visibleText(page(pages, '/'))
+    expect(text).toContain('رالیتو رایگان است')
+    expect(text).toContain('به‌زودی در')
+  })
+
+  it('shows the responsible person, location and a dialable phone on the contact page', () => {
+    const contact = page(pages, '/contact')
+    const text = visibleText(contact)
+    expect(text).toContain(SITE.responsible.name)
+    expect(text).toContain(SITE.responsible.location)
+    expect(text).toContain(SITE.responsible.phone)
+    expect(contact.root.querySelector(`a[href="tel:${SITE.responsible.phoneE164}"]`)).not.toBeNull()
+  })
+
+  it('states the one-month retention for chats and reports on the privacy page', () => {
+    const text = visibleText(page(pages, '/privacy'))
+    expect(text).toContain('پیام‌های گفتگو و درخواست‌های پیام: حداکثر یک ماه')
+    expect(text).toContain('گزارش‌ها و نسخه‌ی ذخیره‌شده‌ی محتوای گزارش‌شده: حداکثر یک ماه')
   })
 })

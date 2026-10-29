@@ -1,10 +1,14 @@
 ---
 import { SITE } from '../config/site'
+import { publishedSports } from '../data/pages'
 import { SPORTS } from '../data/sports'
 import BrandMark from './BrandMark.astro'
 
 // The Jalali year of the build, in Persian digits.
 const year = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric' }).format(new Date())
+const linked = new Set(publishedSports().map((s) => s.slug))
+// A list of sport names is navigation only once the sport pages exist.
+const SportsBlock = linked.size > 0 ? 'nav' : 'div'
 ---
 
 <footer class="site-footer">
@@ -16,18 +20,22 @@ const year = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric' }).
       </a>
       <p class="muted">{SITE.tagline}.</p>
     </div>
-    <nav aria-label="ورزش‌ها">
+    <SportsBlock aria-label={linked.size > 0 ? 'ورزش‌ها' : undefined}>
       <h2 class="footer-title">ورزش‌ها</h2>
       <ul>
         {
-          SPORTS.map((s) => (
-            <li>
-              <a href={`/${s.slug}`}>پارتنر {s.name}</a>
-            </li>
-          ))
+          SPORTS.map((s) =>
+            linked.has(s.slug) ? (
+              <li>
+                <a href={`/${s.slug}`}>پارتنر {s.name}</a>
+              </li>
+            ) : (
+              <li class="footer-plain">پارتنر {s.name}</li>
+            ),
+          )
         }
       </ul>
-    </nav>
+    </SportsBlock>
     <nav aria-label="رالیتو">
       <h2 class="footer-title">رالیتو</h2>
       <ul>
@@ -35,6 +43,7 @@ const year = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric' }).
         <li><a href="/#faq">سؤال‌های پرتکرار</a></li>
         <li><a href="/terms">قوانین استفاده</a></li>
         <li><a href="/privacy">حریم خصوصی</a></li>
+        <li><a href="/contact">تماس با ما</a></li>
       </ul>
     </nav>
   </div>
@@ -88,6 +97,11 @@ const year = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric' }).
     padding-block: 5px;
     color: var(--c-muted);
     text-decoration: none;
+  }
+
+  .footer-plain {
+    padding-block: 5px;
+    color: var(--c-muted);
   }
 
   .site-footer li a:hover {

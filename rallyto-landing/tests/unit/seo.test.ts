@@ -15,10 +15,15 @@ describe('JSON-LD', () => {
     expect(JSON.stringify(websiteLd())).not.toContain('SearchAction')
   })
 
-  it('describes the Android app without a price or a rating', () => {
+  it('describes the Android app as free, without a rating', () => {
     const app = mobileApplicationLd()
     expect(app).toMatchObject({ '@type': 'MobileApplication', operatingSystem: 'ANDROID', applicationCategory: 'SportsApplication' })
-    expect(JSON.stringify(app)).not.toMatch(/offers|aggregateRating|price/i)
+    expect(app.offers).toEqual({ '@type': 'Offer', price: '0', priceCurrency: 'IRR' })
+    expect(JSON.stringify(app)).not.toMatch(/aggregateRating/i)
+  })
+
+  it('gives the organization the responsible person as its contact point', () => {
+    expect(organizationLd().contactPoint).toMatchObject({ '@type': 'ContactPoint', telephone: '+989123135143' })
   })
 
   it('numbers breadcrumbs from 1 with absolute URLs', () => {

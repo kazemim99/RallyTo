@@ -421,5 +421,9 @@
 - [x] 12.5 Landing site (`rallyto-landing`, Astro, static): home page with the court hero, one page per sport with the
   catalog's levels, FAQ, privacy and terms; SEO metadata, structured data, sitemap, share image; unit tests,
   built-site contract tests and Lighthouse thresholds; CI job.
-- [ ] 12.6 Before the site goes live: store links, a reviewed privacy policy with retention periods, contact details
-  and legal entity, and real clubs in the catalog (11.1). See `rallyto-landing/README.md`.
+- [x] 12.6 Apply the owner's decisions (2026-10-29) to the landing site: the app is free; chats and reports are kept
+  one month at most; the responsible person and contact details on `/contact` and in both policies; store links stay
+  «به‌زودی»; the sport pages stay unpublished until 11.1.
+- [ ] 12.7 Purge chat messages (incl. message requests) and reports, with their evidence snapshots, older than 30 days,
+  so the backend matches the published privacy policy. Must ship before the landing site goes live.
+- [ ] 12.8 Publish the sport pages (`SITE.sportPagesPublished`) once 11.1 has filled the venue catalog.

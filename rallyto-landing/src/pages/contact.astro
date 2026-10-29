@@ -1,0 +1,172 @@
+---
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+import Icon from '../components/Icon.astro'
+import { SITE } from '../config/site'
+import { PAGES } from '../data/pages'
+import Base from '../layouts/Base.astro'
+
+const meta = PAGES.contact
+const { responsible } = SITE
+---
+
+<Base meta={meta}>
+  <section class="contact-hero on-dark" aria-labelledby="contact-title">
+    <div class="container">
+      <Breadcrumbs crumbs={meta.crumbs!} />
+      <h1 id="contact-title">تماس با رالیتو</h1>
+      <p class="contact-hero__lead">برای پرسش، پیشنهاد یا پیگیری درباره‌ی رالیتو با ما در تماس باش.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact">
+      <address class="card">
+        <h2 class="card__title">مسئول رالیتو</h2>
+        <dl>
+          <div>
+            <dt>نام</dt>
+            <dd>{responsible.name}</dd>
+          </div>
+          <div>
+            <dt>نشانی</dt>
+            <dd>{responsible.location}</dd>
+          </div>
+          <div>
+            <dt>تلفن</dt>
+            <dd><a class="phone" href={`tel:${responsible.phoneE164}`} dir="ltr">{responsible.phone}</a></dd>
+          </div>
+        </dl>
+      </address>
+
+      <div class="contact__notes">
+        <div class="note">
+          <Icon name="flag" />
+          <div>
+            <h2>گزارش بازیکن، پیام یا پست</h2>
+            <p>
+              برای گزارش، از گزینه‌ی «گزارش» داخل اپ استفاده کن تا محتوای گزارش‌شده همراه آن ثبت شود و مدیران رالیتو با همه‌ی
+              جزئیات بررسی‌اش کنند.
+            </p>
+          </div>
+        </div>
+        <div class="note">
+          <Icon name="shield" />
+          <div>
+            <h2>اطلاعات و حریم خصوصی</h2>
+            <p>
+              اینکه رالیتو چه اطلاعاتی نگه می‌دارد و تا چه مدت، در <a href="/privacy">صفحه‌ی حریم خصوصی</a> آمده است. قوانین
+              استفاده را هم در <a href="/terms">شرایط استفاده</a> می‌خوانی.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-hero {
+    padding-block: 8px 56px;
+  }
+
+  .contact-hero h1 {
+    margin-block-start: 14px;
+    font-size: var(--step-3);
+  }
+
+  .contact-hero__lead {
+    margin-block-start: 10px;
+    color: var(--c-mint);
+    font-size: var(--step-1);
+  }
+
+  .contact {
+    display: grid;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .card {
+    padding: 28px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-l);
+    font-style: normal;
+  }
+
+  .card__title {
+    font: 700 var(--step-1) / 1.6 var(--font-body);
+    margin-block-end: 12px;
+  }
+
+  .card dl {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+  }
+
+  .card dl div {
+    display: grid;
+    gap: 2px;
+    padding-block-end: 14px;
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .card dl div:last-child {
+    padding-block-end: 0;
+    border-bottom: 0;
+  }
+
+  .card dt {
+    color: var(--c-muted);
+    font-size: var(--step--1);
+  }
+
+  .card dd {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .phone {
+    display: inline-block;
+    font-size: var(--step-1);
+    text-decoration: none;
+  }
+
+  .phone:hover {
+    text-decoration: underline;
+  }
+
+  .contact__notes {
+    display: grid;
+    gap: 24px;
+  }
+
+  .note {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .note :global(.icon) {
+    flex: none;
+    margin-block-start: 4px;
+    color: var(--c-court);
+  }
+
+  .note h2 {
+    font: 700 var(--step-1) / 1.6 var(--font-body);
+  }
+
+  .note p {
+    color: var(--c-muted);
+    max-width: var(--measure);
+  }
+
+  @media (min-width: 900px) {
+    .contact {
+      grid-template-columns: 1fr 1.3fr;
+      gap: 64px;
+    }
+  }
+</style>

@@ -20,6 +20,26 @@ export const SITE = {
     myket: null as string | null,
   },
 
+  /**
+   * The person responsible for Rallyto and how to reach them (owner-supplied, 2026-10-29). There is no registered
+   * company, so no company name, registration number or eNamad is stated anywhere.
+   */
+  responsible: {
+    name: 'مصطفی کاظمی',
+    location: 'اردبیل، پارس‌آباد، بلوار ۳',
+    phone: '۰۹۱۲۳۱۳۵۱۴۳',
+    phoneE164: '+989123135143',
+  },
+
+  /** How long chat messages and reports are kept at most (owner decision, 2026-10-29), as every page states it. */
+  retention: 'یک ماه',
+
+  /**
+   * The sport pages (/tennis, /padel, /badminton, /squash) promise partners at clubs, so they stay unbuilt, unlisted
+   * and unlinked while the venue catalog is empty. Turn this on only once task 11.1 (the club import) is done.
+   */
+  sportPagesPublished: false as boolean,
+
   /** Profiles Google may connect to the organization (Organization.sameAs). Empty until they exist. */
   sameAs: [] as string[],
 

@@ -62,7 +62,9 @@ const SAFETY: { icon: IconName; title: string; text: string }[] = [
           <a class="btn btn--ball" href="#download">دریافت اپ</a>
           <a class="btn btn--outline-light" href="#how">ببین چطور کار می‌کند</a>
         </div>
-        {!storesLive && <p class="hero__note">نسخه‌ی اندروید به‌زودی در کافه‌بازار و مایکت</p>}
+        <p class="hero__note">
+          {storesLive ? 'رالیتو رایگان است.' : 'رالیتو رایگان است؛ نسخه‌ی اندروید به‌زودی در کافه‌بازار و مایکت.'}
+        </p>
       </div>
       <CourtScene />
     </div>

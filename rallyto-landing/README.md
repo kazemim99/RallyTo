@@ -31,16 +31,23 @@ npm run og            # re-render public/og/default.png after a brand or tagline
 - **Security**: a Content-Security-Policy `<meta>` with the hashes of every inline script and style; nothing loads from
   another origin.
 
-## Before going live (owner decisions)
+## Owner decisions (2026-10-29) and what is still open
 
-- **Store links**: set `SITE.stores.bazaar` / `myket` in `src/config/site.ts` once the listings are live; until then
-  the download block says «به‌زودی» and links nowhere.
-- **Clubs**: the sport pages talk about finding partners at clubs in Tehran and other cities; publish them once the
-  venue catalog holds real clubs (main change task 11.1).
-- **Policies**: `policies.ts` describes what the system does today. Have it reviewed, and decide retention periods for
-  chats, reports and ratings (none is defined yet, and the privacy page says so).
-- **Contact and legal entity**: none is stated anywhere; add them (and eNamad once there is a business registration).
-- **Pricing**: the site never says the app is free; say so only once it is decided.
+- **Store links**: none yet. `SITE.stores.bazaar` / `myket` stay `null`, so the download block says «به‌زودی» and links
+  nowhere. Set the real URLs in `src/config/site.ts` only once a store publishes the app.
+- **Pricing**: the app is free. The hero, the download block, the FAQ and the terms say so, and the app's structured
+  data carries a price of 0.
+- **Retention**: chat messages (including message requests) and reports, with their saved copies, are kept for one
+  month at most. The privacy page states it in each section that touches them and in a summary; the FAQ and terms
+  agree. **The backend does not delete them yet**: a scheduled purge of messages and reports older than 30 days must
+  ship before the site goes live, or the privacy page is not true.
+- **Responsible person and contact**: مصطفی کاظمی, اردبیل، پارس‌آباد، بلوار ۳, ۰۹۱۲۳۱۳۵۱۴۳ (`SITE.responsible`), on
+  `/contact`, in both policies, and as the Organization's contact point. No company name, registration number or
+  eNamad is stated; add them only once they exist.
+- **Sport pages**: unpublished while the venue catalog has no clubs. `SITE.sportPagesPublished` is `false`, so
+  `/tennis`, `/padel`, `/badminton` and `/squash` are not built, not in the sitemap and not linked (the home page's
+  sport tiles just name the sports). Turn it on only once main change task 11.1 (the club import) is done, and add the
+  four pages back to `lighthouserc.cjs`.
 - **Statistics**: `SITE.analytics` is `null`; a cookieless, self-hosted counter can be plugged in there.
 - **Hosting**: nginx serves `dist/` with `try_files $uri $uri.html =404`, `gzip_static on`, and the share links
   `/m/{token}` proxied to the API.

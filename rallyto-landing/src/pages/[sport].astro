@@ -5,12 +5,13 @@ import Faq from '../components/Faq.astro'
 import MiniCourt from '../components/MiniCourt.astro'
 import SportTiles from '../components/SportTiles.astro'
 import Steps from '../components/home/Steps.astro'
-import { SPORTS, type Sport } from '../data/sports'
-import { sportPage } from '../data/pages'
+import type { Sport } from '../data/sports'
+import { publishedSports, sportPage } from '../data/pages'
 import Base from '../layouts/Base.astro'
 
+// No sport page is built until the venue catalog has clubs (SITE.sportPagesPublished, main change task 11.1).
 export function getStaticPaths() {
-  return SPORTS.map((sport) => ({ params: { sport: sport.slug }, props: { sport } }))
+  return publishedSports().map((sport) => ({ params: { sport: sport.slug }, props: { sport } }))
 }
 
 interface Props {

@@ -1,3 +1,4 @@
+import { SITE } from '../config/site'
 import type { Crumb } from '../lib/seo'
 import { PRIVACY, TERMS } from './policies'
 import { SPORTS, type Sport } from './sports'
@@ -42,10 +43,18 @@ export const PAGES = {
     indexable: true,
     crumbs: [HOME, { name: TERMS.h1, path: '/terms' }],
   },
+  contact: {
+    path: '/contact',
+    title: 'تماس با رالیتو',
+    description:
+      'مسئول رالیتو، نشانی و شماره‌ی تماس برای پرسش‌ها، پیشنهادها و پیگیری درباره‌ی اپ رالیتو و هم‌بازی تنیس، پدل، بدمینتون و اسکواش.',
+    indexable: true,
+    crumbs: [HOME, { name: 'تماس با ما', path: '/contact' }],
+  },
   notFound: {
     path: '/404',
     title: 'صفحه پیدا نشد | رالیتو',
-    description: 'این صفحه در رالیتو وجود ندارد. از صفحه اصلی یا صفحه‌ی ورزش‌ها ادامه بده و هم‌بازی هم‌سطحت را پیدا کن.',
+    description: 'این صفحه در رالیتو وجود ندارد. از صفحه‌ی اصلی ادامه بده و هم‌بازی هم‌سطحت را برای تنیس، پدل، بدمینتون و اسکواش پیدا کن.',
     indexable: false,
   },
 } satisfies Record<string, PageMeta>
@@ -60,8 +69,13 @@ export function sportPage(sport: Sport): PageMeta {
   }
 }
 
+/** The sport pages that are built and linked: none until the venue catalog has clubs (`SITE.sportPagesPublished`). */
+export function publishedSports(): Sport[] {
+  return SITE.sportPagesPublished ? SPORTS : []
+}
+
 /** Every page that belongs in the sitemap, in order. */
 export function indexablePages(): PageMeta[] {
   const [home, ...rest] = Object.values(PAGES).filter((p) => p.indexable)
-  return [home, ...SPORTS.map(sportPage), ...rest]
+  return [home, ...publishedSports().map(sportPage), ...rest]
 }

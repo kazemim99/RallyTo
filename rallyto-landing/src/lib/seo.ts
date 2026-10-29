@@ -18,6 +18,13 @@ export function organizationLd() {
     alternateName: SITE.latinName,
     url: absolute('/'),
     logo: absolute(LOGO_PATH),
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: SITE.responsible.phoneE164,
+      contactType: 'customer support',
+      areaServed: 'IR',
+      availableLanguage: 'fa',
+    },
     ...(SITE.sameAs.length > 0 ? { sameAs: [...SITE.sameAs] } : {}),
   }
 }
@@ -35,8 +42,8 @@ export function websiteLd() {
 }
 
 /**
- * The Android app. No `offers` (pricing is the owner's decision and is stated nowhere) and no `aggregateRating`
- * (there are no store ratings yet; ratings copied from elsewhere are not allowed).
+ * The Android app, free (owner decision, 2026-10-29). No `aggregateRating`: there are no store ratings yet, and ratings
+ * copied from elsewhere are not allowed.
  */
 export function mobileApplicationLd() {
   return {
@@ -49,6 +56,7 @@ export function mobileApplicationLd() {
     operatingSystem: 'ANDROID',
     inLanguage: SITE.locale,
     description: SITE.tagline,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'IRR' },
   }
 }
 

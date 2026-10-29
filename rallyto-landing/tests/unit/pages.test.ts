@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { SITE } from '../../src/config/site'
 import { HOME_FAQ } from '../../src/data/faq'
 import { indexablePages } from '../../src/data/pages'
 import { PRIVACY, TERMS } from '../../src/data/policies'
@@ -9,8 +10,13 @@ const pages = indexablePages()
 const allCopy = JSON.stringify({ SPORTS, HOME_FAQ, PRIVACY, TERMS, pages })
 
 describe('page metadata', () => {
-  it('lists the home page, the four sports and the two policies', () => {
-    expect(pages.map((p) => p.path)).toEqual(['/', '/tennis', '/padel', '/badminton', '/squash', '/privacy', '/terms'])
+  it('lists the home page, the policies and the contact page, and the sports only once published', () => {
+    const sports = SITE.sportPagesPublished ? ['/tennis', '/padel', '/badminton', '/squash'] : []
+    expect(pages.map((p) => p.path)).toEqual(['/', ...sports, '/privacy', '/terms', '/contact'])
+  })
+
+  it('keeps the sport pages unpublished until the venue catalog has clubs (main change task 11.1)', () => {
+    expect(SITE.sportPagesPublished).toBe(false)
   })
 
   it.each(pages.map((p) => [p.path, p] as const))('%s has a title ≤ 60 and a description of 70–160 characters', (_, p) => {
@@ -38,8 +44,13 @@ describe('Persian copy', () => {
     expect(allCopy).not.toMatch(/پارتنر ?یابی(?! (تنیس|پدل|بدمینتون|اسکواش))/)
   })
 
-  it('states no price and does not call the app free', () => {
-    expect(allCopy).not.toMatch(/رایگان|تومان|ریال|قیمت/)
+  it('states no price amount', () => {
+    expect(allCopy).not.toMatch(/تومان|ریال|قیمت/)
+  })
+
+  it('says the app is free, in the questions and in the terms', () => {
+    expect(HOME_FAQ.some((f) => f.q.includes('رایگان') && f.a.startsWith('بله'))).toBe(true)
+    expect(JSON.stringify(TERMS)).toContain('اپ رالیتو رایگان است')
   })
 })
 
@@ -51,5 +62,37 @@ describe('sports', () => {
       expect(s.formats.length, s.slug).toBeGreaterThan(0)
       expect(s.faq.length, s.slug).toBeGreaterThanOrEqual(3)
     }
+  })
+})
+
+describe('retention (owner decision: chats and reports, one month at most)', () => {
+  const privacy = JSON.stringify(PRIVACY)
+
+  it('says so for chats and for reports, and in the summary', () => {
+    expect(SITE.retention).toBe('یک ماه')
+    expect(privacy).toContain('پیام‌های گفتگوها، از جمله درخواست‌های پیام، حداکثر یک ماه نگه داشته می‌شوند')
+    expect(privacy).toContain('حداکثر یک ماه برای بررسی نگه داشته می‌شوند')
+    const summary = PRIVACY.sections.find((s) => s.heading === 'مدت نگهداری')!
+    expect(summary.bullets).toEqual(expect.arrayContaining(['پیام‌های گفتگو و درخواست‌های پیام: حداکثر یک ماه']))
+  })
+
+  it('never says chats or reports are kept indefinitely', () => {
+    expect(allCopy).not.toContain('به‌طور خودکار پاک نمی‌کند')
+    expect(allCopy).not.toMatch(/گزارش‌ها[^.]*پاک نمی‌شوند/)
+  })
+})
+
+describe('responsible person', () => {
+  it('names them with their location and phone in both policies', () => {
+    for (const policy of [PRIVACY, TERMS]) {
+      const text = JSON.stringify(policy)
+      expect(text).toContain(SITE.responsible.name)
+      expect(text).toContain(SITE.responsible.location)
+      expect(text).toContain(SITE.responsible.phone)
+    }
+  })
+
+  it('states no company name, registration number or trust seal', () => {
+    expect(allCopy).not.toMatch(/شرکت|شماره‌ی ثبت|شناسه‌ی ملی|اینماد/)
   })
 })

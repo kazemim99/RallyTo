@@ -1,6 +1,7 @@
 // Lighthouse CI over the test build (dist-test/), mobile profile (Lighthouse's default), every page.
 // A regression below these thresholds fails the run.
-const pages = ['index', 'tennis', 'padel', 'badminton', 'squash', 'privacy', 'terms']
+// The sport pages (tennis, padel, badminton, squash) join this list once SITE.sportPagesPublished is turned on.
+const pages = ['index', 'privacy', 'terms', 'contact']
 
 module.exports = {
   ci: {

@@ -7,4 +7,5 @@ export const SPECULATION_RULES = JSON.stringify({
   prerender: [{ where: { href_matches: '/*' }, eagerness: 'moderate' }],
 })
 
+/** @param {string} text @returns {`sha256-${string}`} */
 export const sha256 = (text) => `sha256-${createHash('sha256').update(text).digest('base64')}`
