@@ -191,12 +191,12 @@ describe('the home page', () => {
 })
 
 describe('owner decisions (2026-10-29)', () => {
-  it('builds no sport page, and links to none, while the venue catalog has no clubs', () => {
-    expect(SITE.sportPagesPublished).toBe(false)
-    for (const path of SPORT_PATHS) expect(fileInDist(path), path).toBeUndefined()
+  it('builds the four sport pages and links them from every footer, now that the venue catalog has clubs', () => {
+    expect(SITE.sportPagesPublished).toBe(true)
+    for (const path of SPORT_PATHS) expect(fileInDist(path), path).toBeDefined()
     for (const p of pages) {
-      const hrefs = p.root.querySelectorAll('a').map((a) => a.getAttribute('href'))
-      for (const path of SPORT_PATHS) expect(hrefs, `${p.path} -> ${path}`).not.toContain(path)
+      const hrefs = p.root.querySelectorAll('footer a').map((a) => a.getAttribute('href'))
+      expect(hrefs, p.path).toEqual(expect.arrayContaining(SPORT_PATHS))
     }
   })
 

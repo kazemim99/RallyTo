@@ -15,8 +15,8 @@ describe('page metadata', () => {
     expect(pages.map((p) => p.path)).toEqual(['/', ...sports, '/privacy', '/terms', '/contact'])
   })
 
-  it('keeps the sport pages unpublished until the venue catalog has clubs (main change task 11.1)', () => {
-    expect(SITE.sportPagesPublished).toBe(false)
+  it('publishes the sport pages now that the venue catalog has clubs (main change task 11.1)', () => {
+    expect(SITE.sportPagesPublished).toBe(true)
   })
 
   it.each(pages.map((p) => [p.path, p] as const))('%s has a title ≤ 60 and a description of 70–160 characters', (_, p) => {

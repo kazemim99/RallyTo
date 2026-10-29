@@ -36,9 +36,10 @@ export const SITE = {
 
   /**
    * The sport pages (/tennis, /padel, /badminton, /squash) promise partners at clubs, so they stay unbuilt, unlisted
-   * and unlinked while the venue catalog is empty. Turn this on only once task 11.1 (the club import) is done.
+   * and unlinked while the venue catalog is empty. On since 2026-10-29: task 11.1 imported the clubs (515 active venues;
+   * every sport has clubs in Tehran).
    */
-  sportPagesPublished: false as boolean,
+  sportPagesPublished: true as boolean,
 
   /** Profiles Google may connect to the organization (Organization.sameAs). Empty until they exist. */
   sameAs: [] as string[],

@@ -44,10 +44,9 @@ npm run og            # re-render public/og/default.png after a brand or tagline
 - **Responsible person and contact**: مصطفی کاظمی, اردبیل، پارس‌آباد، بلوار ۳, ۰۹۱۲۳۱۳۵۱۴۳ (`SITE.responsible`), on
   `/contact`, in both policies, and as the Organization's contact point. No company name, registration number or
   eNamad is stated; add them only once they exist.
-- **Sport pages**: unpublished while the venue catalog has no clubs. `SITE.sportPagesPublished` is `false`, so
-  `/tennis`, `/padel`, `/badminton` and `/squash` are not built, not in the sitemap and not linked (the home page's
-  sport tiles just name the sports). Turn it on only once main change task 11.1 (the club import) is done, and add the
-  four pages back to `lighthouserc.cjs`.
+- **Sport pages**: published since 2026-10-29, once task 11.1 filled the venue catalog (515 active venues; tennis 340,
+  badminton 105, padel 58, squash 30, each with clubs in Tehran). `SITE.sportPagesPublished` is the switch: off, the
+  four pages are not built, not in the sitemap and not linked (remove them from `lighthouserc.cjs` too).
 - **Statistics**: `SITE.analytics` is `null`; a cookieless, self-hosted counter can be plugged in there.
 - **Hosting**: nginx serves `dist/` with `try_files $uri $uri.html =404`, `gzip_static on`, and the share links
   `/m/{token}` proxied to the API.

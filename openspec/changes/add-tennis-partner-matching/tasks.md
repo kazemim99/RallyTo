@@ -388,7 +388,8 @@
 
 ## 11. Launch readiness
 
-- [ ] 11.1 Run the venue import for every province, review the candidates, and bulk-approve them, so the catalog
+- [x] 11.1 (2026-10-29: 515 active venues — tennis 340, badminton 105, padel 58, squash 30 — across the country, every
+  sport with clubs in Tehran; 387 candidates left hidden.) Run the venue import for every province, review the candidates, and bulk-approve them, so the catalog
   covers the country before launch.
 - [x] 11.2 Security pass:
   - review the rate-limit configuration;
@@ -426,4 +427,4 @@
   «به‌زودی»; the sport pages stay unpublished until 11.1.
 - [ ] 12.7 Purge chat messages (incl. message requests) and reports, with their evidence snapshots, older than 30 days,
   so the backend matches the published privacy policy. Must ship before the landing site goes live.
-- [ ] 12.8 Publish the sport pages (`SITE.sportPagesPublished`) once 11.1 has filled the venue catalog.
+- [x] 12.8 Publish the sport pages (`SITE.sportPagesPublished`) once 11.1 has filled the venue catalog.
