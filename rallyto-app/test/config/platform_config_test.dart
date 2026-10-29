@@ -147,6 +147,18 @@ void main() {
       expect(colors['notification'], AppColors.primary);
       expectEveryDensity('drawable', 'ic_notification.png');
     });
+
+    test('the push channel the server posts to is created by the app and is the default', () {
+      final server = read('../src/Contexts/Notifications/Rallyto.Notifications.Infrastructure/Push/FirebasePushGateway.cs');
+      final channelId = RegExp(r'ChannelId = "([^"]+)"').firstMatch(server)!.group(1)!;
+      final activity = read('android/app/src/main/kotlin/ir/rallyto/app/MainActivity.kt');
+      expect(activity, contains('const val PUSH_CHANNEL_ID = "$channelId"'));
+      expect(activity, contains('createNotificationChannel'));
+      expect(
+        RegExp(r'default_notification_channel_id"\s+android:value="([^"]+)"').firstMatch(manifest)?.group(1),
+        channelId,
+      );
+    });
   });
 
   group('iOS', () {
