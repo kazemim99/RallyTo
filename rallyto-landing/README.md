@@ -1,11 +1,13 @@
 # رالیتو — Rallyto landing site
 
 The public site for **rallyto.ir**: what Rallyto is, one page per sport (tennis, padel, badminton, squash), download
-links, and the privacy and terms pages. Static Astro build, Persian and right to left, no JavaScript on any page.
+links, the club directory, and the privacy and terms pages. Static Astro build, Persian and right to left. The only
+script is the club finder's small progressive enhancement; every page works without it.
 
 ```
 npm ci
-npm run dev           # http://localhost:4321
+npm run venues        # save the club directory from https://api.rallyto.ir (VENUES_API=… for another API)
+npm run dev           # http://localhost:4321 (LANDING_VENUES=tests/fixtures/venues.sample.json for sample clubs)
 npm run test:unit     # copy, metadata, contrast, logo drift, structured data
 npm run build:test    # → dist-test/ (no statistics; what the built-site tests and Lighthouse read)
 npm run test:built    # the built site against its contract
@@ -28,6 +30,18 @@ npm run og            # re-render public/og/default.png after a brand or tagline
 - **The hero**: a top-down court redrawn for the sport the visitor picks (a radio group and `:has()`, no script), the
   rally on a CSS motion path, and the open game card. Motion runs a few times and stops; it never runs for visitors
   who ask for reduced motion.
+- **Layout and motion**: warm paper canvas, deep-green and near-black ("night") bands, editorial rows for the sports
+  instead of cards, and app screens redrawn in HTML inside a CSS phone (`Phone.astro`). Motion is CSS only: the hero
+  copy settles in on load (the heading never waits, it is the LCP), sections arrive with scroll-driven animations where
+  the browser has them, FAQ answers open by height (`::details-content`), and hover effects run only on devices that
+  hover. All of it is off under `prefers-reduced-motion`. Logical properties throughout, so `dir="ltr"` mirrors cleanly.
+- **Club directory** (owner decision 2026-11-01): `src/data/venues.json` is a snapshot of the API's public directory
+  (`GET /api/v1/public/venues`: active clubs with name, sports, province and city; never an address, phone or map
+  position, never a hidden club). Run `npm run venues` before every production build. From it the build makes `/clubs`,
+  a page per province (`/clubs/تهران`), per city (`/clubs/تهران/تهران`) and per sport a city has
+  (`/clubs/تهران/تهران/tennis`), with ItemList structured data. A page with fewer than two clubs, or one repeating
+  its city page, is built and linked but `noindex` and out of the sitemap. The finder (sport, province, city) is on the
+  home page, the directory and each sport page. While the snapshot is empty none of this is built.
 - **Security**: a Content-Security-Policy `<meta>` with the hashes of every inline script and style; nothing loads from
   another origin.
 

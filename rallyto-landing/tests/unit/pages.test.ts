@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { SITE } from '../../src/config/site'
 import { HOME_FAQ } from '../../src/data/faq'
-import { indexablePages } from '../../src/data/pages'
+import { clubPages, indexablePages } from '../../src/data/pages'
 import { PRIVACY, TERMS } from '../../src/data/policies'
 import { SPORTS } from '../../src/data/sports'
 
@@ -12,7 +12,8 @@ const allCopy = JSON.stringify({ SPORTS, HOME_FAQ, PRIVACY, TERMS, pages })
 describe('page metadata', () => {
   it('lists the home page, the policies and the contact page, and the sports only once published', () => {
     const sports = SITE.sportPagesPublished ? ['/tennis', '/padel', '/badminton', '/squash'] : []
-    expect(pages.map((p) => p.path)).toEqual(['/', ...sports, '/privacy', '/terms', '/contact'])
+    const clubs = clubPages().filter((p) => p.indexable).map((p) => p.path)
+    expect(pages.map((p) => p.path)).toEqual(['/', ...sports, ...clubs, '/privacy', '/terms', '/contact'])
   })
 
   it('publishes the sport pages now that the venue catalog has clubs (main change task 11.1)', () => {

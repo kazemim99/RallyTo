@@ -5,6 +5,7 @@ import Faq from '../components/Faq.astro'
 import MiniCourt from '../components/MiniCourt.astro'
 import SportTiles from '../components/SportTiles.astro'
 import Steps from '../components/home/Steps.astro'
+import SportCities from '../components/clubs/SportCities.astro'
 import type { Sport } from '../data/sports'
 import { publishedSports, sportPage } from '../data/pages'
 import Base from '../layouts/Base.astro'
@@ -79,6 +80,7 @@ const meta = sportPage(sport)
     </div>
   </section>
 
+  <SportCities sport={sport} />
   <Steps />
   <Faq items={sport.faq} heading={`سؤال‌های پرتکرار درباره‌ی هم‌بازی ${sport.name}`} />
   <SportTiles except={sport.slug} heading="ورزش‌های دیگر در رالیتو" lead="برای هر ورزشی که بازی می‌کنی، سطحت را جدا اعلام کن." />

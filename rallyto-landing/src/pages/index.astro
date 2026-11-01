@@ -6,7 +6,12 @@ import CourtScene from '../components/home/CourtScene.astro'
 import GroupChat from '../components/home/GroupChat.astro'
 import Safety from '../components/home/Safety.astro'
 import Steps from '../components/home/Steps.astro'
+import Venues from '../components/home/Venues.astro'
+import ClubSearch from '../components/home/ClubSearch.astro'
+import { directoryPublished } from '../data/clubs'
+import Icon from '../components/Icon.astro'
 import type { IconName } from '../components/Icon.astro'
+import { SPORTS } from '../data/sports'
 import { SITE } from '../config/site'
 import { HOME_FAQ } from '../data/faq'
 import { PAGES } from '../data/pages'
@@ -14,6 +19,16 @@ import Base from '../layouts/Base.astro'
 import { mobileApplicationLd, organizationLd, websiteLd } from '../lib/seo'
 
 const storesLive = Object.values(SITE.stores).some(Boolean)
+const faDigits = (n: number) => n.toLocaleString('fa-IR')
+
+// Facts, not figures: each is a rule of the app today (src/data/faq.ts and src/data/sports.ts hold the details).
+const levelCount = Math.min(...SPORTS.map((s) => s.levels.length))
+const PROOF = [
+  { value: 'رایگان', label: 'ساختن حساب، بازی، جستجو و گفتگو' },
+  { value: `${faDigits(SPORTS.length)} ورزش`, label: `هر کدام با ${faDigits(levelCount)} سطح جداگانه` },
+  { value: '۳۱ استان', label: 'هم‌بازی بر اساس شهر، باشگاه و ساعت' },
+  { value: 'شماره پنهان', label: 'هماهنگی فقط داخل اپ' },
+]
 
 // Each line is a feature the app has today (see src/data/faq.ts for the rules behind them).
 const SAFETY: { icon: IconName; title: string; text: string }[] = [
@@ -50,56 +65,147 @@ const SAFETY: { icon: IconName; title: string; text: string }[] = [
 ]
 ---
 
-<Base meta={PAGES.home} jsonLd={[organizationLd(), websiteLd(), mobileApplicationLd()]}>
-  <section class="hero on-dark" aria-labelledby="hero-title">
+<Base meta={PAGES.home} jsonLd={[organizationLd(), websiteLd(), mobileApplicationLd()]} headerTone="light">
+  <section class="hero" aria-labelledby="hero-title">
     <div class="container hero__grid">
       <div class="hero__copy">
-        <h1 id="hero-title">هم‌بازیِ هم‌سطح، نزدیک باشگاهت</h1>
+        <p class="hero__sports">
+          {
+            SPORTS.map((s) => (
+              <span class:list={['hero__sport', `hero__sport--${s.slug}`]}>{s.name}</span>
+            ))
+          }
+        </p>
+        <h1 id="hero-title">
+          هم‌بازیِ هم‌سطح،
+          <span class="hero__accent">
+            نزدیک باشگاهت
+            <svg class="hero__swash" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path d="M3 13C70 5 160 3 297 9" />
+            </svg>
+          </span>
+        </h1>
         <p class="hero__lead">
           رالیتو برای تنیس، پدل، بدمینتون و اسکواش هم‌بازی پیدا می‌کند: هم‌سطح خودت، نزدیک باشگاهت و در ساعتی که آزادی.
         </p>
         <div class="hero__actions">
-          <a class="btn btn--ball" href="#download">دریافت اپ</a>
-          <a class="btn btn--outline-light" href="#how">ببین چطور کار می‌کند</a>
+          <a class="btn btn--court" href="#download">
+            دریافت اپ
+            <Icon name="arrow" size={20} class="arrow" />
+          </a>
+          <a class="btn btn--ghost" href="#how">ببین چطور کار می‌کند</a>
         </div>
         <p class="hero__note">
           {storesLive ? 'رالیتو رایگان است.' : 'رالیتو رایگان است؛ نسخه‌ی اندروید به‌زودی در کافه‌بازار و مایکت.'}
         </p>
       </div>
-      <CourtScene />
+      <div class="hero__stage on-dark">
+        <CourtScene />
+      </div>
+    </div>
+
+    <div class="container">
+      <ul class="proof" aria-label="رالیتو در یک نگاه">
+        {
+          PROOF.map((p) => (
+            <li>
+              <b>{p.value}</b>
+              <span>{p.label}</span>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
+  <SportTiles />
+  {directoryPublished() && <ClubSearch />}
   <GroupChat />
   <Steps />
+  <Venues />
   <Safety items={SAFETY} />
-  <SportTiles />
   <Faq items={HOME_FAQ} />
   <DownloadBlock />
 </Base>
 
 <style>
   .hero {
-    padding-block: 24px clamp(72px, 9vw, 120px);
-    overflow: hidden;
-    background:
-      radial-gradient(900px 520px at 15% 30%, rgb(29 122 92 / 55%), transparent 70%),
-      var(--c-deep);
+    padding-block: clamp(20px, 4vw, 48px) clamp(56px, 8vw, 104px);
+    overflow: clip;
   }
 
   .hero__grid {
     display: grid;
-    gap: 44px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
     align-items: center;
   }
 
   .hero__copy {
-    max-width: 36rem;
+    max-width: 40rem;
+  }
+
+  .hero__sports {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin-block-end: 22px;
+    color: var(--c-muted);
+    font-size: var(--step--1);
+    font-weight: 700;
+  }
+
+  .hero__sport {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero__sport::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--dot);
+  }
+
+  .hero__sport--tennis { --dot: var(--c-tennis); }
+  .hero__sport--padel { --dot: var(--c-padel); }
+  .hero__sport--badminton { --dot: var(--c-badminton); }
+  .hero__sport--squash { --dot: var(--c-squash); }
+
+  .hero h1 {
+    font-size: var(--step-5);
+    line-height: 1.22;
+    letter-spacing: -0.02em;
+  }
+
+  .hero__accent {
+    position: relative;
+    display: inline-block;
+    color: var(--c-court);
+  }
+
+  .hero__swash {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: -0.08em;
+    width: 100%;
+    height: 0.24em;
+    overflow: visible;
+  }
+
+  .hero__swash path {
+    fill: none;
+    stroke: var(--c-ball);
+    stroke-width: 9;
+    stroke-linecap: round;
   }
 
   .hero__lead {
-    margin-block: 22px 32px;
-    color: var(--c-mint);
+    max-width: 34rem;
+    margin-block: 26px 34px;
+    color: var(--c-muted);
     font-size: var(--step-1);
     line-height: 1.9;
   }
@@ -107,23 +213,126 @@ const SAFETY: { icon: IconName; title: string; text: string }[] = [
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    align-items: center;
+    gap: 10px 18px;
   }
 
   .hero__note {
     margin-block-start: 18px;
-    color: var(--c-mint);
+    color: var(--c-muted);
     font-size: var(--step--1);
   }
 
-  @media (min-width: 960px) {
-    .hero {
-      padding-block-start: 48px;
+  .hero__stage {
+    position: relative;
+    padding: 22px 16px 26px;
+    border-radius: 36px;
+    background: var(--c-night);
+  }
+
+  /* The proof strip: four plain facts between hairlines. */
+  .proof {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-block-start: clamp(48px, 7vw, 88px);
+    padding: 0;
+    list-style: none;
+    border-block: 1px solid var(--c-line);
+  }
+
+  .proof li {
+    display: grid;
+    align-content: start;
+    gap: 2px;
+    padding: 20px 4px;
+  }
+
+  .proof li:nth-child(odd) {
+    padding-inline-end: 16px;
+    border-inline-end: 1px solid var(--c-line);
+  }
+
+  .proof li:nth-child(even) {
+    padding-inline-start: 16px;
+  }
+
+  .proof li:nth-child(-n + 2) {
+    border-block-end: 1px solid var(--c-line);
+  }
+
+  .proof b {
+    font: 900 var(--step-2) / 1.5 var(--font-display);
+  }
+
+  .proof span {
+    color: var(--c-muted);
+    font-size: var(--step--1);
+    line-height: 1.7;
+  }
+
+  /* On load: the swash draws under the accent, then the rest of the copy and the stage settle in. The heading itself
+     never waits: it is the page's largest paint. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__swash path {
+      stroke-dasharray: 300;
+      animation: swash 0.9s 0.35s var(--ease-in-out) both;
     }
 
+    .hero__lead,
+    .hero__actions,
+    .hero__note,
+    .hero__stage {
+      animation: settle var(--dur-enter) var(--ease-out) both;
+    }
+
+    .hero__lead { animation-delay: 80ms; }
+    .hero__actions { animation-delay: 140ms; }
+    .hero__note { animation-delay: 200ms; }
+    .hero__stage { animation-delay: 120ms; }
+  }
+
+  @keyframes swash {
+    from { stroke-dashoffset: 300; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes settle {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+
+  @media (min-width: 720px) {
+    .proof {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .proof li,
+    .proof li:nth-child(odd),
+    .proof li:nth-child(even) {
+      padding: 26px 22px;
+      border-block-end: 0;
+      border-inline-end: 1px solid var(--c-line);
+    }
+
+    .proof li:first-child {
+      padding-inline-start: 0;
+    }
+
+    .proof li:last-child {
+      border-inline-end: 0;
+    }
+  }
+
+  @media (min-width: 1040px) {
     .hero__grid {
-      grid-template-columns: 1.1fr 1fr;
-      gap: 56px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 64px;
+    }
+
+    .hero__stage {
+      padding: 28px 28px 40px;
     }
   }
 </style>

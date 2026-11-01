@@ -3,6 +3,7 @@ import { SITE } from '../config/site'
 import { publishedSports } from '../data/pages'
 import { SPORTS } from '../data/sports'
 import BrandMark from './BrandMark.astro'
+import { CLUBS_PATH, directoryPublished } from '../data/clubs'
 
 // The Jalali year of the build, in Persian digits.
 const year = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric' }).format(new Date())
@@ -11,11 +12,11 @@ const linked = new Set(publishedSports().map((s) => s.slug))
 const SportsBlock = linked.size > 0 ? 'nav' : 'div'
 ---
 
-<footer class="site-footer">
+<footer class="site-footer on-dark">
   <div class="container site-footer__grid">
     <div class="site-footer__brand">
       <a class="footer-brand" href="/">
-        <BrandMark size={34} tone="color" />
+        <BrandMark size={34} tone="reversed" />
         <span>{SITE.name}</span>
       </a>
       <p class="muted">{SITE.tagline}.</p>
@@ -40,12 +41,21 @@ const SportsBlock = linked.size > 0 ? 'nav' : 'div'
       <h2 class="footer-title">رالیتو</h2>
       <ul>
         <li><a href="/#how">چطور کار می‌کند</a></li>
+        {directoryPublished() && <li><a href={CLUBS_PATH}>باشگاه‌ها</a></li>}
         <li><a href="/#faq">سؤال‌های پرتکرار</a></li>
         <li><a href="/terms">قوانین استفاده</a></li>
         <li><a href="/privacy">حریم خصوصی</a></li>
         <li><a href="/contact">تماس با ما</a></li>
       </ul>
     </nav>
+    <div class="site-footer__contact">
+      <h2 class="footer-title">مسئول رالیتو</h2>
+      <address>
+        <span>{SITE.responsible.name}</span>
+        <span>{SITE.responsible.location}</span>
+        <a href={`tel:${SITE.responsible.phoneE164}`} dir="ltr">{SITE.responsible.phone}</a>
+      </address>
+    </div>
   </div>
   <div class="container site-footer__base">
     <p>© {year} {SITE.name}</p>
@@ -55,20 +65,23 @@ const SportsBlock = linked.size > 0 ? 'nav' : 'div'
 
 <style>
   .site-footer {
-    padding-block: 56px 28px;
-    background: var(--c-surface);
-    border-top: 1px solid var(--c-line);
+    padding-block: 64px 28px;
+    background: var(--c-night);
     font-size: var(--step--1);
   }
 
   .site-footer__grid {
     display: grid;
-    gap: 32px;
-    grid-template-columns: 1fr 1fr;
+    gap: 36px 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer__brand,
+  .site-footer__contact {
+    grid-column: 1 / -1;
   }
 
   .site-footer__brand {
-    grid-column: 1 / -1;
     max-width: 22rem;
   }
 
@@ -76,15 +89,16 @@ const SportsBlock = linked.size > 0 ? 'nav' : 'div'
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: var(--c-ink);
+    color: var(--c-surface);
     font: 900 1.45rem / 1 var(--font-display);
     text-decoration: none;
-    margin-block-end: 10px;
+    margin-block-end: 12px;
   }
 
   .footer-title {
-    font: 700 var(--step-0) / 1.6 var(--font-body);
     margin-block-end: 8px;
+    color: var(--c-surface);
+    font: 700 var(--step-0) / 1.6 var(--font-body);
   }
 
   .site-footer ul {
@@ -92,38 +106,52 @@ const SportsBlock = linked.size > 0 ? 'nav' : 'div'
     list-style: none;
   }
 
-  .site-footer li a {
+  .site-footer li a,
+  .site-footer address a {
     display: inline-block;
     padding-block: 5px;
-    color: var(--c-muted);
+    color: var(--c-mint);
     text-decoration: none;
   }
 
   .footer-plain {
     padding-block: 5px;
-    color: var(--c-muted);
+    color: var(--c-mint);
   }
 
-  .site-footer li a:hover {
-    color: var(--c-court);
-    text-decoration: underline;
+  .site-footer address {
+    display: grid;
+    justify-items: start;
+    color: var(--c-mint);
+    font-style: normal;
+    line-height: 2;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .site-footer li a:hover,
+    .site-footer address a:hover {
+      color: var(--c-surface);
+      text-decoration: underline;
+    }
   }
 
   .site-footer__base {
     display: flex;
     justify-content: space-between;
-    margin-block-start: 40px;
+    gap: 16px;
+    margin-block-start: 48px;
     padding-block-start: 20px;
-    border-top: 1px solid var(--c-line);
-    color: var(--c-muted);
+    border-top: 1px solid rgb(255 255 255 / 12%);
+    color: var(--c-mint);
   }
 
-  @media (min-width: 760px) {
+  @media (min-width: 860px) {
     .site-footer__grid {
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
     }
 
-    .site-footer__brand {
+    .site-footer__brand,
+    .site-footer__contact {
       grid-column: auto;
     }
   }

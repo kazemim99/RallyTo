@@ -1,0 +1,119 @@
+---
+/** A province: its cities, and in each city the clubs and the sports they have. */
+import DownloadBlock from '../../../components/DownloadBlock.astro'
+import ClubList from '../../../components/clubs/ClubList.astro'
+import DirectoryHero from '../../../components/clubs/DirectoryHero.astro'
+import { DIRECTORY, citySportPath, clubsOf, sportsIn, type ProvinceGroup } from '../../../data/clubs'
+import { provinceClubsPage } from '../../../data/pages'
+import Base from '../../../layouts/Base.astro'
+import { clubListLd } from '../../../lib/seo'
+
+export function getStaticPaths() {
+  return DIRECTORY.map((province) => ({ params: { province: province.slug }, props: { province } }))
+}
+
+interface Props {
+  province: ProvinceGroup
+}
+const { province } = Astro.props
+const meta = provinceClubsPage(province)
+const fa = (n: number) => n.toLocaleString('fa-IR')
+const ld = clubListLd(
+  `باشگاه‌های استان ${province.name}`,
+  province.path,
+  province.cities.flatMap((c) => c.clubs.map((club) => ({ name: club.name, sports: club.sports.map((s) => s.name), city: c.name, province: province.name }))),
+)
+---
+
+<Base meta={meta} jsonLd={[ld]}>
+  <DirectoryHero
+    crumbs={meta.crumbs!}
+    heading={`باشگاه‌های استان ${province.name}`}
+    lead={`${fa(province.clubCount)} باشگاه در ${fa(province.cities.length)} شهر. شهرت را باز کن تا باشگاه‌هایش را به تفکیک ورزش ببینی.`}
+    province={province.path}
+  />
+
+  <section class="section">
+    <div class="container cities">
+      {
+        province.cities.map((city) => (
+          <section class="city" aria-labelledby={`city-${city.id}`}>
+            <div class="city__head">
+              <h2 id={`city-${city.id}`}>
+                <a href={city.path}>{city.name}</a>
+              </h2>
+              <ul class="city__sports" aria-label={`ورزش‌های ${city.name}`}>
+                {sportsIn(city).map((s) => (
+                  <li>
+                    <a href={citySportPath(city, s)}>
+                      {s.name} {fa(clubsOf(city, s).length)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <ClubList clubs={city.clubs} />
+          </section>
+        ))
+      }
+    </div>
+  </section>
+
+  <DownloadBlock />
+</Base>
+
+<style>
+  .cities {
+    display: grid;
+    gap: clamp(40px, 6vw, 64px);
+  }
+
+  .city__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 20px;
+    margin-block-end: 14px;
+  }
+
+  .city h2 {
+    font-size: var(--step-3);
+  }
+
+  .city h2 a {
+    color: var(--c-ink);
+    text-decoration: none;
+  }
+
+  .city__sports {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .city__sports a {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--c-soft);
+    color: var(--c-court);
+    font-size: var(--step--1);
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color var(--dur-ui) ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .city h2 a:hover {
+      color: var(--c-court);
+    }
+
+    .city__sports a:hover {
+      background: var(--c-mint);
+    }
+  }
+</style>

@@ -1,0 +1,235 @@
+---
+/**
+ * The club directory's front page: the finder, the cities with the most clubs for each sport, and every province with
+ * its cities. Not built while the directory snapshot is empty (src/data/venues.json, `npm run venues`).
+ */
+import DownloadBlock from '../../components/DownloadBlock.astro'
+import DirectoryHero from '../../components/clubs/DirectoryHero.astro'
+import { DIRECTORY, citySportPath, directoryPublished, topCitiesFor, totalClubs } from '../../data/clubs'
+import { clubsHubPage } from '../../data/pages'
+import { SPORTS } from '../../data/sports'
+import Base from '../../layouts/Base.astro'
+
+export function getStaticPaths() {
+  // A rest parameter left undefined builds /clubs itself; none is built while the snapshot is empty.
+  return directoryPublished() ? [{ params: { hub: undefined } }] : []
+}
+
+const meta = clubsHubPage()
+const fa = (n: number) => n.toLocaleString('fa-IR')
+---
+
+<Base meta={meta}>
+  <DirectoryHero
+    crumbs={meta.crumbs!}
+    heading="باشگاه‌های تنیس، پدل، بدمینتون و اسکواش"
+    lead={`${fa(totalClubs())} باشگاه در ${fa(DIRECTORY.length)} استان. ورزش، استان و شهرت را انتخاب کن تا باشگاه‌های همان‌جا را ببینی؛ بعد در رالیتو برای همان باشگاه‌ها هم‌بازی هم‌سطح پیدا کن.`}
+  />
+
+  <section class="section" aria-labelledby="by-sport">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">به تفکیک ورزش</p>
+        <h2 id="by-sport">شهرهایی که بیشترین باشگاه را دارند</h2>
+      </div>
+      <div class="by-sport">
+        {
+          SPORTS.map((s) => {
+            const top = topCitiesFor(s, 6)
+            return (
+              top.length > 0 && (
+                <div class:list={['sport-block', `sport-block--${s.slug}`]} id={s.slug}>
+                  <h3>باشگاه‌های {s.name}</h3>
+                  <ul>
+                    {top.map(({ city, count }) => (
+                      <li>
+                        <a href={citySportPath(city, s)}>
+                          <span>{city.name}</span>
+                          <b>{fa(count)}</b>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            )
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section provinces-section" aria-labelledby="by-province">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker">به تفکیک استان</p>
+        <h2 id="by-province">همه‌ی استان‌ها و شهرها</h2>
+      </div>
+      <ul class="provinces">
+        {
+          DIRECTORY.map((p) => (
+            <li>
+              <h3>
+                <a href={p.path}>استان {p.name}</a>
+                <span class="count">{fa(p.clubCount)} باشگاه</span>
+              </h3>
+              <ul class="cities">
+                {p.cities.map((c) => (
+                  <li>
+                    <a href={c.path}>
+                      {c.name} <span class="count">{fa(c.clubs.length)}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <DownloadBlock />
+</Base>
+
+<style>
+  .by-sport {
+    display: grid;
+    gap: 36px 40px;
+  }
+
+  .sport-block {
+    --tint: var(--c-tennis);
+    scroll-margin-top: 110px;
+  }
+
+  .sport-block--padel { --tint: var(--c-padel); }
+  .sport-block--badminton { --tint: var(--c-badminton); }
+  .sport-block--squash { --tint: var(--c-squash); }
+
+  .sport-block h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-block-end: 8px;
+  }
+
+  .sport-block h3::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background: var(--tint);
+  }
+
+  .sport-block ul,
+  .provinces,
+  .cities {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sport-block ul {
+    border-top: 1px solid var(--c-ink);
+  }
+
+  .sport-block a {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-block: 11px;
+    border-bottom: 1px solid var(--c-line);
+    color: var(--c-ink);
+    text-decoration: none;
+    transition: color var(--dur-ui) ease;
+  }
+
+  .sport-block b {
+    color: var(--tint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .provinces-section {
+    background: var(--c-surface);
+    border-block: 1px solid var(--c-line);
+  }
+
+  .provinces {
+    display: grid;
+    gap: 28px 40px;
+  }
+
+  .provinces > li {
+    padding-block-start: 14px;
+    border-top: 1px solid var(--c-ink);
+  }
+
+  .provinces h3 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 12px;
+    margin-block-end: 8px;
+  }
+
+  .provinces h3 a {
+    color: var(--c-ink);
+    text-decoration: none;
+  }
+
+  .count {
+    color: var(--c-muted);
+    font-size: var(--step--1);
+    font-weight: 400;
+  }
+
+  .cities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .cities a {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--c-line);
+    border-radius: 999px;
+    color: var(--c-ink);
+    font-size: var(--step--1);
+    text-decoration: none;
+    transition:
+      border-color var(--dur-ui) ease,
+      background-color var(--dur-ui) ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .sport-block a:hover,
+    .provinces h3 a:hover {
+      color: var(--c-court);
+    }
+
+    .cities a:hover {
+      border-color: var(--c-court);
+      background: var(--c-soft);
+    }
+  }
+
+  @media (min-width: 760px) {
+    .by-sport,
+    .provinces {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1040px) {
+    .by-sport {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .provinces {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

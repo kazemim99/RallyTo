@@ -1,8 +1,9 @@
 import { SITE } from '../config/site'
 
-/** Absolute URL on the canonical host for a site path ("/" for the home page). */
+/** Absolute URL on the canonical host for a site path ("/" for the home page). Persian path segments (the club
+ * directory's places) are percent-encoded, as a sitemap requires. */
 export function absolute(path: string): string {
-  return path === '/' ? `${SITE.url}/` : `${SITE.url}${path}`
+  return path === '/' ? `${SITE.url}/` : `${SITE.url}${encodeURI(path)}`
 }
 
 /** The logo Google may show for the organization: a square PNG on the site itself. */
@@ -74,6 +75,34 @@ export function breadcrumbLd(crumbs: readonly Crumb[]) {
       position: i + 1,
       name: c.name,
       item: absolute(c.path),
+    })),
+  }
+}
+
+/**
+ * A directory page's clubs as an ItemList of sports places. Each carries its name, sports and town only: Rallyto
+ * publishes no club address, phone number or position (owner decision 2026-11-01).
+ */
+export function clubListLd(
+  name: string,
+  path: string,
+  clubs: readonly { name: string; sports: readonly string[]; city: string; province: string }[],
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name,
+    url: absolute(path),
+    numberOfItems: clubs.length,
+    itemListElement: clubs.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'SportsActivityLocation',
+        name: c.name,
+        sport: c.sports,
+        address: { '@type': 'PostalAddress', addressLocality: c.city, addressRegion: c.province, addressCountry: 'IR' },
+      },
     })),
   }
 }

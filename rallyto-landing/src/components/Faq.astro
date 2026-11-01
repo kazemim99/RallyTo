@@ -12,7 +12,10 @@ const { items, heading = 'سؤال‌هایی که معمولاً می‌پرس�
 
 <section class="section faq" id={id} aria-labelledby={`${id}-title`}>
   <div class="container faq__inner">
-    <h2 id={`${id}-title`}>{heading}</h2>
+    <div class="faq__head">
+      <p class="kicker">سؤال‌ها</p>
+      <h2 id={`${id}-title`}>{heading}</h2>
+    </div>
     <div class="faq__list">
       {
         items.map((item) => (
@@ -33,7 +36,7 @@ const { items, heading = 'سؤال‌هایی که معمولاً می‌پرس�
   }
 
   .faq__list {
-    border-top: 1px solid var(--c-line);
+    border-top: 1px solid var(--c-ink);
   }
 
   details {
@@ -44,45 +47,81 @@ const { items, heading = 'سؤال‌هایی که معمولاً می‌پرس�
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    padding-block: 20px;
+    gap: 20px;
+    padding-block: 22px;
     font-weight: 700;
     font-size: var(--step-1);
     line-height: 1.65;
     cursor: pointer;
     list-style: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: color var(--dur-ui) ease;
   }
 
   summary::-webkit-details-marker {
     display: none;
   }
 
+  /* A plus that turns into a cross when the answer is open. */
   summary::after {
     content: '';
     flex: none;
-    width: 12px;
-    height: 12px;
-    border: solid var(--c-court);
-    border-width: 0 2.5px 2.5px 0;
-    transform: rotate(45deg) translate(-3px, -3px);
-    transition: transform 0.2s ease;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid var(--c-line);
+    background:
+      linear-gradient(var(--c-court), var(--c-court)) center / 12px 2px no-repeat,
+      linear-gradient(var(--c-court), var(--c-court)) center / 2px 12px no-repeat;
+    transition:
+      transform var(--dur-ui) var(--ease-out),
+      background-color var(--dur-ui) ease,
+      border-color var(--dur-ui) ease;
   }
 
   details[open] summary::after {
-    transform: rotate(-135deg);
+    transform: rotate(45deg);
+    border-color: var(--c-court);
+    background-color: var(--c-soft);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    summary:hover {
+      color: var(--c-court);
+    }
   }
 
   details p {
     max-width: var(--measure);
-    padding-block-end: 22px;
+    padding-block-end: 24px;
     color: var(--c-muted);
+  }
+
+  /* The answer opens and closes by height where the browser can animate it; elsewhere it simply appears. */
+  @media (prefers-reduced-motion: no-preference) {
+    details::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition:
+        block-size 320ms var(--ease-out),
+        content-visibility 320ms allow-discrete;
+    }
+
+    details[open]::details-content {
+      block-size: auto;
+    }
   }
 
   @media (min-width: 960px) {
     .faq__inner {
-      grid-template-columns: 1fr 2fr;
-      gap: 64px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      gap: 72px;
       align-items: start;
+    }
+
+    .faq__head {
+      position: sticky;
+      top: 110px;
     }
   }
 </style>

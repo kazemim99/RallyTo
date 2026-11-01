@@ -1,0 +1,92 @@
+---
+/**
+ * A phone, drawn in CSS, holding a screen of the app redrawn in HTML (same colours, same components). Decorative: the
+ * text beside it says what the screen shows, so the whole device is hidden from assistive technology. `tilt` leans it
+ * a little, toward the start edge.
+ */
+interface Props {
+  tilt?: boolean
+  class?: string
+}
+const { tilt = false, class: className } = Astro.props
+---
+
+<div class:list={['phone', className, { 'phone--tilt': tilt }]} aria-hidden="true">
+  <div class="phone__screen">
+    <div class="phone__status"><span>۹:۴۱</span><i></i></div>
+    <slot />
+  </div>
+  <span class="phone__sample">نمونه</span>
+</div>
+
+<style>
+  .phone {
+    position: relative;
+    width: min(100%, 320px);
+    padding: 10px;
+    border-radius: 46px;
+    background: #0d1714;
+    box-shadow:
+      0 0 0 1.5px #2b3833 inset,
+      0 50px 80px -40px rgb(8 42 32 / 60%),
+      0 24px 30px -24px rgb(8 42 32 / 40%);
+  }
+
+  .phone--tilt {
+    transform: rotate(3deg);
+  }
+
+  [dir='ltr'] .phone--tilt {
+    transform: rotate(-3deg);
+  }
+
+  .phone__screen {
+    overflow: hidden;
+    border-radius: 37px;
+    background: var(--c-canvas);
+    color: var(--c-ink);
+    font-size: var(--step--1);
+    line-height: 1.6;
+  }
+
+  .phone__status {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding-inline: 28px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  /* The camera island. */
+  .phone__status i {
+    position: absolute;
+    inset-inline-start: 50%;
+    top: 10px;
+    width: 86px;
+    height: 22px;
+    border-radius: 999px;
+    background: #0d1714;
+    translate: 50% 0;
+  }
+
+  [dir='ltr'] .phone__status i {
+    translate: -50% 0;
+  }
+
+  .phone__sample {
+    position: absolute;
+    inset-block-start: 26px;
+    inset-inline-end: -14px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: var(--c-ball);
+    color: var(--c-deep);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 24px;
+    box-shadow: var(--shadow);
+  }
+</style>

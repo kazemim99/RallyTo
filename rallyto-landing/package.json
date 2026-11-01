@@ -10,13 +10,14 @@
     "dev": "astro dev",
     "fonts": "node scripts/subset-font.mjs",
     "build": "node scripts/subset-font.mjs && astro build && node scripts/precompress.mjs",
-    "build:test": "node scripts/subset-font.mjs && cross-env LANDING_BUILD=test astro build",
+    "build:test": "node scripts/subset-font.mjs && cross-env LANDING_BUILD=test LANDING_VENUES=tests/fixtures/venues.sample.json astro build",
     "preview": "astro preview",
     "check": "astro check",
     "og": "node scripts/render-og.mjs",
-    "test:unit": "vitest run tests/unit",
-    "test:built": "vitest run tests/built",
-    "lhci": "lhci autorun"
+    "test:unit": "cross-env LANDING_VENUES=tests/fixtures/venues.sample.json vitest run tests/unit",
+    "test:built": "cross-env LANDING_VENUES=tests/fixtures/venues.sample.json vitest run tests/built",
+    "lhci": "lhci autorun",
+    "venues": "node scripts/fetch-venues.mjs"
   },
   "dependencies": {
     "astro": "7.3.5"

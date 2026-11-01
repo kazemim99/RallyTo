@@ -1,8 +1,13 @@
 ---
 import { publishedSports } from '../data/pages'
 import { SPORTS } from '../data/sports'
+import Icon from './Icon.astro'
 import MiniCourt from './MiniCourt.astro'
 
+/**
+ * The sports as an editorial index: one row each, its number, its name set large, what it offers in Rallyto, and its
+ * court. A row links to the sport's page once that page is published; until then it just names the sport.
+ */
 interface Props {
   /** The sport whose page this is; it is left out of the list. */
   except?: string
@@ -11,104 +16,197 @@ interface Props {
 }
 const {
   except,
-  heading = 'تنیس، پدل، بدمینتون یا اسکواش؟',
+  heading = 'یک اپ، چهار زمین',
   lead = 'هر ورزش سطح‌بندی و قاعده‌های خودش را دارد و رالیتو برای هر کدام جدا هم‌بازی پیدا می‌کند.',
 } = Astro.props
 const sports = SPORTS.filter((s) => s.slug !== except)
-// A tile links to its sport's page only once that page is published; until then it just names the sport.
 const linked = new Set(publishedSports().map((s) => s.slug))
+const faDigits = (n: number) => n.toLocaleString('fa-IR')
 ---
 
 <section class="section sports" id="sports" aria-labelledby="sports-title">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head sports__head reveal">
+      <p class="kicker">ورزش‌ها</p>
       <h2 id="sports-title">{heading}</h2>
       <p>{lead}</p>
     </div>
-    <ul class="tiles" data-count={sports.length}>
+    <ul class="index">
       {
-        sports.map((s) => (
-          <li>
-            {linked.has(s.slug) ? (
-              <a class:list={['tile', 'tile--link', `tile--${s.slug}`]} href={`/${s.slug}`}>
-                <MiniCourt sport={s.slug} />
-                <span class="tile__text">
-                  <span class="tile__name">پارتنر {s.name}</span>
-                  <span class="tile__formats">{s.formats.join('، ')}</span>
+        sports.map((s, i) => {
+          const Row = linked.has(s.slug) ? 'a' : 'div'
+          return (
+            <li>
+              <Row class:list={['row', `row--${s.slug}`, { 'row--link': Row === 'a' }]} href={Row === 'a' ? `/${s.slug}` : undefined}>
+                <span class="row__n eyebrow-num" aria-hidden="true">
+                  {faDigits(i + 1)}
                 </span>
-              </a>
-            ) : (
-              <div class:list={['tile', `tile--${s.slug}`]}>
-                <MiniCourt sport={s.slug} />
-                <span class="tile__text">
-                  <span class="tile__name">پارتنر {s.name}</span>
-                  <span class="tile__formats">{s.formats.join('، ')}</span>
+                <span class="row__name">
+                  <span class="visually-hidden">پارتنر </span>
+                  {s.name}
                 </span>
-              </div>
-            )}
-          </li>
-        ))
+                <span class="row__meta">
+                  {s.formats.join(' و ')}، {faDigits(s.levels.length)} سطح از {s.levels[0].name} تا {s.levels.at(-1)!.name}
+                </span>
+                <span class="row__court" aria-hidden="true">
+                  <MiniCourt sport={s.slug} />
+                </span>
+                {Row === 'a' && <Icon name="arrow" size={26} class="arrow row__arrow" />}
+              </Row>
+            </li>
+          )
+        })
       }
     </ul>
   </div>
 </section>
 
 <style>
-  .tiles {
-    display: grid;
-    gap: 14px;
-    grid-template-columns: repeat(2, 1fr);
+  .sports__head {
+    max-width: 40rem;
+  }
+
+  .index {
+    margin: 0;
     padding: 0;
     list-style: none;
+    border-top: 1px solid var(--c-ink);
   }
 
-  .tile {
+  .row {
+    --tint: var(--c-tennis);
+    position: relative;
     display: grid;
-    gap: 14px;
-    height: 100%;
-    padding: 14px 14px 18px;
-    background: var(--c-surface);
-    border: 1px solid var(--c-line);
-    border-radius: var(--radius-l);
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'n name court'
+      'n meta court';
+    align-items: center;
+    column-gap: 16px;
+    padding-block: 18px;
+    border-bottom: 1px solid var(--c-line);
     color: var(--c-ink);
     text-decoration: none;
-    transition:
-      border-color 0.2s ease,
-      transform 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    isolation: isolate;
   }
 
-  .tile--link:hover {
-    border-color: var(--c-court);
-    transform: translateY(-2px);
+  .row--padel { --tint: var(--c-padel); }
+  .row--badminton { --tint: var(--c-badminton); }
+  .row--squash { --tint: var(--c-squash); }
+
+  /* The sport's colour fills the row from its start edge on hover. */
+  .row::before {
+    content: '';
+    position: absolute;
+    inset: 0 calc(-1 * var(--gutter));
+    z-index: -1;
+    background: color-mix(in srgb, var(--tint) 9%, transparent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 420ms var(--ease-out);
   }
 
-  .tile :global(.mini-court) {
-    border-radius: 14px;
+  [dir='ltr'] .row::before {
+    transform-origin: left;
   }
 
-  .tile__text {
-    display: grid;
-    padding-inline: 4px;
-  }
-
-  .tile__name {
-    font-weight: 700;
-    font-size: var(--step-1);
-    line-height: 1.6;
-  }
-
-  .tile__formats {
-    color: var(--c-muted);
+  .row__n {
+    grid-area: n;
+    align-self: start;
+    padding-block-start: 0.6em;
+    color: var(--tint);
     font-size: var(--step--1);
   }
 
-  @media (min-width: 900px) {
-    .tiles {
-      grid-template-columns: repeat(4, 1fr);
+  .row__name {
+    grid-area: name;
+    font: 900 var(--step-3) / 1.4 var(--font-display);
+  }
+
+  .row__meta {
+    grid-area: meta;
+    color: var(--c-muted);
+    font-size: var(--step--1);
+    line-height: 1.7;
+  }
+
+  .row__court {
+    grid-area: court;
+    width: 54px;
+    transition: transform 420ms var(--ease-out);
+  }
+
+  .row__court :global(.mini-court) {
+    filter: drop-shadow(0 8px 14px rgb(19 33 29 / 18%));
+  }
+
+  .row :global(.row__arrow) {
+    display: none;
+  }
+
+  .row--link:focus-visible {
+    outline-offset: -3px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .row--link:hover::before {
+      transform: scaleX(1);
     }
 
-    .tiles[data-count='3'] {
-      grid-template-columns: repeat(3, 1fr);
+    .row--link:hover .row__court {
+      transform: rotate(-8deg) scale(1.06);
+    }
+
+    .row--link:hover :global(.row__arrow) {
+      color: var(--tint);
+      transform: translateX(4px);
+    }
+
+    [dir='rtl'] .row--link:hover :global(.row__arrow) {
+      transform: scaleX(-1) translateX(4px);
+    }
+  }
+
+  .row--link:active .row__court {
+    transform: scale(0.96);
+    transition-duration: var(--dur-press);
+  }
+
+  @media (min-width: 860px) {
+    .row {
+      grid-template-columns: 72px minmax(0, 0.9fr) minmax(0, 1.1fr) 76px 32px;
+      grid-template-areas: 'n name meta court arrow';
+      column-gap: 28px;
+      padding-block: 26px;
+    }
+
+    .row__n {
+      align-self: center;
+      padding: 0;
+      font-size: var(--step-1);
+    }
+
+    .row__name {
+      font-size: var(--step-4);
+      line-height: 1.3;
+    }
+
+    .row__meta {
+      font-size: var(--step-0);
+    }
+
+    .row__court {
+      width: 76px;
+    }
+
+    .row :global(.row__arrow) {
+      grid-area: arrow;
+      display: block;
+      color: var(--c-muted);
+      transition:
+        transform var(--dur-ui) var(--ease-out),
+        color var(--dur-ui) ease;
     }
   }
 </style>

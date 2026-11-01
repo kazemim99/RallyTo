@@ -1,0 +1,166 @@
+---
+/** A city: its clubs with their sports, a link per sport, and the province's other cities. */
+import DownloadBlock from '../../../../components/DownloadBlock.astro'
+import ClubList from '../../../../components/clubs/ClubList.astro'
+import DirectoryHero from '../../../../components/clubs/DirectoryHero.astro'
+import { DIRECTORY, citySportPath, clubsOf, sportsIn, type CityGroup, type ProvinceGroup } from '../../../../data/clubs'
+import { cityClubsPage } from '../../../../data/pages'
+import Base from '../../../../layouts/Base.astro'
+import { clubListLd } from '../../../../lib/seo'
+
+export function getStaticPaths() {
+  return DIRECTORY.flatMap((province) =>
+    province.cities.map((city) => ({ params: { province: province.slug, city: city.slug }, props: { province, city } })),
+  )
+}
+
+interface Props {
+  province: ProvinceGroup
+  city: CityGroup
+}
+const { province, city } = Astro.props
+const meta = cityClubsPage(province, city)
+const fa = (n: number) => n.toLocaleString('fa-IR')
+const sports = sportsIn(city)
+const others = province.cities.filter((c) => c.id !== city.id)
+const ld = clubListLd(
+  `باشگاه‌های ${city.name}`,
+  city.path,
+  city.clubs.map((club) => ({ name: club.name, sports: club.sports.map((s) => s.name), city: city.name, province: province.name })),
+)
+---
+
+<Base meta={meta} jsonLd={[ld]}>
+  <DirectoryHero
+    crumbs={meta.crumbs!}
+    heading={`باشگاه‌های ${city.name}`}
+    lead={`${fa(city.clubs.length)} باشگاه در ${city.name}، استان ${province.name}. برای هر کدام از این باشگاه‌ها می‌توانی در رالیتو هم‌بازی هم‌سطح پیدا کنی یا بازی باز بگذاری.`}
+    province={province.path}
+    city={city.path}
+  />
+
+  <section class="section">
+    <div class="container">
+      <ul class="sport-links" aria-label={`ورزش‌های ${city.name}`}>
+        {
+          sports.map((s) => (
+            <li>
+              <a class:list={['sport-link', `sport-link--${s.slug}`]} href={citySportPath(city, s)}>
+                <span>باشگاه {s.name}</span>
+                <b>{fa(clubsOf(city, s).length)}</b>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <h2 class="list-title">همه‌ی باشگاه‌های {city.name}</h2>
+      <ClubList clubs={city.clubs} />
+
+      {
+        others.length > 0 && (
+          <nav class="others" aria-labelledby="others-title">
+            <h2 id="others-title">شهرهای دیگر استان {province.name}</h2>
+            <ul>
+              {others.map((c) => (
+                <li>
+                  <a href={c.path}>{c.name}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
+    </div>
+  </section>
+
+  <DownloadBlock />
+</Base>
+
+<style>
+  .sport-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+    gap: 10px;
+    margin: 0 0 clamp(40px, 6vw, 64px);
+    padding: 0;
+    list-style: none;
+  }
+
+  .sport-link {
+    --tint: var(--c-tennis);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    border: 1px solid var(--c-line);
+    border-inline-start: 4px solid var(--tint);
+    border-radius: 16px;
+    background: var(--c-surface);
+    color: var(--c-ink);
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      transform var(--dur-press) var(--ease-out),
+      border-color var(--dur-ui) ease;
+  }
+
+  .sport-link--padel { --tint: var(--c-padel); }
+  .sport-link--badminton { --tint: var(--c-badminton); }
+  .sport-link--squash { --tint: var(--c-squash); }
+
+  .sport-link b {
+    color: var(--c-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sport-link:active {
+    transform: scale(0.98);
+  }
+
+  .list-title {
+    margin-block-end: 16px;
+    font-size: var(--step-2);
+  }
+
+  .others {
+    margin-block-start: clamp(40px, 6vw, 64px);
+  }
+
+  .others h2 {
+    margin-block-end: 12px;
+    font-size: var(--step-1);
+    font-family: var(--font-body);
+    font-weight: 700;
+  }
+
+  .others ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .others a {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--c-line);
+    border-radius: 999px;
+    color: var(--c-ink);
+    font-size: var(--step--1);
+    text-decoration: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .sport-link:hover,
+    .others a:hover {
+      border-color: var(--c-court);
+    }
+
+    .sport-link:hover {
+      border-inline-start-color: var(--tint);
+    }
+  }
+</style>

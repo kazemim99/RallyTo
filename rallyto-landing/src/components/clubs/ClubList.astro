@@ -1,0 +1,85 @@
+---
+/** Clubs as a plain list: each club's name and the sports it has, in the site's order and colours. */
+import type { Club } from '../../data/clubs'
+
+interface Props {
+  clubs: Club[]
+}
+const { clubs } = Astro.props
+---
+
+<ul class="clubs">
+  {
+    clubs.map((club) => (
+      <li class="club">
+        <span class="club__name">{club.name}</span>
+        <span class="club__sports">
+          {club.sports.map((s) => (
+            <span class:list={['chip', `chip--${s.slug}`]}>{s.name}</span>
+          ))}
+        </span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .clubs {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--c-ink);
+  }
+
+  .club {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .club__name {
+    min-width: 0;
+    font-weight: 700;
+    font-size: var(--step-1);
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+
+  .club__sports {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip {
+    --dot: var(--c-tennis);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 10px;
+    border: 1px solid var(--c-line);
+    border-radius: 999px;
+    background: var(--c-surface);
+    color: var(--c-ink);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 26px;
+    white-space: nowrap;
+  }
+
+  .chip::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--dot);
+  }
+
+  .chip--padel { --dot: var(--c-padel); }
+  .chip--badminton { --dot: var(--c-badminton); }
+  .chip--squash { --dot: var(--c-squash); }
+</style>

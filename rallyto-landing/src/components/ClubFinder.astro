@@ -1,0 +1,192 @@
+---
+/**
+ * Find a club by sport, province and city. Without JavaScript it is a plain form whose city list is grouped by
+ * province and which opens the directory; with JavaScript the city list follows the chosen province and the form goes
+ * straight to that city's page (for the chosen sport, when the city has a club for it). Only places with at least one
+ * active club are offered.
+ */
+import { CLUBS_PATH, DIRECTORY, sportsIn } from '../data/clubs'
+import { SPORTS } from '../data/sports'
+import Icon from './Icon.astro'
+
+interface Props {
+  tone?: 'light' | 'dark'
+  /** The sport selected when the form opens (a sport page passes its own). */
+  sport?: string
+  /** The province and city paths selected when the form opens (a directory page passes its own place). */
+  province?: string
+  city?: string
+  headingId?: string
+}
+const { tone = 'light', sport = '', province = '', city = '', headingId } = Astro.props
+const fa = (n: number) => n.toLocaleString('fa-IR')
+---
+
+<form class:list={['finder', `finder--${tone}`]} action={CLUBS_PATH} method="get" data-club-finder aria-labelledby={headingId}>
+  <label class="finder__field">
+    <span>ورزش</span>
+    <select name="sport" data-sport>
+      <option value="">همه‌ی ورزش‌ها</option>
+      {SPORTS.map((s) => <option value={s.slug} selected={s.slug === sport}>{s.name}</option>)}
+    </select>
+  </label>
+  <label class="finder__field">
+    <span>استان</span>
+    <select name="province" data-province>
+      <option value="">همه‌ی استان‌ها</option>
+      {
+        DIRECTORY.map((p) => (
+          <option value={p.path} data-slug={p.slug} selected={p.path === province}>
+            {p.name}
+          </option>
+        ))
+      }
+    </select>
+  </label>
+  <label class="finder__field">
+    <span>شهر</span>
+    <select name="city" data-city>
+      <option value="">همه‌ی شهرها</option>
+      {
+        DIRECTORY.map((p) => (
+          <optgroup label={p.name} data-province-slug={p.slug}>
+            {p.cities.map((c) => (
+              <option value={c.path} data-sports={sportsIn(c).map((s) => s.slug).join(' ')} selected={c.path === city}>
+                {c.name} ({fa(c.clubs.length)})
+              </option>
+            ))}
+          </optgroup>
+        ))
+      }
+    </select>
+  </label>
+  <button class:list={['btn', 'finder__go', tone === 'dark' ? 'btn--ball' : 'btn--court']} type="submit">
+    <Icon name="search" size={20} />
+    پیدا کن
+  </button>
+</form>
+
+<script>
+  // Progressive enhancement: narrow the cities to the chosen province and open the matching directory page.
+  for (const form of document.querySelectorAll<HTMLFormElement>('[data-club-finder]')) {
+    const sport = form.querySelector<HTMLSelectElement>('[data-sport]')!
+    const province = form.querySelector<HTMLSelectElement>('[data-province]')!
+    const city = form.querySelector<HTMLSelectElement>('[data-city]')!
+
+    const narrow = () => {
+      const slug = province.selectedOptions[0]?.dataset.slug ?? ''
+      for (const group of city.querySelectorAll('optgroup')) {
+        const shown = !slug || group.dataset.provinceSlug === slug
+        group.hidden = !shown
+        group.disabled = !shown
+      }
+      if (city.selectedOptions[0]?.parentElement instanceof HTMLOptGroupElement && city.selectedOptions[0].parentElement.disabled) city.value = ''
+    }
+
+    province.addEventListener('change', narrow)
+    city.addEventListener('change', () => {
+      // Picking a city first selects its province, so the two never disagree.
+      const group = city.selectedOptions[0]?.parentElement
+      if (group instanceof HTMLOptGroupElement) {
+        const match = [...province.options].find((o) => o.dataset.slug === group.dataset.provinceSlug)
+        if (match && province.value !== match.value) {
+          province.value = match.value
+          narrow()
+        }
+      }
+    })
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault()
+      const chosenCity = city.selectedOptions[0]
+      const sports = (chosenCity?.dataset.sports ?? '').split(' ')
+      let target = city.value || province.value || form.getAttribute('action') || '/clubs'
+      if (city.value && sport.value && sports.includes(sport.value)) target += `/${sport.value}`
+      else if (!city.value && !province.value && sport.value) target += `#${sport.value}`
+      window.location.assign(target)
+    })
+
+    narrow()
+  }
+</script>
+
+<style>
+  .finder {
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 24px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-line);
+    box-shadow: var(--shadow);
+  }
+
+  .finder--dark {
+    background: rgb(255 255 255 / 7%);
+    border-color: rgb(255 255 255 / 14%);
+    box-shadow: none;
+  }
+
+  .finder__field {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .finder__field span {
+    color: var(--c-muted);
+    font-size: 0.8125rem;
+    font-weight: 700;
+  }
+
+  .finder--dark .finder__field span {
+    color: var(--c-mint);
+  }
+
+  select {
+    width: 100%;
+    min-height: 50px;
+    padding-inline: 14px 40px;
+    border: 1.5px solid var(--c-line);
+    border-radius: 14px;
+    /* A down-chevron drawn in the court green, on the inline-end side. */
+    background:
+      var(--c-surface)
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23146B52' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")
+      no-repeat left 14px center;
+    color: var(--c-ink);
+    font: 400 1rem / 1.4 var(--font-body);
+    appearance: none;
+    cursor: pointer;
+    transition: border-color var(--dur-ui) ease;
+  }
+
+  [dir='ltr'] select {
+    padding-inline: 14px 40px;
+    background-position: right 14px center;
+  }
+
+  select:focus-visible {
+    border-color: var(--c-court);
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    select:hover {
+      border-color: var(--c-court);
+    }
+  }
+
+  .finder__go {
+    min-height: 50px;
+    align-self: end;
+  }
+
+  @media (min-width: 760px) {
+    .finder {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+      align-items: end;
+      padding: 18px;
+    }
+  }
+</style>

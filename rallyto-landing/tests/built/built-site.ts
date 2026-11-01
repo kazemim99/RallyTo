@@ -48,7 +48,7 @@ export function jsonLd(p: BuiltPage): Record<string, unknown>[] {
 
 /** The built file a site path is served from, if any (nginx: try_files $uri $uri.html). */
 export function fileInDist(sitePath: string): string | undefined {
-  const clean = sitePath.split(/[?#]/)[0]
+  const clean = decodeURI(sitePath.split(/[?#]/)[0])
   const candidates = clean === '/' ? ['index.html'] : [clean.slice(1), `${clean.slice(1)}.html`]
   return candidates.map((c) => join(DIST, c)).find((f) => existsSync(f))
 }

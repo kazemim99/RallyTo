@@ -1,17 +1,19 @@
 /**
  * The site's colours, mirrored in src/styles/global.css as `--c-<name>` (tests/unit/contrast.test.ts holds the two
  * together and checks every pair below against WCAG 2.2 AA). The palette is the player app's (rallyto-app
- * AppColors) plus the four court surfaces of the hero.
+ * AppColors) plus the four court surfaces of the hero, on a warm paper canvas, with a near-black green (night) for
+ * the hero stage and the footer.
  */
 export const COLORS = {
   deep: '#0B4C3A',
   court: '#146B52',
   ball: '#D9EF70',
   clay: '#E9783C',
-  ink: '#172522',
-  muted: '#5C6B68',
-  line: '#DCE5E2',
-  canvas: '#F5F8F7',
+  ink: '#13211D',
+  muted: '#56635F',
+  line: '#E0DCD1',
+  canvas: '#F4F2EC',
+  night: '#082A20',
   surface: '#FFFFFF',
   mint: '#CCE6DD',
   soft: '#E7F3EF',
@@ -38,6 +40,9 @@ export const TEXT_PAIRS: [ColorName, ColorName][] = [
   ['surface', 'court'],
   ['surface', 'deep'],
   ['mint', 'deep'],
+  ['surface', 'night'],
+  ['mint', 'night'],
+  ['ball', 'night'],
   ['ball', 'deep'],
   ['deep', 'ball'],
   ['warning', 'claySoft'],

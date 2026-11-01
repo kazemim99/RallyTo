@@ -1,0 +1,252 @@
+[
+  {
+    "name": "باشگاه انقلاب",
+    "provinceId": 8,
+    "provinceName": "تهران",
+    "cityId": 301,
+    "cityName": "تهران",
+    "sports": [
+      "tennis",
+      "squash"
+    ]
+  },
+  {
+    "name": "مجموعه ورزشی آزادی",
+    "provinceId": 8,
+    "provinceName": "تهران",
+    "cityId": 301,
+    "cityName": "تهران",
+    "sports": [
+      "tennis",
+      "badminton"
+    ]
+  },
+  {
+    "name": "پدل‌کلاب ونک",
+    "provinceId": 8,
+    "provinceName": "تهران",
+    "cityId": 301,
+    "cityName": "تهران",
+    "sports": [
+      "padel"
+    ]
+  },
+  {
+    "name": "باشگاه تنیس شهید چمران",
+    "provinceId": 8,
+    "provinceName": "تهران",
+    "cityId": 301,
+    "cityName": "تهران",
+    "sports": [
+      "tennis"
+    ]
+  },
+  {
+    "name": "سالن بدمینتون شیرودی",
+    "provinceId": 8,
+    "provinceName": "تهران",
+    "cityId": 301,
+    "cityName": "تهران",
+    "sports": [
+      "badminton"
+    ]
+  },
+  {
+    "name": "پدل پارک چیتگر",
+    "provinceId": 8,
+    "provinceName": "تهران",
+    "cityId": 301,
+    "cityName": "تهران",
+    "sports": [
+      "padel",
+      "tennis"
+    ]
+  },
+  {
+    "name": "مجموعه‌ی ورزشی فرهنگی شهید چمران شهرداری منطقه‌ی ۲ تهران",
+    "provinceId": 8,
+    "provinceName": "تهران",
+    "cityId": 301,
+    "cityName": "تهران",
+    "sports": [
+      "squash",
+      "badminton",
+      "tennis"
+    ]
+  },
+  {
+    "name": "باشگاه تنیس اسلام‌شهر",
+    "provinceId": 8,
+    "provinceName": "تهران",
+    "cityId": 330,
+    "cityName": "اسلام‌شهر",
+    "sports": [
+      "tennis"
+    ]
+  },
+  {
+    "name": "باشگاه تنیس فولاد",
+    "provinceId": 4,
+    "provinceName": "اصفهان",
+    "cityId": 101,
+    "cityName": "اصفهان",
+    "sports": [
+      "tennis"
+    ]
+  },
+  {
+    "name": "مجموعه ورزشی نقش جهان",
+    "provinceId": 4,
+    "provinceName": "اصفهان",
+    "cityId": 101,
+    "cityName": "اصفهان",
+    "sports": [
+      "tennis",
+      "badminton",
+      "squash"
+    ]
+  },
+  {
+    "name": "پدل اصفهان",
+    "provinceId": 4,
+    "provinceName": "اصفهان",
+    "cityId": 101,
+    "cityName": "اصفهان",
+    "sports": [
+      "padel"
+    ]
+  },
+  {
+    "name": "باشگاه تنیس کاشان",
+    "provinceId": 4,
+    "provinceName": "اصفهان",
+    "cityId": 120,
+    "cityName": "کاشان",
+    "sports": [
+      "tennis"
+    ]
+  },
+  {
+    "name": "باشگاه تنیس شیراز",
+    "provinceId": 17,
+    "provinceName": "فارس",
+    "cityId": 601,
+    "cityName": "شیراز",
+    "sports": [
+      "tennis"
+    ]
+  },
+  {
+    "name": "مجموعه ورزشی پارس",
+    "provinceId": 17,
+    "provinceName": "فارس",
+    "cityId": 601,
+    "cityName": "شیراز",
+    "sports": [
+      "tennis",
+      "padel"
+    ]
+  },
+  {
+    "name": "سالن اسکواش شیراز",
+    "provinceId": 17,
+    "provinceName": "فارس",
+    "cityId": 601,
+    "cityName": "شیراز",
+    "sports": [
+      "squash"
+    ]
+  },
+  {
+    "name": "باشگاه تنیس مشهد",
+    "provinceId": 11,
+    "provinceName": "خراسان رضوی",
+    "cityId": 401,
+    "cityName": "مشهد",
+    "sports": [
+      "tennis"
+    ]
+  },
+  {
+    "name": "مجموعه ورزشی سامن",
+    "provinceId": 11,
+    "provinceName": "خراسان رضوی",
+    "cityId": 401,
+    "cityName": "مشهد",
+    "sports": [
+      "badminton",
+      "tennis"
+    ]
+  },
+  {
+    "name": "باشگاه تنیس کرج",
+    "provinceId": 30,
+    "provinceName": "البرز",
+    "cityId": 801,
+    "cityName": "کرج",
+    "sports": [
+      "tennis"
+    ]
+  },
+  {
+    "name": "پدل کرج",
+    "provinceId": 30,
+    "provinceName": "البرز",
+    "cityId": 801,
+    "cityName": "کرج",
+    "sports": [
+      "padel"
+    ]
+  },
+  {
+    "name": "سالن ورزشی دهدشت",
+    "provinceId": 24,
+    "provinceName": "کهگیلویه و بویراحمد",
+    "cityId": 901,
+    "cityName": "دهدشت",
+    "sports": [
+      "badminton"
+    ]
+  },
+  {
+    "name": "باشگاه تنیس اردبیل",
+    "provinceId": 3,
+    "provinceName": "اردبیل",
+    "cityId": 201,
+    "cityName": "اردبیل",
+    "sports": [
+      "tennis"
+    ]
+  },
+  {
+    "name": "سالن سبلان",
+    "provinceId": 3,
+    "provinceName": "اردبیل",
+    "cityId": 201,
+    "cityName": "اردبیل",
+    "sports": [
+      "badminton",
+      "squash"
+    ]
+  },
+  {
+    "name": "زمین تنیس پارس‌آباد",
+    "provinceId": 3,
+    "provinceName": "اردبیل",
+    "cityId": 210,
+    "cityName": "پارس‌آباد",
+    "sports": [
+      "tennis"
+    ]
+  },
+  {
+    "name": "سالن بدمینتون شهرکرد",
+    "provinceId": 9,
+    "provinceName": "چهارمحال و بختیاری",
+    "cityId": 950,
+    "cityName": "شهرکرد",
+    "sports": [
+      "badminton"
+    ]
+  }
+]

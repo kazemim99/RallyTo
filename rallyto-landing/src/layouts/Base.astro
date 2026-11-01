@@ -9,9 +9,11 @@ import { breadcrumbLd } from '../lib/seo'
 interface Props {
   meta: PageMeta
   jsonLd?: Record<string, unknown>[]
+  /** The band the page opens with, so the header can match it. */
+  headerTone?: 'light' | 'dark'
 }
 
-const { meta, jsonLd = [] } = Astro.props
+const { meta, jsonLd = [], headerTone = 'dark' } = Astro.props
 const structured = meta.crumbs ? [...jsonLd, breadcrumbLd(meta.crumbs)] : jsonLd
 ---
 
@@ -22,7 +24,7 @@ const structured = meta.crumbs ? [...jsonLd, breadcrumbLd(meta.crumbs)] : jsonLd
   </head>
   <body>
     <a class="skip-link" href="#main">رفتن به محتوای اصلی</a>
-    <Header />
+    <Header tone={headerTone} />
     <main id="main">
       <slot />
     </main>

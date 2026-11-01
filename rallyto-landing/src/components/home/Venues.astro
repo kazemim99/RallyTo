@@ -1,0 +1,297 @@
+---
+/**
+ * Places to play: the venue catalog as the app shows it. Every point is a rule of the app today — clubs are entered
+ * and checked by the Rallyto team, a club's page lists its sports, courts, setting, night lighting, address and phone,
+ * the map marks only the club, and a player keeps one to three home clubs per sport. The club on the phone is a
+ * sample, not a real venue.
+ */
+import Icon, { type IconName } from '../Icon.astro'
+import Phone from '../Phone.astro'
+import { CLUBS_PATH, directoryPublished } from '../../data/clubs'
+
+const POINTS: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: 'pin',
+    title: 'باشگاه‌های شهرت، با جزئیات',
+    text: 'برای هر باشگاه ورزش‌هایش، تعداد زمین‌ها، سرپوشیده یا روباز بودن، نورپردازی شب، نشانی و تلفن را می‌بینی.',
+  },
+  {
+    icon: 'calendar',
+    title: 'یک تا سه باشگاه همیشگی',
+    text: 'زمان‌های آزادت را در باشگاه‌هایی که آنجا بازی می‌کنی ثبت کن؛ هر کس برای همان باشگاه و ساعت هم‌بازی بخواهد پیدایت می‌کند.',
+  },
+  {
+    icon: 'shield',
+    title: 'موقعیت تو را نمی‌خواهیم',
+    text: 'نقشه فقط جای باشگاه را نشان می‌دهد. هم‌بازی‌ها بر اساس شهر، باشگاه و ساعت پیدا می‌شوند، نه موقعیت مکانی‌ات.',
+  },
+]
+---
+
+<section class="section venues" id="venues" aria-labelledby="venues-title">
+  <div class="container venues__grid">
+    <div class="venues__copy">
+      <div class="section-head reveal">
+        <p class="kicker">باشگاه‌ها</p>
+        <h2 id="venues-title">جایی برای بازی، همان نزدیکی</h2>
+        <p>باشگاه‌ها را تیم رالیتو وارد و بررسی می‌کند. بازی‌ها و زمان‌های آزاد به باشگاه گره خورده‌اند، پس هر هم‌بازی که پیدا می‌کنی می‌داند کجا قرار است بازی کنید.</p>
+      </div>
+      <ul class="points">
+        {
+          POINTS.map((p) => (
+            <li>
+              <Icon name={p.icon} />
+              <div>
+                <h3>{p.title}</h3>
+                <p>{p.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+      {
+        directoryPublished() && (
+          <a class="btn btn--outline venues__all" href={CLUBS_PATH}>
+            فهرست باشگاه‌ها
+            <Icon name="arrow" size={18} class="arrow" />
+          </a>
+        )
+      }
+    </div>
+
+    <div class="venues__device reveal">
+      <Phone tilt>
+        <div class="v-cover">
+          <b>باشگاه نمونه</b>
+          <small>تهران</small>
+          <span class="v-chips"><i>تنیس</i><i>پدل</i></span>
+        </div>
+        <div class="v-map">
+          <svg viewBox="0 0 280 120" aria-hidden="true" focusable="false">
+            <path class="v-map__park" d="M178 8h70l14 40-50 22-40-18z"></path>
+            <path class="v-map__road" d="M-10 84C60 70 120 92 300 60M96 -10 120 130M210 -10l-20 140"></path>
+            <path class="v-map__street" d="M-10 30h300M30 -10v140M250 -10v140M-10 112h300"></path>
+            <g transform="translate(140 52)">
+              <path class="v-map__pin" d="M0 18S-13 6-13-3a13 13 0 0 1 26 0C13 6 0 18 0 18Z"></path>
+              <circle cy="-3" r="5" fill="#fff"></circle>
+            </g>
+          </svg>
+        </div>
+        <ul class="v-rows">
+          <li><Icon name="pin" size={18} /><span class="v-line"></span></li>
+          <li><Icon name="phone" size={18} /><span class="v-line v-line--short"></span></li>
+        </ul>
+        <div class="v-sport">
+          <div class="v-sport__head">
+            <span class="v-ball">T</span>
+            <b>تنیس</b>
+            <span class="v-light"><Icon name="bulb" size={14} />نورپردازی شب</span>
+          </div>
+          <div class="v-stats">
+            <span><small>زمین</small><b>۴</b></span>
+            <span><small>فضا</small><b>روباز</b></span>
+          </div>
+        </div>
+      </Phone>
+    </div>
+  </div>
+</section>
+
+<style>
+  .venues__grid {
+    display: grid;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .points {
+    display: grid;
+    gap: 26px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .points li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .points :global(.icon) {
+    flex: none;
+    margin-block-start: 4px;
+    color: var(--c-court);
+  }
+
+  .points p {
+    color: var(--c-muted);
+  }
+
+  .venues__all {
+    margin-block-start: 32px;
+  }
+
+  .venues__device {
+    display: grid;
+    justify-items: center;
+  }
+
+  /* The venue screen, as the app draws it. */
+  .v-cover {
+    display: grid;
+    gap: 2px;
+    margin: 0 12px;
+    padding: 18px 16px 14px;
+    border-radius: 22px;
+    background: var(--c-court);
+    color: var(--c-surface);
+  }
+
+  .v-cover b {
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  .v-cover small {
+    color: var(--c-mint);
+  }
+
+  .v-chips {
+    display: flex;
+    gap: 6px;
+    margin-block-start: 8px;
+  }
+
+  .v-chips i {
+    padding: 0 10px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 16%);
+    font-style: normal;
+    font-size: 0.75rem;
+    line-height: 22px;
+  }
+
+  .v-map {
+    margin: 10px 12px 0;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #e8e4d8;
+  }
+
+  .v-map svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .v-map__park {
+    fill: #cfe3cf;
+  }
+
+  .v-map__road {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 9;
+  }
+
+  .v-map__street {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 3.5;
+  }
+
+  .v-map__pin {
+    fill: var(--c-clay);
+  }
+
+  .v-rows {
+    display: grid;
+    margin: 8px 12px 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .v-rows li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 4px;
+    border-bottom: 1px solid var(--c-line);
+    color: var(--c-court);
+  }
+
+  .v-line {
+    flex: 1;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--c-line);
+  }
+
+  .v-line--short {
+    flex: 0 0 40%;
+  }
+
+  .v-sport {
+    margin: 12px 12px 16px;
+  }
+
+  .v-sport__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .v-ball {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--c-ball);
+    color: #315215;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .v-light {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-inline-start: auto;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: var(--c-soft);
+    color: var(--c-court);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    line-height: 22px;
+    white-space: nowrap;
+  }
+
+  .v-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-block-start: 10px;
+  }
+
+  .v-stats span {
+    display: grid;
+    padding: 8px 12px;
+    border-radius: 14px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-line);
+  }
+
+  .v-stats small {
+    color: var(--c-muted);
+    font-size: 0.75rem;
+  }
+
+  @media (min-width: 900px) {
+    .venues__grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 80px;
+    }
+  }
+</style>

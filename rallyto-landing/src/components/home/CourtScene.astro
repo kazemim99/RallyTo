@@ -149,6 +149,7 @@ const faDigits = (n: number) => n.toLocaleString('fa-IR')
     --ball: var(--c-ball);
     position: relative;
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 18px;
     justify-items: center;
   }
@@ -171,7 +172,8 @@ const faDigits = (n: number) => n.toLocaleString('fa-IR')
   /* The picker: a segmented control in the hero's colours. */
   .picker {
     display: flex;
-    gap: 4px;
+    max-width: 100%;
+    gap: 2px;
     margin: 0;
     padding: 5px;
     border: 0;
@@ -180,7 +182,9 @@ const faDigits = (n: number) => n.toLocaleString('fa-IR')
   }
 
   .picker label {
-    padding: 8px 16px;
+    padding: 8px clamp(10px, 3.2vw, 16px);
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
     border-radius: 999px;
     color: var(--c-mint);
     font-size: var(--step--1);
@@ -209,7 +213,7 @@ const faDigits = (n: number) => n.toLocaleString('fa-IR')
   .court {
     width: min(100%, 360px);
     aspect-ratio: 360 / 520;
-    filter: drop-shadow(0 30px 40px rgb(0 0 0 / 30%));
+    filter: drop-shadow(0 18px 24px rgb(0 0 0 / 35%));
   }
 
   .court svg {
@@ -389,6 +393,7 @@ const faDigits = (n: number) => n.toLocaleString('fa-IR')
   /* The open game, as the app's game card shows it. */
   .games {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     width: min(100%, 380px);
   }
 
@@ -469,6 +474,7 @@ const faDigits = (n: number) => n.toLocaleString('fa-IR')
 
   .game__foot {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 10px;
     font-size: var(--step--1);
@@ -505,6 +511,7 @@ const faDigits = (n: number) => n.toLocaleString('fa-IR')
 
   .game__count {
     color: var(--c-muted);
+    white-space: nowrap;
   }
 
   .game__join {
@@ -529,11 +536,11 @@ const faDigits = (n: number) => n.toLocaleString('fa-IR')
     line-height: 22px;
   }
 
-  @media (min-width: 960px) {
+  @media (min-width: 1040px) {
     .games {
       position: absolute;
-      inset-block-end: -6%;
-      inset-inline-start: -22%;
+      inset-block-end: 4%;
+      inset-inline-start: -26%;
       width: 320px;
     }
 

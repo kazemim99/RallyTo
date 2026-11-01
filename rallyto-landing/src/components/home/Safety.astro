@@ -4,6 +4,7 @@
  * attendance record a partner sees before agreeing to play.
  */
 import Icon, { type IconName } from '../Icon.astro'
+import Phone from '../Phone.astro'
 
 interface Props {
   items: { icon: IconName; title: string; text: string }[]
@@ -11,10 +12,11 @@ interface Props {
 const { items } = Astro.props
 ---
 
-<section class="section on-dark safety" id="safety" aria-labelledby="safety-title">
+<section class="section safety" id="safety" aria-labelledby="safety-title">
   <div class="container safety__grid">
     <div>
-      <div class="section-head">
+      <div class="section-head reveal">
+        <p class="kicker">امنیت و اعتماد</p>
         <h2 id="safety-title">قبل از قرار، هم‌بازی‌ات را بشناس</h2>
         <p>خوش‌قولی، سطح و امتیاز هم‌بازی‌ات را پیش از بازی می‌بینی. شماره‌ات هم پیش خودت می‌ماند.</p>
       </div>
@@ -33,95 +35,98 @@ const { items } = Astro.props
       </ul>
     </div>
 
-    <div class="player" aria-hidden="true">
-      <span class="player__sample">نمونه</span>
-      <div class="player__top">
-        <i class="player__avatar">س</i>
-        <div>
-          <b>سارا</b>
-          <small>تنیس، سطح متوسط</small>
+    <div class="safety__device reveal">
+      <Phone>
+        <div class="player">
+          <div class="player__top">
+            <i class="player__avatar">س</i>
+            <div>
+              <b>سارا</b>
+              <small>تنیس، سطح متوسط</small>
+            </div>
+          </div>
+          <div class="player__stat">
+            <span>خوش‌قولی</span>
+            <b class="player__badge">عالی</b>
+          </div>
+          <div class="player__stat">
+            <span>امتیاز هم‌بازی‌ها</span>
+            <b class="player__stars">۴٫۷ <i></i></b>
+          </div>
+          <div class="player__stat">
+            <span>سطح اعلام‌شده</span>
+            <b>بیشتر هم‌بازی‌ها می‌گویند درست است</b>
+          </div>
+          <div class="player__actions">
+            <span class="player__primary">درخواست پیام</span>
+            <span class="player__ghost">گزارش</span>
+          </div>
         </div>
-      </div>
-      <div class="player__stat">
-        <span>خوش‌قولی</span>
-        <b class="player__badge">عالی</b>
-      </div>
-      <div class="player__stat">
-        <span>امتیاز هم‌بازی‌ها</span>
-        <b class="player__stars">۴٫۷ <i></i></b>
-      </div>
-      <div class="player__stat">
-        <span>سطح اعلام‌شده</span>
-        <b>بیشتر هم‌بازی‌ها می‌گویند درست است</b>
-      </div>
-      <div class="player__actions">
-        <span class="player__primary">درخواست پیام</span>
-        <span class="player__ghost">گزارش</span>
-      </div>
+      </Phone>
     </div>
   </div>
 </section>
 
 <style>
+  .safety {
+    background: var(--c-surface);
+    border-block-start: 1px solid var(--c-line);
+  }
+
   .safety__grid {
     display: grid;
-    gap: 48px;
+    gap: 56px;
     align-items: center;
   }
 
   .safety__list {
     display: grid;
-    gap: 24px;
+    gap: 0 40px;
     padding: 0;
     list-style: none;
+    border-top: 1px solid var(--c-line);
   }
 
   .safety__list li {
     display: flex;
     gap: 14px;
     align-items: flex-start;
+    padding-block: 18px;
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .safety__list h3 {
+    font-size: var(--step-0);
   }
 
   .safety__list :global(.icon) {
     flex: none;
     margin-block-start: 4px;
-    color: var(--c-ball);
+    color: var(--c-court);
   }
 
   .safety__list p {
-    color: var(--c-mint);
-  }
-
-  .player {
-    position: relative;
-    justify-self: center;
-    width: min(100%, 360px);
-    padding: 22px;
-    background: var(--c-surface);
-    color: var(--c-ink);
-    border-radius: var(--radius-l);
-    box-shadow: 0 40px 60px -30px rgb(0 0 0 / 50%);
+    color: var(--c-muted);
     font-size: var(--step--1);
+    line-height: 1.9;
   }
 
-  .player__sample {
-    position: absolute;
-    inset-block-start: -11px;
-    inset-inline-end: 20px;
-    padding: 0 10px;
-    border-radius: 999px;
-    background: var(--c-ball);
-    color: var(--c-deep);
-    font-size: 0.75rem;
-    line-height: 22px;
-    font-weight: 700;
+  .safety__device {
+    display: grid;
+    justify-items: center;
+  }
+
+  /* A player's profile, as the app shows it. */
+  .player {
+    padding: 8px 18px 22px;
   }
 
   .player__top {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-block-end: 18px;
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    margin-block-end: 16px;
+    text-align: center;
     line-height: 1.6;
   }
 
@@ -137,23 +142,34 @@ const { items } = Astro.props
   .player__avatar {
     display: grid;
     place-items: center;
-    width: 56px;
-    height: 56px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     background: linear-gradient(145deg, #d8e9e4, #9fc6ba);
     color: var(--c-deep);
     font-style: normal;
     font-weight: 700;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 
   .player__stat {
     display: flex;
     justify-content: space-between;
-    padding-block: 8px;
+    gap: 12px;
+    padding: 10px 12px;
+    background: var(--c-surface);
+  }
+
+  .player__stat:nth-child(2) {
+    border-radius: 14px 14px 0 0;
+  }
+
+  .player__stat:nth-child(4) {
+    border-radius: 0 0 14px 14px;
   }
 
   .player__stat span {
+    flex: none;
     color: var(--c-muted);
   }
 
@@ -162,6 +178,7 @@ const { items } = Astro.props
   }
 
   .player__stat b {
+    min-width: 0;
     text-align: end;
   }
 
@@ -176,7 +193,7 @@ const { items } = Astro.props
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: #9a6a05;
+    color: #8a5f04;
   }
 
   .player__stars i {
@@ -190,13 +207,13 @@ const { items } = Astro.props
     display: grid;
     grid-template-columns: 1.6fr 1fr;
     gap: 8px;
-    margin-block-start: 18px;
+    margin-block-start: 16px;
   }
 
   .player__actions span {
     padding: 10px;
     text-align: center;
-    border-radius: 12px;
+    border-radius: 999px;
     font-weight: 700;
   }
 
@@ -210,10 +227,17 @@ const { items } = Astro.props
     color: var(--c-court);
   }
 
-  @media (min-width: 900px) {
-    .safety__grid {
-      grid-template-columns: 1.25fr 1fr;
-      gap: 80px;
+  @media (min-width: 760px) {
+    .safety__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+  }
+
+  @media (min-width: 1040px) {
+    .safety__grid {
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 72px;
+    }
+
   }
 </style>

@@ -19,9 +19,10 @@ const FIXES = [
 ] as const
 ---
 
-<section class="section problem" aria-labelledby="problem-title">
+<section class="section problem" id="partners" aria-labelledby="problem-title">
   <div class="container problem__grid">
     <div class="problem__copy">
+      <p class="kicker">هم‌بازی هم‌سطح</p>
       <h2 id="problem-title">دیگه تو گروه تلگرامی دنبال نفر چهارم نگرد</h2>
       <p class="problem__lead">
         پیام‌های بی‌جواب، سطح‌های ناجور، کنسلی دقیقه‌ی نود. پیدا کردن هم‌بازی نباید سخت‌تر از خود بازی باشد.
@@ -43,7 +44,8 @@ const FIXES = [
       </ul>
     </div>
 
-    <div class="compare" aria-hidden="true">
+    <div class="compare reveal" aria-hidden="true">
+      <span class="tag tag--before">امروز، در گروه</span>
       <div class="chat">
         <div class="chat__bar">
           <span class="chat__avatar">ت</span>
@@ -64,6 +66,7 @@ const FIXES = [
         </ol>
       </div>
 
+      <span class="tag tag--after">با رالیتو</span>
       <div class="settled">
         <div class="settled__head">
           <Icon name="check" size={22} />
@@ -86,6 +89,11 @@ const FIXES = [
 </section>
 
 <style>
+  .problem {
+    background: var(--c-surface);
+    border-block: 1px solid var(--c-line);
+  }
+
   .problem__grid {
     display: grid;
     gap: 48px;
@@ -102,15 +110,17 @@ const FIXES = [
 
   .fixes {
     display: grid;
-    gap: 22px;
     padding: 0;
     list-style: none;
+    border-top: 1px solid var(--c-line);
   }
 
   .fixes li {
     display: flex;
-    gap: 14px;
+    gap: 16px;
     align-items: flex-start;
+    padding-block: 18px;
+    border-bottom: 1px solid var(--c-line);
   }
 
   .fixes__icon {
@@ -119,7 +129,7 @@ const FIXES = [
     flex: none;
     width: 46px;
     height: 46px;
-    border-radius: 14px;
+    border-radius: 50%;
     background: var(--c-soft);
     color: var(--c-court);
   }
@@ -134,8 +144,33 @@ const FIXES = [
     gap: 18px;
   }
 
+  .tag {
+    justify-self: start;
+    padding: 2px 12px;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1.8;
+  }
+
+  .tag--before {
+    background: var(--c-canvas);
+    color: var(--c-muted);
+    border: 1px solid var(--c-line);
+  }
+
+  .tag--after {
+    position: relative;
+    z-index: 1;
+    justify-self: end;
+    margin-block: 6px -30px;
+    margin-inline-end: 24px;
+    background: var(--c-court);
+    color: var(--c-surface);
+  }
+
   .chat {
-    background: #e6ece9;
+    background: #ebe8e0;
     border-radius: var(--radius-l);
     padding: 0 0 18px;
     overflow: hidden;
@@ -209,7 +244,7 @@ const FIXES = [
   .settled {
     justify-self: end;
     width: min(100%, 330px);
-    margin-block-start: -36px;
+    margin-block-start: -20px;
     padding: 16px 18px;
     background: var(--c-surface);
     border: 2px solid var(--c-court);

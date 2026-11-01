@@ -1,0 +1,45 @@
+---
+/** The home page's club finder: sport, province and city, into the club directory. Shown once the directory exists. */
+import { CLUBS_PATH, DIRECTORY, totalClubs } from '../../data/clubs'
+import ClubFinder from '../ClubFinder.astro'
+import Icon from '../Icon.astro'
+
+const fa = (n: number) => n.toLocaleString('fa-IR')
+---
+
+<section class="section club-search" id="clubs" aria-labelledby="club-search-title">
+  <div class="container club-search__inner">
+    <div class="section-head reveal">
+      <p class="kicker">باشگاه پیدا کن</p>
+      <h2 id="club-search-title">کجا بازی کنیم؟</h2>
+      <p>
+        {fa(totalClubs())} باشگاه تنیس، پدل، بدمینتون و اسکواش در {fa(DIRECTORY.length)} استان، همه بررسی‌شده به دست تیم رالیتو. ورزش،
+        استان و شهرت را انتخاب کن.
+      </p>
+    </div>
+    <ClubFinder headingId="club-search-title" />
+    <a class="btn btn--ghost club-search__all" href={CLUBS_PATH}>
+      همه‌ی باشگاه‌ها به تفکیک استان
+      <Icon name="arrow" size={18} class="arrow" />
+    </a>
+  </div>
+</section>
+
+<style>
+  .club-search {
+    padding-block-start: 0;
+  }
+
+  .club-search__inner {
+    display: grid;
+    gap: 18px;
+  }
+
+  .club-search .section-head {
+    margin-block-end: 8px;
+  }
+
+  .club-search__all {
+    justify-self: start;
+  }
+</style>

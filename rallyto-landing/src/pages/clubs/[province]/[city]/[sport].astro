@@ -1,0 +1,125 @@
+---
+/** One sport in one city: the clubs that have it, the city's other sports, and a way into the app. */
+import DownloadBlock from '../../../../components/DownloadBlock.astro'
+import ClubList from '../../../../components/clubs/ClubList.astro'
+import DirectoryHero from '../../../../components/clubs/DirectoryHero.astro'
+import { DIRECTORY, citySportPath, clubsOf, sportsIn, type CityGroup, type ProvinceGroup } from '../../../../data/clubs'
+import { citySportClubsPage, publishedSports } from '../../../../data/pages'
+import type { Sport } from '../../../../data/sports'
+import Base from '../../../../layouts/Base.astro'
+import { clubListLd } from '../../../../lib/seo'
+
+export function getStaticPaths() {
+  return DIRECTORY.flatMap((province) =>
+    province.cities.flatMap((city) =>
+      sportsIn(city).map((sport) => ({
+        params: { province: province.slug, city: city.slug, sport: sport.slug },
+        props: { province, city, sport },
+      })),
+    ),
+  )
+}
+
+interface Props {
+  province: ProvinceGroup
+  city: CityGroup
+  sport: Sport
+}
+const { province, city, sport } = Astro.props
+const meta = citySportClubsPage(province, city, sport)
+const fa = (n: number) => n.toLocaleString('fa-IR')
+const clubs = clubsOf(city, sport)
+const otherSports = sportsIn(city).filter((s) => s !== sport)
+const sportPagePublished = publishedSports().includes(sport)
+const ld = clubListLd(
+  `باشگاه‌های ${sport.name} ${city.name}`,
+  meta.path,
+  clubs.map((club) => ({ name: club.name, sports: [sport.name], city: city.name, province: province.name })),
+)
+---
+
+<Base meta={meta} jsonLd={[ld]}>
+  <DirectoryHero
+    crumbs={meta.crumbs!}
+    heading={`باشگاه ${sport.name} در ${city.name}`}
+    lead={`${fa(clubs.length)} باشگاه ${sport.name} در ${city.name}، استان ${province.name}. در رالیتو برای همین باشگاه‌ها هم‌بازی ${sport.name} هم‌سطح پیدا کن یا بازی باز بگذار.`}
+    sport={sport.slug}
+    province={province.path}
+    city={city.path}
+  />
+
+  <section class="section">
+    <div class="container">
+      <ClubList clubs={clubs} />
+
+      <div class="more">
+        {
+          otherSports.length > 0 && (
+            <nav aria-labelledby="other-sports">
+              <h2 id="other-sports">ورزش‌های دیگر در {city.name}</h2>
+              <ul>
+                {otherSports.map((s) => (
+                  <li>
+                    <a href={citySportPath(city, s)}>
+                      باشگاه {s.name} ({fa(clubsOf(city, s).length)})
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <a href={city.path}>همه‌ی باشگاه‌های {city.name}</a>
+                </li>
+              </ul>
+            </nav>
+          )
+        }
+        {
+          sportPagePublished && (
+            <p class="more__sport">
+              <a href={`/${sport.slug}`}>پیدا کردن پارتنر {sport.name} در رالیتو و سطح‌بندی {sport.name}</a>
+            </p>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <DownloadBlock />
+</Base>
+
+<style>
+  .more {
+    display: grid;
+    gap: 24px;
+    margin-block-start: clamp(36px, 5vw, 56px);
+  }
+
+  .more h2 {
+    margin-block-end: 12px;
+    font: 700 var(--step-1) / 1.6 var(--font-body);
+  }
+
+  .more ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .more ul a {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--c-line);
+    border-radius: 999px;
+    color: var(--c-ink);
+    font-size: var(--step--1);
+    text-decoration: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .more ul a:hover {
+      border-color: var(--c-court);
+    }
+  }
+</style>

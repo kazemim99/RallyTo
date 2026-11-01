@@ -19,7 +19,8 @@ beforeAll(() => {
 })
 
 const meta = (p: BuiltPage, selector: string) => p.root.querySelector(selector)?.getAttribute('content') ?? ''
-const canonicalOf = (path: string) => (path === '/' ? `${SITE.url}/` : `${SITE.url}${path}`)
+// Persian path segments (the club directory) are percent-encoded in every absolute URL.
+const canonicalOf = (path: string) => (path === '/' ? `${SITE.url}/` : `${SITE.url}${encodeURI(path)}`)
 
 describe('every page', () => {
   it('is Persian, right to left', () => {
@@ -219,5 +220,62 @@ describe('owner decisions (2026-10-29)', () => {
     const text = visibleText(page(pages, '/privacy'))
     expect(text).toContain('پیام‌های گفتگو و درخواست‌های پیام: حداکثر یک ماه')
     expect(text).toContain('گزارش‌ها و نسخه‌ی ذخیره‌شده‌ی محتوای گزارش‌شده: حداکثر یک ماه')
+  })
+})
+
+describe('the club directory (owner decision 2026-11-01, built from tests/fixtures/venues.sample.json)', () => {
+  const directoryPages = () => pages.filter((p) => p.path === '/clubs' || p.path.startsWith('/clubs/'))
+
+  it('offers a sport, province and city finder on the home page that opens the directory', () => {
+    const home = page(pages, '/')
+    const form = home.root.querySelector('form[data-club-finder]')!
+    expect(form.getAttribute('action')).toBe('/clubs')
+    for (const name of ['sport', 'province', 'city']) expect(form.querySelector(`select[name="${name}"]`), name).not.toBeNull()
+    const sports = form.querySelectorAll('select[name="sport"] option').map((o) => o.getAttribute('value'))
+    expect(sports).toEqual(['', 'tennis', 'padel', 'badminton', 'squash'])
+    const cities = form.querySelectorAll('select[name="city"] option[value^="/clubs/"]').map((o) => o.getAttribute('value')!)
+    for (const path of cities) expect(fileInDist(path), path).toBeDefined()
+  })
+
+  it('links the directory from the header and every footer', () => {
+    for (const p of pages) expect(p.root.querySelectorAll('footer a').map((a) => a.getAttribute('href')), p.path).toContain('/clubs')
+    expect(page(pages, '/').root.querySelectorAll('header a').map((a) => a.getAttribute('href'))).toContain('/clubs')
+  })
+
+  it('lists on each city page exactly the clubs of that city', () => {
+    const shiraz = page(pages, '/clubs/فارس/شیراز')
+    const names = shiraz.root.querySelectorAll('.club__name').map((n) => n.text.trim())
+    expect(names).toEqual(['باشگاه تنیس شیراز', 'سالن اسکواش شیراز', 'مجموعه ورزشی پارس'])
+    expect(page(pages, '/clubs/فارس/شیراز/padel').root.querySelectorAll('.club__name').map((n) => n.text.trim())).toEqual(['مجموعه ورزشی پارس'])
+  })
+
+  it('keeps pages with too few clubs out of the index and the sitemap, but builds and links them', () => {
+    const thin = page(pages, '/clubs/تهران/اسلام-شهر')
+    expect(meta(thin, 'meta[name="robots"]')).toContain('noindex')
+    const sitemap = readFileSync(join(DIST, 'sitemap.xml'), 'utf8')
+    expect(sitemap).not.toContain(encodeURI('/clubs/تهران/اسلام-شهر'))
+    expect(sitemap).toContain(encodeURI('/clubs/تهران/تهران/tennis'))
+    expect(page(pages, '/clubs/تهران').root.querySelectorAll('a').map((a) => a.getAttribute('href'))).toContain('/clubs/تهران/اسلام-شهر')
+  })
+
+  it('publishes no address, phone number or map position for any club', () => {
+    for (const p of directoryPages()) {
+      const main = p.root.querySelector('main')!
+      expect(main.querySelectorAll('a[href^="tel:"], address'), p.path).toHaveLength(0)
+      for (const d of jsonLd(p)) expect(JSON.stringify(d), p.path).not.toMatch(/streetAddress|telephone|geo|latitude/)
+    }
+  })
+
+  it('describes each page’s clubs as a list of sports places in their town', () => {
+    const list = jsonLd(page(pages, '/clubs/فارس/شیراز')).find((d) => d['@type'] === 'ItemList') as {
+      itemListElement: { item: { '@type': string; name: string; address: { addressLocality: string } } }[]
+    }
+    expect(list.itemListElement).toHaveLength(3)
+    expect(list.itemListElement[0].item).toMatchObject({ '@type': 'SportsActivityLocation', address: { addressLocality: 'شیراز' } })
+  })
+
+  it('points every sport page to the cities with clubs for that sport', () => {
+    const hrefs = page(pages, '/tennis').root.querySelectorAll('#clubs a').map((a) => a.getAttribute('href'))
+    expect(hrefs).toContain('/clubs/تهران/تهران/tennis')
   })
 })

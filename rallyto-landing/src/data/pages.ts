@@ -1,4 +1,17 @@
 import { SITE } from '../config/site'
+import {
+  CLUBS_CRUMB,
+  CLUBS_PATH,
+  DIRECTORY,
+  INDEX_MIN_CLUBS,
+  citySportPath,
+  clubsOf,
+  directoryPublished,
+  sportsIn,
+  totalClubs,
+  type CityGroup,
+  type ProvinceGroup,
+} from './clubs'
 import type { Crumb } from '../lib/seo'
 import { PRIVACY, TERMS } from './policies'
 import { SPORTS, type Sport } from './sports'
@@ -74,8 +87,85 @@ export function publishedSports(): Sport[] {
   return SITE.sportPagesPublished ? SPORTS : []
 }
 
+const fa = (n: number) => n.toLocaleString('fa-IR')
+const joinFa = (names: string[]) => (names.length < 2 ? names.join('') : `${names.slice(0, -1).join('، ')} و ${names.at(-1)}`)
+const BRAND = ' | رالیتو'
+/** The first title that fits the 60-character limit, so long place names fall back to a shorter form. */
+const fitTitle = (...candidates: string[]) => candidates.find((t) => [...t].length <= 60) ?? candidates.at(-1)!
+
+/** A city's name, with its province when another province has a city of the same name (titles stay unique). */
+function cityLabel(city: CityGroup, province: ProvinceGroup, directory: readonly ProvinceGroup[]): string {
+  const twins = directory.filter((p) => p.cities.some((c) => c.name === city.name)).length
+  return twins > 1 ? `${city.name} (${province.name})` : city.name
+}
+
+export function clubsHubPage(directory: readonly ProvinceGroup[] = DIRECTORY): PageMeta {
+  return {
+    path: CLUBS_PATH,
+    title: 'باشگاه‌های تنیس، پدل، بدمینتون و اسکواش' + BRAND,
+    description: `فهرست ${fa(totalClubs(directory))} باشگاه تنیس، پدل، بدمینتون و اسکواش در ${fa(directory.length)} استان ایران، به تفکیک استان، شهر و ورزش؛ برای هر باشگاه در رالیتو هم‌بازی هم‌سطح پیدا کن.`,
+    indexable: totalClubs(directory) >= INDEX_MIN_CLUBS,
+    crumbs: [HOME, CLUBS_CRUMB],
+  }
+}
+
+export function provinceClubsPage(province: ProvinceGroup): PageMeta {
+  return {
+    path: province.path,
+    title: fitTitle(`باشگاه‌های تنیس، پدل و اسکواش استان ${province.name}${BRAND}`, `باشگاه‌های استان ${province.name}${BRAND}`),
+    description: `${fa(province.clubCount)} باشگاه تنیس، پدل، بدمینتون و اسکواش در ${fa(province.cities.length)} شهر استان ${province.name}. شهرت را انتخاب کن و در رالیتو هم‌بازی هم‌سطح پیدا کن.`,
+    indexable: province.clubCount >= INDEX_MIN_CLUBS,
+    crumbs: [HOME, CLUBS_CRUMB, { name: `استان ${province.name}`, path: province.path }],
+  }
+}
+
+export function cityClubsPage(province: ProvinceGroup, city: CityGroup, directory: readonly ProvinceGroup[] = DIRECTORY): PageMeta {
+  const label = cityLabel(city, province, directory)
+  const sports = joinFa(sportsIn(city).map((s) => s.name))
+  return {
+    path: city.path,
+    title: fitTitle(`باشگاه‌های ${sports} در ${label}${BRAND}`, `باشگاه‌های ورزشی ${label}${BRAND}`, `باشگاه‌های ${label}${BRAND}`),
+    description: `فهرست ${fa(city.clubs.length)} باشگاه ${sports} در ${city.name}، استان ${province.name}. در رالیتو برای همین باشگاه‌ها هم‌بازی هم‌سطح پیدا کن یا بازی باز بگذار.`,
+    indexable: city.clubs.length >= INDEX_MIN_CLUBS,
+    crumbs: [HOME, CLUBS_CRUMB, { name: `استان ${province.name}`, path: province.path }, { name: city.name, path: city.path }],
+  }
+}
+
+export function citySportClubsPage(province: ProvinceGroup, city: CityGroup, sport: Sport, directory: readonly ProvinceGroup[] = DIRECTORY): PageMeta {
+  const label = cityLabel(city, province, directory)
+  const count = clubsOf(city, sport).length
+  const path = citySportPath(city, sport)
+  return {
+    path,
+    title: fitTitle(`باشگاه ${sport.name} در ${label}${BRAND}`, `باشگاه ${sport.name} ${city.name}${BRAND}`),
+    description: `فهرست ${fa(count)} باشگاه ${sport.name} در ${city.name}، استان ${province.name}. در رالیتو برای همین باشگاه‌ها هم‌بازی ${sport.name} هم‌سطح پیدا کن یا بازی باز بگذار.`,
+    // A sport page that lists every club of its city repeats the city page; only the city page is indexed then.
+    indexable: count >= INDEX_MIN_CLUBS && count < city.clubs.length,
+    crumbs: [
+      HOME,
+      CLUBS_CRUMB,
+      { name: `استان ${province.name}`, path: province.path },
+      { name: city.name, path: city.path },
+      { name: sport.name, path },
+    ],
+  }
+}
+
+/** Every page of the club directory, built or not indexable; empty while the directory snapshot is empty. */
+export function clubPages(directory: readonly ProvinceGroup[] = DIRECTORY): PageMeta[] {
+  if (directory.length === 0) return []
+  return [
+    clubsHubPage(directory),
+    ...directory.flatMap((p) => [
+      provinceClubsPage(p),
+      ...p.cities.flatMap((c) => [cityClubsPage(p, c, directory), ...sportsIn(c).map((s) => citySportClubsPage(p, c, s, directory))]),
+    ]),
+  ]
+}
+
 /** Every page that belongs in the sitemap, in order. */
 export function indexablePages(): PageMeta[] {
   const [home, ...rest] = Object.values(PAGES).filter((p) => p.indexable)
-  return [home, ...publishedSports().map(sportPage), ...rest]
+  const clubs = directoryPublished() ? clubPages().filter((p) => p.indexable) : []
+  return [home, ...publishedSports().map(sportPage), ...clubs, ...rest]
 }

@@ -5,25 +5,28 @@
  */
 ---
 
-<section class="section steps" id="how" aria-labelledby="how-title">
+<section class="section steps on-dark" id="how" aria-labelledby="how-title">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
+      <p class="kicker">چطور کار می‌کند</p>
       <h2 id="how-title">سه قدم تا بازی بعدی</h2>
       <p>چند دقیقه برای پروفایل، بعد رالیتو هم‌بازی‌های هم‌سطحت را جلوی چشمت می‌گذارد.</p>
     </div>
 
     <ol class="steps__list">
-      <li class="step">
+      <li class="step reveal">
+        <span class="step__n" aria-hidden="true">۱</span>
         <div class="step__ui" aria-hidden="true">
           <div class="ui-row"><span class="ui-ball">ت</span><b>تنیس</b><span class="ui-chip">متوسط</span></div>
           <div class="ui-row"><span class="ui-ball ui-ball--padel">پ</span><b>پدل</b><span class="ui-chip">مبتدی</span></div>
           <div class="ui-row ui-row--muted"><span class="ui-pin"></span>تهران، باشگاه‌های نزدیک من</div>
         </div>
-        <h3><span class="step__n">۱</span>پروفایلت را بساز</h3>
+        <h3>پروفایلت را بساز</h3>
         <p>ورزش‌هایت، سطحت در هر کدام، شهرت و باشگاه‌هایی که آنجا بازی می‌کنی.</p>
       </li>
 
-      <li class="step">
+      <li class="step reveal">
+        <span class="step__n" aria-hidden="true">۲</span>
         <div class="step__ui" aria-hidden="true">
           <div class="ui-seg"><span class="on">بازی باز</span><span>زمان‌های آزاد</span></div>
           <div class="ui-card">
@@ -35,17 +38,18 @@
             <small>هر هفته، باشگاه نزدیک من</small>
           </div>
         </div>
-        <h3><span class="step__n">۲</span>بازی بگذار یا هم‌بازی پیدا کن</h3>
+        <h3>بازی بگذار یا هم‌بازی پیدا کن</h3>
         <p>یک بازی با جای خالی منتشر کن، یا زمان‌های آزاد هفتگی‌ات را بگذار تا هم‌سطح‌ها پیدایت کنند.</p>
       </li>
 
-      <li class="step">
+      <li class="step reveal">
+        <span class="step__n" aria-hidden="true">۳</span>
         <div class="step__ui" aria-hidden="true">
           <div class="ui-bubble">ساعت ۶ زمین شماره‌ی ۳ می‌بینمت</div>
           <div class="ui-row"><span class="ui-check"></span>حضور در بازی تأیید شد</div>
           <div class="ui-stars"><i></i><i></i><i></i><i></i><i class="off"></i></div>
         </div>
-        <h3><span class="step__n">۳</span>هماهنگ کن، بازی کن، امتیاز بده</h3>
+        <h3>هماهنگ کن، بازی کن، امتیاز بده</h3>
         <p>داخل اپ هماهنگ کن. بعد از بازی حضورها ثبت می‌شود و به هم امتیاز می‌دهید.</p>
       </li>
     </ol>
@@ -53,36 +57,40 @@
 </section>
 
 <style>
+  .steps {
+    background: var(--c-deep);
+  }
+
   .steps__list {
     display: grid;
-    gap: 28px;
+    gap: 44px;
     padding: 0;
     list-style: none;
+    counter-reset: step;
+  }
+
+  .step {
+    position: relative;
   }
 
   .step h3 {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     margin-block: 22px 6px;
   }
 
   .step p {
-    color: var(--c-muted);
+    color: var(--c-mint);
     max-width: 30rem;
   }
 
+  /* The step's number, set large in outline, with its card laid over its lower half. */
   .step__n {
-    display: grid;
-    place-items: center;
-    flex: none;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: var(--c-court);
-    color: var(--c-surface);
-    font: 900 1.05rem / 1 var(--font-display);
-    padding-block-start: 2px;
+    display: block;
+    margin-block-end: -0.42em;
+    color: transparent;
+    font: 900 clamp(4.5rem, 3rem + 5vw, 7rem) / 1 var(--font-display);
+    -webkit-text-stroke: 1.5px rgb(217 239 112 / 70%);
+    font-variant-numeric: tabular-nums;
+    user-select: none;
   }
 
   .step__ui {
@@ -90,10 +98,12 @@
     align-content: center;
     gap: 10px;
     min-height: 210px;
+    position: relative;
     padding: 22px;
     background: var(--c-surface);
-    border: 1px solid var(--c-line);
+    color: var(--c-ink);
     border-radius: var(--radius-l);
+    box-shadow: 0 30px 50px -30px rgb(0 0 0 / 55%);
     font-size: var(--step--1);
     line-height: 1.6;
   }
@@ -226,7 +236,16 @@
 
   @media (min-width: 860px) {
     .steps__list {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .step:nth-child(2) {
+      margin-block-start: 48px;
+    }
+
+    .step:nth-child(3) {
+      margin-block-start: 96px;
     }
   }
 </style>

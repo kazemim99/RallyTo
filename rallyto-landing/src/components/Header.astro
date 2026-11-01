@@ -1,20 +1,32 @@
 ---
 import BrandMark from './BrandMark.astro'
+import Icon from './Icon.astro'
+import { CLUBS_PATH, directoryPublished } from '../data/clubs'
 
-/** On every page the header sits on the deep-green band the page opens with. */
+/**
+ * The site header. `tone` matches the band the page opens with: paper on the home page, deep green on the inner
+ * pages. On wide screens it stays at the top while the page scrolls and gains a hairline once the page has moved; on
+ * phones it scrolls away, and the section links become a row that scrolls sideways under the brand (no menu to open,
+ * so no script is needed).
+ */
+interface Props {
+  tone?: 'light' | 'dark'
+}
+const { tone = 'dark' } = Astro.props
 const NAV = [
   { href: '/#how', label: 'چطور کار می‌کند' },
   { href: '/#sports', label: 'ورزش‌ها' },
+  { href: directoryPublished() ? CLUBS_PATH : '/#venues', label: 'باشگاه‌ها' },
   { href: '/#safety', label: 'امنیت' },
   { href: '/#faq', label: 'سؤال‌ها' },
 ]
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html'
 ---
 
-<header class="site-header on-dark">
+<header class:list={['site-header', `site-header--${tone}`, { 'on-dark': tone === 'dark' }]}>
   <div class="container site-header__bar">
     <a class="brand" href="/" aria-label="رالیتو، صفحه اصلی">
-      <BrandMark size={38} tile spin={isHome} />
+      <BrandMark size={36} tile spin={isHome} />
       <span class="brand__name" aria-hidden="true">رالیتو</span>
     </a>
     <nav class="site-nav" aria-label="بخش‌های سایت">
@@ -28,77 +40,169 @@ const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html
         }
       </ul>
     </nav>
-    <a class="btn btn--ball site-header__cta" href="/#download">دریافت اپ</a>
+    <a class:list={['btn', 'site-header__cta', tone === 'dark' ? 'btn--ball' : 'btn--court']} href="/#download">
+      دریافت اپ
+      <Icon name="arrow" size={18} class="arrow" />
+    </a>
   </div>
 </header>
 
 <style>
   .site-header {
     position: relative;
-    z-index: 5;
+    z-index: 20;
+    background: var(--c-canvas);
+    color: var(--c-ink);
+  }
+
+  .site-header--dark {
+    background: var(--c-deep);
+    color: var(--c-surface);
   }
 
   .site-header__bar {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      'brand . cta'
+      'nav nav nav';
     align-items: center;
-    gap: 24px;
-    min-height: 76px;
+    column-gap: 16px;
+    min-height: 64px;
   }
 
   .brand {
+    grid-area: brand;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: var(--c-surface);
+    padding-block: 12px;
+    color: inherit;
     text-decoration: none;
   }
 
   .brand__name {
-    font: 900 1.6rem / 1 var(--font-display);
+    font: 900 1.5rem / 1 var(--font-display);
     padding-block-start: 4px;
   }
 
+  .site-header__cta {
+    grid-area: cta;
+    min-height: 42px;
+    padding-inline: 18px;
+    font-size: var(--step--1);
+  }
+
+  /* Phones: the links scroll sideways under the brand, fading out at the far edge to show there is more. */
   .site-nav {
+    grid-area: nav;
+    margin-inline: calc(-1 * var(--gutter));
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    mask-image: linear-gradient(to left, transparent, #000 32px, #000 calc(100% - 32px), transparent);
+  }
+
+  .site-nav::-webkit-scrollbar {
     display: none;
-    margin-inline-start: auto;
   }
 
   .site-nav ul {
     display: flex;
-    gap: 6px;
-    padding: 0;
+    gap: 4px;
+    width: max-content;
+    margin: 0;
+    padding: 0 var(--gutter) 12px;
     list-style: none;
   }
 
   .site-nav a {
     display: block;
-    padding: 8px 12px;
-    color: var(--c-mint);
+    padding: 6px 14px;
+    border: 1px solid var(--c-line);
+    border-radius: 999px;
+    color: inherit;
     font-size: var(--step--1);
     font-weight: 700;
+    line-height: 1.6;
     text-decoration: none;
-    border-radius: 999px;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background-color var(--dur-ui) ease,
+      border-color var(--dur-ui) ease;
   }
 
-  .site-nav a:hover {
-    color: var(--c-surface);
-    background: rgb(255 255 255 / 8%);
+  .site-header--dark .site-nav a {
+    border-color: rgb(255 255 255 / 18%);
+    color: var(--c-mint);
   }
 
-  .site-header__cta {
-    margin-inline-start: auto;
-    min-height: 44px;
-    padding-inline: 18px;
-    font-size: var(--step--1);
-  }
-
-  @media (min-width: 900px) {
-    .site-nav {
-      display: block;
+  @media (hover: hover) and (pointer: fine) {
+    .site-nav a:hover {
+      background: rgb(19 33 29 / 6%);
     }
 
-    .site-header__cta {
-      margin-inline-start: 8px;
+    .site-header--dark .site-nav a:hover {
+      background: rgb(255 255 255 / 8%);
+      color: var(--c-surface);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .site-header {
+      position: sticky;
+      top: 0;
+    }
+
+    .site-header__bar {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: 'brand nav cta';
+      min-height: 76px;
+    }
+
+    .site-nav {
+      justify-self: center;
+      margin: 0;
+      overflow: visible;
+      mask-image: none;
+    }
+
+    .site-nav ul {
+      padding: 0;
+    }
+
+    .site-nav a {
+      border-color: transparent;
+    }
+
+    .site-header--dark .site-nav a {
+      border-color: transparent;
+    }
+
+    /* A hairline under the sticky header once the page has scrolled (scroll-driven, no script). */
+    @supports (animation-timeline: scroll()) {
+      .site-header::after {
+        content: '';
+        position: absolute;
+        inset: auto 0 0;
+        height: 1px;
+        background: var(--c-line);
+        opacity: 0;
+        animation: header-rule linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 80px;
+      }
+
+      .site-header--dark::after {
+        background: rgb(255 255 255 / 14%);
+      }
+    }
+  }
+
+  @keyframes header-rule {
+    to {
+      opacity: 1;
     }
   }
 </style>
