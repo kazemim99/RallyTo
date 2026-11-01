@@ -11,7 +11,7 @@ public sealed class PipelineTests
     /// </summary>
     private static readonly HashSet<string> CacheAllowlist = new(StringComparer.Ordinal)
     {
-        "GetSportsQuery", "GetProvincesQuery", "GetCitiesQuery", "ListVenuesQuery",
+        "GetSportsQuery", "GetProvincesQuery", "GetCitiesQuery", "ListVenuesQuery", "ListPublicVenuesQuery",
     };
 
     private static IEnumerable<Assembly> AllAssemblies() =>

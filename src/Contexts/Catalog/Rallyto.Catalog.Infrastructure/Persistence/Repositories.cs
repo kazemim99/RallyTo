@@ -44,6 +44,12 @@ internal sealed class LocationRepository(CatalogDbContext db) : ILocationReposit
         var ids = cityIds.ToList();
         return await db.Cities.AsNoTracking().Where(c => ids.Contains(c.Id)).ToDictionaryAsync(c => c.Id, c => c.Name, cancellationToken);
     }
+
+    public async Task<IReadOnlyList<City>> GetCitiesAsync(IEnumerable<int> cityIds, CancellationToken cancellationToken)
+    {
+        var ids = cityIds.ToList();
+        return await db.Cities.AsNoTracking().Where(c => ids.Contains(c.Id)).ToListAsync(cancellationToken);
+    }
 }
 
 internal sealed class VenueRepository(CatalogDbContext db) : IVenueRepository

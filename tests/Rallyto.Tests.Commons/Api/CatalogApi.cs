@@ -48,6 +48,9 @@ public sealed record VenueDto(
     double? GoogleRating = null,
     int? GoogleReviewCount = null);
 
+/// <summary>One club in the public directory: only what the landing site may publish.</summary>
+public sealed record PublicVenueDto(string Name, int ProvinceId, string ProvinceName, int CityId, string CityName, IReadOnlyList<string> Sports);
+
 public sealed record VenueImportOutcomeDto(string SourceRef, string Outcome, Guid? VenueId, string? Message);
 
 public sealed record VenueImportResultDto(int Created, int Existing, int Skipped, IReadOnlyList<VenueImportOutcomeDto> Items);
@@ -61,6 +64,7 @@ public static class CatalogApi
     public const string Sports = "/api/v1/sports";
     public const string Provinces = "/api/v1/provinces";
     public const string Venues = "/api/v1/venues";
+    public const string PublicVenues = "/api/v1/public/venues";
     public const string AdminSports = "/api/v1/admin/sports";
     public const string AdminVenues = "/api/v1/admin/venues";
     public const string AdminCandidates = "/api/v1/admin/venue-candidates";

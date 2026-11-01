@@ -11,5 +11,7 @@ ENV ASPNETCORE_URLS=http://+:8080 \
     ASPNETCORE_ENVIRONMENT=Production
 EXPOSE 8080
 COPY --from=build /app .
+# Owned by the app user, so a new named volume mounted here is writable.
+RUN mkdir -p /app/uploads && chown $APP_UID /app/uploads
 USER $APP_UID
 ENTRYPOINT ["dotnet", "Rallyto.Host.dll"]

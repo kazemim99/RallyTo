@@ -24,6 +24,9 @@ public sealed record ProvinceDto(int Id, string Name);
 
 public sealed record CityDto(int Id, int ProvinceId, string Name, int ActiveVenueCount);
 
+/// <summary>One club in the public directory (<see cref="Venues.ListPublicVenuesQuery"/>): name, sports, province and city only.</summary>
+public sealed record PublicVenueDto(string Name, int ProvinceId, string ProvinceName, int CityId, string CityName, IReadOnlyList<string> Sports);
+
 public sealed record VenueSportDto(string SportCode, int? CourtCount, CourtSetting Setting, CourtSurface? Surface, bool HasLighting);
 
 public sealed record VenueDto(

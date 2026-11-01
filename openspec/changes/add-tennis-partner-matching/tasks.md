@@ -428,3 +428,18 @@
 - [ ] 12.7 Purge chat messages (incl. message requests) and reports, with their evidence snapshots, older than 30 days,
   so the backend matches the published privacy policy. Must ship before the landing site goes live.
 - [x] 12.8 Publish the sport pages (`SITE.sportPagesPublished`) once 11.1 has filled the venue catalog.
+
+## 13. Public club directory and club finder (owner decision 2026-11-01) [venue-catalog › Public club directory]
+
+- [x] 13.1 `GET /api/v1/public/venues` (anonymous, cached with the catalog): active clubs with name, active sports,
+  province and city only; hidden clubs never listed. Integration tests `PublicVenueDirectoryTests`.
+- [x] 13.2 Landing: `npm run venues` saves the directory to `src/data/venues.json`; the build reads only that snapshot.
+  While it is empty, no directory page, finder or link is built.
+- [x] 13.3 Landing: `/clubs`, one page per province, city and sport a city has (Persian place segments); titles and
+  descriptions within the metadata rules; ItemList structured data with town only; pages with fewer than two clubs, or
+  repeating their city page, are `noindex` and left out of the sitemap.
+- [x] 13.4 Landing: the sport, province and city finder on the home page, the directory pages and each sport page (a
+  plain form without JavaScript; with it, cities follow the province and the form opens the matching page); header,
+  footer and sport-page links into the directory. Unit and built-site tests on a fixture.
+- [ ] 13.5 Fetch the real snapshot (`VENUES_API=… npm run venues`) and rebuild before each landing deploy, and again
+  whenever clubs change.

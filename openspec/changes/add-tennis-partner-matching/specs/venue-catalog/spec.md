@@ -145,3 +145,19 @@ display any player's location.
 #### Scenario: Venue without coordinates
 - **WHEN** a player opens a venue without coordinates
 - **THEN** the address is shown, without a map
+
+### Requirement: Public club directory
+The system SHALL publish a directory of active venues that anyone can read without signing in, for the landing site's
+club pages and finder (owner decision 2026-11-01). Each entry SHALL carry only the venue's name, the active sports it
+offers, its province and its city. The directory MUST NOT include a hidden venue, and MUST NOT expose an address, a
+phone number, coordinates, an id or any import reference.
+
+#### Scenario: Anonymous visitor reads the directory
+- **GIVEN** an active venue offering tennis and padel in Tehran
+- **WHEN** someone who is not signed in requests the public directory
+- **THEN** the venue is listed with its name, "tennis" and "padel", province Tehran and city Tehran, and nothing else
+
+#### Scenario: Hidden venue
+- **GIVEN** a hidden venue
+- **WHEN** the public directory is requested
+- **THEN** the hidden venue is not listed

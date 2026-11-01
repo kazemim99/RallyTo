@@ -70,6 +70,7 @@ public static class HostRegistration
             var origins = configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
             policy.WithOrigins(origins).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
         }));
+        services.Configure<Microsoft.AspNetCore.Builder.ForwardedHeadersOptions>(o => ProxyHeaders.Configure(o, configuration));
         services.AddRallytoRateLimiting(configuration);
 
         services.AddRallytoCore(configuration);

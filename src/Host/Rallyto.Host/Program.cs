@@ -10,6 +10,8 @@ builder.Services.AddRallytoHost(builder.Configuration, builder.Environment);
 
 var app = builder.Build();
 
+// First, so telemetry, rate limits and the audit trail see the visitor's address, not the proxy's (ProxyHeaders).
+app.UseForwardedHeaders();
 app.UseMiddleware<RequestTelemetryMiddleware>();
 if (!app.Environment.IsProduction())
 {

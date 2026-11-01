@@ -57,6 +57,20 @@ public sealed class SportsController(ISender sender) : ControllerBase
     public async Task<ActionResult<IReadOnlyList<SportDto>>> List(CancellationToken ct) => Ok(await sender.Send(new GetSportsQuery(), ct));
 }
 
+/// <summary>
+/// The public club directory: active clubs with their sports, province and city, nothing else. Read without signing in,
+/// by the landing site's build (rallyto-landing `npm run venues`); owner decision 2026-11-01.
+/// </summary>
+[ApiController]
+[ApiVersion("1.0")]
+[AllowAnonymous]
+[Route("api/v{version:apiVersion}/public/venues")]
+public sealed class PublicVenuesController(ISender sender) : ControllerBase
+{
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<PublicVenueDto>>> List(CancellationToken ct) => Ok(await sender.Send(new ListPublicVenuesQuery(), ct));
+}
+
 [ApiController]
 [ApiVersion("1.0")]
 [Authorize]

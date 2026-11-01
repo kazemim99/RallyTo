@@ -20,6 +20,7 @@ public interface ILocationRepository
     Task<IReadOnlyList<(City City, int ActiveVenues)>> ListCitiesAsync(int provinceId, CancellationToken cancellationToken);
     Task<City?> GetCityAsync(int cityId, CancellationToken cancellationToken);
     Task<IReadOnlyDictionary<int, string>> CityNamesAsync(IEnumerable<int> cityIds, CancellationToken cancellationToken);
+    Task<IReadOnlyList<City>> GetCitiesAsync(IEnumerable<int> cityIds, CancellationToken cancellationToken);
 }
 
 public sealed record VenueFilter(int? CityId, Guid? SportId, string? NormalizedQuery, VenueStatus? Status);
