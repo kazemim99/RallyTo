@@ -6,7 +6,9 @@ part of 'notification_models.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NotificationViewModel _$NotificationViewModelFromJson(Map<String, dynamic> json) => NotificationViewModel(
+NotificationViewModel _$NotificationViewModelFromJson(
+  Map<String, dynamic> json,
+) => NotificationViewModel(
   id: json['id'] as String,
   createdAt: json['createdAt'] as String,
   code: json['code'] as String? ?? '',
@@ -17,10 +19,14 @@ NotificationViewModel _$NotificationViewModelFromJson(Map<String, dynamic> json)
   isRead: json['isRead'] as bool? ?? false,
 );
 
-NotificationPageModel _$NotificationPageModelFromJson(Map<String, dynamic> json) => NotificationPageModel(
+NotificationPageModel _$NotificationPageModelFromJson(
+  Map<String, dynamic> json,
+) => NotificationPageModel(
   items:
       (json['items'] as List<dynamic>?)
-          ?.map((e) => NotificationViewModel.fromJson(e as Map<String, dynamic>))
+          ?.map(
+            (e) => NotificationViewModel.fromJson(e as Map<String, dynamic>),
+          )
           .toList() ??
       const [],
   page: (json['page'] as num?)?.toInt() ?? 1,
@@ -31,31 +37,32 @@ NotificationPageModel _$NotificationPageModelFromJson(Map<String, dynamic> json)
 UnreadCountModel _$UnreadCountModelFromJson(Map<String, dynamic> json) =>
     UnreadCountModel(count: (json['count'] as num?)?.toInt() ?? 0);
 
-PreferencesModel _$PreferencesModelFromJson(Map<String, dynamic> json) => PreferencesModel(
-  pushMatches: json['pushMatches'] as bool? ?? true,
-  pushChat: json['pushChat'] as bool? ?? true,
-  pushRatings: json['pushRatings'] as bool? ?? true,
-  pushSavedSearches: json['pushSavedSearches'] as bool? ?? true,
-  quietHoursEnabled: json['quietHoursEnabled'] as bool? ?? true,
-  quietStart: json['quietStart'] as String? ?? '23:00',
-  quietEnd: json['quietEnd'] as String? ?? '08:00',
-);
+PreferencesModel _$PreferencesModelFromJson(Map<String, dynamic> json) =>
+    PreferencesModel(
+      pushMatches: json['pushMatches'] as bool? ?? true,
+      pushChat: json['pushChat'] as bool? ?? true,
+      pushRatings: json['pushRatings'] as bool? ?? true,
+      pushSavedSearches: json['pushSavedSearches'] as bool? ?? true,
+      quietHoursEnabled: json['quietHoursEnabled'] as bool? ?? true,
+      quietStart: json['quietStart'] as String? ?? '23:00',
+      quietEnd: json['quietEnd'] as String? ?? '08:00',
+    );
 
-Map<String, dynamic> _$PreferencesModelToJson(PreferencesModel instance) => <String, dynamic>{
-  'pushMatches': instance.pushMatches,
-  'pushChat': instance.pushChat,
-  'pushRatings': instance.pushRatings,
-  'pushSavedSearches': instance.pushSavedSearches,
-  'quietHoursEnabled': instance.quietHoursEnabled,
-  'quietStart': instance.quietStart,
-  'quietEnd': instance.quietEnd,
-};
+Map<String, dynamic> _$PreferencesModelToJson(PreferencesModel instance) =>
+    <String, dynamic>{
+      'pushMatches': instance.pushMatches,
+      'pushChat': instance.pushChat,
+      'pushRatings': instance.pushRatings,
+      'pushSavedSearches': instance.pushSavedSearches,
+      'quietHoursEnabled': instance.quietHoursEnabled,
+      'quietStart': instance.quietStart,
+      'quietEnd': instance.quietEnd,
+    };
 
-Map<String, dynamic> _$DeviceTokenRequestModelToJson(DeviceTokenRequestModel instance) => <String, dynamic>{
-  'token': instance.token,
-  'platform': instance.platform,
-};
+Map<String, dynamic> _$DeviceTokenRequestModelToJson(
+  DeviceTokenRequestModel instance,
+) => <String, dynamic>{'token': instance.token, 'platform': instance.platform};
 
-Map<String, dynamic> _$DeviceTokenRemovalModelToJson(DeviceTokenRemovalModel instance) => <String, dynamic>{
-  'token': instance.token,
-};
+Map<String, dynamic> _$DeviceTokenRemovalModelToJson(
+  DeviceTokenRemovalModel instance,
+) => <String, dynamic>{'token': instance.token};

@@ -6,6 +6,6 @@ part of 'account_models.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Map<String, dynamic> _$AccountDeletionRequestToJson(AccountDeletionRequest instance) => <String, dynamic>{
-  'code': instance.code,
-};
+Map<String, dynamic> _$AccountDeletionRequestToJson(
+  AccountDeletionRequest instance,
+) => <String, dynamic>{'code': instance.code};

@@ -156,9 +156,21 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i945.AuthApi>(
       () => networkModule.authApi(gh<_i361.Dio>(instanceName: 'authDio')),
     );
+    gh.lazySingleton<_i996.AuthRepository>(
+      () => _i781.AuthRepositoryImpl(gh<_i945.AuthApi>()),
+    );
     gh.lazySingleton<_i1002.TokenStorage>(
       () => _i1002.TokenStorage(gh<_i666.SecureStorageService>()),
       dispose: (i) => i.dispose(),
+    );
+    gh.lazySingleton<_i552.CurrentUser>(
+      () => _i552.CurrentUser(gh<_i1002.TokenStorage>()),
+    );
+    gh.lazySingleton<_i838.RealtimeClient>(
+      () => _i536.SignalRRealtimeClient(gh<_i1002.TokenStorage>()),
+    );
+    gh.factory<_i157.PhoneBloc>(
+      () => _i157.PhoneBloc(gh<_i996.AuthRepository>(), gh<_i791.Countdown>()),
     );
     gh.lazySingleton<_i903.AuthSessionCubit>(
       () => _i903.AuthSessionCubit.withApi(
@@ -166,33 +178,10 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i945.AuthApi>(),
       ),
     );
-    gh.lazySingleton<_i996.AuthRepository>(
-      () => _i781.AuthRepositoryImpl(gh<_i945.AuthApi>()),
-    );
     gh.factory<_i861.AuthInterceptor>(
       () => _i861.AuthInterceptor(
         gh<_i1002.TokenStorage>(),
         gh<_i361.Dio>(instanceName: 'authDio'),
-      ),
-    );
-    gh.lazySingleton<_i838.RealtimeClient>(
-      () => _i536.SignalRRealtimeClient(gh<_i1002.TokenStorage>()),
-    );
-    gh.lazySingleton<_i552.CurrentUser>(
-      () => _i552.CurrentUser(gh<_i1002.TokenStorage>()),
-    );
-    gh.lazySingleton<_i946.RealtimeLifecycle>(
-      () => _i946.RealtimeLifecycle(
-        gh<_i903.AuthSessionCubit>(),
-        gh<_i838.RealtimeClient>(),
-      ),
-    );
-    gh.factoryParam<_i20.CodeBloc, _i151.OtpChallenge, dynamic>(
-      (challenge, _) => _i20.CodeBloc(
-        gh<_i996.AuthRepository>(),
-        gh<_i903.AuthSessionCubit>(),
-        gh<_i791.Countdown>(),
-        challenge,
       ),
     );
     gh.lazySingleton<_i361.Dio>(
@@ -202,8 +191,19 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       instanceName: 'apiDio',
     );
-    gh.factory<_i157.PhoneBloc>(
-      () => _i157.PhoneBloc(gh<_i996.AuthRepository>(), gh<_i791.Countdown>()),
+    gh.factoryParam<_i20.CodeBloc, _i151.OtpChallenge, dynamic>(
+      (challenge, _) => _i20.CodeBloc(
+        gh<_i996.AuthRepository>(),
+        gh<_i903.AuthSessionCubit>(),
+        gh<_i791.Countdown>(),
+        challenge,
+      ),
+    );
+    gh.lazySingleton<_i946.RealtimeLifecycle>(
+      () => _i946.RealtimeLifecycle(
+        gh<_i903.AuthSessionCubit>(),
+        gh<_i838.RealtimeClient>(),
+      ),
     );
     gh.lazySingleton<_i107.AccountApi>(
       () => accountModule.accountApi(gh<_i361.Dio>(instanceName: 'apiDio')),
@@ -239,24 +239,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i169.SearchApi>(
       () => searchModule.searchApi(gh<_i361.Dio>(instanceName: 'apiDio')),
     );
+    gh.lazySingleton<_i266.AccountRepository>(
+      () => _i1023.AccountRepositoryImpl(gh<_i107.AccountApi>()),
+    );
     gh.lazySingleton<_i586.CatalogRepository>(
       () => _i471.CatalogRepositoryImpl(
         gh<_i525.CatalogApi>(),
         gh<_i666.SecureStorageService>(),
       ),
     );
-    gh.factoryParam<_i356.VenueDetailCubit, String, dynamic>(
-      (venueId, _) =>
-          _i356.VenueDetailCubit(gh<_i586.CatalogRepository>(), venueId),
-    );
-    gh.lazySingleton<_i1025.MatchRepository>(
-      () => _i479.MatchRepositoryImpl(gh<_i290.MatchApi>()),
+    gh.lazySingleton<_i898.ReportRepository>(
+      () => _i1015.ReportRepositoryImpl(gh<_i30.ReportApi>()),
     );
     gh.lazySingleton<_i224.DeviceTokenRepository>(
       () => _i354.DeviceTokenRepositoryImpl(gh<_i950.NotificationApi>()),
     );
     gh.lazySingleton<_i419.SearchRepository>(
       () => _i686.SearchRepositoryImpl(gh<_i169.SearchApi>()),
+    );
+    gh.lazySingleton<_i411.AvailabilityRepository>(
+      () => _i855.AvailabilityRepositoryImpl(gh<_i707.AvailabilityApi>()),
+    );
+    gh.lazySingleton<_i789.ProfileRepository>(
+      () => _i206.ProfileRepositoryImpl(gh<_i453.ProfileApi>()),
     );
     gh.factory<_i947.CityPickerCubit>(
       () => _i947.CityPickerCubit(gh<_i586.CatalogRepository>()),
@@ -267,56 +272,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i838.RealtimeClient>(),
       ),
     );
-    gh.lazySingleton<_i41.RatingRepository>(
-      () => _i699.RatingRepositoryImpl(gh<_i587.RatingApi>()),
-    );
-    gh.factoryParam<_i719.VenuePickerCubit, _i719.VenuePickerArgs, dynamic>(
-      (args, _) => _i719.VenuePickerCubit(gh<_i586.CatalogRepository>(), args),
-    );
-    gh.lazySingleton<_i411.AvailabilityRepository>(
-      () => _i855.AvailabilityRepositoryImpl(gh<_i707.AvailabilityApi>()),
-    );
-    gh.lazySingleton<_i898.ReportRepository>(
-      () => _i1015.ReportRepositoryImpl(gh<_i30.ReportApi>()),
-    );
-    gh.lazySingleton<_i224.NotificationRepository>(
-      () => _i354.NotificationRepositoryImpl(
-        gh<_i950.NotificationApi>(),
-        gh<_i838.RealtimeClient>(),
-      ),
-    );
-    gh.factoryParam<_i747.MatchDetailCubit, _i747.MatchRef, dynamic>(
-      (ref, _) => _i747.MatchDetailCubit(
-        gh<_i1025.MatchRepository>(),
-        gh<_i586.CatalogRepository>(),
-        gh<_i963.ChatRepository>(),
-        gh<_i552.CurrentUser>(),
-        gh<_i171.ShareService>(),
-        ref,
-      ),
-    );
-    gh.factory<_i624.AvailabilityListCubit>(
-      () => _i624.AvailabilityListCubit(
-        gh<_i411.AvailabilityRepository>(),
-        gh<_i586.CatalogRepository>(),
-      ),
-    );
-    gh.factory<_i147.MyReportsCubit>(
-      () => _i147.MyReportsCubit(gh<_i898.ReportRepository>()),
-    );
-    gh.factory<_i777.NotificationPreferencesCubit>(
-      () => _i777.NotificationPreferencesCubit(
-        gh<_i224.NotificationRepository>(),
-      ),
-    );
-    gh.lazySingleton<_i789.ProfileRepository>(
-      () => _i206.ProfileRepositoryImpl(gh<_i453.ProfileApi>()),
-    );
     gh.factory<_i944.ChatBadgeCubit>(
       () => _i944.ChatBadgeCubit(
         gh<_i963.ChatRepository>(),
         gh<_i838.RealtimeClient>(),
       ),
+    );
+    gh.lazySingleton<_i41.RatingRepository>(
+      () => _i699.RatingRepositoryImpl(gh<_i587.RatingApi>()),
     );
     gh.factoryParam<
       _i55.AvailabilityFormCubit,
@@ -330,21 +293,35 @@ extension GetItInjectableX on _i174.GetIt {
         existing,
       ),
     );
-    gh.lazySingleton<_i997.PushRegistration>(
-      () => _i997.PushRegistration(
-        gh<_i1040.PushService>(),
-        gh<_i224.DeviceTokenRepository>(),
-        gh<_i224.NotificationRepository>(),
+    gh.factoryParam<_i719.VenuePickerCubit, _i719.VenuePickerArgs, dynamic>(
+      (args, _) => _i719.VenuePickerCubit(gh<_i586.CatalogRepository>(), args),
+    );
+    gh.lazySingleton<_i224.NotificationRepository>(
+      () => _i354.NotificationRepositoryImpl(
+        gh<_i950.NotificationApi>(),
+        gh<_i838.RealtimeClient>(),
+      ),
+    );
+    gh.factoryParam<_i356.VenueDetailCubit, String, dynamic>(
+      (venueId, _) =>
+          _i356.VenueDetailCubit(gh<_i586.CatalogRepository>(), venueId),
+    );
+    gh.lazySingleton<_i1025.MatchRepository>(
+      () => _i479.MatchRepositoryImpl(gh<_i290.MatchApi>()),
+    );
+    gh.factory<_i153.OnboardingCubit>(
+      () => _i153.OnboardingCubit(
+        gh<_i789.ProfileRepository>(),
+        gh<_i586.CatalogRepository>(),
         gh<_i903.AuthSessionCubit>(),
       ),
-      dispose: (i) => i.dispose(),
     );
-    gh.lazySingleton<_i266.AccountRepository>(
-      () => _i1023.AccountRepositoryImpl(gh<_i107.AccountApi>()),
+    gh.factory<_i351.BlockedPlayersCubit>(
+      () => _i351.BlockedPlayersCubit(gh<_i789.ProfileRepository>()),
     );
-    gh.factory<_i13.MyMatchesCubit>(
-      () => _i13.MyMatchesCubit(
-        gh<_i1025.MatchRepository>(),
+    gh.factory<_i102.MyProfileCubit>(
+      () => _i102.MyProfileCubit(
+        gh<_i789.ProfileRepository>(),
         gh<_i586.CatalogRepository>(),
       ),
     );
@@ -356,18 +333,29 @@ extension GetItInjectableX on _i174.GetIt {
         userId,
       ),
     );
-    gh.factoryParam<_i751.ReportFormCubit, _i978.ReportTarget, dynamic>(
-      (target, _) =>
-          _i751.ReportFormCubit(gh<_i898.ReportRepository>(), target),
+    gh.factory<_i147.MyReportsCubit>(
+      () => _i147.MyReportsCubit(gh<_i898.ReportRepository>()),
     );
-    gh.factory<_i626.SavedSearchesCubit>(
-      () => _i626.SavedSearchesCubit(
-        gh<_i419.SearchRepository>(),
+    gh.factory<_i777.NotificationPreferencesCubit>(
+      () => _i777.NotificationPreferencesCubit(
+        gh<_i224.NotificationRepository>(),
+      ),
+    );
+    gh.factory<_i624.AvailabilityListCubit>(
+      () => _i624.AvailabilityListCubit(
+        gh<_i411.AvailabilityRepository>(),
         gh<_i586.CatalogRepository>(),
       ),
     );
-    gh.factoryParam<_i352.RatingFormCubit, _i420.RatingTarget, dynamic>(
-      (target, _) => _i352.RatingFormCubit(gh<_i41.RatingRepository>(), target),
+    gh.factoryParam<_i747.MatchDetailCubit, _i747.MatchRef, dynamic>(
+      (ref, _) => _i747.MatchDetailCubit(
+        gh<_i1025.MatchRepository>(),
+        gh<_i586.CatalogRepository>(),
+        gh<_i963.ChatRepository>(),
+        gh<_i552.CurrentUser>(),
+        gh<_i171.ShareService>(),
+        ref,
+      ),
     );
     gh.factory<_i272.AccountDeletionCubit>(
       () => _i272.AccountDeletionCubit(
@@ -375,6 +363,21 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i903.AuthSessionCubit>(),
         gh<_i791.Countdown>(),
       ),
+    );
+    gh.factoryParam<_i751.ReportFormCubit, _i978.ReportTarget, dynamic>(
+      (target, _) =>
+          _i751.ReportFormCubit(gh<_i898.ReportRepository>(), target),
+    );
+    gh.factoryParam<_i700.PartnerSearchCubit, _i652.SearchFilters?, dynamic>(
+      (initial, _) => _i700.PartnerSearchCubit(
+        gh<_i419.SearchRepository>(),
+        gh<_i789.ProfileRepository>(),
+        gh<_i586.CatalogRepository>(),
+        initial,
+      ),
+    );
+    gh.factoryParam<_i352.RatingFormCubit, _i420.RatingTarget, dynamic>(
+      (target, _) => _i352.RatingFormCubit(gh<_i41.RatingRepository>(), target),
     );
     gh.factory<_i559.NotificationBadgeCubit>(
       () => _i559.NotificationBadgeCubit(
@@ -388,11 +391,16 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i838.RealtimeClient>(),
       ),
     );
-    gh.factory<_i153.OnboardingCubit>(
-      () => _i153.OnboardingCubit(
-        gh<_i789.ProfileRepository>(),
+    gh.factory<_i13.MyMatchesCubit>(
+      () => _i13.MyMatchesCubit(
+        gh<_i1025.MatchRepository>(),
         gh<_i586.CatalogRepository>(),
-        gh<_i903.AuthSessionCubit>(),
+      ),
+    );
+    gh.factory<_i626.SavedSearchesCubit>(
+      () => _i626.SavedSearchesCubit(
+        gh<_i419.SearchRepository>(),
+        gh<_i586.CatalogRepository>(),
       ),
     );
     gh.factoryParam<_i783.ConversationCubit, _i783.ConversationTarget, dynamic>(
@@ -404,22 +412,21 @@ extension GetItInjectableX on _i174.GetIt {
         target,
       ),
     );
-    gh.factoryParam<_i700.PartnerSearchCubit, _i652.SearchFilters?, dynamic>(
-      (initial, _) => _i700.PartnerSearchCubit(
-        gh<_i419.SearchRepository>(),
-        gh<_i789.ProfileRepository>(),
-        gh<_i586.CatalogRepository>(),
-        initial,
+    gh.lazySingleton<_i997.PushRegistration>(
+      () => _i997.PushRegistration(
+        gh<_i1040.PushService>(),
+        gh<_i224.DeviceTokenRepository>(),
+        gh<_i224.NotificationRepository>(),
+        gh<_i903.AuthSessionCubit>(),
       ),
+      dispose: (i) => i.dispose(),
     );
-    gh.factory<_i102.MyProfileCubit>(
-      () => _i102.MyProfileCubit(
+    gh.factory<_i616.ChatInboxCubit>(
+      () => _i616.ChatInboxCubit(
+        gh<_i963.ChatRepository>(),
+        gh<_i838.RealtimeClient>(),
         gh<_i789.ProfileRepository>(),
-        gh<_i586.CatalogRepository>(),
       ),
-    );
-    gh.factory<_i351.BlockedPlayersCubit>(
-      () => _i351.BlockedPlayersCubit(gh<_i789.ProfileRepository>()),
     );
     gh.factoryParam<_i214.MatchFormCubit, _i214.MatchFormArgs, dynamic>(
       (args, _) => _i214.MatchFormCubit(
@@ -427,13 +434,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i789.ProfileRepository>(),
         gh<_i586.CatalogRepository>(),
         args,
-      ),
-    );
-    gh.factory<_i616.ChatInboxCubit>(
-      () => _i616.ChatInboxCubit(
-        gh<_i963.ChatRepository>(),
-        gh<_i838.RealtimeClient>(),
-        gh<_i789.ProfileRepository>(),
       ),
     );
     return this;

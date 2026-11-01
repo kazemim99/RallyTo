@@ -36,3 +36,14 @@ Replaces the catalog with the Google Maps spreadsheet (`باشگاه_های_تن
    - `hide-old` hides the tennix/tennisor clubs (not deleted; `old_venues.json` is the snapshot).
    - `carry` gives a visible Google place the photos and profile of the old club within 150 m. Check `carry.json`
      for two different clubs side by side and undo those by hand. Run it once only: it appends descriptions.
+
+## Padel, squash and badminton (`racket/`)
+
+From the spreadsheet `ورزش_های_راکتی_ایران.xlsx` (sheet «همه مکان‌ها»; a place with several sports is one row).
+
+1. `rows.json` → `chunkN.json` → Persian translations `outN.json` (as for the tennis list, plus `indoor` and `public`).
+2. `python build_items.py` writes `items.json` (one venue per place, one sport entry per sport) and `plan.json`
+   (hidden for review: medium confidence, not public — school yards and federation offices — and second listings of
+   one place sharing a sport within 60 m). It reuses the town→county table of `google/build_items.py`.
+3. `python import_racket.py --api <url> [--allow-similar]`. A place already in the catalog under the same Google
+   place gains the sports it lacks instead of being created twice.
