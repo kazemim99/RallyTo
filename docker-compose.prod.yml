@@ -1,6 +1,13 @@
-# Production stack. No server is provisioned yet (tasks.md 11.5): image owner and hosts are placeholders.
-# Secrets come from the server's .env file, never from this repository.
+# Production stack on the shared server (docs/DEPLOYMENT.md). Secrets come from the server's .env file, never from this
+# repository. The box also runs other services: no port is published except the API's, on loopback, for the host's nginx,
+# and every container has a memory limit. No Seq here: logs go to stdout (docker logs), rotated below.
 name: rallyto
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
 
 services:
   postgres:
@@ -17,44 +24,47 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
+    mem_limit: 384m
+    logging: *logging
     networks: [rallyto-network]
 
   redis:
     image: redis:7-alpine
     restart: unless-stopped
-    networks: [rallyto-network]
-
-  seq:
-    image: datalust/seq:latest
-    restart: unless-stopped
-    environment:
-      ACCEPT_EULA: "Y"
-    volumes:
-      - seq-data:/data
+    command: ["redis-server", "--maxmemory", "64mb", "--maxmemory-policy", "allkeys-lru", "--save", ""]
+    mem_limit: 128m
+    logging: *logging
     networks: [rallyto-network]
 
   rallyto-api:
-    image: ghcr.io/${GHCR_OWNER:?set GHCR_OWNER}/rallyto-api:${RALLYTO_API_TAG:-latest}
+    # Built from this repository and loaded onto the server (docs/DEPLOYMENT.md), so no registry is involved.
+    image: rallyto-api:${RALLYTO_API_TAG:-latest}
     restart: unless-stopped
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://+:8080
+      DOTNET_gcServer: "0"
       ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=${POSTGRES_DB:-rallyto};Username=${POSTGRES_USER:-rallyto};Password=${POSTGRES_PASSWORD}
       ConnectionStrings__Redis: redis:6379
-      Seq__ServerUrl: http://seq:80
       Jwt__SecretKey: ${JWT_SECRET_KEY:?set JWT_SECRET_KEY}
       Sms__Provider: MeliPayamak
       MeliPayamak__UserName: ${MELIPAYAMAK_USERNAME:?set MELIPAYAMAK_USERNAME}
       MeliPayamak__ApiKey: ${MELIPAYAMAK_API_KEY:?set MELIPAYAMAK_API_KEY}
       MeliPayamak__OtpBodyId: ${MELIPAYAMAK_OTP_BODY_ID:?set MELIPAYAMAK_OTP_BODY_ID}
       Notifications__Firebase__CredentialsJson: ${FIREBASE_CREDENTIALS_JSON:?set FIREBASE_CREDENTIALS_JSON}
-      PublicBaseUrl: ${PUBLIC_BASE_URL:?set PUBLIC_BASE_URL}
+      PublicBaseUrl: ${PUBLIC_BASE_URL:-https://rallyto.ir}
+      Cors__AllowedOrigins__0: https://admin.rallyto.ir
+      # nginx reaches the API through the Docker bridge; X-Forwarded-For is believed only from there (ProxyHeaders).
+      ForwardedHeaders__KnownNetworks__0: 172.16.0.0/12
+      Observability__Logging__FileEnabled: "false"
       Identity__InitialAdmin__Email: ${ADMIN_EMAIL:?set ADMIN_EMAIL}
       Identity__InitialAdmin__Password: ${ADMIN_PASSWORD:?set ADMIN_PASSWORD}
     ports:
       - "127.0.0.1:5100:8080"
     volumes:
       - uploads:/app/uploads
+    mem_limit: 512m
+    logging: *logging
     depends_on:
       postgres:
         condition: service_healthy
@@ -64,7 +74,6 @@ services:
 
 volumes:
   postgres-data:
-  seq-data:
   uploads:
 
 networks:
