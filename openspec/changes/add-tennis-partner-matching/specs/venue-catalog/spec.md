@@ -148,14 +148,20 @@ display any player's location.
 
 ### Requirement: Public club directory
 The system SHALL publish a directory of active venues that anyone can read without signing in, for the landing site's
-club pages and finder (owner decision 2026-11-01). Each entry SHALL carry only the venue's name, the active sports it
-offers, its province and its city. The directory MUST NOT include a hidden venue, and MUST NOT expose an address, a
-phone number, coordinates, an id or any import reference.
+club pages and finder (owner decision 2026-11-01). Each entry SHALL carry the venue's name, the active sports it offers,
+its province and city, and, where the catalog has them, its address, phone number, coordinates, Google place id, working
+hours, website, Instagram, Telegram and description. The directory MUST NOT include a hidden venue, and MUST NOT expose
+an id, an import reference or a copied rating.
 
 #### Scenario: Anonymous visitor reads the directory
 - **GIVEN** an active venue offering tennis and padel in Tehran
 - **WHEN** someone who is not signed in requests the public directory
-- **THEN** the venue is listed with its name, "tennis" and "padel", province Tehran and city Tehran, and nothing else
+- **THEN** the venue is listed with its name, "tennis" and "padel", province Tehran and city Tehran
+
+#### Scenario: Reaching a club
+- **GIVEN** an active venue with an address, a phone number, coordinates and working hours
+- **WHEN** the public directory is requested
+- **THEN** the entry carries all of them, and a value the catalog does not have is empty, never guessed
 
 #### Scenario: Hidden venue
 - **GIVEN** a hidden venue

@@ -432,14 +432,25 @@
 ## 13. Public club directory and club finder (owner decision 2026-11-01) [venue-catalog › Public club directory]
 
 - [x] 13.1 `GET /api/v1/public/venues` (anonymous, cached with the catalog): active clubs with name, active sports,
-  province and city only; hidden clubs never listed. Integration tests `PublicVenueDirectoryTests`.
+  province, city, address, phone, position, hours, own links and description; hidden clubs never listed; no id, import
+  reference or rating. Integration tests `PublicVenueDirectoryTests`.
 - [x] 13.2 Landing: `npm run venues` saves the directory to `src/data/venues.json`; the build reads only that snapshot.
   While it is empty, no directory page, finder or link is built.
 - [x] 13.3 Landing: `/clubs`, one page per province, city and sport a city has (Persian place segments); titles and
-  descriptions within the metadata rules; ItemList structured data with town only; pages with fewer than two clubs, or
+  descriptions within the metadata rules; ItemList structured data with address, phone and position; pages with fewer than two clubs, or
   repeating their city page, are `noindex` and left out of the sitemap.
-- [x] 13.4 Landing: the sport, province and city finder on the home page, the directory pages and each sport page (a
+- [x] 13.4 Landing: the sport, province and city finder in the home page's hero, the directory pages and each sport page (a
   plain form without JavaScript; with it, cities follow the province and the form opens the matching page); header,
   footer and sport-page links into the directory. Unit and built-site tests on a fixture.
 - [ ] 13.5 Fetch the real snapshot (`VENUES_API=… npm run venues`) and rebuild before each landing deploy, and again
   whenever clubs change.
+- [x] 13.6 Landing (SEO audit 2026-11-02): a page per club (`/clubs/<province>/<city>/<club>`) with its address, phone,
+  hours, map, own links, the nearest clubs of its sports and the lists it belongs to; SportsActivityLocation structured
+  data; indexed only with an exact address and a phone or a position. List titles name what the page gives
+  («باشگاه تنیس تبریز: نشانی، تلفن و نقشه»); province titles name the province's own sports; a province whose clubs
+  are all in one city is `noindex`. Unit and built-site tests on a fixture.
+- [x] 13.7 Landing (SEO audit 2026-11-02): `/guides` with the rules of each sport and padel compared with tennis,
+  as Articles, linked from every footer and from each sport page.
+- [x] 13.8 Landing: the finder keeps the chosen sport on a province (`?sport=`, filtered in the browser) and offers only the
+      places that have it. Clubs whose address was only their city take one from their map position (OpenStreetMap,
+      `tools/club-scrape/geocode_addresses.mjs`), credited in the footer; a club the map says nothing more about keeps none.

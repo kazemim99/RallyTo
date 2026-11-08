@@ -6,9 +6,9 @@ using Rallyto.Tests.Commons.Api;
 namespace Rallyto.Host.IntegrationTests.Catalog;
 
 /// <summary>
-/// The public club directory the landing site is built from (spec venue-catalog, owner decision 2026-11-01): anyone may
-/// read it without signing in; it lists only active clubs, and only their name, sports, province and city — never an
-/// address, a phone number or coordinates.
+/// The public club directory the landing site is built from (spec venue-catalog, owner decisions 2026-11-01): anyone may
+/// read it without signing in; it lists only active clubs, with what a visitor needs to find and reach one — but no
+/// internal reference.
 /// </summary>
 public sealed class PublicVenueDirectoryTests(RallytoHostFactory factory) : IntegrationTestBase(factory)
 {
@@ -45,7 +45,61 @@ public sealed class PublicVenueDirectoryTests(RallytoHostFactory factory) : Inte
     }
 
     [Fact]
-    public async Task Never_exposes_an_address_a_phone_or_coordinates()
+    public async Task Lists_how_to_find_and_reach_a_club()
+    {
+        var admin = await Factory.AdminClientAsync();
+        var tehran = await CatalogApi.CityIdAsync(admin, "تهران", "تهران");
+        var created = await admin.PostApiAsync<VenueDto>(CatalogApi.AdminVenues, new
+        {
+            cityId = tehran,
+            name = "باشگاه با اطلاعات کامل",
+            address = "تهران، خیابان ولیعصر، پلاک ۱۰",
+            phone = "02122638043",
+            latitude = 35.7730808,
+            longitude = 51.4420388,
+            sports = new[] { CatalogApi.TennisOutdoor() },
+            allowSimilar = true,
+        });
+        await admin.PutApiAsync<VenueDto>($"{CatalogApi.AdminVenues}/{created.Data!.Id}/profile", new
+        {
+            description = "۲ زمین خاک رس",
+            website = "https://example.ir",
+            instagram = "https://www.instagram.com/example",
+            telegram = "https://t.me/example",
+            workingHours = "همه‌روزه ۷ تا ۲۴",
+        });
+
+        var list = (await Factory.CreateClient().GetApiAsync<List<PublicVenueDto>>(CatalogApi.PublicVenues)).Data!;
+
+        var club = list.Single(v => v.Name == "باشگاه با اطلاعات کامل");
+        club.Address.Should().Be("تهران، خیابان ولیعصر، پلاک ۱۰");
+        club.Phone.Should().Be("02122638043");
+        club.Latitude.Should().Be(35.7730808);
+        club.Longitude.Should().Be(51.4420388);
+        club.WorkingHours.Should().Be("همه‌روزه ۷ تا ۲۴");
+        club.Website.Should().Be("https://example.ir");
+        club.Instagram.Should().Be("https://www.instagram.com/example");
+        club.Telegram.Should().Be("https://t.me/example");
+        club.Description.Should().Be("۲ زمین خاک رس");
+    }
+
+    [Fact]
+    public async Task A_club_without_a_phone_or_position_lists_none()
+    {
+        var admin = await Factory.AdminClientAsync();
+        var tehran = await CatalogApi.CityIdAsync(admin, "تهران", "تهران");
+        await CatalogApi.CreateVenueAsync(admin, tehran, "باشگاه بی‌تلفن");
+
+        var list = (await Factory.CreateClient().GetApiAsync<List<PublicVenueDto>>(CatalogApi.PublicVenues)).Data!;
+
+        var club = list.Single(v => v.Name == "باشگاه بی‌تلفن");
+        club.Phone.Should().BeNull();
+        club.Latitude.Should().BeNull();
+        club.Longitude.Should().BeNull();
+    }
+
+    [Fact]
+    public async Task Never_exposes_an_internal_reference()
     {
         var admin = await Factory.AdminClientAsync();
         var tehran = await CatalogApi.CityIdAsync(admin, "تهران", "تهران");
@@ -54,6 +108,6 @@ public sealed class PublicVenueDirectoryTests(RallytoHostFactory factory) : Inte
         var json = await Factory.CreateClient().GetStringAsync(CatalogApi.PublicVenues);
 
         json.Should().Contain("باشگاه با نشانی");
-        json.Should().NotContainAny("address", "phone", "latitude", "longitude", "خیابان ولیعصر", "googlePlaceId", "\"id\"");
+        json.Should().NotContainAny("sourceRef", "sourceUrl", "googleRating", "googleReviewCount", "\"status\"", "\"id\"");
     }
 }

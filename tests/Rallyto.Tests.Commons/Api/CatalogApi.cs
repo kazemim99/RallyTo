@@ -48,8 +48,24 @@ public sealed record VenueDto(
     double? GoogleRating = null,
     int? GoogleReviewCount = null);
 
-/// <summary>One club in the public directory: only what the landing site may publish.</summary>
-public sealed record PublicVenueDto(string Name, int ProvinceId, string ProvinceName, int CityId, string CityName, IReadOnlyList<string> Sports);
+/// <summary>One club in the public directory: what the landing site publishes, no internal reference.</summary>
+public sealed record PublicVenueDto(
+    string Name,
+    int ProvinceId,
+    string ProvinceName,
+    int CityId,
+    string CityName,
+    IReadOnlyList<string> Sports,
+    string? Address,
+    string? Phone,
+    double? Latitude,
+    double? Longitude,
+    string? GooglePlaceId,
+    string? WorkingHours,
+    string? Website,
+    string? Instagram,
+    string? Telegram,
+    string? Description);
 
 public sealed record VenueImportOutcomeDto(string SourceRef, string Outcome, Guid? VenueId, string? Message);
 
