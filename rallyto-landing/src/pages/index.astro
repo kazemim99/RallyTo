@@ -88,15 +88,22 @@ const SAFETY: { icon: IconName; title: string; text: string }[] = [
         <p class="hero__lead">
           رالیتو برای تنیس، پدل، بدمینتون و اسکواش هم‌بازی پیدا می‌کند: هم‌سطح خودت، نزدیک باشگاهت و در ساعتی که آزادی.
         </p>
+        {
+          directoryPublished() && (
+            <div class="hero__finder">
+              <ClubSearch />
+            </div>
+          )
+        }
         <div class="hero__actions">
-          <a class="btn btn--court" href="#download">
+          <a class:list={['btn', directoryPublished() ? 'btn--ghost' : 'btn--court']} href="#download">
             دریافت اپ
             <Icon name="arrow" size={20} class="arrow" />
           </a>
           <a class="btn btn--ghost" href="#how">ببین چطور کار می‌کند</a>
         </div>
         <p class="hero__note">
-          {storesLive ? 'رالیتو رایگان است.' : 'رالیتو رایگان است؛ نسخه‌ی اندروید به‌زودی در کافه‌بازار و مایکت.'}
+          {storesLive ? 'رالیتو رایگان است.' : 'رالیتو رایگان است؛ اندروید را مستقیم دانلود کن و روی آیفون نسخه‌ی وب را باز کن.'}
         </p>
       </div>
       <div class="hero__stage on-dark">
@@ -119,7 +126,6 @@ const SAFETY: { icon: IconName; title: string; text: string }[] = [
   </section>
 
   <SportTiles />
-  {directoryPublished() && <ClubSearch />}
   <GroupChat />
   <Steps />
   <Venues />
@@ -210,6 +216,10 @@ const SAFETY: { icon: IconName; title: string; text: string }[] = [
     line-height: 1.9;
   }
 
+  .hero__finder {
+    margin-block: -10px 22px;
+  }
+
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
@@ -279,6 +289,7 @@ const SAFETY: { icon: IconName; title: string; text: string }[] = [
     }
 
     .hero__lead,
+    .hero__finder,
     .hero__actions,
     .hero__note,
     .hero__stage {
@@ -286,6 +297,7 @@ const SAFETY: { icon: IconName; title: string; text: string }[] = [
     }
 
     .hero__lead { animation-delay: 80ms; }
+    .hero__finder { animation-delay: 110ms; }
     .hero__actions { animation-delay: 140ms; }
     .hero__note { animation-delay: 200ms; }
     .hero__stage { animation-delay: 120ms; }

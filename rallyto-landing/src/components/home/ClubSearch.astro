@@ -1,5 +1,5 @@
 ---
-/** The home page's club finder: sport, province and city, into the club directory. Shown once the directory exists. */
+/** The club finder in the home page's hero: sport, province and city, into the club directory. Shown once the directory exists. */
 import { CLUBS_PATH, DIRECTORY, totalClubs } from '../../data/clubs'
 import ClubFinder from '../ClubFinder.astro'
 import Icon from '../Icon.astro'
@@ -7,39 +7,50 @@ import Icon from '../Icon.astro'
 const fa = (n: number) => n.toLocaleString('fa-IR')
 ---
 
-<section class="section club-search" id="clubs" aria-labelledby="club-search-title">
-  <div class="container club-search__inner">
-    <div class="section-head reveal">
-      <p class="kicker">باشگاه پیدا کن</p>
-      <h2 id="club-search-title">کجا بازی کنیم؟</h2>
-      <p>
-        {fa(totalClubs())} باشگاه تنیس، پدل، بدمینتون و اسکواش در {fa(DIRECTORY.length)} استان، همه بررسی‌شده به دست تیم رالیتو. ورزش،
-        استان و شهرت را انتخاب کن.
-      </p>
-    </div>
-    <ClubFinder headingId="club-search-title" />
-    <a class="btn btn--ghost club-search__all" href={CLUBS_PATH}>
-      همه‌ی باشگاه‌ها به تفکیک استان
-      <Icon name="arrow" size={18} class="arrow" />
-    </a>
+<section class="club-search" id="clubs" aria-labelledby="club-search-title">
+  <div class="club-search__head">
+    <h2 id="club-search-title">باشگاه پیدا کن</h2>
+    <p>{fa(totalClubs())} باشگاه در {fa(DIRECTORY.length)} استان، با نشانی، تلفن و نقشه</p>
   </div>
+  <ClubFinder layout="compact" headingId="club-search-title" />
+  <a class="club-search__all" href={CLUBS_PATH}>
+    همه‌ی باشگاه‌ها به تفکیک استان
+    <Icon name="arrow" size={16} class="arrow" />
+  </a>
 </section>
 
 <style>
   .club-search {
-    padding-block-start: 0;
-  }
-
-  .club-search__inner {
     display: grid;
-    gap: 18px;
+    gap: 10px;
   }
 
-  .club-search .section-head {
-    margin-block-end: 8px;
+  .club-search__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 12px;
+  }
+
+  .club-search__head h2 {
+    font-size: var(--step-2);
+    line-height: 1.5;
+  }
+
+  .club-search__head p {
+    color: var(--c-muted);
+    font-size: var(--step--1);
   }
 
   .club-search__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     justify-self: start;
+    min-height: 32px;
+    color: var(--c-court);
+    font-size: var(--step--1);
+    font-weight: 700;
+    text-decoration: none;
   }
 </style>

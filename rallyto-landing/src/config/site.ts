@@ -21,6 +21,17 @@ export const SITE = {
   },
 
   /**
+   * The app outside the stores (owner decision 2026-11-07): the Android APK from this site, and the web app, which is
+   * the way to use Rallyto on iPhone. Both are published by deploy/publish-app.sh.
+   */
+  direct: {
+    apk: '/download/rallyto.apk',
+    webApp: 'https://app.rallyto.ir',
+    /** The APK's lowest Android version (minSdk 24 in rallyto-app/android/app/build.gradle.kts). */
+    androidMin: '۷',
+  },
+
+  /**
    * The person responsible for Rallyto and how to reach them (owner-supplied, 2026-10-29). There is no registered
    * company, so no company name, registration number or eNamad is stated anywhere.
    */
@@ -43,6 +54,9 @@ export const SITE = {
 
   /** Profiles Google may connect to the organization (Organization.sameAs). Empty until they exist. */
   sameAs: [] as string[],
+
+  /** Google Search Console ownership token (owner-supplied, 2026-11-02), stated on the home page only. */
+  googleSiteVerification: 'yw6qmLpStnv2aNY-zXwageJaePv5u-KwAD9ITS3SEnI',
 
   /** Self-hosted, cookieless statistics, loaded only by production builds. `null` until it is set up. */
   analytics: null as { script: string; websiteId: string } | null,

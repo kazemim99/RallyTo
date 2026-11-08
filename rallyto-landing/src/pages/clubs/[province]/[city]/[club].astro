@@ -1,0 +1,200 @@
+---
+/**
+ * One club: where it is and how to reach it, the clubs nearest to it for the same sports, and the lists it belongs to.
+ * Indexed only when it has an exact address and a phone or a position (clubPage); the rest is built for visitors.
+ */
+import DownloadBlock from '../../../../components/DownloadBlock.astro'
+import ClubList from '../../../../components/clubs/ClubList.astro'
+import DirectoryHero from '../../../../components/clubs/DirectoryHero.astro'
+import { areaOf, citySportPath, clubsOf, nearbyClubs, type CityGroup, type Club, type ProvinceGroup } from '../../../../data/clubs'
+import { clubPageEntries, publishedSports, type PageMeta } from '../../../../data/pages'
+import Base from '../../../../layouts/Base.astro'
+import { clubLd } from '../../../../lib/seo'
+
+export function getStaticPaths() {
+  return clubPageEntries().map(({ province, city, club, meta }) => ({
+    params: { province: province.slug, city: city.slug, club: club.slug },
+    props: { province, city, club, meta },
+  }))
+}
+
+interface Props {
+  province: ProvinceGroup
+  city: CityGroup
+  club: Club
+  meta: PageMeta
+}
+const { province, city, club, meta } = Astro.props
+const fa = (n: number) => n.toLocaleString('fa-IR')
+const km = (d: number) => (d < 1 ? `${fa(Math.round(d * 1000 / 50) * 50)} متر` : `${d.toLocaleString('fa-IR', { maximumFractionDigits: 1 })} کیلومتر`)
+const heading = meta.crumbs!.at(-1)!.name
+const area = areaOf(club, city.name)
+const sports = club.sports.map((s) => s.name).join('، ')
+const nearby = nearbyClubs(club, city, 6)
+const partnerPages = publishedSports().filter((s) => club.sports.includes(s))
+const ld = clubLd(meta.path, { ...club, sports: club.sports.map((s) => s.name), city: city.name, province: province.name }, club.map?.google ?? null)
+---
+
+<Base meta={meta} jsonLd={[ld]}>
+  <DirectoryHero
+    crumbs={meta.crumbs!}
+    heading={heading}
+    lead={`${sports} در ${city.name}${area ? `، ${area}` : ''}، استان ${province.name}.`}
+    sport={club.sports[0].slug}
+    province={province.path}
+    city={city.path}
+  />
+
+  <section class="section" id="results" aria-labelledby="club-facts">
+    <div class="container">
+      <h2 class="results-title" id="club-facts">نشانی و راه‌های تماس</h2>
+      <ClubList clubs={[club]} named={false} />
+      <p class="note">
+        این اطلاعات از فهرست باشگاه‌های رالیتو است. اگر چیزی تغییر کرده یا صاحب این باشگاه هستی،
+        <a href="/contact">از صفحه‌ی تماس خبرمان کن</a>.
+      </p>
+    </div>
+  </section>
+
+  {
+    nearby.length > 0 && (
+      <section class="section nearby" aria-labelledby="nearby-title">
+        <div class="container">
+          <h2 id="nearby-title">باشگاه‌های دیگر {sports} در {city.name}</h2>
+          <ul class="nearby__list">
+            {nearby.map(({ club: other, km: d }) => (
+              <li>
+                <a href={other.path}>{other.name}</a>
+                <span class="nearby__meta">
+                  {other.sports.map((s) => s.name).join('، ')}
+                  {d !== null && <> · {km(d)} فاصله</>}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section more-section" aria-labelledby="more-title">
+    <div class="container">
+      <h2 id="more-title">فهرست‌های {city.name}</h2>
+      <ul class="more">
+        {
+          club.sports.map((s) => (
+            <li>
+              <a href={citySportPath(city, s)}>
+                باشگاه‌های {s.name} {city.name} ({fa(clubsOf(city, s).length)})
+              </a>
+            </li>
+          ))
+        }
+        <li><a href={city.path}>همه‌ی باشگاه‌های {city.name}</a></li>
+        <li><a href={province.path}>باشگاه‌های استان {province.name}</a></li>
+        {
+          partnerPages.map((s) => (
+            <li>
+              <a href={`/${s.slug}`}>پیدا کردن هم‌بازی {s.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <DownloadBlock />
+</Base>
+
+<style>
+  .results-title {
+    margin-block-end: 16px;
+    font-size: var(--step-2);
+  }
+
+  .note {
+    max-width: 44rem;
+    margin-block-start: 20px;
+    color: var(--c-muted);
+    font-size: var(--step--1);
+    line-height: 1.9;
+  }
+
+  .note a {
+    color: var(--c-court);
+    font-weight: 700;
+  }
+
+  .nearby {
+    padding-block-start: 0;
+  }
+
+  .nearby h2,
+  .more-section h2 {
+    margin-block-end: 14px;
+    font: 700 var(--step-1) / 1.6 var(--font-body);
+  }
+
+  .nearby__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--c-line);
+  }
+
+  .nearby__list li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+    padding-block: 12px;
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .nearby__list a {
+    min-width: 0;
+    color: var(--c-ink);
+    font-weight: 700;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .nearby__meta {
+    color: var(--c-muted);
+    font-size: var(--step--1);
+  }
+
+  .more-section {
+    padding-block-start: 0;
+  }
+
+  .more {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .more a {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid var(--c-line);
+    border-radius: 999px;
+    color: var(--c-ink);
+    font-size: var(--step--1);
+    text-decoration: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .nearby__list a:hover {
+      color: var(--c-court);
+    }
+
+    .more a:hover {
+      border-color: var(--c-court);
+    }
+  }
+</style>

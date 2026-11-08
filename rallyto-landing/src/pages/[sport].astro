@@ -6,6 +6,7 @@ import MiniCourt from '../components/MiniCourt.astro'
 import SportTiles from '../components/SportTiles.astro'
 import Steps from '../components/home/Steps.astro'
 import SportCities from '../components/clubs/SportCities.astro'
+import { GUIDES, GUIDES_PATH } from '../data/guides'
 import type { Sport } from '../data/sports'
 import { publishedSports, sportPage } from '../data/pages'
 import Base from '../layouts/Base.astro'
@@ -20,6 +21,7 @@ interface Props {
 }
 const { sport } = Astro.props
 const meta = sportPage(sport)
+const guides = GUIDES.filter((g) => g.sports.includes(sport.slug))
 ---
 
 <Base meta={meta}>
@@ -54,6 +56,17 @@ const meta = sportPage(sport)
           <dt>تعداد بازیکن</dt>
           <dd>{sport.playersNote}</dd>
         </dl>
+        {
+          guides.length > 0 && (
+            <ul class="facts__guides">
+              {guides.map((g) => (
+                <li>
+                  <a href={`${GUIDES_PATH}/${g.slug}`}>{g.crumb}</a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
       </aside>
     </div>
   </section>
@@ -162,6 +175,21 @@ const meta = sportPage(sport)
 
   .facts dd {
     margin: 0 0 12px;
+    font-weight: 700;
+  }
+
+  .facts__guides {
+    display: grid;
+    gap: 6px;
+    margin: 4px 0 0;
+    padding: 12px 0 0;
+    border-top: 1px solid var(--c-line);
+    list-style: none;
+  }
+
+  .facts__guides a {
+    color: var(--c-court);
+    font-size: var(--step--1);
     font-weight: 700;
   }
 

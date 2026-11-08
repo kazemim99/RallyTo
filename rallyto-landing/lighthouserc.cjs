@@ -1,8 +1,8 @@
 // Lighthouse CI over the test build (dist-test/), mobile profile (Lighthouse's default), every page.
 // A regression below these thresholds fails the run.
 // The sport pages are in the list while SITE.sportPagesPublished is on.
-// The club directory pages come from tests/fixtures/venues.sample.json (the test build's snapshot).
-const pages = ['index', 'tennis', 'padel', 'badminton', 'squash', 'privacy', 'terms', 'contact', 'clubs', 'clubs/تهران', 'clubs/تهران/تهران/tennis']
+// The club directory and club pages come from tests/fixtures/venues.sample.json (the test build's snapshot).
+const pages = ['index', 'tennis', 'padel', 'badminton', 'squash', 'privacy', 'terms', 'contact', 'clubs', 'clubs/تهران', 'clubs/تهران/تهران/tennis', 'clubs/فارس/شیراز/باشگاه-تنیس-شیراز', 'guides', 'guides/padel-vs-tennis', 'guides/find-partner']
 
 module.exports = {
   ci: {

@@ -8,7 +8,17 @@
     "sports": [
       "tennis",
       "squash"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "مجموعه ورزشی آزادی",
@@ -19,7 +29,17 @@
     "sports": [
       "tennis",
       "badminton"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "پدل‌کلاب ونک",
@@ -29,7 +49,17 @@
     "cityName": "تهران",
     "sports": [
       "padel"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "باشگاه تنیس شهید چمران",
@@ -39,7 +69,17 @@
     "cityName": "تهران",
     "sports": [
       "tennis"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "سالن بدمینتون شیرودی",
@@ -49,7 +89,17 @@
     "cityName": "تهران",
     "sports": [
       "badminton"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "پدل پارک چیتگر",
@@ -60,7 +110,17 @@
     "sports": [
       "padel",
       "tennis"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "مجموعه‌ی ورزشی فرهنگی شهید چمران شهرداری منطقه‌ی ۲ تهران",
@@ -72,7 +132,17 @@
       "squash",
       "badminton",
       "tennis"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "باشگاه تنیس اسلام‌شهر",
@@ -82,7 +152,17 @@
     "cityName": "اسلام‌شهر",
     "sports": [
       "tennis"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "باشگاه تنیس فولاد",
@@ -92,7 +172,17 @@
     "cityName": "اصفهان",
     "sports": [
       "tennis"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "مجموعه ورزشی نقش جهان",
@@ -104,7 +194,17 @@
       "tennis",
       "badminton",
       "squash"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "پدل اصفهان",
@@ -114,7 +214,17 @@
     "cityName": "اصفهان",
     "sports": [
       "padel"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "باشگاه تنیس کاشان",
@@ -124,7 +234,17 @@
     "cityName": "کاشان",
     "sports": [
       "tennis"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "باشگاه تنیس شیراز",
@@ -134,7 +254,17 @@
     "cityName": "شیراز",
     "sports": [
       "tennis"
-    ]
+    ],
+    "address": "شیراز، بلوار چمران، کوچه‌ی ۲۴",
+    "phone": "07136260000",
+    "latitude": 29.6365,
+    "longitude": 52.5219,
+    "googlePlaceId": "ChIJshirazclub",
+    "workingHours": "همه‌روزه ۷ تا ۲۴",
+    "website": "https://shiraztennis.example.ir",
+    "instagram": "https://www.instagram.com/shiraztennis",
+    "telegram": "https://t.me/shiraztennis",
+    "description": "۴ زمین خاک رس و ۲ زمین هارد با نورپردازی شبانه."
   },
   {
     "name": "مجموعه ورزشی پارس",
@@ -145,7 +275,17 @@
     "sports": [
       "tennis",
       "padel"
-    ]
+    ],
+    "address": "شیراز، معالی‌آباد",
+    "phone": "09171234567",
+    "latitude": 29.64,
+    "longitude": 52.48,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "سالن اسکواش شیراز",
@@ -155,7 +295,17 @@
     "cityName": "شیراز",
     "sports": [
       "squash"
-    ]
+    ],
+    "address": "شیراز",
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "باشگاه تنیس مشهد",
@@ -165,7 +315,17 @@
     "cityName": "مشهد",
     "sports": [
       "tennis"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "مجموعه ورزشی سامن",
@@ -176,7 +336,17 @@
     "sports": [
       "badminton",
       "tennis"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "باشگاه تنیس کرج",
@@ -186,7 +356,17 @@
     "cityName": "کرج",
     "sports": [
       "tennis"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "پدل کرج",
@@ -196,7 +376,17 @@
     "cityName": "کرج",
     "sports": [
       "padel"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "سالن ورزشی دهدشت",
@@ -206,7 +396,17 @@
     "cityName": "دهدشت",
     "sports": [
       "badminton"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "باشگاه تنیس اردبیل",
@@ -216,7 +416,17 @@
     "cityName": "اردبیل",
     "sports": [
       "tennis"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "سالن سبلان",
@@ -227,7 +437,17 @@
     "sports": [
       "badminton",
       "squash"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "زمین تنیس پارس‌آباد",
@@ -237,7 +457,17 @@
     "cityName": "پارس‌آباد",
     "sports": [
       "tennis"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   },
   {
     "name": "سالن بدمینتون شهرکرد",
@@ -247,6 +477,16 @@
     "cityName": "شهرکرد",
     "sports": [
       "badminton"
-    ]
+    ],
+    "address": null,
+    "phone": null,
+    "latitude": null,
+    "longitude": null,
+    "googlePlaceId": null,
+    "workingHours": null,
+    "website": null,
+    "instagram": null,
+    "telegram": null,
+    "description": null
   }
 ]

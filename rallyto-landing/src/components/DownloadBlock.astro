@@ -1,7 +1,8 @@
 ---
 /**
- * Where to get the app. Until a store publishes it (`SITE.stores` is null) each store reads «به‌زودی» and links
- * nowhere, so the page never sends anyone to a missing listing.
+ * Where to get the app: the Android APK from this site and the web app for iPhone (`SITE.direct`), then the stores.
+ * Until a store publishes it (`SITE.stores` is null) each store reads «به‌زودی» and links nowhere, so the page never
+ * sends anyone to a missing listing.
  */
 import { SITE } from '../config/site'
 import BrandMark from './BrandMark.astro'
@@ -19,10 +20,35 @@ const anyLive = STORES.some((s) => s.url)
       <p class="kicker">دریافت اپ</p>
       <h2 id="download-title">بازی بعدی‌ات را همین هفته بچین</h2>
       <p class="muted download__lead">
+        رالیتو رایگان است. روی اندروید فایل نصبی را مستقیم از همین‌جا بگیر؛ روی آیفون نسخه‌ی وب را باز کن و به صفحه‌ی
+        اصلی گوشی اضافه‌اش کن.
+      </p>
+      <ul class="direct">
+        <li>
+          <a class="direct__link direct__link--main" href={SITE.direct.apk} download="rallyto.apk">
+            <span class="direct__small">اندروید {SITE.direct.androidMin} و بالاتر</span>
+            <span class="direct__name">دانلود مستقیم APK</span>
+          </a>
+        </li>
+        <li>
+          <a class="direct__link" href={SITE.direct.webApp} rel="noopener">
+            <span class="direct__small">آیفون و هر گوشی دیگر</span>
+            <span class="direct__name">نسخه‌ی وب رالیتو</span>
+          </a>
+        </li>
+      </ul>
+      <p class="direct__notes">
+        <span>اگر اندروید پرسید، اجازه‌ی نصب از این منبع را بده.</span>
+        <span>
+          برای آیفون نسخه‌ی وب بهترین راه است: بدون اپ‌استور، در Safari بازش کن، دکمه‌ی اشتراک‌گذاری را بزن و
+          «Add to Home Screen» را انتخاب کن تا مثل یک اپ از صفحه‌ی اصلی باز شود.
+        </span>
+      </p>
+      <p class="muted download__stores-lead">
         {
           anyLive
-            ? 'رالیتو رایگان است. از فروشگاه دلخواهت نصبش کن، پروفایلت را بساز و اولین بازی‌ات را پیدا کن.'
-            : 'رالیتو رایگان است. نسخه‌ی اندروید آن به‌زودی در کافه‌بازار و مایکت منتشر می‌شود.'
+            ? 'یا از فروشگاه دلخواهت نصبش کن:'
+            : 'نسخه‌ی کافه‌بازار و مایکت هم به‌زودی منتشر می‌شود.'
         }
       </p>
       <ul class="stores">
@@ -86,8 +112,71 @@ const anyLive = STORES.some((s) => s.url)
 
   .download__lead {
     max-width: 34rem;
-    margin-block: 18px 30px;
+    margin-block: 18px 26px;
     font-size: var(--step-1);
+  }
+
+  .direct {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .direct__link {
+    display: grid;
+    min-width: 200px;
+    min-height: 64px;
+    padding: 10px 24px;
+    border: 1.5px solid rgb(255 255 255 / 55%);
+    border-radius: 18px;
+    color: var(--c-surface);
+    text-decoration: none;
+    line-height: 1.5;
+    transition:
+      transform var(--dur-press) var(--ease-out),
+      background-color var(--dur-ui) ease;
+  }
+
+  .direct__link--main {
+    border-color: var(--c-ball);
+    background: var(--c-ball);
+    color: var(--c-deep);
+  }
+
+  .direct__link:active {
+    transform: scale(0.97);
+  }
+
+  .direct__small {
+    font-size: 0.8125rem;
+  }
+
+  .direct__name {
+    font-weight: 700;
+    font-size: var(--step-1);
+  }
+
+  .direct__notes {
+    display: grid;
+    gap: 4px;
+    max-width: 36rem;
+    margin-block: 14px 30px;
+    color: var(--c-mint);
+    font-size: var(--step--1);
+    line-height: 1.9;
+  }
+
+  .download__stores-lead {
+    margin-block-end: 12px;
+    font-size: var(--step--1);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .direct__link:not(.direct__link--main):hover {
+      background: rgb(255 255 255 / 8%);
+    }
   }
 
   .download__inner :global(.download__mark) {

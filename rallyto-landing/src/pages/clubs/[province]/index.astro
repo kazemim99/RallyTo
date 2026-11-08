@@ -1,8 +1,9 @@
 ---
-/** A province: its cities, and in each city the clubs and the sports they have. */
+/** A province: its cities, and in each city the clubs with how to reach them. */
 import DownloadBlock from '../../../components/DownloadBlock.astro'
 import ClubList from '../../../components/clubs/ClubList.astro'
 import DirectoryHero from '../../../components/clubs/DirectoryHero.astro'
+import SportFilter from '../../../components/clubs/SportFilter.astro'
 import { DIRECTORY, citySportPath, clubsOf, sportsIn, type ProvinceGroup } from '../../../data/clubs'
 import { provinceClubsPage } from '../../../data/pages'
 import Base from '../../../layouts/Base.astro'
@@ -21,30 +22,34 @@ const fa = (n: number) => n.toLocaleString('fa-IR')
 const ld = clubListLd(
   `باشگاه‌های استان ${province.name}`,
   province.path,
-  province.cities.flatMap((c) => c.clubs.map((club) => ({ name: club.name, sports: club.sports.map((s) => s.name), city: c.name, province: province.name }))),
+  province.cities.flatMap((c) => c.clubs.map((club) => ({ ...club, sports: club.sports.map((s) => s.name), city: c.name, province: province.name }))),
 )
 ---
 
 <Base meta={meta} jsonLd={[ld]}>
   <DirectoryHero
     crumbs={meta.crumbs!}
-    heading={`باشگاه‌های استان ${province.name}`}
+    heading={`باشگاه‌ها و زمین‌های ورزشی استان ${province.name}`}
     lead={`${fa(province.clubCount)} باشگاه در ${fa(province.cities.length)} شهر. شهرت را باز کن تا باشگاه‌هایش را به تفکیک ورزش ببینی.`}
     province={province.path}
   />
 
-  <section class="section">
+  <section class="section" id="results">
     <div class="container cities">
+      <div class="results-head">
+        <p class="results-title" data-results-title>{fa(province.clubCount)} باشگاه در استان {province.name}</p>
+        <SportFilter path={province.path} place={`استان ${province.name}`} />
+      </div>
       {
         province.cities.map((city) => (
-          <section class="city" aria-labelledby={`city-${city.id}`}>
+          <section class="city" data-city-section aria-labelledby={`city-${city.id}`}>
             <div class="city__head">
               <h2 id={`city-${city.id}`}>
                 <a href={city.path}>{city.name}</a>
               </h2>
               <ul class="city__sports" aria-label={`ورزش‌های ${city.name}`}>
                 {sportsIn(city).map((s) => (
-                  <li>
+                  <li data-sport={s.slug}>
                     <a href={citySportPath(city, s)}>
                       {s.name} {fa(clubsOf(city, s).length)}
                     </a>
@@ -63,6 +68,15 @@ const ld = clubListLd(
 </Base>
 
 <style>
+  .results-head {
+    display: grid;
+    gap: 4px;
+  }
+
+  .results-title {
+    font: 900 var(--step-2) / 1.5 var(--font-display);
+  }
+
   .cities {
     display: grid;
     gap: clamp(40px, 6vw, 64px);

@@ -1,0 +1,66 @@
+---
+/**
+ * Narrows a page's club list to the sport its address asks for (`?sport=tennis`, where the finder leads). Hidden until
+ * then: without the parameter, or without JavaScript, the page lists every club.
+ */
+import { SPORTS } from '../../data/sports'
+
+interface Props {
+  /** The page without the filter, for the way back to every club. */
+  path: string
+  /** What the title says after «در», such as «استان تهران». */
+  place: string
+}
+const { path, place } = Astro.props
+const names = JSON.stringify(Object.fromEntries(SPORTS.map((s) => [s.slug, s.name])))
+---
+
+<p class="sport-filter" data-sport-filter data-sport-names={names} data-place={place} hidden>
+  <span data-sport-filter-label></span>
+  <a href={`${path}#results`}>نمایش همه‌ی ورزش‌ها</a>
+</p>
+
+<script>
+  import { filteredTitle, sportFromSearch } from '../../lib/clubFinder'
+
+  const filter = document.querySelector<HTMLElement>('[data-sport-filter]')
+  if (filter) {
+    const names: Record<string, string> = JSON.parse(filter.dataset.sportNames ?? '{}')
+    const sport = sportFromSearch(window.location.search, Object.keys(names))
+    if (sport) {
+      const has = (el: HTMLElement) => (el.dataset.sports ?? '').split(' ').includes(sport)
+      const clubs = [...document.querySelectorAll<HTMLElement>('.club[data-sports]')]
+      for (const club of clubs) club.hidden = !has(club)
+      for (const city of document.querySelectorAll<HTMLElement>('[data-city-section]')) {
+        city.hidden = !city.querySelector('.club:not([hidden])')
+        for (const link of city.querySelectorAll<HTMLElement>('[data-sport]')) link.hidden = link.dataset.sport !== sport
+      }
+      const count = clubs.filter(has).length
+      const title = document.querySelector('[data-results-title]')
+      if (title) title.textContent = filteredTitle(count, names[sport], filter.dataset.place ?? '')
+      const label = filter.querySelector('[data-sport-filter-label]')
+      if (label) label.textContent = `فقط باشگاه‌های ${names[sport]}`
+      filter.hidden = false
+    }
+  }
+</script>
+
+<style>
+  .sport-filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 14px;
+    color: var(--c-muted);
+    font-size: var(--step--1);
+  }
+
+  .sport-filter[hidden] {
+    display: none;
+  }
+
+  .sport-filter a {
+    color: var(--c-court);
+    font-weight: 700;
+  }
+</style>

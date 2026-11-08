@@ -34,22 +34,23 @@ const sportPagePublished = publishedSports().includes(sport)
 const ld = clubListLd(
   `باشگاه‌های ${sport.name} ${city.name}`,
   meta.path,
-  clubs.map((club) => ({ name: club.name, sports: [sport.name], city: city.name, province: province.name })),
+  clubs.map((club) => ({ ...club, sports: [sport.name], city: city.name, province: province.name })),
 )
 ---
 
 <Base meta={meta} jsonLd={[ld]}>
   <DirectoryHero
     crumbs={meta.crumbs!}
-    heading={`باشگاه ${sport.name} در ${city.name}`}
+    heading={`باشگاه و زمین ${sport.name} در ${city.name}`}
     lead={`${fa(clubs.length)} باشگاه ${sport.name} در ${city.name}، استان ${province.name}. در رالیتو برای همین باشگاه‌ها هم‌بازی ${sport.name} هم‌سطح پیدا کن یا بازی باز بگذار.`}
     sport={sport.slug}
     province={province.path}
     city={city.path}
   />
 
-  <section class="section">
+  <section class="section" id="results">
     <div class="container">
+      <h2 class="results-title">{fa(clubs.length)} باشگاه {sport.name} در {city.name}</h2>
       <ClubList clubs={clubs} />
 
       <div class="more">
@@ -87,6 +88,11 @@ const ld = clubListLd(
 </Base>
 
 <style>
+  .results-title {
+    margin-block-end: 16px;
+    font-size: var(--step-2);
+  }
+
   .more {
     display: grid;
     gap: 24px;

@@ -79,6 +79,8 @@ describe('every page', () => {
     for (const p of pages) {
       for (const a of p.root.querySelectorAll('a[href^="/"]')) {
         const href = a.getAttribute('href')!
+        // The APK is not part of the build: nginx serves it from beside the site (deploy/nginx/rallyto-landing.conf).
+        if (href === SITE.direct.apk) continue
         expect(fileInDist(href), `${p.path} → ${href}`).toBeDefined()
       }
     }
@@ -130,6 +132,10 @@ describe('metadata of indexable pages', () => {
       expect(file, `${p.path}: ${image}`).toBeDefined()
       expect(pngSize(file!)).toEqual({ width: 1200, height: 630 })
     }
+  })
+
+  it('proves site ownership to Google Search Console on the home page', () => {
+    expect(meta(page(pages, '/'), 'meta[name="google-site-verification"]')).toBe(SITE.googleSiteVerification)
   })
 
   it('keeps the 404 page out of the index', () => {
@@ -184,6 +190,19 @@ describe('the home page', () => {
     expect(home.root.querySelectorAll('script:not([type])')).toHaveLength(0)
   })
 
+  it('offers the Android APK and the web app for iPhone in the download block (owner decision 2026-11-07)', () => {
+    const block = page(pages, '/').root.querySelector('#download')!
+    const hrefs = block.querySelectorAll('a').map((a) => a.getAttribute('href'))
+    expect(hrefs).toEqual(expect.arrayContaining([SITE.direct.apk, SITE.direct.webApp]))
+    expect(block.querySelector(`a[href="${SITE.direct.apk}"]`)!.getAttribute('download')).toBe('rallyto.apk')
+    expect(block.text).toContain('آیفون')
+    expect(block.text).toContain('Add to Home Screen')
+  })
+
+  it('no longer says anywhere that the Android app is only coming', () => {
+    for (const p of pages) expect(visibleText(p), p.path).not.toMatch(/نسخه‌ی اندروید(?: آن)? به‌زودی/)
+  })
+
   it('never links to a store listing that does not exist yet', () => {
     const home = page(pages, '/')
     const storeLinks = home.root.querySelectorAll('a[href*="cafebazaar"], a[href*="myket"]')
@@ -226,15 +245,19 @@ describe('owner decisions (2026-10-29)', () => {
 describe('the club directory (owner decision 2026-11-01, built from tests/fixtures/venues.sample.json)', () => {
   const directoryPages = () => pages.filter((p) => p.path === '/clubs' || p.path.startsWith('/clubs/'))
 
-  it('offers a sport, province and city finder on the home page that opens the directory', () => {
+  it('offers a sport, province and city finder at the top of the home page that opens the directory', () => {
     const home = page(pages, '/')
-    const form = home.root.querySelector('form[data-club-finder]')!
+    const form = home.root.querySelector('.hero__copy form[data-club-finder]')!
     expect(form.getAttribute('action')).toBe('/clubs')
     for (const name of ['sport', 'province', 'city']) expect(form.querySelector(`select[name="${name}"]`), name).not.toBeNull()
     const sports = form.querySelectorAll('select[name="sport"] option').map((o) => o.getAttribute('value'))
     expect(sports).toEqual(['', 'tennis', 'padel', 'badminton', 'squash'])
     const cities = form.querySelectorAll('select[name="city"] option[value^="/clubs/"]').map((o) => o.getAttribute('value')!)
     for (const path of cities) expect(fileInDist(path), path).toBeDefined()
+  })
+
+  it('credits OpenStreetMap, the source of the addresses taken from the map, in every footer', () => {
+    for (const p of pages) expect(p.root.querySelectorAll('footer a').map((a) => a.getAttribute('href')), p.path).toContain('https://www.openstreetmap.org/copyright')
   })
 
   it('links the directory from the header and every footer', () => {
@@ -249,6 +272,32 @@ describe('the club directory (owner decision 2026-11-01, built from tests/fixtur
     expect(page(pages, '/clubs/فارس/شیراز/padel').root.querySelectorAll('.club__name').map((n) => n.text.trim())).toEqual(['مجموعه ورزشی پارس'])
   })
 
+  it('marks what the sport filter needs on a province page, which still lists every club without it', () => {
+    const province = page(pages, '/clubs/تهران')
+    const clubs = province.root.querySelectorAll('#results .club')
+    expect(clubs.length).toBeGreaterThan(1)
+    for (const club of clubs) {
+      const shown = club.querySelectorAll('.chip').map((c) => c.text.trim())
+      expect(club.getAttribute('data-sports')!.split(' ')).toHaveLength(shown.length)
+      expect(club.hasAttribute('hidden')).toBe(false)
+    }
+    const filter = province.root.querySelector('[data-sport-filter]')!
+    expect(filter.hasAttribute('hidden')).toBe(true)
+    expect(filter.getAttribute('data-place')).toBe('استان تهران')
+    expect(filter.querySelector('a')!.getAttribute('href')).toBe('/clubs/تهران#results')
+    expect(province.root.querySelector('[data-results-title]')).not.toBeNull()
+    expect(province.root.querySelectorAll('[data-city-section]').length).toBeGreaterThan(0)
+  })
+
+  it('tells the finder which sports each province and city has, and how many clubs', () => {
+    const form = page(pages, '/').root.querySelector('form[data-club-finder]')!
+    const shiraz = form.querySelector('select[name="city"] option[value="/clubs/فارس/شیراز"]')!
+    expect(shiraz.getAttribute('data-sports')!.split(' ')).toContain('tennis')
+    expect(shiraz.getAttribute('data-counts')).toMatch(/tennis:\d/)
+    expect(shiraz.getAttribute('data-total')).toBe('3')
+    expect(form.querySelector('select[name="province"] option[value="/clubs/فارس"]')!.getAttribute('data-sports')).toContain('tennis')
+  })
+
   it('keeps pages with too few clubs out of the index and the sitemap, but builds and links them', () => {
     const thin = page(pages, '/clubs/تهران/اسلام-شهر')
     expect(meta(thin, 'meta[name="robots"]')).toContain('noindex')
@@ -258,24 +307,167 @@ describe('the club directory (owner decision 2026-11-01, built from tests/fixtur
     expect(page(pages, '/clubs/تهران').root.querySelectorAll('a').map((a) => a.getAttribute('href'))).toContain('/clubs/تهران/اسلام-شهر')
   })
 
-  it('publishes no address, phone number or map position for any club', () => {
+  const clubRow = (path: string, name: string) =>
+    page(pages, path).root.querySelectorAll('.club').find((c) => c.querySelector('.club__name')!.text.trim() === name)!
+
+  it('shows a club’s address, phone, hours, map and own links in the results', () => {
+    const club = clubRow('/clubs/فارس/شیراز', 'باشگاه تنیس شیراز')
+    expect(club.querySelector('address')!.text).toBe('شیراز، بلوار چمران، کوچه‌ی ۲۴')
+    const phone = club.querySelector('a[href^="tel:"]')!
+    expect(phone.getAttribute('href')).toBe('tel:07136260000')
+    expect(phone.text.trim()).toBe('۰۷۱۳۶۲۶۰۰۰۰')
+    expect(club.text).toContain('همه‌روزه ۷ تا ۲۴')
+    const hrefs = club.querySelectorAll('a').map((a) => a.getAttribute('href'))
+    expect(hrefs).toContain('https://www.google.com/maps/search/?api=1&query=29.6365,52.5219&query_place_id=ChIJshirazclub')
+    expect(hrefs).toContain('https://balad.ir/location?latitude=29.6365&longitude=52.5219&zoom=17')
+    expect(hrefs).toEqual(expect.arrayContaining(['https://shiraztennis.example.ir', 'https://www.instagram.com/shiraztennis', 'https://t.me/shiraztennis']))
+    expect(club.querySelector('details')!.text).toContain('۴ زمین خاک رس')
+    expect(club.text).toContain('مشاهده روی نقشه')
+  })
+
+  it('says when a club has no exact address, and shows no phone, map or link it does not have', () => {
+    const club = clubRow('/clubs/فارس/شیراز', 'سالن اسکواش شیراز')
+    expect(club.text).toContain('نشانی دقیق ثبت نشده')
+    expect(club.querySelector('address')).toBeNull()
+    // Only its name, which leads to its own page.
+    expect(club.querySelectorAll('a').map((a) => a.getAttribute('class'))).toEqual(['club__name'])
+    expect(club.querySelector('details')).toBeNull()
+  })
+
+  it('opens every outside link safely, in a new tab', () => {
     for (const p of directoryPages()) {
-      const main = p.root.querySelector('main')!
-      expect(main.querySelectorAll('a[href^="tel:"], address'), p.path).toHaveLength(0)
-      for (const d of jsonLd(p)) expect(JSON.stringify(d), p.path).not.toMatch(/streetAddress|telephone|geo|latitude/)
+      for (const a of p.root.querySelectorAll('.club a[href^="http"]')) {
+        expect(a.getAttribute('target'), p.path).toBe('_blank')
+        expect(a.getAttribute('rel'), p.path).toContain('noopener')
+        expect(a.getAttribute('rel'), p.path).toContain('nofollow')
+      }
     }
   })
 
-  it('describes each page’s clubs as a list of sports places in their town', () => {
+  it('shows the results on the pages the finder opens without a city too', () => {
+    const province = page(pages, '/clubs/فارس')
+    expect(province.root.querySelector('#results')).not.toBeNull()
+    expect(province.root.querySelector('#results a[href^="tel:"]')).not.toBeNull()
+    expect(province.root.querySelector('#results .results-title')!.text).toContain('استان فارس')
+    expect(page(pages, '/clubs/فارس/شیراز').root.querySelector('#results .list-title')!.text).toContain('شیراز')
+    const sport = page(pages, '/clubs/فارس/شیراز/tennis').root.querySelector('#results .results-title')!.text
+    expect(sport).toContain('تنیس')
+    expect(sport).toContain('شیراز')
+  })
+
+  it('describes each page’s clubs as sports places with what the catalog knows, and nothing else', () => {
     const list = jsonLd(page(pages, '/clubs/فارس/شیراز')).find((d) => d['@type'] === 'ItemList') as {
-      itemListElement: { item: { '@type': string; name: string; address: { addressLocality: string } } }[]
+      itemListElement: { item: { name: string } & Record<string, unknown> }[]
     }
     expect(list.itemListElement).toHaveLength(3)
-    expect(list.itemListElement[0].item).toMatchObject({ '@type': 'SportsActivityLocation', address: { addressLocality: 'شیراز' } })
+    const full = list.itemListElement.find((i) => i.item.name === 'باشگاه تنیس شیراز')!.item
+    expect(full).toMatchObject({
+      '@type': 'SportsActivityLocation',
+      telephone: '07136260000',
+      url: 'https://shiraztennis.example.ir',
+      address: { streetAddress: 'شیراز، بلوار چمران، کوچه‌ی ۲۴', addressLocality: 'شیراز' },
+      geo: { '@type': 'GeoCoordinates', latitude: 29.6365, longitude: 52.5219 },
+    })
+    const bare = list.itemListElement.find((i) => i.item.name === 'سالن اسکواش شیراز')!.item
+    expect(bare).toMatchObject({ address: { addressLocality: 'شیراز' } })
+    expect(JSON.stringify(bare)).not.toMatch(/streetAddress|telephone|geo|"url"/)
   })
 
   it('points every sport page to the cities with clubs for that sport', () => {
     const hrefs = page(pages, '/tennis').root.querySelectorAll('#clubs a').map((a) => a.getAttribute('href'))
+    expect(hrefs).toContain('/clubs/تهران/تهران/tennis')
+  })
+})
+
+describe('club pages (SEO audit 2026-11-02)', () => {
+  const shirazClub = '/clubs/فارس/شیراز/باشگاه-تنیس-شیراز'
+
+  it('links every club in a list to its own page', () => {
+    const links = page(pages, '/clubs/فارس/شیراز').root.querySelectorAll('a.club__name')
+    expect(links.map((a) => a.getAttribute('href'))).toEqual([shirazClub, '/clubs/فارس/شیراز/سالن-اسکواش-شیراز', '/clubs/فارس/شیراز/مجموعه-ورزشی-پارس'])
+  })
+
+  it('names the club in the h1 and shows how to reach it', () => {
+    const club = page(pages, shirazClub)
+    expect(club.root.querySelector('h1')!.text.trim()).toBe('باشگاه تنیس شیراز')
+    expect(club.root.querySelector('#results address')!.text).toBe('شیراز، بلوار چمران، کوچه‌ی ۲۴')
+    expect(club.root.querySelector('#results a[href^="tel:"]')!.getAttribute('href')).toBe('tel:07136260000')
+    expect(club.root.querySelector('#results .club__name')).toBeNull()
+    expect(club.root.querySelector('title')!.text).toBe('باشگاه تنیس شیراز: آدرس، تلفن و نقشه | رالیتو')
+  })
+
+  it('describes the club as one sports place belonging to the page', () => {
+    const place = jsonLd(page(pages, shirazClub)).find((d) => d['@type'] === 'SportsActivityLocation')!
+    expect(place).toMatchObject({
+      name: 'باشگاه تنیس شیراز',
+      telephone: '07136260000',
+      mainEntityOfPage: canonicalOf(shirazClub),
+      hasMap: 'https://www.google.com/maps/search/?api=1&query=29.6365,52.5219&query_place_id=ChIJshirazclub',
+    })
+  })
+
+  it('lists the other clubs of its sports in the city, with the distance when both have a position', () => {
+    const nearby = page(pages, shirazClub).root.querySelectorAll('.nearby__list li')
+    expect(nearby).toHaveLength(1)
+    expect(nearby[0].querySelector('a')!.getAttribute('href')).toBe('/clubs/فارس/شیراز/مجموعه-ورزشی-پارس')
+    expect(nearby[0].text).toContain('فاصله')
+  })
+
+  it('indexes a club page only when it says where the club is and how to reach it', () => {
+    const sitemap = readFileSync(join(DIST, 'sitemap.xml'), 'utf8')
+    expect(sitemap).toContain(encodeURI(shirazClub))
+    const bare = page(pages, '/clubs/فارس/شیراز/سالن-اسکواش-شیراز')
+    expect(meta(bare, 'meta[name="robots"]')).toContain('noindex')
+    expect(sitemap).not.toContain(encodeURI('/clubs/فارس/شیراز/سالن-اسکواش-شیراز'))
+  })
+})
+
+describe('guides (SEO audit 2026-11-02)', () => {
+  it('links the guides from every footer, and each sport page to its rules', () => {
+    for (const p of pages) expect(p.root.querySelectorAll('footer a').map((a) => a.getAttribute('href')), p.path).toContain('/guides')
+    expect(page(pages, '/padel').root.querySelectorAll('.facts a').map((a) => a.getAttribute('href'))).toEqual(['/guides/find-partner', '/guides/padel', '/guides/padel-vs-tennis'])
+  })
+
+  it('links the finding-a-partner guide from all four sport pages, and sends its reader to all four', () => {
+    for (const path of SPORT_PATHS) {
+      expect(page(pages, path).root.querySelectorAll('.facts a').map((a) => a.getAttribute('href')), path).toContain('/guides/find-partner')
+    }
+    const hrefs = page(pages, '/guides/find-partner').root.querySelectorAll('.guide__aside a').map((a) => a.getAttribute('href'))
+    expect(hrefs).toEqual(expect.arrayContaining(SPORT_PATHS))
+  })
+
+  it('shows every figure of a guide with its description and its real size, so the page does not jump', () => {
+    const images = page(pages, '/guides/find-partner').root.querySelectorAll('.guide__body figure img')
+    expect(images.length).toBeGreaterThanOrEqual(3)
+    for (const img of images) {
+      const src = img.getAttribute('src')!
+      const file = fileInDist(src)
+      expect(file, src).toBeDefined()
+      expect(img.getAttribute('alt')!.length, src).toBeGreaterThan(20)
+      expect(pngSize(file!), src).toEqual({ width: Number(img.getAttribute('width')), height: Number(img.getAttribute('height')) })
+    }
+    for (const figure of page(pages, '/guides/find-partner').root.querySelectorAll('.guide__body figure')) {
+      expect(figure.querySelector('figcaption')?.text.trim()).toBeTruthy()
+    }
+  })
+
+  it('shares a guide with its own image when it has one, in the preview and in the article', () => {
+    const guide = page(pages, '/guides/find-partner')
+    const share = `${SITE.url}/guides/find-partner/level-time-club.png`
+    expect(meta(guide, 'meta[property="og:image"]')).toBe(share)
+    expect(meta(guide, 'meta[property="og:image:alt"]')).toContain('سطح')
+    expect(jsonLd(guide).find((d) => d['@type'] === 'Article')).toMatchObject({ image: share, datePublished: '2026-11-03' })
+    expect(meta(page(pages, '/guides/padel'), 'meta[property="og:image"]')).toBe(`${SITE.url}/og/default.png`)
+  })
+
+  it('publishes each guide as an article by Rallyto, with its date', () => {
+    const article = jsonLd(page(pages, '/guides/padel')).find((d) => d['@type'] === 'Article')!
+    expect(article).toMatchObject({ headline: 'پدل چیست و چطور بازی می‌شود؟', datePublished: '2026-11-02', author: { name: 'رالیتو' } })
+  })
+
+  it('sends a guide reader to the partner page and the club lists of its sport', () => {
+    const hrefs = page(pages, '/guides/tennis-scoring').root.querySelectorAll('.guide__aside a').map((a) => a.getAttribute('href'))
+    expect(hrefs).toContain('/tennis')
     expect(hrefs).toContain('/clubs/تهران/تهران/tennis')
   })
 })

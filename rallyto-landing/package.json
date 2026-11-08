@@ -14,6 +14,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "og": "node scripts/render-og.mjs",
+    "guide-images": "node scripts/render-guide-images.mjs",
     "test:unit": "cross-env LANDING_VENUES=tests/fixtures/venues.sample.json vitest run tests/unit",
     "test:built": "cross-env LANDING_VENUES=tests/fixtures/venues.sample.json vitest run tests/built",
     "lhci": "lhci autorun",

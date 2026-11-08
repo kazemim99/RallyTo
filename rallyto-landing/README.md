@@ -36,12 +36,19 @@ npm run og            # re-render public/og/default.png after a brand or tagline
   the browser has them, FAQ answers open by height (`::details-content`), and hover effects run only on devices that
   hover. All of it is off under `prefers-reduced-motion`. Logical properties throughout, so `dir="ltr"` mirrors cleanly.
 - **Club directory** (owner decision 2026-11-01): `src/data/venues.json` is a snapshot of the API's public directory
-  (`GET /api/v1/public/venues`: active clubs with name, sports, province and city; never an address, phone or map
-  position, never a hidden club). Run `npm run venues` before every production build. From it the build makes `/clubs`,
+  (`GET /api/v1/public/venues`: active clubs with name, sports, province, city, address, phone, position, hours, own
+  links and description; never a hidden club, an id or a rating). Run `npm run venues` before every production build.
+  A club whose address is only its city's name shows «نشانی دقیق ثبت نشده». From it the build makes `/clubs`,
   a page per province (`/clubs/تهران`), per city (`/clubs/تهران/تهران`) and per sport a city has
-  (`/clubs/تهران/تهران/tennis`), with ItemList structured data. A page with fewer than two clubs, or one repeating
-  its city page, is built and linked but `noindex` and out of the sitemap. The finder (sport, province, city) is on the
-  home page, the directory and each sport page. While the snapshot is empty none of this is built.
+  (`/clubs/تهران/تهران/tennis`), with ItemList structured data, and a page per club
+  (`/clubs/تهران/تهران/<club name>`, SportsActivityLocation) with the nearest clubs of its sports. A list with fewer
+  than two clubs, one repeating its city page or a province whose clubs are all in one city, and a club page without
+  an exact address and a phone or a position, is built and linked but `noindex` and out of the sitemap. The finder
+  (sport, province, city) is in the home page's hero, the directory and each sport page. While the snapshot is empty
+  none of this is built.
+- **Guides** (`src/data/guides.ts`, `/guides`): the rules and scoring of each sport, padel compared with tennis, and how
+  to find a partner, as Articles. Rules, standard measurements and practical advice: no prices, no claims about clubs or
+  players. A guide's images are drawn, not photographs: `npm run guide-images` renders them to `public/guides/` (committed).
 - **Security**: a Content-Security-Policy `<meta>` with the hashes of every inline script and style; nothing loads from
   another origin.
 

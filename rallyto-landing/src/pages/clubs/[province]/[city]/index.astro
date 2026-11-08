@@ -1,5 +1,5 @@
 ---
-/** A city: its clubs with their sports, a link per sport, and the province's other cities. */
+/** A city: its clubs with how to reach them, a link per sport, and the province's other cities. */
 import DownloadBlock from '../../../../components/DownloadBlock.astro'
 import ClubList from '../../../../components/clubs/ClubList.astro'
 import DirectoryHero from '../../../../components/clubs/DirectoryHero.astro'
@@ -26,20 +26,20 @@ const others = province.cities.filter((c) => c.id !== city.id)
 const ld = clubListLd(
   `باشگاه‌های ${city.name}`,
   city.path,
-  city.clubs.map((club) => ({ name: club.name, sports: club.sports.map((s) => s.name), city: city.name, province: province.name })),
+  city.clubs.map((club) => ({ ...club, sports: club.sports.map((s) => s.name), city: city.name, province: province.name })),
 )
 ---
 
 <Base meta={meta} jsonLd={[ld]}>
   <DirectoryHero
     crumbs={meta.crumbs!}
-    heading={`باشگاه‌های ${city.name}`}
+    heading={`باشگاه‌ها و زمین‌های ورزشی ${city.name}`}
     lead={`${fa(city.clubs.length)} باشگاه در ${city.name}، استان ${province.name}. برای هر کدام از این باشگاه‌ها می‌توانی در رالیتو هم‌بازی هم‌سطح پیدا کنی یا بازی باز بگذاری.`}
     province={province.path}
     city={city.path}
   />
 
-  <section class="section">
+  <section class="section" id="results">
     <div class="container">
       <ul class="sport-links" aria-label={`ورزش‌های ${city.name}`}>
         {

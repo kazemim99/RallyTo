@@ -1,0 +1,91 @@
+---
+/** The guides: one entry per guide, with what it explains. */
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+import DownloadBlock from '../components/DownloadBlock.astro'
+import { GUIDES, GUIDES_PATH } from '../data/guides'
+import { guidesHubPage } from '../data/pages'
+import Base from '../layouts/Base.astro'
+
+const meta = guidesHubPage()
+---
+
+<Base meta={meta}>
+  <section class="guides-hero on-dark" aria-labelledby="guides-title">
+    <div class="container">
+      <Breadcrumbs crumbs={meta.crumbs!} />
+      <h1 id="guides-title">راهنمای تنیس، پدل، بدمینتون و اسکواش</h1>
+      <p class="guides-hero__lead">قوانین و امتیازشماری هر ورزش به زبان ساده و راه پیدا کردن هم‌بازی هم‌سطح، برای وقتی که تازه شروع می‌کنی، وسط بازی سر یک امتیاز بحث است یا دنبال هم‌بازی تازه‌ای می‌گردی.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="راهنماها">
+    <div class="container">
+      <ul class="guides">
+        {
+          GUIDES.map((g) => (
+            <li>
+              <a href={`${GUIDES_PATH}/${g.slug}`}>
+                <h2>{g.h1}</h2>
+                <p>{g.description}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <DownloadBlock />
+</Base>
+
+<style>
+  .guides-hero {
+    padding-block: 18px clamp(40px, 6vw, 72px);
+  }
+
+  .guides-hero h1 {
+    max-width: 22ch;
+    margin-block: 18px 14px;
+    font-size: var(--step-4);
+    line-height: 1.3;
+  }
+
+  .guides-hero__lead {
+    max-width: 44rem;
+    color: var(--c-mint);
+    font-size: var(--step-1);
+    line-height: 1.85;
+  }
+
+  .guides {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--c-ink);
+  }
+
+  .guides a {
+    display: grid;
+    gap: 6px;
+    padding-block: 22px;
+    border-bottom: 1px solid var(--c-line);
+    color: var(--c-ink);
+    text-decoration: none;
+  }
+
+  .guides h2 {
+    font-size: var(--step-2);
+  }
+
+  .guides p {
+    max-width: var(--measure);
+    color: var(--c-muted);
+    line-height: 1.9;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .guides a:hover h2 {
+      color: var(--c-court);
+    }
+  }
+</style>
