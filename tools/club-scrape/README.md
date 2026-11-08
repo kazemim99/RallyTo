@@ -47,3 +47,16 @@ From the spreadsheet `ورزش_های_راکتی_ایران.xlsx` (sheet «هم�
    one place sharing a sport within 60 m). It reuses the town→county table of `google/build_items.py`.
 3. `python import_racket.py --api <url> [--allow-similar]`. A place already in the catalog under the same Google
    place gains the sports it lacks instead of being created twice.
+
+## Addresses from the map
+
+Some imported clubs hold only their city's name as an address. `geocode_addresses.mjs` asks OpenStreetMap (Nominatim)
+what is at each such club's position and writes `output/address_proposal.json` in the catalog's format, «شهر، محله،
+مجموعه، خیابان». A part is left out rather than guessed, and a club stays without an address when the map adds nothing
+to its city or names another city there. The address is the nearest thing the map names, so it can be a street off.
+
+1. `node geocode_addresses.mjs`, then read the proposal.
+2. `node apply_addresses.mjs sql`, and run `output/address_update.sql` on the catalog database after a backup.
+3. `node apply_addresses.mjs snapshot` for the site's saved directory (or `npm run venues` once the API serves them).
+
+The site credits OpenStreetMap in its footer (ODbL); keep that while these addresses are used.

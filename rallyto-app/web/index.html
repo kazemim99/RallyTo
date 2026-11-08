@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fa-IR" dir="rtl">
+<head>
+  <!-- Replaced by the `--base-href` argument of `flutter build web`. -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="رالیتو: هم‌بازی هم‌سطح برای تنیس، پدل، بدمینتون و اسکواش پیدا کن.">
+  <meta name="theme-color" content="#0B4C3A">
+  <!-- The app itself is not for search engines; the site (rallyto.ir) is. -->
+  <meta name="robots" content="noindex">
+
+  <!-- Added to the home screen on iPhone, it opens full screen like an installed app. -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="رالیتو">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.json">
+
+  <title>رالیتو</title>
+  <link rel="stylesheet" href="install.css">
+</head>
+<body>
+  <!-- Shown until Flutter draws its first frame (install.js removes it). -->
+  <div id="boot" aria-hidden="true">
+    <img src="brand/logo-512.png" alt="" width="96" height="96">
+  </div>
+
+  <!-- The install prompt (install.js fills it in and shows it; hidden otherwise). -->
+  <section id="install" class="install" role="region" aria-label="نصب رالیتو" hidden>
+    <img class="install__icon" src="icons/icon-192.png" alt="" width="44" height="44">
+    <div class="install__text">
+      <p class="install__title">رالیتو را روی گوشی‌ات نصب کن</p>
+      <p class="install__body" id="install-body"></p>
+      <p class="install__steps" id="install-steps" hidden>
+        در Safari دکمه‌ی اشتراک‌گذاری
+        <svg class="install__share" viewBox="0 0 24 24" aria-label="اشتراک‌گذاری" role="img"><path d="M12 3v12M7 8l5-5 5 5M5 12v8h14v-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        را بزن و «Add to Home Screen» (افزودن به صفحه‌ی اصلی) را انتخاب کن.
+      </p>
+    </div>
+    <div class="install__actions">
+      <button type="button" class="install__go" id="install-go" hidden>نصب</button>
+      <a class="install__apk" id="install-apk" href="https://rallyto.ir/download/rallyto.apk" hidden>دانلود APK</a>
+      <button type="button" class="install__close" id="install-close" aria-label="بستن">✕</button>
+    </div>
+  </section>
+
+  <script src="install.js"></script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

@@ -23,6 +23,7 @@ secrets/
 **/google-services.json
 **/GoogleService-Info.plist
 **/firebase-credentials*.json
+**/*firebase-adminsdk*.json
 *.keystore
 *.jks
 key.properties

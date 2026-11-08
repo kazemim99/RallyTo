@@ -1,0 +1,165 @@
+/* The web app's loading screen and its install prompt. Plain CSS: it shows before Flutter has loaded. */
+@font-face {
+  font-family: Vazir;
+  src: url('assets/assets/fonts/vazir/Vazir-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Vazir;
+  src: url('assets/assets/fonts/vazir/Vazir.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #0b4c3a;
+}
+
+#boot {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #0b4c3a;
+  transition: opacity 200ms ease-out;
+}
+
+#boot.done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#boot img {
+  border-radius: 22px;
+  animation: breathe 1.6s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  50% {
+    transform: scale(0.94);
+  }
+}
+
+.install {
+  position: fixed;
+  inset-inline: 12px;
+  /* At the top, so it never covers the screen's main button, which sits low where the thumb is. */
+  top: calc(12px + env(safe-area-inset-top));
+  z-index: 2147483647;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 520px;
+  margin-inline: auto;
+  padding: 14px;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #172522;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 22%);
+  font: 400 14px/1.8 Vazir, Tahoma, sans-serif;
+  direction: rtl;
+  transform: translateY(0);
+  transition:
+    transform 260ms cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 260ms ease-out;
+}
+
+.install[hidden] {
+  display: none;
+}
+
+.install.entering {
+  transform: translateY(-16px);
+  opacity: 0;
+}
+
+.install__icon {
+  flex-shrink: 0;
+  border-radius: 11px;
+}
+
+.install__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.install__text p {
+  margin: 0;
+}
+
+.install__title {
+  font-weight: 700;
+}
+
+.install__body,
+.install__steps {
+  color: #4b5a56;
+  font-size: 13px;
+}
+
+.install__share {
+  width: 18px;
+  height: 18px;
+  vertical-align: -3px;
+  color: #146b52;
+}
+
+.install__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.install__go {
+  min-height: 40px;
+  padding-inline: 18px;
+  border: 0;
+  border-radius: 12px;
+  background: #146b52;
+  color: #ffffff;
+  font: 700 14px Vazir, Tahoma, sans-serif;
+  cursor: pointer;
+}
+
+.install__apk {
+  color: #146b52;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.install__close {
+  align-self: flex-end;
+  order: -1;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #4b5a56;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.install__go:active,
+.install__close:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #boot img {
+    animation: none;
+  }
+
+  .install,
+  #boot {
+    transition: none;
+  }
+}

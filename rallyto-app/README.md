@@ -14,6 +14,29 @@ flutter test
 flutter run --dart-define=API_BASE_URL=http://192.168.1.10:5000   # default: http://10.0.2.2:5000 (Android emulator)
 ```
 
+## Release builds
+
+Both talk to the production API, so `API_BASE_URL` is always given:
+
+```sh
+flutter build apk --release --dart-define=API_BASE_URL=https://api.rallyto.ir
+flutter build web --release --no-web-resources-cdn --no-wasm-dry-run --dart-define=API_BASE_URL=https://api.rallyto.ir
+```
+
+Then `deploy/publish-app.sh all` (docs/DEPLOYMENT.md): the APK goes to `rallyto.ir/download/rallyto.apk`, the web
+build to `app.rallyto.ir`.
+
+**Signing.** `android/key.properties` (never committed) points at the upload key, which is kept outside the repository
+(`%USERPROFILE%\.secrets\rallyto\rallyto-upload.jks`, certificate SHA-256 `C3:16:ED:22:…:32:46:C2:6C`). Every update must
+be signed with that same key: Android refuses to install an update signed with another, and a store listing is tied to
+it. Keep a copy of the key file and `key.properties` somewhere safe outside this machine. Without `key.properties` a
+release build is signed with the debug key; such a build must never be published.
+
+**Web.** `web/` holds the install prompt (`install.js`, `install.css`), the manifest and the brand icons
+(`branding/build_brand.py` writes them). `--no-web-resources-cdn` and `web/engine-fonts/` keep every file the engine
+loads on our own host instead of Google's CDN, which players in Iran may not reach. Push is off on the web. When a new
+file under `web/` does not appear in `build/web`, delete `.dart_tool/flutter_build` and build again.
+
 ## Push notifications (Firebase)
 
 Push uses Firebase Cloud Messaging. The Firebase configuration is **supplied at build time and never committed**:

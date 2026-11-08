@@ -54,6 +54,8 @@ services:
       Notifications__Firebase__CredentialsJson: ${FIREBASE_CREDENTIALS_JSON:?set FIREBASE_CREDENTIALS_JSON}
       PublicBaseUrl: ${PUBLIC_BASE_URL:-https://rallyto.ir}
       Cors__AllowedOrigins__0: https://admin.rallyto.ir
+      # The web build of the player app (deploy/nginx/rallyto-app.conf).
+      Cors__AllowedOrigins__1: https://app.rallyto.ir
       # nginx reaches the API through the Docker bridge; X-Forwarded-For is believed only from there (ProxyHeaders).
       ForwardedHeaders__KnownNetworks__0: 172.16.0.0/12
       Observability__Logging__FileEnabled: "false"

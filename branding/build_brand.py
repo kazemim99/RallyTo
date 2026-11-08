@@ -279,6 +279,8 @@ def main() -> None:
 
     print("player app")
     flutter_app(img)
+    print("player app, web build")
+    web_icons(img, ROOT / "rallyto-app/web", extra=True)
     print("admin panel")
     web_icons(img, ROOT / "rallyto-admin/public", extra=False)
     # The sidebar and sign-in BrandMark component imports the icon as an asset.

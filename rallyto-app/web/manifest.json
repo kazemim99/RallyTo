@@ -1,0 +1,33 @@
+{
+    "id": "/",
+    "name": "رالیتو",
+    "short_name": "رالیتو",
+    "description": "هم‌بازی هم‌سطح برای تنیس، پدل، بدمینتون و اسکواش",
+    "lang": "fa-IR",
+    "dir": "rtl",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#0B4C3A",
+    "theme_color": "#0B4C3A",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
